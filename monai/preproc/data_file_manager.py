@@ -17,10 +17,12 @@ subjects = os.listdir(data_dir)
 class Subject:
     name: str
     subjpath: Path
-    scans: tuple[Path, str]
+    scans: list[Path]
 
 
-class LesjakData(Mapping):
+class LesjakData:
+    """The LesjakData class can give the path to a NiFti given it's subject name and modality
+    """
     def __init__(self, basepath):
         self.basepath = Path(basepath)
         self.prefix = "SUBJECT_MODALITY.nii.gz"
@@ -35,6 +37,9 @@ class LesjakData(Mapping):
         subjects["path"] = {item.name: Path(item.path) for item in subject_fileobjs}
         return subjects
 
+    def create_subject(name):
+        pass
+
     def scan_name(self, subject, modality):
         name = self.prefix.replace("SUBJECT", subject)
         name = name.replace("MODALITY", modality)
@@ -48,25 +53,6 @@ class LesjakData(Mapping):
                 "{} does not exit".format(path.relative_to(self.basepath))
             )
         return path
-
-    def get_scans(self, subject):
-        pass
-
-    @property
-    def modalities(self):
-        return self._modalities
-
-    @modalities.setter
-    def modalities(self, values):
-        self._modalities = values
-
-    @property
-    def labels(self):
-        labels = self._labels
-
-    @labels.setter
-    def labels(self, labels):
-        self.subjects["label"] = {subj: label for subj, label in labels}
 
 
 def assign_train_test(subjects, fraction_ts):
