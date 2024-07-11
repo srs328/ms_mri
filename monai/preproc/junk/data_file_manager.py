@@ -7,6 +7,7 @@ import random
 from abc import ABC, abstractmethod
 from collections.abc import Mapping
 
+#! This is before I simplified LesjakData to do only one simple task
 
 data_dir = "/mnt/c/Users/srs-9/OneDrive - UMass Chan Medical School/Projects/MS MRI/lesjak_2017/data"
 
@@ -27,29 +28,32 @@ class LesjakData:
         self.basepath = Path(basepath)
         self.prefix = "SUBJECT_MODALITY.nii.gz"
         self.scan_dir = "raw"
-        self.subjects = [
-            item.name for item in os.scandir(self.basepath) if item.is_dir()
-        ]
+        self.modalities = ["FLAIR", "T1W", "T1WKS", "T2W"]
+        self.subjects = self.get_subjects()
+
+    def get_subjects(self):
+        subjects = dict()
+        subject_fileobjs = [item for item in os.scandir(self.basepath) if item.is_dir()]
+        subjects["name"] = [item.name for item in subject_fileobjs]
+        subjects["path"] = {item.name: Path(item.path) for item in subject_fileobjs}
+        return subjects
+
+    def create_subject(name):
+        pass
 
     def scan_name(self, subject, modality):
         name = self.prefix.replace("SUBJECT", subject)
         name = name.replace("MODALITY", modality)
         return name
 
-    def get_scan(self, subject, modality):
+    def scan_path(self, subject, modality):
         scan_name = self.scan_name(subject, modality)
-        path = self.basepath / subject / self.scan_dir / scan_name
+        path = self.subjects["path"][subject] / self.scan_dir / scan_name
         if not path.is_file():
             raise FileNotFoundError(
                 "{} does not exit".format(path.relative_to(self.basepath))
             )
         return path
-
-    def subject_folder(self, subject):
-        return self.basepath / subject
-
-    def stacked_path(self, subject):
-        path = self.basepath / subject / self.scan_dir / f"{subject}_stacked.nii.gz"
 
 
 def assign_train_test(subjects, fraction_ts):
