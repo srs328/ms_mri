@@ -101,3 +101,6 @@ class Data(ABC):
 class MonaiData:
     def __init__(self, basepath):
         self.basepath = Path(basepath)
+
+if __name__ == "__main__":
+    print("THAAAAAAAAA")
