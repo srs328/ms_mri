@@ -10,3 +10,4 @@
     - They're similar enough in the Lesjak data that I could just pick any one. But I should look into the significance of the affine in case it's important and very sensitive to differences
 - In the Lesjak data, the shapes of each nifti image within a subject are different. If this is the case with the Hemond data, I'll have to think about how to stack them. 
 - Are the Hemond images registered within subjects?
+THOO
