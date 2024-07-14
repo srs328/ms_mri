@@ -54,7 +54,7 @@ class LesjakData:
 
 def assign_train_test(subjects, fraction_ts):
     n_subj = len(subjects)
-    n_ts = n_subj * int(fraction_ts)
+    n_ts = int(n_subj * fraction_ts)
 
     random.shuffle(subjects)
     subj_ts = [(subj, "ts") for subj in subjects[:n_ts]]
@@ -101,6 +101,7 @@ class Data(ABC):
 class MonaiData:
     def __init__(self, basepath):
         self.basepath = Path(basepath)
+
 
 if __name__ == "__main__":
     print("THAAAAAAAAA")

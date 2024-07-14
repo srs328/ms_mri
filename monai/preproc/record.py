@@ -1,33 +1,48 @@
 from collections import defaultdict, namedtuple
 
 from collections import defaultdict, namedtuple
+from collections.abc import MutableSequence
 from pathlib import Path
 from typing import NamedTuple
 import csv
+from pprint import pp
 
 Scan = namedtuple("Scan", ("subid", "date", "image", "label"))
 
+# TODO try to make this a subclass of Sequence
+#   https://stackoverflow.com/questions/46690012/subclassing-sequence-with-proper-type-hints-in-python
 
 
+# Source: https://stackoverflow.com/questions/15418386/what-is-the-best-data-structure-for-storing-a-set-of-four-or-more-values
 # make class method to return this given a csv, and another given a dict
-class DataSet(object):
+class DataSet(MutableSequence):
 
     def __init__(self, recordname: str, fields: list, records=None):
         if records is None:
             records = []
         self.fields = fields
-        self.Data = namedtuple(recordname, self.fields, defaults=["","","",""])
-        self.records = [self.Data(**record) for record in records]
+        self.Data = namedtuple(recordname, self.fields, defaults=["", "", "", ""])
+        self._records = [self.Data(**record) for record in records]
         self.valid_fieldnames = set(self.fields)
 
-        # Create an empty table of lookup tables for each field name that maps
-        # each unique field value to a list of record-list indices of the ones
-        # that contain it.
         self.lookup_tables = {}
 
-    def add_record(self, record):
-        print(record)
-        self.records.append(self.Data(**record))
+    def __getitem__(self, idx):
+        return self._records[idx]
+
+    def __setitem__(self, idx, val):
+        self._records[idx] = self.Data(**val)
+
+    def __delitem__(self, idx):
+        del self._records[idx]
+
+    def __len__(self):
+        return len(self._records)
+
+    def insert(self, idx, val):
+        a = self._records[:idx]
+        b = self._records[idx:]
+        self._records = a + [self.Data(**val)] + b
 
     def retrieve(self, **kwargs):
         """Fetch a list of records with a field name with the value supplied
@@ -43,12 +58,12 @@ class DataSet(object):
             raise ValueError('keyword arg "%s" isn\'t a valid field name' % field)
         if field not in self.lookup_tables:  # Need to create a lookup table?
             lookup_table = self.lookup_tables[field] = defaultdict(list)
-            for index, record in enumerate(self.records):
+            for index, record in enumerate(self._records):
                 field_value = getattr(record, field)
                 lookup_table[field_value].append(index)
         # Return (possibly empty) sequence of matching records.
         return tuple(
-            self.records[index] for index in self.lookup_tables[field].get(value, [])
+            self._records[index] for index in self.lookup_tables[field].get(value, [])
         )
 
 
