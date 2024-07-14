@@ -4,6 +4,12 @@ Mount external drive with `sudo mount -t drvfs F: /mnt/f`
 
 Monai [Installation Guide](https://docs.monai.io/en/stable/installation.html). 
 
+## Hemond Data
+
+### Preproc
+
+- In `hemond_data.py` in `HaemondData.find_scan`, consider raising a Warning instead of an Exception if a scan is not found for a subid/ses. This will make sense when the program is more complete and things are ready to run
+
 ## Brats Data
 
 - [MONAI Tutorials](https://github.com/Project-MONAI/tutorials)

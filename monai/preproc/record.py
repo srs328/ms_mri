@@ -9,8 +9,6 @@ Scan = namedtuple("Scan", ("subid", "date", "image", "label"))
 
 
 
-
-
 # make class method to return this given a csv, and another given a dict
 class DataSet(object):
 
@@ -18,7 +16,7 @@ class DataSet(object):
         if records is None:
             records = []
         self.fields = fields
-        self.Data = namedtuple(recordname, self.fields)
+        self.Data = namedtuple(recordname, self.fields, defaults=["","","",""])
         self.records = [self.Data(**record) for record in records]
         self.valid_fieldnames = set(self.fields)
 
@@ -28,7 +26,8 @@ class DataSet(object):
         self.lookup_tables = {}
 
     def add_record(self, record):
-        pass
+        print(record)
+        self.records.append(self.Data(**record))
 
     def retrieve(self, **kwargs):
         """Fetch a list of records with a field name with the value supplied
@@ -54,7 +53,7 @@ class DataSet(object):
 
 
 if __name__ == "__main__":
-    empdb = DataBase("employees.csv", "Person")
+    empdb = DataSet("employees.csv", "Person")
 
     print(
         "retrieve(name='Ted Kingston'): {}".format(empdb.retrieve(name="Ted Kingston"))

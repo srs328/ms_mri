@@ -6,6 +6,9 @@
 	],
 	"settings": {
 		"python.terminal.activateEnvironment": true,
-		"python.defaultInterpreterPath": "/home/srs-9/Envs/monai/bin/python"
+		"python.defaultInterpreterPath": "/home/srs-9/Envs/monai/bin/python",
+		"editor.fontFamily": "JetBrainsMono Nerd Font, Consolas, 'Courier New'",
+		// "editor.fontFamily": "SauceCodePro Nerd Font Mono Medium, JetBrainsMono Nerd Font, Consolas, 'Courier New'"
+		"terminal.integrated.fontFamily": "SauceCodePro Nerd Font Mono, JetBrainsMono Nerd Font",
 	}
 }

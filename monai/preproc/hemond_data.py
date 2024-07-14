@@ -10,10 +10,12 @@ from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from pathlib import Path
 from typing import NamedTuple
+from pprint import pprint
 
-from attrs import define, field
+from attrs import define, field, asdict
+from dataclasses import dataclass, fields
 
-from monai.preproc import record
+from record import DataSet
 
 PREPROC_DIR = "/home/srs-9/Projects/ms_mri/monai/preproc"
 sys.path.append(PREPROC_DIR)
@@ -21,11 +23,22 @@ sys.path.append(PREPROC_DIR)
 # even though each subject only has one scan, I'm writing this to be extensible
 # for when there are multiple scans per subject
 
-class Scan(NamedTuple):
+@dataclass(slots=True)
+class Scan:
     subid: int
     date: int
-    image: Path
-    label: Path
+    image: Path = None
+    label: Path = None
+    
+    def has_label(self):
+        if self.label is not None:
+            return True
+        else:
+            return False
+    
+    def _field_names(self):
+        return [field.name for field in fields(self)]
+        
 
 def get_subj_ses(filename):
     restr = re.compile(r"sub-ms(\d{4})_ses-(\d{8})\.nii\.gz")
@@ -51,14 +64,23 @@ class Subject:
             return False
 
 
-class HaemondData(Sequence):
+# could subclass DataSet and have initial values for things like fields and Scan as Data
+class HaemondData(DataSet):
 
-    def __init__(self, basepath):
-        self.basepath = Path(basepath)
-        self._scans = []
+    def __init__(self, recordname: str, fields: list, records=None):
+        super().__init__(recordname, fields, records=records)
+        self.Data = Scan
 
-    def add_scan(self, image, label, date):
-        self._scans.append(Scan(subid=self.subid, date=date, image=image, label=label))   
+    def add_label(self, subid, ses, label):
+        scan = self.find_scan(subid, ses)
+        scan.label = label
+                
+    def find_scan(self, subid, ses):
+        sub_scans = self.retrieve(subid=subid)
+        for scan in sub_scans:
+            if scan.date == ses:
+                return scan
+        raise LookupError(f"No scan exists for subject: {subid} and session: {ses}", subid, ses)
 
 
 def scan_data_dir(data_dir):
@@ -66,11 +88,11 @@ def scan_data_dir(data_dir):
         file.name for file in os.scandir(data_dir) if file.name.split(".")[-1] == "gz"
     ]
 
-    dataset_paths = record.DataSet('hemond_data', Scan._fields)
+    dataset = DataSet('hemond_data', Scan.fields())
     
     for image in images:
         subj, ses = get_subj_ses(image)
-        scans.append(Scan(subid=subj, date=ses, image=image))
+        dataset.add_record(dict(subid=subj, date=ses, image=image))
 
     labels = [
         file.name
@@ -79,11 +101,12 @@ def scan_data_dir(data_dir):
     ]
 
     for label in labels:
-        q
+        pass
 
 
 
 def scan_hemond_subjects(data_dir):
+    
     images = [
         file.name for file in os.scandir(data_dir) if file.name.split(".")[-1] == "gz"
     ]
