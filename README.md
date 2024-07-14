@@ -10,6 +10,10 @@ Monai [Installation Guide](https://docs.monai.io/en/stable/installation.html).
 
 - In `hemond_data.py` in `HaemondData.find_scan`, consider raising a Warning instead of an Exception if a scan is not found for a subid/ses. This will make sense when the program is more complete and things are ready to run
 
+- Issue is that hemond data have slightly different shape in one axis where as the data going into the monai network are all uniform in shape. Need to crop data
+- Also need to modify the network to not expect four dimensional stacked images
+
+
 ## Brats Data
 
 - [MONAI Tutorials](https://github.com/Project-MONAI/tutorials)
