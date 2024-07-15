@@ -16,7 +16,7 @@ from attrs import define, field, asdict
 from dataclasses import dataclass, fields
 import warnings
 
-from record import DataSet
+from monai_analysis.preproc.record import DataSet
 
 PREPROC_DIR = "/home/srs-9/Projects/ms_mri/monai/preproc"
 sys.path.append(PREPROC_DIR)
@@ -78,6 +78,7 @@ class HaemondData(DataSet):
 
 
 def scan_data_dir(data_dir):
+    data_dir = Path(data_dir)
     images = [
         Path(file.path)
         for file in os.scandir(data_dir)

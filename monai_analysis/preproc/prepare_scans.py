@@ -6,7 +6,6 @@ import nibabel as nib
 import data_file_manager as datafm
 
 
-
 def load_scan(scan_path: Path) -> np.ndarray:
     img = nib.load(scan_path)
     return np.array(img.dataobj)

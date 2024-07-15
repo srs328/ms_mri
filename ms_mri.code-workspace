@@ -6,9 +6,8 @@
 	],
 	"settings": {
 		"python.terminal.activateEnvironment": true,
-		"python.defaultInterpreterPath": "/home/srs-9/Envs/monai/bin/python",
-		"editor.fontFamily": "SauceCodePro Nerd Font Mono, JetBrainsMono Nerd Font, Consolas, 'Courier New'",
-		// "editor.fontFamily": "SauceCodePro Nerd Font Mono Medium, JetBrainsMono Nerd Font, Consolas, 'Courier New'"
-		"terminal.integrated.fontFamily": "BlexMono Nerd Font Mono, SauceCodePro Nerd Font Mono, JetBrainsMono Nerd Font",
+		"python.defaultInterpreterPath": "/home/hemondlab/.virtualenvs/monai/bin/python",
+		"editor.fontFamily": "SauceCodeProNerdFont-Medium, JetBrainsMono Nerd Font, Consolas, 'Courier New'",
+		"terminal.integrated.fontFamily": "BlexMonoNerdFont, SauceCodePro Nerd Font Mono, JetBrainsMono Nerd Font"
 	}
 }
