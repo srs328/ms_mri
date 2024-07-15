@@ -8,9 +8,9 @@ from abc import ABC, abstractmethod
 from collections.abc import Mapping
 
 
-data_dir = "/mnt/c/Users/srs-9/OneDrive - UMass Chan Medical School/Projects/MS MRI/lesjak_2017/data"
+#data_dir = "/mnt/c/Users/srs-9/OneDrive - UMass Chan Medical School/Projects/MS MRI/lesjak_2017/data"
 
-subjects = os.listdir(data_dir)
+#subjects = os.listdir(data_dir)
 
 
 @dataclass

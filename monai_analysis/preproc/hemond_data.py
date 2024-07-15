@@ -55,7 +55,7 @@ class HaemondData(DataSet):
 
     def __init__(self, recordname: str, fields: list, records=None):
         super().__init__(recordname, fields, records=records)
-        self.Data = Scan
+        self.Data: Scan = Scan
 
     def add_label(self, subid, ses, label):
         try:
@@ -77,7 +77,7 @@ class HaemondData(DataSet):
         )
 
 
-def scan_data_dir(data_dir):
+def scan_data_dir(data_dir) -> HaemondData:
     data_dir = Path(data_dir)
     images = [
         Path(file.path)
@@ -101,6 +101,30 @@ def scan_data_dir(data_dir):
         subj, ses = Scan.get_subj_ses(label)
         dataset.add_label(subj, ses, label)
 
+    return dataset
+
+
+def assign_conditions(dataset: HaemondData) -> HaemondData:
+    scans_no_label = []
+    for i, scan in enumerate(dataset):
+        if not scan.has_label():
+            scans_no_label.append(i)
+
+    fraction_ts = 0.1
+    n_scans = len(dataset)
+    n_ts = int(fraction_ts * n_scans)
+    inds = [i for i in range(n_scans)]
+    random.shuffle(inds)
+
+    for i in scans_no_label:
+        inds.remove(i)
+        inds.insert(0, i)
+
+    for i in inds[:n_ts]:
+        dataset[i].cond = 'ts'
+    for i in inds[n_ts:]:
+        dataset[i].cond = 'tr'
+    
     return dataset
 
 
