@@ -26,7 +26,9 @@ Monai [Installation Guide](https://docs.monai.io/en/stable/installation.html).
 
 ## 3D Autoseg
 
-I think the Buffalo people are only using the set of slices that include the choroid plexus
+- I think the Buffalo people are only using the set of slices that include the choroid plexus
+
+- Hemondlab computer GPU running out of memory when trying to train. Tries to allocate 1.14 gb then fails. Checking with nvidia-smi shows that when this happens, the gpu usage reaches ~11000MiB / 12288MiB
 
 ## Notes
 
