@@ -1,7 +1,9 @@
 # README
 
 - Mount external drive with `sudo mount -t drvfs F: /mnt/f` 
-- smb://umwssnas01.umassmed.edu/MS-neuroimaging$
+- Shared drive
+    - smb://umwssnas01.umassmed.edu/MS-neuroimaging$
+    - \\umwssnas01\MS-neuroimaging$
 
 
 Monai [Installation Guide](https://docs.monai.io/en/stable/installation.html). 
@@ -42,12 +44,6 @@ Preprocessing steps
 
 multis (don't know what this is referring to)
 
-<<<<<<< HEAD
-ACTRIMS - Oct 25 deadline
-AAN april deadline
-
-choroid_t1flair 
-=======
 ### Meeting with Buffalo people
 
 - I think they're only using the set of slices that include choroid plexus
@@ -57,4 +53,3 @@ choroid_t1flair
 
 - ACTRIMS - Oct 25 deadline
 - AAN april deadline
->>>>>>> cdabfc7046338f620cceb96f7cc366f12c83a489

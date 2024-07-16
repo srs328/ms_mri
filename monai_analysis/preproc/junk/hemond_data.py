@@ -16,7 +16,7 @@ from attrs import define, field, asdict
 from dataclasses import dataclass, fields
 import warnings
 
-from record import DataSet
+from record import Record
 
 PREPROC_DIR = "/home/srs-9/Projects/ms_mri/monai/preproc"
 sys.path.append(PREPROC_DIR)
@@ -74,7 +74,7 @@ class Subject:
 
 
 # could subclass DataSet and have initial values for things like fields and Scan as Data
-class HaemondData(DataSet):
+class HaemondData(Record):
 
     def __init__(self, recordname: str, fields: list, records=None):
         super().__init__(recordname, fields, records=records)
