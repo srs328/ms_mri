@@ -5,9 +5,10 @@ import importlib
 import numpy as np
 import nibabel as nib
 from monai_analysis.preproc import data_file_manager as datafm
-from monai_analysis.preproc.hemond_data import HaemondData
-import tqdm 
+from monai_analysis.preproc.hemond_data import DataSet
+import tqdm
 import random
+
 
 def load_scan(scan_path: Path) -> np.ndarray:
     img = nib.load(scan_path)
@@ -18,7 +19,7 @@ def load_scan(scan_path: Path) -> np.ndarray:
 #     scan_paths = [lesjak_datafm.get_scan(subject, mod) for mod in modalities]
 
 
-def hemond_data(dataset: HaemondData) -> HaemondData:
+def hemond_data(dataset: DataSet) -> DataSet:
     scans_no_label = []
     for i, scan in enumerate(dataset):
         if not scan.has_label():
@@ -35,10 +36,10 @@ def hemond_data(dataset: HaemondData) -> HaemondData:
         inds.insert(0, i)
 
     for i in inds[:n_ts]:
-        dataset[i].cond = 'ts'
+        dataset[i].cond = "ts"
     for i in inds[n_ts:]:
-        dataset[i].cond = 'tr'
-    
+        dataset[i].cond = "tr"
+
     return dataset
 
 
@@ -53,7 +54,6 @@ def lesjak():
         scan_paths = [lesjak_datafm.get_scan(subject, mod) for mod in modalities]
         scans = [load_scan(path) for path in scan_paths]
         scan_struct = np.stack(scans, axis=-1)
-        
 
 
 if __name__ == "__main__":

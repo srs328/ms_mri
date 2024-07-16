@@ -16,7 +16,7 @@ from attrs import define, field, asdict
 from dataclasses import dataclass, fields
 import warnings
 
-from monai_analysis.preproc.record import DataSet
+from monai_analysis.preproc.record import Record
 
 PREPROC_DIR = "/home/srs-9/Projects/ms_mri/monai/preproc"
 sys.path.append(PREPROC_DIR)
@@ -24,7 +24,14 @@ sys.path.append(PREPROC_DIR)
 # even though each subject only has one scan, I'm writing this to be extensible
 # for when there are multiple scans per subject
 
-# TODO expand this to include modality 
+# ? If I have multiple modalities things get tricky. One approach would be that for each session
+# ?  there are multiple Scans, one for each modality and one for a label (then I'd restructure Scan)
+# ?  A second approach is that there would still be separate Scan objects for each modality, but each one
+# ?  would have the same label as the label attribute of Scan
+# ?  A third approach is making a new Scan struct that holds all modalities in it
+
+
+# TODO expand this to include modality
 @dataclass(slots=True)
 class Scan:
     subid: int
@@ -32,7 +39,6 @@ class Scan:
     image: Path = None
     label: Path = None
     cond: str = None
-    modality: str = None
 
     def has_label(self):
         if self.label is not None:
@@ -51,8 +57,23 @@ class Scan:
         return rematch[1], rematch[2]
 
 
+# ? could this subclass Scan? nah maybe not
+# ?     someone mentioned composition though
+# ?     https://stackoverflow.com/questions/51575931/class-inheritance-in-python-3-7-dataclasses
+
+
+@dataclass(slots=True)
+class MultiModalScan:
+    subid: int
+    date: int
+    images: dict[str, Path] = None
+    label: Path = None
+    cond: str = None
+
+
 # could subclass DataSet and have initial values for things like fields and Scan as Data
-class HaemondData(DataSet):
+# ? Does this need to be a subclass, what if the DataSet class had these two functions
+class DataSet(Record):
 
     def __init__(self, recordname: str, fields: list, records=None):
         super().__init__(recordname, fields, records=records)
@@ -77,16 +98,17 @@ class HaemondData(DataSet):
             f"No scan exists for subject: {subid} and session: {ses}", subid, ses
         )
 
-#? would this be considered a factory function, or could it be made into one?
-def scan_data_dir(data_dir) -> HaemondData:
-    data_dir = Path(data_dir)
+
+# ? this is a function that could be fed into a factory function to produce a concrete instance. for another dataset I'd make another function to collect the data
+def scan_data_dir(dataroot) -> DataSet:
+    dataroot = Path(dataroot)
     images = [
         Path(file.path)
-        for file in os.scandir(data_dir)
+        for file in os.scandir(dataroot)
         if file.name.split(".")[-1] == "gz"
     ]
 
-    dataset = HaemondData("hemond_data", Scan._field_names())
+    dataset = DataSet("hemond_data", Scan._field_names())
 
     for image in images:
         subj, ses = Scan.get_subj_ses(image)
@@ -94,7 +116,7 @@ def scan_data_dir(data_dir) -> HaemondData:
 
     labels = [
         Path(file.path)
-        for file in os.scandir(data_dir / "labels")
+        for file in os.scandir(dataroot / "labels")
         if file.name.split(".")[-1] == "gz"
     ]
 
@@ -105,7 +127,45 @@ def scan_data_dir(data_dir) -> HaemondData:
     return dataset
 
 
-def assign_conditions(dataset: HaemondData) -> HaemondData:
+# kinda confusing how I have to reconstruct each path, and then how in the scan loop, suddenly its looping
+#   over full paths. change the outer loops to use item.path instead
+def collect_choroid_dataset(dataroot) -> DataSet:
+    dataroot = Path(dataroot)
+    sub_dirs = [item.path for item in os.scandir(dataroot) if item.is_dir()]
+    modalities = ["flair", "phase", "t1", "t1_gd"]
+
+    dataset = DataSet("DataSet", MultiModalScan._field_names())
+
+    for sub_dir in sub_dirs:
+        subid = re.match(r"sub-ms(\d{4})", sub_dir.name)[1]
+        ses_dirs = [item.path for item in os.scandir(sub_dir) if "ses" in item.name]
+
+        for ses_dir in ses_dirs:
+            sesid = re.match(r"ses-(\d+)", ses_dir.name)[1]
+            scan_paths = ses_dir.glob("*.nii.gz")
+
+            image_dict = defaultdict(str)
+            label = None
+            for scan_path in scan_paths:
+                scan_prefix = re.match(r"(.+)\.nii\.gz", scan_path.name)[1]
+                if scan_prefix in modalities:
+                    image_dict[scan_prefix] = scan_path
+                elif "lesion_index" in scan_prefix:
+                    label = scan_path
+
+                if label is None:
+                    warnings.warn(f"No label for sub-{subid} ses-{sesid}")
+                pprint(f"For sub-{subid} ses-{sesid} found:")
+                pprint(list(image_dict.keys()))
+
+            dataset.append(
+                dict(subid=subid, date=sesid, images=image_dict, label=label)
+            )
+
+    return dataset
+
+
+def assign_conditions(dataset: DataSet) -> DataSet:
     scans_no_label = []
     for i, scan in enumerate(dataset):
         if not scan.has_label():
@@ -122,10 +182,10 @@ def assign_conditions(dataset: HaemondData) -> HaemondData:
         inds.insert(0, i)
 
     for i in inds[:n_ts]:
-        dataset[i].cond = 'ts'
+        dataset[i].cond = "ts"
     for i in inds[n_ts:]:
-        dataset[i].cond = 'tr'
-    
+        dataset[i].cond = "tr"
+
     return dataset
 
 

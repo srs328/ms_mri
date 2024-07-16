@@ -15,7 +15,7 @@ Scan = namedtuple("Scan", ("subid", "date", "image", "label"))
 
 # Source: https://stackoverflow.com/questions/15418386/what-is-the-best-data-structure-for-storing-a-set-of-four-or-more-values
 # make class method to return this given a csv, and another given a dict
-class DataSet(MutableSequence):
+class Record(MutableSequence):
 
     def __init__(self, recordname: str, fields: list, records=None):
         if records is None:
@@ -68,7 +68,7 @@ class DataSet(MutableSequence):
 
 
 if __name__ == "__main__":
-    empdb = DataSet("employees.csv", "Person")
+    empdb = Record("employees.csv", "Person")
 
     print(
         "retrieve(name='Ted Kingston'): {}".format(empdb.retrieve(name="Ted Kingston"))
