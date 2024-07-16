@@ -24,7 +24,7 @@ sys.path.append(PREPROC_DIR)
 # even though each subject only has one scan, I'm writing this to be extensible
 # for when there are multiple scans per subject
 
-
+# TODO expand this to include modality 
 @dataclass(slots=True)
 class Scan:
     subid: int
@@ -32,6 +32,7 @@ class Scan:
     image: Path = None
     label: Path = None
     cond: str = None
+    modality: str = None
 
     def has_label(self):
         if self.label is not None:
@@ -76,7 +77,7 @@ class HaemondData(DataSet):
             f"No scan exists for subject: {subid} and session: {ses}", subid, ses
         )
 
-
+#? would this be considered a factory function, or could it be made into one?
 def scan_data_dir(data_dir) -> HaemondData:
     data_dir = Path(data_dir)
     images = [

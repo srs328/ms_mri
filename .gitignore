@@ -3,6 +3,7 @@
 Data/
 
 *.code-workspace
+*cp_work_dir*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -1,6 +1,8 @@
 # README
 
-Mount external drive with `sudo mount -t drvfs F: /mnt/f` 
+- Mount external drive with `sudo mount -t drvfs F: /mnt/f` 
+- smb://umwssnas01.umassmed.edu/MS-neuroimaging$
+
 
 Monai [Installation Guide](https://docs.monai.io/en/stable/installation.html). 
 
@@ -20,15 +22,32 @@ Monai [Installation Guide](https://docs.monai.io/en/stable/installation.html).
 
 - [The Medical Segmentation Decathlon](https://www.nature.com/articles/s41467-022-30695-9)
 
-cluster -i T:\brain\lesjak_2017\data\patient01\proc\patient01_FLAIR.csf.1.nii.gz -t 30
+## 3D Autoseg
 
-fslmaths patient01_FLAIR.cs
-f.1.clustered.nii.gz -thr 2080.5 -bin patient01_FLAIR.csf.1.clusteredLarge.nii.gz
+I think the Buffalo people are only using the set of slices that include the choroid plexus
 
-1. Intensity normalize across subjects and within subjects
+## Notes
+
+### Segmenting CSF/lymph channels
+
+Can use cluster to segment continuous regions of a particular intensity and then pull out ROI's like the dorsal and ventral sinuses
+
+- `cluster -i T:\brain\lesjak_2017\data\patient01\proc\patient01_FLAIR.csf.1.nii.gz -t 30`
+- `fslmaths patient01_FLAIR.csf.1.clustered.nii.gz -thr 2080.5 -bin patient01_FLAIR.csf.1.clusteredLarge.nii.gz`
+
+Preprocessing steps
+
+1. Intensity normalize across subjects and/or within subjects
 2. 
 
-multis
+multis (don't know what this is referring to)
 
-ACTRIMS - Oct 25 deadline
-AAN april deadline
+### Meeting with Buffalo people
+
+- I think they're only using the set of slices that include choroid plexus
+
+
+## Conferences
+
+- ACTRIMS - Oct 25 deadline
+- AAN april deadline
