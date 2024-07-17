@@ -26,9 +26,22 @@ Monai [Installation Guide](https://docs.monai.io/en/stable/installation.html).
 
 ## 3D Autoseg
 
+[Source code](https://docs.monai.io/en/1.2.0/_modules/monai/apps/auto3dseg/auto_runner.html)
+
+[SwinUNETR](https://docs.monai.io/en/1.3.0/_modules/monai/networks/nets/swin_unetr.html)
+
+- Uses soft dice loss function
+
+### Training the network
+
 - I think the Buffalo people are only using the set of slices that include the choroid plexus
+- They used the [auto3dseg_hello_world](https://github.com/Project-MONAI/tutorials/blob/main/auto3dseg/notebooks/auto3dseg_hello_world.ipynb) example
+
+- On lenovo_desktop, getting ZeroDivisionError during training ([see output](logs/ZeroDivisionError.txt))
+    - SwinUNETR uses soft dice loss function
 
 - Hemondlab computer GPU running out of memory when trying to train. Tries to allocate 1.14 gb then fails. Checking with nvidia-smi shows that when this happens, the gpu usage reaches ~11000MiB / 12288MiB
+    - [Question on pytorch forum](https://discuss.pytorch.org/t/how-to-prevent-cuda-out-of-memory-error-for-a-large-monai-network-swinunetr-with-large-patch-size-images/179639)
 
 ## Notes
 

@@ -6,7 +6,7 @@
 	],
 	"settings": {
 		"python.terminal.activateEnvironment": true,
-		"python.defaultInterpreterPath": "/home/hemondlab/.virtualenvs/monai/bin/python",
+		"python.defaultInterpreterPath": "/home/srs-9/.virtualenvs/monai/bin/python",
 		"editor.fontFamily": "SauceCodeProNerdFont-Medium, JetBrainsMono Nerd Font, Consolas, 'Courier New'",
 		"terminal.integrated.fontFamily": "BlexMonoNerdFont, SauceCodePro Nerd Font Mono, JetBrainsMono Nerd Font"
 	

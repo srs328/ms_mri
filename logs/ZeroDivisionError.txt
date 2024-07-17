@@ -1,0 +1,37 @@
+2024-07-16 19:57:33,669 - INFO - Running data analysis...
+2024-07-16 19:57:33,670 - INFO - Found 1 GPUs for data analyzing!
+100%|██████████| 60/60 [00:44<00:00,  1.36it/s]
+2024-07-16 19:58:19,891 - INFO - Data spacing is not completely uniform. MONAI transforms may provide unexpected result
+2024-07-16 19:58:19,892 - INFO - Writing data stats to /home/srs-9/Dev/ms_mri/training_work_dirs/cp_work_dir8/datastats.yaml.
+2024-07-16 19:58:20,226 - INFO - Writing by-case data stats to /home/srs-9/Dev/ms_mri/training_work_dirs/cp_work_dir8/datastats_by_case.yaml, this may take a while.
+2024-07-16 19:58:21,716 - INFO - BundleGen from https://github.com/Project-MONAI/research-contributions/releases/download/algo_templates/e4cf5a1.tar.gz
+algo_templates.tar.gz: 104kB [00:01, 61.8kB/s]                             
+2024-07-16 19:58:23,445 - INFO - Downloaded: /tmp/tmpjqvdb8wo/algo_templates.tar.gz
+2024-07-16 19:58:23,445 - INFO - Expected md5 is None, skip md5 check for file /tmp/tmpjqvdb8wo/algo_templates.tar.gz.
+2024-07-16 19:58:23,446 - INFO - Writing into directory: /home/srs-9/Dev/ms_mri/training_work_dirs/cp_work_dir8.
+
+2024-07-16 19:58:23,833 - INFO - Generated:/home/srs-9/Dev/ms_mri/training_work_dirs/cp_work_dir8/swinunetr_0
+2024-07-16 19:58:24,370 - INFO - Generated:/home/srs-9/Dev/ms_mri/training_work_dirs/cp_work_dir8/swinunetr_1
+2024-07-16 19:58:24,754 - INFO - Generated:/home/srs-9/Dev/ms_mri/training_work_dirs/cp_work_dir8/swinunetr_2
+2024-07-16 19:58:25,123 - INFO - Generated:/home/srs-9/Dev/ms_mri/training_work_dirs/cp_work_dir8/swinunetr_3
+2024-07-16 19:58:25,144 - INFO - ['python', '/home/srs-9/Dev/ms_mri/training_work_dirs/cp_work_dir8/swinunetr_0/scripts/train.py', 'run', "--config_file='/home/srs-9/Dev/ms_mri/training_work_dirs/cp_work_dir8/swinunetr_0/configs/hyper_parameters.yaml,/home/srs-9/Dev/ms_mri/training_work_dirs/cp_work_dir8/swinunetr_0/configs/network.yaml,/home/srs-9/Dev/ms_mri/training_work_dirs/cp_work_dir8/swinunetr_0/configs/transforms_infer.yaml,/home/srs-9/Dev/ms_mri/training_work_dirs/cp_work_dir8/swinunetr_0/configs/transforms_train.yaml,/home/srs-9/Dev/ms_mri/training_work_dirs/cp_work_dir8/swinunetr_0/configs/transforms_validate.yaml'", '--num_epochs_per_validation=1', '--num_epochs=100', '--num_warmup_epochs=1']
+2024-07-16 19:58:56,281 - INFO - Downloaded: /home/srs-9/Dev/ms_mri/training_work_dirs/cp_work_dir8/swinunetr_0/pretrained_model/swin_unetr.base_5000ep_f48_lr2e-4_pretrained.pt
+2024-07-16 19:58:56,281 - INFO - Expected md5 is None, skip md5 check for file /home/srs-9/Dev/ms_mri/training_work_dirs/cp_work_dir8/swinunetr_0/pretrained_model/swin_unetr.base_5000ep_f48_lr2e-4_pretrained.pt.
+2024/07/16 19:58:56 INFO mlflow.tracking.fluent: Experiment with name 'Auto3DSeg' does not exist. Creating a new experiment.
+swinunetr_0 - training ...:   4%|▍         | 4/100 [21:40<8:40:15, 325.16s/round]
+Traceback (most recent call last):
+  File "/home/srs-9/Dev/ms_mri/training_work_dirs/cp_work_dir8/swinunetr_0/scripts/train.py", line 850, in <module>
+    fire.Fire()
+  File "/home/srs-9/.virtualenvs/monai/lib/python3.12/site-packages/fire/core.py", line 143, in Fire
+    component_trace = _Fire(component, args, parsed_flag_args, context, name)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/srs-9/.virtualenvs/monai/lib/python3.12/site-packages/fire/core.py", line 477, in _Fire
+    component, remaining_args = _CallAndUpdateTrace(
+                                ^^^^^^^^^^^^^^^^^^^^
+  File "/home/srs-9/.virtualenvs/monai/lib/python3.12/site-packages/fire/core.py", line 693, in _CallAndUpdateTrace
+    component = fn(*varargs, **kwargs)
+                ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/srs-9/Dev/ms_mri/training_work_dirs/cp_work_dir8/swinunetr_0/scripts/train.py", line 643, in run
+    logger.debug(f"Evaluation metric - class {_c + 1}: {metric[2 * _c] / metric[2 * _c + 1]}")
+                                                        ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~
+ZeroDivisionError: float division by zero
