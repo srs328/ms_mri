@@ -1,4 +1,4 @@
-import data_file_manager as datafm
+from mri_preproc.paths import data_file_manager as datafm
 from pathlib import Path
 from pprint import pp
 import copy

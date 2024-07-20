@@ -4,8 +4,8 @@ from pathlib import Path
 import importlib
 import numpy as np
 import nibabel as nib
-from monai_analysis.preproc import data_file_manager as datafm
-from monai_analysis.preproc.hemond_data import DataSet
+from mri_preproc.paths import data_file_manager as datafm
+from mri_preproc.paths.hemond_data import DataSet
 import tqdm
 import random
 

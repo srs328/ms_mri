@@ -16,10 +16,10 @@ from attrs import define, field, asdict
 from dataclasses import dataclass, fields
 import warnings
 
-from monai_analysis.preproc.record import Record
+from mri_preproc.paths.record import Record
 
-PREPROC_DIR = "/home/srs-9/Projects/ms_mri/monai/preproc"
-sys.path.append(PREPROC_DIR)
+# PREPROC_DIR = "/home/srs-9/Projects/ms_mri/monai/preproc"
+# sys.path.append(PREPROC_DIR)
 
 # even though each subject only has one scan, I'm writing this to be extensible
 # for when there are multiple scans per subject

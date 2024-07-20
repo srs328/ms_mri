@@ -69,8 +69,8 @@ def create_monai_dir(data, basepath: Path, modality: str):
     for folder in [imagesTr_dir, labelsTr_dir, imagesTs_dir]:
         os.makedirs(folder, exist_ok=True)
 
-    for subject in subjects:
-        pass
+    #for subject in subjects:
+    #    pass
 
 
 class Data(ABC):

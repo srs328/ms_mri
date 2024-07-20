@@ -9,8 +9,10 @@ import glob
 import random
 from monai.apps.auto3dseg import AutoRunner
 from monai.config import print_config
-from monai_analysis.preproc import hemond_data, init_paths, prepare_scans
+from mri_preprox.paths import hemond_data, init_paths
 import importlib
+
+from mri_preproc import prepare_scans
 
 print_config()
 
