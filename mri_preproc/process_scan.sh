@@ -27,3 +27,4 @@ flirt -v \
     -applyxfm -init $proc_dir/$prefix-rigid_affine.mat \
     -out $proc_dir/$prefix-brain-mni_space.nii.gz
 
+# More beginner friendly explanation
