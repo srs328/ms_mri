@@ -4,13 +4,13 @@ scan_dir=$1
 prefix=$2
 
 
-proc_dir=${scan_dir}/proc
+proc_dir="$scan_dir/proc"
 if [[ ! -d "$proc_dir" ]]; then
     echo "making $proc_dir" 
-    mkdir $proc_dir
+    mkdir "$proc_dir"
 fi
 
-bet $scan_dir/$prefix.nii.gz $proc_dir/$prefix-brain.nii.gz -m -v
+bet "$scan_dir/$prefix.nii.gz" "$proc_dir/${prefix}-brain.nii.gz" -m -v
 
 REF_DIR=$FSLDIR/data/standard
 
