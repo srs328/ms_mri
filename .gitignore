@@ -2,6 +2,7 @@
 /junk/
 Data/
 *.log
+tutorials/
 
 *.code-workspace
 *cp_work_dir*
