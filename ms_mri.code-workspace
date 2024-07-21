@@ -8,12 +8,18 @@
 		"python.terminal.activateEnvironment": true,
 		"python.defaultInterpreterPath": "/home/srs-9/.virtualenvs/monai/bin/python",
 		"editor.fontFamily": "SauceCodeProNerdFont-Medium, JetBrainsMono Nerd Font, Consolas, 'Courier New'",
-		"terminal.integrated.fontFamily": "BlexMonoNerdFont, SauceCodePro Nerd Font Mono, JetBrainsMono Nerd Font"
+		"terminal.integrated.fontFamily": "BlexMonoNerdFont, SauceCodePro Nerd Font Mono, JetBrainsMono Nerd Font",
 	
 		// "workbench.colorCustomizations": {
 		// 	"editor.background": "#FFFBEB",
 		// 	"sideBar.background" "#E7EBF2"
 		// }
+
+		// indent-rainbow
+		// Using the light mode
+		"indentRainbow.indicatorStyle": "light",
+		// we use a simple 1 pixel wide line
+		"indentRainbow.lightIndicatorStyleLineWidth": 1,
 	
 	}
 }

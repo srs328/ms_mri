@@ -164,7 +164,7 @@ def collect_choroid_dataset(dataroot, suppress_output=False) -> DataSet:
     dataset = DataSet("DataSet", MultiModalScan)
 
     for sub_dir in sub_dirs:
-        subid = re.match(r"sub-ms(\d{4})", sub_dir.name)[1]
+        subid = re.match(r"sub-(ms\d{4})", sub_dir.name)[1]
         ses_dirs = [Path(item.path) for item in os.scandir(sub_dir) if "ses" in item.name]
 
         for ses_dir in ses_dirs:
@@ -180,11 +180,11 @@ def collect_choroid_dataset(dataroot, suppress_output=False) -> DataSet:
                 elif "lesion_index" in scan_prefix:
                     label = scan_path
 
-            if label is None:
-                warnings.warn(f"No label for sub-{subid} ses-{sesid}")
             if not suppress_output:
                 pprint(f"For sub-{subid} ses-{sesid} found:")
                 pprint(list(image_dict.keys()))
+                if label is None:
+                    warnings.warn(f"No label for sub-{subid} ses-{sesid}")
 
             dataset.append(
                 dict(subid=subid, date=sesid, dataroot=dataroot, images=image_dict, label=label)

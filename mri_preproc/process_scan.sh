@@ -1,7 +1,10 @@
 #!/bin/bash
 
+# could make verbosity an optional parameter
+
 scan_dir=$1
 prefix=$2
+verbosity=${3:-0}
 
 
 proc_dir="$scan_dir/proc"
@@ -10,21 +13,31 @@ if [[ ! -d "$proc_dir" ]]; then
     mkdir "$proc_dir"
 fi
 
+if [[ ! -f "$scan_dir/$prefix.nii.gz" ]]; then
+    echo "No file $scan_dir/$prefix.nii.gz" > /dev/stderr
+    exit 1 
+fi
+
+if [[ -f "$proc_dir/${prefix}-brain-mni_reg.nii.gz" ]]; then
+    echo "$proc_dir/${prefix}-brain-mni_reg.nii.gz already exists"
+    exit 0
+fi
+
 bet "$scan_dir/$prefix.nii.gz" "$proc_dir/${prefix}-brain.nii.gz" -m -v
 
 REF_DIR=$FSLDIR/data/standard
 
-flirt -v \
-    -in $proc_dir/$prefix-brain.nii.gz \
-    -ref $REF_DIR/MNI152_T1_1mm \
-    -omat $proc_dir/$prefix-affine.mat -dof 12
+flirt -verbose "$verbosity" \
+    -in "$proc_dir/${prefix}-brain.nii.gz" \
+    -ref "$REF_DIR/MNI152_T1_1mm_brain.nii.gz" \
+    -omat "$proc_dir/${prefix}-mni_affine.mat" -dof 12
 
-aff2rigid $proc_dir/$prefix-affine.mat $proc_dir/$prefix-rigid_affine.mat
+aff2rigid "$proc_dir/${prefix}-mni_affine.mat" "$proc_dir/${prefix}-mni_rigid_affine.mat"
 
-flirt -v \
-    -in $proc_dir/$prefix-brain.nii.gz \
-    -ref $REF_DIR/MNI152_T1_1mm \
-    -applyxfm -init $proc_dir/$prefix-rigid_affine.mat \
-    -out $proc_dir/$prefix-brain-mni_space.nii.gz
+flirt -verbose "$verbosity" \
+    -in "$proc_dir/${prefix}-brain.nii.gz" \
+    -ref "$REF_DIR/MNI152_T1_1mm_brain.nii.gz" \
+    -applyxfm -init "${proc_dir}/${prefix}-mni_rigid_affine.mat" \
+    -out "$proc_dir/${prefix}-brain-mni_reg.nii.gz"
 
-# More beginner friendly explanation
+echo "processing successful for $scan_dir/$prefix.nii.gz" > /dev/stderr
