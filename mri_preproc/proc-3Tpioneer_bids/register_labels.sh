@@ -11,10 +11,6 @@ affine="${proc_dir}/mni_reg-rigid_affine.mat"
 REF_DIR=$FSLDIR/data/standard
 
 
-if [[ ! -f "$affine" ]]; then
-    mv "${proc_dir}/flair-mni_rigid_affine.mat" "$affine"
-fi
-
 # modalities=("phase" "t1" "t1_gd")
 
 # for mod in ${modalities[@]}; do
@@ -22,10 +18,15 @@ fi
 #     reg_scan="${proc_dir}/${mod}
 # done
 
+if [[ ! -f "$affine" ]]; then
+    exit 1
+fi
+
 for label in "$scan_dir"/lesion_index*; do
-    label_prefix=${label%".nii.gz"}
-    raw_label="${label_prefix}.nii.gz"
-    reg_label="${label_prefix}-mni_reg.nii.gz"
+    filename=$(basename "${label}")
+    file_prefix=${filename%".nii.gz"}
+    raw_label="${scan_dir}/${file_prefix}.nii.gz"    
+    reg_label="${proc_dir}/${file_prefix}-mni_reg.nii.gz"
 
     if [[ ! -f "$reg_label" ]]; then
         flirt -verbose "$verbosity" \

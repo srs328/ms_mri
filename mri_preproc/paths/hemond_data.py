@@ -36,7 +36,7 @@ from mri_preproc.paths.record import Record
 class Scan:
     subid: str
     date: int
-    dataroot: str
+    root: str
     image: Path = None
     label: Path = None
     cond: str = None
@@ -114,6 +114,7 @@ class DataSet(Record):
         for scan in sub_scans:
             if scan.date == ses:
                 return scan
+        #return None
         raise LookupError(
             f"No scan exists for subject: {subid} and session: {ses}", subid, ses
         )
@@ -132,7 +133,7 @@ def scan_data_dir(dataroot) -> DataSet:
 
     for image in images:
         subj, ses = Scan.get_subj_ses(image)
-        dataset.append(dict(subid=subj, date=ses, dataroot=dataroot, image=image))
+        dataset.append(dict(subid=subj, date=ses, root=dataroot, image=image))
 
     labels = [
         Path(file.path)
@@ -150,7 +151,7 @@ def scan_data_dir(dataroot) -> DataSet:
 # kinda confusing how I have to reconstruct each path, and then how in the scan loop, suddenly its looping
 #   over full paths. change the outer loops to use item.path instead
 #? should I add a try except block to skip directories that aren't subject dirs?
-def collect_choroid_dataset(dataroot, suppress_output=False) -> DataSet:
+def collect_raw_dataset(dataroot, suppress_output=False) -> DataSet:
     dataroot = Path(dataroot)
     sub_dirs = [Path(item.path) for item in os.scandir(dataroot) if item.is_dir() and "sub" in item.name]
     modalities = ["flair", "phase", "t1", "t1_gd"]
@@ -186,6 +187,37 @@ def collect_choroid_dataset(dataroot, suppress_output=False) -> DataSet:
 
     return dataset
 
+def collect_proc_dataset(dataroot, suppress_output=True) -> DataSet:
+    dataroot = Path(dataroot)
+    sub_dirs = [Path(item.path) for item in os.scandir(dataroot) if item.is_dir() and "sub" in item.name]
+    modality = "flair"
+
+    dataset = DataSet("DataSet", Scan)
+
+    for sub_dir in sub_dirs:
+        subid = re.match(r"sub-(ms\d{4})", sub_dir.name)[1]
+        ses_dirs = [Path(item.path) for item in os.scandir(sub_dir) if "ses" in item.name]
+
+        for ses_dir in ses_dirs:
+            sesid = re.match(r"ses-(\d+)", ses_dir.name)[1]
+            proc_dir = ses_dir / "proc"
+            image_path = proc_dir / "flair-brain-mni_reg.nii.gz"
+            label_path = proc_dir / "lesion_index.t3m20-mni_reg.nii.gz"
+            if not image_path.is_file():
+                continue
+            if not label_path.is_file():
+                label_path = None
+            
+            dataset.append(
+                dict(subid=subid, date=sesid, root=ses_dir, image=image_path, label=label_path)
+            )
+
+            if not suppress_output:
+                if label_path is None:
+                    warnings.warn(f"No label for sub-{subid} ses-{sesid}")
+
+    return dataset
+
 
 def assign_conditions(dataset: DataSet) -> DataSet:
     scans_no_label = []
@@ -212,8 +244,10 @@ def assign_conditions(dataset: DataSet) -> DataSet:
 
 
 if __name__ == "__main__":
-    data_dir = Path("/mnt/t/Data/3Tpioneer_bids")
-    dataset = collect_choroid_dataset(data_dir, suppress_output=True)
+    # data_dir = Path("/mnt/t/Data/3Tpioneer_bids")
+    data_dir = Path("/mnt/t/Data/MONAI/flair")
+    dataset = scan_data_dir(data_dir)
+    # dataset = collect_raw_dataset(data_dir, suppress_output=True)
     # data, unmatched_labels = scan_hemond_subjects(data_dir)
     # dataset = scan_data_dir(data_dir)
     thoo = 4
