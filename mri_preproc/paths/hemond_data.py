@@ -46,9 +46,6 @@ class Scan:
             return True
         else:
             return False
-    
-    def scan_folder(self):
-        return self.dataroot / f"sub-{self.subid}" / f"ses-{self.date}"
 
     @classmethod
     def _field_names(cls):
@@ -71,7 +68,7 @@ class Scan:
 class MultiModalScan:
     subid: int
     date: int
-    dataroot: str
+    root: str
     images: dict[str, Path] = None
     label: Path = None
     cond: str = None
@@ -81,9 +78,6 @@ class MultiModalScan:
             return True
         else:
             return False
-    
-    def scan_folder(self):
-        return self.dataroot / f"sub-{self.subid}" / f"ses-{self.date}"
 
     @classmethod
     def _field_names(cls):
@@ -187,7 +181,7 @@ def collect_choroid_dataset(dataroot, suppress_output=False) -> DataSet:
                     warnings.warn(f"No label for sub-{subid} ses-{sesid}")
 
             dataset.append(
-                dict(subid=subid, date=sesid, dataroot=dataroot, images=image_dict, label=label)
+                dict(subid=subid, date=sesid, root=ses_dir, images=image_dict, label=label)
             )
 
     return dataset
