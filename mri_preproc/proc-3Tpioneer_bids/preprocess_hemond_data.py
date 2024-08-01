@@ -64,10 +64,10 @@ for data in dataset:
     scan_dir = data.root
     command_parts = [processing_script, str(scan_dir), "1"]
     try:
-        logger.info(" ".join(command_parts))
+        logger.debug(" ".join(command_parts))
         result = subprocess.run(command_parts, capture_output=True, text=True, check=True)
     except subprocess.CalledProcessError as e:
         logger.info(e.stdout)
         logger.error(e.stderr)
     else:
-        logger.debug(result.stdout)
+        logger.info(result.stdout)

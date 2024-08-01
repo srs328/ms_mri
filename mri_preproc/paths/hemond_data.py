@@ -202,7 +202,7 @@ def collect_proc_dataset(dataroot, suppress_output=True) -> DataSet:
             sesid = re.match(r"ses-(\d+)", ses_dir.name)[1]
             proc_dir = ses_dir / "proc"
             image_path = proc_dir / "flair-brain-mni_reg.nii.gz"
-            label_path = proc_dir / "lesion_index.t3m20-mni_reg.nii.gz"
+            label_path = proc_dir / "lesion_index.t3m20-mni_reg-mask.nii.gz"
             if not image_path.is_file():
                 continue
             if not label_path.is_file():
