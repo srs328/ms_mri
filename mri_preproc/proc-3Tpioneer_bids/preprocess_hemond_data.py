@@ -39,7 +39,7 @@ logger.addHandler(fh)
 init_paths.main()
 from mri_preproc.paths.init_paths import DATA_HOME
 
-dataset = hemond_data.collect_raw_dataset(DATA_HOME, suppress_output=True)
+dataset = hemond_data.get_raw_3Tpioneer_bids(DATA_HOME, suppress_output=True)
 
 processing_script = "/home/srs-9/Projects/ms_mri/mri_preproc/process_flair.sh"
 

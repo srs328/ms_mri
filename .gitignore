@@ -3,6 +3,7 @@
 Data/
 *.log
 tutorials/
+figures/
 
 *.code-workspace
 *cp_work_dir*

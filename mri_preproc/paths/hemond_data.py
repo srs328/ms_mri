@@ -30,6 +30,10 @@ from mri_preproc.paths.record import Record
 # ?  would have the same label as the label attribute of Scan
 # ?  A third approach is making a new Scan struct that holds all modalities in it
 
+def get_subj_ses(filename):
+    restr = re.compile(r"sub-(ms\d{4})_ses-(\d{8})\.nii\.gz")
+    rematch = restr.match(filename.name)
+    return rematch[1], rematch[2]
 
 # TODO expand this to include modality
 @dataclass(slots=True)
@@ -49,13 +53,7 @@ class Scan:
 
     @classmethod
     def _field_names(cls):
-        return cls.__slots__
-
-    @staticmethod
-    def get_subj_ses(filename):
-        restr = re.compile(r"sub-(ms\d{4})_ses-(\d{8})\.nii\.gz")
-        rematch = restr.match(filename.name)
-        return rematch[1], rematch[2]
+        return cls.__slots__    
 
 
 # ? could this subclass Scan? nah maybe not
@@ -82,12 +80,6 @@ class MultiModalScan:
     @classmethod
     def _field_names(cls):
         return cls.__slots__
-
-    @staticmethod
-    def get_subj_ses(filename):
-        restr = re.compile(r"sub-(ms\d{4})_ses-(\d{8})\.nii\.gz")
-        rematch = restr.match(filename.name)
-        return rematch[1], rematch[2]
 
 
 # could subclass DataSet and have initial values for things like fields and Scan as Data
@@ -120,8 +112,10 @@ class DataSet(Record):
         )
 
 
-# ? this is a function that could be fed into a factory function to produce a concrete instance. for another dataset I'd make another function to collect the data
-def scan_data_dir(dataroot) -> DataSet:
+# This function scans a directory with the following structure: all scans at top level
+#  with filename as sub-{subid}_ses-{sesid}; labels are in subdirectory /labels with same
+#  exact name as the images
+def scan_data_dir1(dataroot) -> DataSet:
     dataroot = Path(dataroot)
     images = [
         Path(file.path)
@@ -132,7 +126,7 @@ def scan_data_dir(dataroot) -> DataSet:
     dataset = DataSet("hemond_data", Scan)
 
     for image in images:
-        subj, ses = Scan.get_subj_ses(image)
+        subj, ses = get_subj_ses(image)
         dataset.append(dict(subid=subj, date=ses, root=dataroot, image=image))
 
     labels = [
@@ -142,7 +136,7 @@ def scan_data_dir(dataroot) -> DataSet:
     ]
 
     for label in labels:
-        subj, ses = Scan.get_subj_ses(label)
+        subj, ses = get_subj_ses(label)
         dataset.add_label(subj, ses, label)
 
     return dataset
@@ -151,7 +145,7 @@ def scan_data_dir(dataroot) -> DataSet:
 # kinda confusing how I have to reconstruct each path, and then how in the scan loop, suddenly its looping
 #   over full paths. change the outer loops to use item.path instead
 #? should I add a try except block to skip directories that aren't subject dirs?
-def collect_raw_dataset(dataroot, suppress_output=False) -> DataSet:
+def get_raw_3Tpioneer_bids(dataroot, suppress_output=False) -> DataSet:
     dataroot = Path(dataroot)
     sub_dirs = [Path(item.path) for item in os.scandir(dataroot) if item.is_dir() and "sub" in item.name]
     modalities = ["flair", "phase", "t1", "t1_gd"]
@@ -187,7 +181,8 @@ def collect_raw_dataset(dataroot, suppress_output=False) -> DataSet:
 
     return dataset
 
-def collect_proc_dataset(dataroot, suppress_output=True) -> DataSet:
+
+def get_proc_3Tpioneer_bids(dataroot, suppress_output=True) -> DataSet:
     dataroot = Path(dataroot)
     sub_dirs = [Path(item.path) for item in os.scandir(dataroot) if item.is_dir() and "sub" in item.name]
     modality = "flair"
@@ -219,6 +214,19 @@ def collect_proc_dataset(dataroot, suppress_output=True) -> DataSet:
     return dataset
 
 
+def subset_proc_3Tpioneer_bids(pioneer_bids_root, flair_root):
+    dataset0 = get_proc_3Tpioneer_bids(pioneer_bids_root)
+    dataset_ref = scan_data_dir1(flair_root)
+
+    dataset = DataSet("DataSet", Scan)
+    for ref_data in dataset_ref:
+        scan = dataset0.find_scan(ref_data.subid, ref_data.date)
+        if scan:
+            dataset.append(asdict(scan))
+    
+    return dataset
+
+
 def assign_conditions(dataset: DataSet) -> DataSet:
     scans_no_label = []
     for i, scan in enumerate(dataset):
@@ -246,7 +254,7 @@ def assign_conditions(dataset: DataSet) -> DataSet:
 if __name__ == "__main__":
     # data_dir = Path("/mnt/t/Data/3Tpioneer_bids")
     data_dir = Path("/mnt/t/Data/MONAI/flair")
-    dataset = scan_data_dir(data_dir)
+    dataset = scan_data_dir1(data_dir)
     # dataset = collect_raw_dataset(data_dir, suppress_output=True)
     # data, unmatched_labels = scan_hemond_subjects(data_dir)
     # dataset = scan_data_dir(data_dir)
