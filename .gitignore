@@ -4,6 +4,8 @@ Data/
 *.log
 tutorials/
 figures/
+screenshots/
+*.nii.gz
 
 *.code-workspace
 *cp_work_dir*
