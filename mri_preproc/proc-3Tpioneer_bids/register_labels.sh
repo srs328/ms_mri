@@ -44,3 +44,28 @@ for label in "$scan_dir"/lesion_index*; do
     fi
 
 done
+
+
+label="choroid_t1_flair.nii.gz"
+filename=$(basename "${label}")
+file_prefix=${filename%".nii.gz"}
+raw_label="${scan_dir}/${file_prefix}.nii.gz"    
+reg_label="${proc_dir}/${file_prefix}-mni_reg.nii.gz"
+
+if [[ ! -f "$reg_label" ]]; then
+    echo "Applying affine transform to $raw_label"
+    flirt -verbose "$verbosity" \
+        -in "$raw_label" \
+        -ref "$REF_DIR/MNI152_T1_1mm_brain.nii.gz" \
+        -applyxfm -init "$affine" \
+        -out "$reg_label"
+fi
+
+mask_label="${proc_dir}/${file_prefix}-mni_reg-mask.nii.gz"
+if [[ ! -f "$mask_label" ]]; then
+    echo "Masking $reg_label"
+    fslmaths "$reg_label" -div "$reg_label" "$mask_label"
+fi
+
+flirt -in "choroid_t1_flair.nii.gz" -ref "$REF_DIR/MNI152_T1_1mm_brain.nii.gz" -applyxfm -init "proc/mni_reg-rigid_affine.mat" -out "choroid_t1_flair_test.nii.gz"
+flirt -in "lesion_index.t3m20.nii.gz" -ref "$REF_DIR/MNI152_T1_1mm_brain.nii.gz" -applyxfm -init "proc/mni_reg-rigid_affine.mat" -out "lesion_index_test.nii.gz"

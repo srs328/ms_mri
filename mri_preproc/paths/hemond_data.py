@@ -145,10 +145,10 @@ def scan_data_dir1(dataroot) -> DataSet:
 # kinda confusing how I have to reconstruct each path, and then how in the scan loop, suddenly its looping
 #   over full paths. change the outer loops to use item.path instead
 #? should I add a try except block to skip directories that aren't subject dirs?
-def get_raw_3Tpioneer_bids(dataroot, suppress_output=False) -> DataSet:
+def get_raw_3Tpioneer_bids(dataroot, label_prefix=None, suppress_output=False) -> DataSet:
     dataroot = Path(dataroot)
     sub_dirs = [Path(item.path) for item in os.scandir(dataroot) if item.is_dir() and "sub" in item.name]
-    modalities = ["flair", "phase", "t1", "t1_gd"]
+    modalities = ["flair", "t1"]
 
     dataset = DataSet("DataSet", MultiModalScan)
 
@@ -166,7 +166,7 @@ def get_raw_3Tpioneer_bids(dataroot, suppress_output=False) -> DataSet:
                 scan_prefix = re.match(r"(.+)\.nii\.gz", scan_path.name)[1]
                 if scan_prefix in modalities:
                     image_dict[scan_prefix] = scan_path
-                elif "lesion_index" in scan_prefix:
+                elif label_prefix in scan_prefix:
                     label = scan_path
 
             if not suppress_output:
