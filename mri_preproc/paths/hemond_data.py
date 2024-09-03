@@ -30,6 +30,8 @@ from mri_preproc.paths.record import Record
 # ?  would have the same label as the label attribute of Scan
 # ?  A third approach is making a new Scan struct that holds all modalities in it
 
+#! refactor data collection functinos so I only need one or two
+
 def get_subj_ses(filename):
     restr = re.compile(r"sub-(ms\d{4})_ses-(\d{8})\.nii\.gz")
     rematch = restr.match(filename.name)
@@ -211,6 +213,36 @@ def get_t1_flair_3Tpioneer_bids(dataroot, suppress_output=True) -> DataSet:
 
     return dataset
 
+def get_pituitary_3Tpioneer_bids(dataroot, suppress_output=True) -> DataSet:
+    dataroot = Path(dataroot)
+    sub_dirs = [Path(item.path) for item in os.scandir(dataroot) if item.is_dir() and "sub" in item.name]
+
+    dataset = DataSet("DataSet", Scan)
+
+    for sub_dir in sub_dirs:
+        subid = re.match(r"sub-(ms\d{4})", sub_dir.name)[1]
+        ses_dirs = [Path(item.path) for item in os.scandir(sub_dir) if "ses" in item.name]
+
+        for ses_dir in ses_dirs:
+            sesid = re.match(r"ses-(\d+)", ses_dir.name)[1]
+            image_path = ses_dir / "t1.nii.gz"
+            label_path = ses_dir / "pituitary.nii.gz"
+            if not image_path.is_file():
+                continue
+            if not label_path.is_file():
+                label_path = None
+            
+            dataset.append(
+                dict(subid=subid, date=sesid, root=ses_dir, image=image_path, label=label_path)
+            )
+
+            if not suppress_output:
+                if label_path is None:
+                    warnings.warn(f"No label for sub-{subid} ses-{sesid}")
+
+    return dataset
+
+
 def get_proc_3Tpioneer_bids(dataroot, suppress_output=True) -> DataSet:
     dataroot = Path(dataroot)
     sub_dirs = [Path(item.path) for item in os.scandir(dataroot) if item.is_dir() and "sub" in item.name]
@@ -262,7 +294,7 @@ def assign_conditions(dataset: DataSet) -> DataSet:
         if not scan.has_label():
             scans_no_label.append(i)
 
-    fraction_ts = 0.2
+    fraction_ts = 0.1
     n_scans = len(dataset)
     n_ts = int(fraction_ts * n_scans)
     inds = [i for i in range(n_scans)]
