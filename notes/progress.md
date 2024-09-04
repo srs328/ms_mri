@@ -37,9 +37,14 @@ Analyzes data to generate networks from algorithm templates, then trains the mod
   
 Trained model for first time. Training set had 100 scans, and there were 4 folds with max 10 epochs per fold. The work dir was `cp_work_dir21`
 
+How does the training work with folds? Is the network trained from scratch at each fold?
+
 ## Pipeline
 
-Goal is to be able to do something like:
+Goal is to be able to do something like: ...
+
+1. CLI: modalities, ...
+2. fslmerge if a stack of given modalities doesn't exist
 
 ## Issues
 

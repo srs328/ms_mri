@@ -8,3 +8,7 @@
 ## The Training Work Directory
 
 - `best_metric_model.pt` is the trained model, and each fold has one
+
+## Ensemble Predictions
+
+[Documentation](https://docs.monai.io/en/0.8.1/_modules/monai/handlers/segmentation_saver.html) about saving predictions (i.e. `pred = ensemble( pred_param={...} )`)
