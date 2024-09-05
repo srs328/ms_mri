@@ -274,6 +274,38 @@ def get_proc_3Tpioneer_bids(dataroot, suppress_output=True) -> DataSet:
 
     return dataset
 
+def scan_3Tpioneer_bids(dataroot, modality, label, subdir=None, suppress_output=True) -> DataSet:
+    dataroot = Path(dataroot)
+    sub_dirs = [Path(item.path) for item in os.scandir(dataroot) if item.is_dir() and "sub" in item.name]
+
+    dataset = DataSet("DataSet", Scan)
+
+    for sub_dir in sub_dirs:
+        subid = re.match(r"sub-(ms\d{4})", sub_dir.name)[1]
+        ses_dirs = [Path(item.path) for item in os.scandir(sub_dir) if "ses" in item.name]
+
+        for ses_dir in ses_dirs:
+            sesid = re.match(r"ses-(\d+)", ses_dir.name)[1]
+            scan_dir = ses_dir
+            if subdir is not None:
+                scan_dir = scan_dir / subdir
+            image_path = scan_dir / f"{modality}.nii.gz"
+            label_path = scan_dir / f"{label}.nii.gz"
+            if not image_path.is_file():
+                continue
+            if not label_path.is_file():
+                continue
+            
+            dataset.append(
+                dict(subid=subid, date=sesid, root=ses_dir, image=image_path, label=label_path)
+            )
+
+            if not suppress_output:
+                if label_path is None:
+                    warnings.warn(f"No label for sub-{subid} ses-{sesid}")
+
+    return dataset
+
 
 def subset_proc_3Tpioneer_bids(pioneer_bids_root, flair_root):
     dataset0 = get_proc_3Tpioneer_bids(pioneer_bids_root)
@@ -288,13 +320,12 @@ def subset_proc_3Tpioneer_bids(pioneer_bids_root, flair_root):
     return dataset
 
 
-def assign_conditions(dataset: DataSet) -> DataSet:
+def assign_conditions(dataset: DataSet, fraction_ts=0.1) -> DataSet:
     scans_no_label = []
     for i, scan in enumerate(dataset):
         if not scan.has_label():
             scans_no_label.append(i)
 
-    fraction_ts = 0.1
     n_scans = len(dataset)
     n_ts = int(fraction_ts * n_scans)
     inds = [i for i in range(n_scans)]
