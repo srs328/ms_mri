@@ -2,7 +2,8 @@ import os
 import subprocess
 from mri_preproc.paths import hemond_data
 
-dataroot = "/home/hemondlab/3Tpioneer_bids"
+# dataroot = "/home/hemondlab/3Tpioneer_bids"
+dataroot = "/media/hemondlab/Data/3Tpioneer_bids"
 dataset = hemond_data.scan_3Tpioneer_bids(dataroot, "flair", "CLN_NL")
 
 for data in dataset:
