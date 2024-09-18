@@ -55,7 +55,11 @@ class Scan:
 
     @classmethod
     def _field_names(cls):
-        return cls.__slots__    
+        return cls.__slots__  
+
+    @property
+    def relative_path(self):  
+        return f"sub-{self.subid}/ses-{self.date}"
 
 
 # ? could this subclass Scan? nah maybe not
@@ -111,7 +115,7 @@ class DataSet(Record):
         #return None
         raise LookupError(
             f"No scan exists for subject: {subid} and session: {ses}", subid, ses
-        )
+        )        
 
 
 # This function scans a directory with the following structure: all scans at top level
@@ -293,7 +297,7 @@ def scan_3Tpioneer_bids(dataroot, modality, label, subdir=None, suppress_output=
             label_path = scan_dir / f"{label}.nii.gz"
             if not image_path.is_file():
                 continue
-            if not label_path.is_file():
+            if not label_path.is_file() and label is not None:
                 continue
             
             dataset.append(
