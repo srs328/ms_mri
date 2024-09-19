@@ -5,7 +5,7 @@ Data/
 tutorials/
 figures/
 screenshots/
-*.nii.gz
+*.nii*
 
 *.code-workspace
 *cp_work_dir*

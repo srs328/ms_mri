@@ -4,8 +4,11 @@ import shutil
 import re
 import subprocess
 
-dataroot = Path("/mnt/e/3Tpioneer_bids")
-pit_label_home = Path("/mnt/e/pituitary_labels/final")
+# dataroot = Path("/mnt/e/3Tpioneer_bids")
+# pit_label_home = Path("/mnt/e/pituitary_labels/final")
+
+dataroot = Path("/media/smbshare/3Tpioneer_bids")
+pit_label_home = Path("/media/hemondlab/Data/pituitary_labels/final")
 
 
 def get_subj_ses(filename):
