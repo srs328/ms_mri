@@ -1,0 +1,184 @@
+{
+    "testing": [
+        {
+            "image": "/home/hemondlab/3Tpioneer_bids/sub-ms1080/ses-20180416/flair.nii.gz",
+            "label": "/home/hemondlab/3Tpioneer_bids/sub-ms1080/ses-20180416/choroid_t1_flair.nii.gz"
+        },
+        {
+            "image": "/home/hemondlab/3Tpioneer_bids/sub-ms1033/ses-20171117/flair.nii.gz",
+            "label": "/home/hemondlab/3Tpioneer_bids/sub-ms1033/ses-20171117/choroid_t1_flair.nii.gz"
+        },
+        {
+            "image": "/home/hemondlab/3Tpioneer_bids/sub-ms1259/ses-20200803/flair.nii.gz",
+            "label": "/home/hemondlab/3Tpioneer_bids/sub-ms1259/ses-20200803/choroid_t1_flair.nii.gz"
+        },
+        {
+            "image": "/home/hemondlab/3Tpioneer_bids/sub-ms1265/ses-20180127/flair.nii.gz",
+            "label": "/home/hemondlab/3Tpioneer_bids/sub-ms1265/ses-20180127/choroid_t1_flair.nii.gz"
+        },
+        {
+            "image": "/home/hemondlab/3Tpioneer_bids/sub-ms2144/ses-20190422/flair.nii.gz",
+            "label": "/home/hemondlab/3Tpioneer_bids/sub-ms2144/ses-20190422/choroid_t1_flair.nii.gz"
+        },
+        {
+            "image": "/home/hemondlab/3Tpioneer_bids/sub-ms1119/ses-20161010/flair.nii.gz",
+            "label": "/home/hemondlab/3Tpioneer_bids/sub-ms1119/ses-20161010/choroid_t1_flair.nii.gz"
+        },
+        {
+            "image": "/home/hemondlab/3Tpioneer_bids/sub-ms1272/ses-20211105/flair.nii.gz",
+            "label": "/home/hemondlab/3Tpioneer_bids/sub-ms1272/ses-20211105/choroid_t1_flair.nii.gz"
+        }
+    ],
+    "training": [
+        {
+            "fold": 0,
+            "image": "/home/hemondlab/3Tpioneer_bids/sub-ms1293/ses-20161129/flair.nii.gz",
+            "label": "/home/hemondlab/3Tpioneer_bids/sub-ms1293/ses-20161129/choroid_t1_flair.nii.gz"
+        },
+        {
+            "fold": 1,
+            "image": "/home/hemondlab/3Tpioneer_bids/sub-ms1518/ses-20220216/flair.nii.gz",
+            "label": "/home/hemondlab/3Tpioneer_bids/sub-ms1518/ses-20220216/choroid_t1_flair.nii.gz"
+        },
+        {
+            "fold": 2,
+            "image": "/home/hemondlab/3Tpioneer_bids/sub-ms1437/ses-20210503/flair.nii.gz",
+            "label": "/home/hemondlab/3Tpioneer_bids/sub-ms1437/ses-20210503/choroid_t1_flair.nii.gz"
+        },
+        {
+            "fold": 3,
+            "image": "/home/hemondlab/3Tpioneer_bids/sub-ms1498/ses-20210602/flair.nii.gz",
+            "label": "/home/hemondlab/3Tpioneer_bids/sub-ms1498/ses-20210602/choroid_t1_flair.nii.gz"
+        },
+        {
+            "fold": 4,
+            "image": "/home/hemondlab/3Tpioneer_bids/sub-ms2132/ses-20190825/flair.nii.gz",
+            "label": "/home/hemondlab/3Tpioneer_bids/sub-ms2132/ses-20190825/choroid_t1_flair.nii.gz"
+        },
+        {
+            "fold": 0,
+            "image": "/home/hemondlab/3Tpioneer_bids/sub-ms1019/ses-20190608/flair.nii.gz",
+            "label": "/home/hemondlab/3Tpioneer_bids/sub-ms1019/ses-20190608/choroid_t1_flair.nii.gz"
+        },
+        {
+            "fold": 1,
+            "image": "/home/hemondlab/3Tpioneer_bids/sub-ms1547/ses-20220321/flair.nii.gz",
+            "label": "/home/hemondlab/3Tpioneer_bids/sub-ms1547/ses-20220321/choroid_t1_flair.nii.gz"
+        },
+        {
+            "fold": 2,
+            "image": "/home/hemondlab/3Tpioneer_bids/sub-ms2081/ses-20170204/flair.nii.gz",
+            "label": "/home/hemondlab/3Tpioneer_bids/sub-ms2081/ses-20170204/choroid_t1_flair.nii.gz"
+        },
+        {
+            "fold": 3,
+            "image": "/home/hemondlab/3Tpioneer_bids/sub-ms1188/ses-20200720/flair.nii.gz",
+            "label": "/home/hemondlab/3Tpioneer_bids/sub-ms1188/ses-20200720/choroid_t1_flair.nii.gz"
+        },
+        {
+            "fold": 4,
+            "image": "/home/hemondlab/3Tpioneer_bids/sub-ms2146/ses-20191017/flair.nii.gz",
+            "label": "/home/hemondlab/3Tpioneer_bids/sub-ms2146/ses-20191017/choroid_t1_flair.nii.gz"
+        },
+        {
+            "fold": 0,
+            "image": "/home/hemondlab/3Tpioneer_bids/sub-ms1486/ses-20210224/flair.nii.gz",
+            "label": "/home/hemondlab/3Tpioneer_bids/sub-ms1486/ses-20210224/choroid_t1_flair.nii.gz"
+        },
+        {
+            "fold": 1,
+            "image": "/home/hemondlab/3Tpioneer_bids/sub-ms1234/ses-20180214/flair.nii.gz",
+            "label": "/home/hemondlab/3Tpioneer_bids/sub-ms1234/ses-20180214/choroid_t1_flair.nii.gz"
+        },
+        {
+            "fold": 2,
+            "image": "/home/hemondlab/3Tpioneer_bids/sub-ms1065/ses-20170127/flair.nii.gz",
+            "label": "/home/hemondlab/3Tpioneer_bids/sub-ms1065/ses-20170127/choroid_t1_flair.nii.gz"
+        },
+        {
+            "fold": 3,
+            "image": "/home/hemondlab/3Tpioneer_bids/sub-ms1010/ses-20180208/flair.nii.gz",
+            "label": "/home/hemondlab/3Tpioneer_bids/sub-ms1010/ses-20180208/choroid_t1_flair.nii.gz"
+        },
+        {
+            "fold": 4,
+            "image": "/home/hemondlab/3Tpioneer_bids/sub-ms2097/ses-20171223/flair.nii.gz",
+            "label": "/home/hemondlab/3Tpioneer_bids/sub-ms2097/ses-20171223/choroid_t1_flair.nii.gz"
+        },
+        {
+            "fold": 0,
+            "image": "/home/hemondlab/3Tpioneer_bids/sub-ms2097/ses-20190109/flair.nii.gz",
+            "label": "/home/hemondlab/3Tpioneer_bids/sub-ms2097/ses-20190109/choroid_t1_flair.nii.gz"
+        },
+        {
+            "fold": 1,
+            "image": "/home/hemondlab/3Tpioneer_bids/sub-ms1011/ses-20180911/flair.nii.gz",
+            "label": "/home/hemondlab/3Tpioneer_bids/sub-ms1011/ses-20180911/choroid_t1_flair.nii.gz"
+        },
+        {
+            "fold": 2,
+            "image": "/home/hemondlab/3Tpioneer_bids/sub-ms1152/ses-20170529/flair.nii.gz",
+            "label": "/home/hemondlab/3Tpioneer_bids/sub-ms1152/ses-20170529/choroid_t1_flair.nii.gz"
+        },
+        {
+            "fold": 3,
+            "image": "/home/hemondlab/3Tpioneer_bids/sub-ms2187/ses-20200731/flair.nii.gz",
+            "label": "/home/hemondlab/3Tpioneer_bids/sub-ms2187/ses-20200731/choroid_t1_flair.nii.gz"
+        },
+        {
+            "fold": 4,
+            "image": "/home/hemondlab/3Tpioneer_bids/sub-ms1163/ses-20180907/flair.nii.gz",
+            "label": "/home/hemondlab/3Tpioneer_bids/sub-ms1163/ses-20180907/choroid_t1_flair.nii.gz"
+        },
+        {
+            "fold": 0,
+            "image": "/home/hemondlab/3Tpioneer_bids/sub-ms1540/ses-20201222/flair.nii.gz",
+            "label": "/home/hemondlab/3Tpioneer_bids/sub-ms1540/ses-20201222/choroid_t1_flair.nii.gz"
+        },
+        {
+            "fold": 1,
+            "image": "/home/hemondlab/3Tpioneer_bids/sub-ms2083/ses-20170502/flair.nii.gz",
+            "label": "/home/hemondlab/3Tpioneer_bids/sub-ms2083/ses-20170502/choroid_t1_flair.nii.gz"
+        },
+        {
+            "fold": 2,
+            "image": "/home/hemondlab/3Tpioneer_bids/sub-ms2164/ses-20200113/flair.nii.gz",
+            "label": "/home/hemondlab/3Tpioneer_bids/sub-ms2164/ses-20200113/choroid_t1_flair.nii.gz"
+        },
+        {
+            "fold": 3,
+            "image": "/home/hemondlab/3Tpioneer_bids/sub-ms2126/ses-20181224/flair.nii.gz",
+            "label": "/home/hemondlab/3Tpioneer_bids/sub-ms2126/ses-20181224/choroid_t1_flair.nii.gz"
+        },
+        {
+            "fold": 4,
+            "image": "/home/hemondlab/3Tpioneer_bids/sub-ms1355/ses-20210104/flair.nii.gz",
+            "label": "/home/hemondlab/3Tpioneer_bids/sub-ms1355/ses-20210104/choroid_t1_flair.nii.gz"
+        },
+        {
+            "fold": 0,
+            "image": "/home/hemondlab/3Tpioneer_bids/sub-ms1109/ses-20180303/flair.nii.gz",
+            "label": "/home/hemondlab/3Tpioneer_bids/sub-ms1109/ses-20180303/choroid_t1_flair.nii.gz"
+        },
+        {
+            "fold": 1,
+            "image": "/home/hemondlab/3Tpioneer_bids/sub-ms1548/ses-20210628/flair.nii.gz",
+            "label": "/home/hemondlab/3Tpioneer_bids/sub-ms1548/ses-20210628/choroid_t1_flair.nii.gz"
+        },
+        {
+            "fold": 2,
+            "image": "/home/hemondlab/3Tpioneer_bids/sub-ms1280/ses-20220317/flair.nii.gz",
+            "label": "/home/hemondlab/3Tpioneer_bids/sub-ms1280/ses-20220317/choroid_t1_flair.nii.gz"
+        },
+        {
+            "fold": 3,
+            "image": "/home/hemondlab/3Tpioneer_bids/sub-ms1321/ses-20201020/flair.nii.gz",
+            "label": "/home/hemondlab/3Tpioneer_bids/sub-ms1321/ses-20201020/choroid_t1_flair.nii.gz"
+        },
+        {
+            "fold": 4,
+            "image": "/home/hemondlab/3Tpioneer_bids/sub-ms1191/ses-20190124/flair.nii.gz",
+            "label": "/home/hemondlab/3Tpioneer_bids/sub-ms1191/ses-20190124/choroid_t1_flair.nii.gz"
+        }
+    ]
+}

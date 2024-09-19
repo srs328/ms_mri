@@ -9,11 +9,72 @@
 
 ### Pineal
 
-- [ ] ms1011
-- [ ] 
+- Boundaries much larger in t1 versus flair, which should I follow?
+
+ms1011
+ms1019
+ms1029
+ms1033
+ms1037 (felt iffy)
+ms1057
+ms1085 - boundaries iffy; cyst?
+ms1087 - stalk like protrusion
+ms1089
+ms1097 - t1 versus flair boundary pretty different 
+
+### Choroid
+
+#### Done by me
+
+#### Done by someone else
+
+ms1010
+ms1011
+ms1019
+ms1065
+ms1080
+ms1033
+ms1109
+ms1119
+ms1152
+ms1163
+ms1188
+ms1191
+ms1234
+ms1259
+ms1265
+ms1272
+ms1280
+ms1293
+ms1321
+ms1355
+ms1486
+ms1498
+ms1518
+ms1540
+ms1547
+ms1548
+ms1437
+ms2081
+ms2083
+ms2097
+ms2097
+ms2126
+ms2132
+ms2144
+ms2146
+ms2164
+ms2187
+
 
 ### Pituitary
 
+#### Done by me
+
+#### Done by someone else
+
+ms1001
+ms1004
 ms1010
 ms1011
 ms1019
@@ -21,6 +82,7 @@ ms1022
 ms1028
 ms1029
 ms1030
+ms1033
 ms1036
 ms1037
 ms1042
@@ -37,9 +99,7 @@ ms1082
 ms1085
 ms1087
 ms1089
-ms1033
 ms1090
-ms1142
 ms1097
 ms1098
 ms1103
@@ -53,6 +113,7 @@ ms1129
 ms1130
 ms1131
 ms1141
+ms1142
 ms1143
 ms1145
 ms1146
@@ -126,6 +187,7 @@ ms1392
 ms1394
 ms1400
 ms1401
+ms1405
 ms1414
 ms1415
 ms1417
@@ -146,6 +208,3 @@ ms1486
 ms1488
 ms1489
 ms1492
-ms1405
-ms1001
-ms1004

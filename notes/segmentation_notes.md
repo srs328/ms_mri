@@ -7,6 +7,7 @@
 - 30 in training data
 - Input 2 channels (t1, flair)
 
+- sub-ms1003 may be under-labeled
 - sub-ms1004
 
 
@@ -14,4 +15,4 @@
 
 ### Pituitary 1
 
-- sub-ms1005 has discontinuities in a slice (e.g. coron
+- sub-ms1005 has discontinuities in a slice (e.g. coronal)
