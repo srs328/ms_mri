@@ -11,16 +11,20 @@
 
 - Boundaries much larger in t1 versus flair, which should I follow?
 
+ms1010
 ms1011
 ms1019
 ms1029
 ms1033
 ms1037 (felt iffy)
 ms1057
+ms1065
+ms1080
 ms1085 - boundaries iffy; cyst?
 ms1087 - stalk like protrusion
 ms1089
 ms1097 - t1 versus flair boundary pretty different 
+ms1103
 
 ### Choroid
 
@@ -65,6 +69,7 @@ ms2144
 ms2146
 ms2164
 ms2187
+
 
 
 ### Pituitary

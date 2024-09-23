@@ -44,7 +44,12 @@ How does the training work with folds? Is the network trained from scratch at ea
 Goal is to be able to do something like: ...
 
 1. CLI: modalities, subj-ses, ...
-2. fslmerge if a stack of given modalities doesn't exist
+2. fslmerge if a stack of given modalities doesn't exist\
+
+## Segmentation
+
+- [Choroid plexus segmentation deep learning](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10543490/)
+  - [Github of their segmentation tool](https://github.com/hettk/chp_seg)
 
 ## Issues
 

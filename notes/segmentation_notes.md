@@ -8,7 +8,7 @@
 - Input 2 channels (t1, flair)
 
 - sub-ms1003 may be under-labeled
-- sub-ms1004
+- sub-ms1007 missing a sliver?
 
 
 ## Pituitary
