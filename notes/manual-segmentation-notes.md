@@ -23,8 +23,14 @@ ms1080
 ms1085 - boundaries iffy; cyst?
 ms1087 - stalk like protrusion
 ms1089
-ms1097 - t1 versus flair boundary pretty different 
+ms1097 - t1 versus flair boundary pretty different
 ms1103
+ms1109 (wd black)
+ms1119 (wd black)
+ms1152 (wd black)
+ms1163 (wd black)
+ms1188 (wd black)
+ms1191 (wd black)
 
 ### Choroid
 
