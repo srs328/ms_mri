@@ -1,6 +1,7 @@
 # Manual Segmentation Notes
 
 ## Notes
+
 - sub-ms1005 cyst at pineal?
 
 ## Tasks
@@ -31,6 +32,21 @@ ms1152 (wd black)
 ms1163 (wd black)
 ms1188 (wd black)
 ms1191 (wd black)
+ms1234
+ms1259
+ms1265
+ms1272
+ms1280
+ms1293
+ms1321
+ms1355
+ms1437
+ms1486
+ms1498 (boundaries hard to tell)
+ms1518 (cyst makes boundaries rly confusing)
+ms1540
+ms1547
+ms1548
 
 ### Choroid
 
@@ -75,8 +91,6 @@ ms2144
 ms2146
 ms2164
 ms2187
-
-
 
 ### Pituitary
 
