@@ -11,7 +11,7 @@ class Record(MutableSequence):
         if records is None:
             records = []
         self.fields = fields
-        defaults = [""]*len(fields)
+        defaults = [""] * len(fields)
         self.Data = namedtuple(recordname, self.fields, defaults=defaults)
         self._records = [self.Data(**record) for record in records]
         self.valid_fieldnames = set(self.fields)
@@ -33,9 +33,12 @@ class Record(MutableSequence):
     def insert(self, idx, val):
         a = self._records[:idx]
         b = self._records[idx:]
-        self._records = a + [self.Data(**val)] + b
+        if isinstance(val, self.Data):
+            self._records = a + [val] + b
+        else:
+            self._records = a + [self.Data(**val)] + b
 
-    def retrieve(self, **kwargs):
+    def retrieve(self, get_index=False, **kwargs):
         """Fetch a list of records with a field name with the value supplied
         as a keyword arg (or return None if there aren't any).
         """
@@ -53,6 +56,10 @@ class Record(MutableSequence):
                 field_value = getattr(record, field)
                 lookup_table[field_value].append(index)
         # Return (possibly empty) sequence of matching records.
-        return tuple(
-            self._records[index] for index in self.lookup_tables[field].get(value, [])
-        )
+        if get_index:
+            return tuple(self.lookup_tables[field].get(value, []))
+        else:
+            return tuple(
+                self._records[index]
+                for index in self.lookup_tables[field].get(value, [])
+            )

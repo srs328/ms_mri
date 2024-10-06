@@ -1,12 +1,13 @@
 from __future__ import annotations
-from dataclasses import dataclass
+from dataclasses import dataclass, asdict
 import os
 from pathlib import Path
 from abc import ABC, abstractmethod
 import re
 import warnings
 
-from record import Record
+from train.record import Record
+
 
 # Right now it's unused, but could make a method in DataSet that returns a Subject object.
 @dataclass
@@ -19,6 +20,7 @@ class Subject:
 # TODO expand this to include modality
 @dataclass(slots=True)
 class Scan:
+    id: int
     subid: str
     date: int
     root: str
@@ -32,12 +34,19 @@ class Scan:
         else:
             return False
 
+    def asdict(self):
+        dict_form = {k: getattr(self, k) for k in self._field_names()}
+        for k, v in dict_form.items():
+            if isinstance(v, Path):
+                dict_form[k] = str(v)
+        return dict_form
+
     @classmethod
     def _field_names(cls):
-        return cls.__slots__  
+        return cls.__slots__
 
     @property
-    def relative_path(self):  
+    def relative_path(self):
         return f"sub-{self.subid}/ses-{self.date}"
 
 
@@ -65,25 +74,40 @@ class DataSet(Record):
         for scan in sub_scans:
             if scan.date == ses:
                 return scan
-        #return None
+        # return None
         raise LookupError(
             f"No scan exists for subject: {subid} and session: {ses}", subid, ses
         )
-        
+
+    def remove_scan(self, scan):
+        idx = self.retrieve(id=scan.id, get_index=True)[0]
+        del self[idx]
+
+    def serialize(self):
+        return [scan.asdict() for scan in self]
+
     @property
     def dataroot(self):
         return self.Data[0].root
-    
 
-def scan_3Tpioneer_bids(dataroot, modality, label, subdir=None, suppress_output=True) -> DataSet:
+
+def scan_3Tpioneer_bids(
+    dataroot, modality, label, subdir=None, suppress_output=True
+) -> DataSet:
     dataroot = Path(dataroot)
-    sub_dirs = [Path(item.path) for item in os.scandir(dataroot) if item.is_dir() and "sub" in item.name]
+    sub_dirs = [
+        Path(item.path)
+        for item in os.scandir(dataroot)
+        if item.is_dir() and "sub" in item.name
+    ]
 
     dataset = DataSet("DataSet", Scan)
 
     for sub_dir in sub_dirs:
-        subid = re.match(r"sub-(ms\d{4})", sub_dir.name)[1]
-        ses_dirs = [Path(item.path) for item in os.scandir(sub_dir) if "ses" in item.name]
+        subid = re.match(r"sub-ms(\d{4})", sub_dir.name)[1]
+        ses_dirs = [
+            Path(item.path) for item in os.scandir(sub_dir) if "ses" in item.name
+        ]
 
         for ses_dir in ses_dirs:
             sesid = re.match(r"ses-(\d+)", ses_dir.name)[1]
@@ -96,9 +120,17 @@ def scan_3Tpioneer_bids(dataroot, modality, label, subdir=None, suppress_output=
                 image_path = None
             if not label_path.is_file() and label is not None:
                 label_path = None
-            
+
+            id = int(subid) * int(sesid)
             dataset.append(
-                dict(subid=subid, date=sesid, root=ses_dir, image=image_path, label=label_path)
+                dict(
+                    id=id,
+                    subid=subid,
+                    date=sesid,
+                    root=ses_dir,
+                    image=image_path,
+                    label=label_path,
+                )
             )
 
             if not suppress_output:
