@@ -1,6 +1,7 @@
 # Project specific
 /junk/
 Data/
+data/
 *.log
 tutorials/
 figures/
