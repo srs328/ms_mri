@@ -1,0 +1,5 @@
+{
+    "test_fract": 0.2,
+    "n_folds": 5,
+    "max_epochs": 100
+}

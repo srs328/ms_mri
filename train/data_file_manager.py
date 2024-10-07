@@ -23,7 +23,7 @@ class Scan:
     id: int
     subid: str
     date: int
-    root: str
+    root: Path
     image: Path = None
     label: Path = None
     cond: str = None
@@ -45,6 +45,13 @@ class Scan:
     def _field_names(cls):
         return cls.__slots__
 
+    @classmethod
+    def from_dict(cls, dict_form):
+        for k in ["root", "image", "label"]:
+            if dict_form[k] is not None:
+                dict_form[k] = Path(dict_form[k])
+        return cls(**dict_form)
+
     @property
     def relative_path(self):
         return f"sub-{self.subid}/ses-{self.date}"
@@ -52,9 +59,10 @@ class Scan:
 
 # could subclass DataSet and have initial values for things like fields and Scan as Data
 # ? Does this need to be a subclass, what if the DataSet class had these two functions
+# ! test if this would work with a struct other than Scan (say, namedtuple)
 class DataSet(Record):
 
-    def __init__(self, recordname: str, scan_struct: Scan, records=None):
+    def __init__(self, recordname: str, scan_struct, records=None):
         fields = scan_struct._field_names()
         super().__init__(recordname, fields, records=records)
         self.Data = scan_struct
@@ -89,6 +97,9 @@ class DataSet(Record):
     @property
     def dataroot(self):
         return self.Data[0].root
+
+    def __str__(self):
+        return ", ".join([str(scan) for scan in self])
 
 
 def scan_3Tpioneer_bids(
