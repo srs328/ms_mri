@@ -11,7 +11,9 @@ screenshots/
 *.code-workspace
 *cp_work_dir*
 
+scratch.py
 .*
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
