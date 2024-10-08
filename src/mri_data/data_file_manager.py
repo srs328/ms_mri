@@ -1,12 +1,12 @@
 from __future__ import annotations
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass
 import os
 from pathlib import Path
 from abc import ABC, abstractmethod
 import re
 import warnings
 
-from train.record import Record
+from mri_data.record import Record
 
 
 # Right now it's unused, but could make a method in DataSet that returns a Subject object.

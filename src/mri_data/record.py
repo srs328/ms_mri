@@ -1,7 +1,6 @@
 from collections import defaultdict, namedtuple
 
-from collections import defaultdict, namedtuple
-from collections.abc import MutableSequence, Sequence
+from collections.abc import MutableSequence
 
 
 # based on: https://stackoverflow.com/questions/15418386/what-is-the-best-data-structure-for-storing-a-set-of-four-or-more-values
