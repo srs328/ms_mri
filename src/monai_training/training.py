@@ -1,16 +1,12 @@
 from importlib.resources import files
 import json
 import os
+from monai.apps.auto3dseg import AutoRunner
 import nibabel as nibabel
 import random
-from train.data_file_manager import DataSet
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass
 
-from monai.apps.auto3dseg import AutoRunner
-from monai.config import print_config
-
-
-# test_fract, n_folds, max_epochs, work_dir, label names
+from mri_data.data_file_manager import DataSet
 
 
 @dataclass
@@ -104,48 +100,3 @@ def assign_conditions(dataset: DataSet, fraction_ts) -> DataSet:
         dataset[i].cond = "tr"
 
     return dataset
-
-
-def train0(dataset: DataSet, config):
-    dataset = assign_conditions(dataset, config.test_fract)
-    train_data = []
-    test_data = []
-    for scan in dataset:
-        if scan.cond == "tr" and scan.has_label():
-            train_data.append({"image": str(scan.image), "label": str(scan.label)})
-        elif scan.cond == "ts" and scan.has_label():
-            test_data.append({"image": str(scan.image), "label": str(scan.label)})
-
-    print(f"Train num total: {len(train_data)}")
-    print(f"Test num: {len(test_data)}")
-
-    datalist = {
-        "work_dir": config.work_dir,
-        "dataroot": dataset.dataroot,
-        "info": config.info,
-        "testing": test_data,
-        "training": [
-            {"fold": i % config.n_folds, "image": c["image"], "label": c["label"]}
-            for i, c in enumerate(train_data)
-        ],
-    }
-
-
-def create_datalist_struct(dataset, config):
-    train_data = []
-    test_data = []
-    for scan in dataset:
-        if scan.cond == "tr" and scan.has_label():
-            train_data.append({"image": str(scan.image), "label": str(scan.label)})
-        elif scan.cond == "ts" and scan.has_label():
-            test_data.append({"image": str(scan.image), "label": str(scan.label)})
-
-    print(f"Train num total: {len(train_data)}")
-    print(f"Test num: {len(test_data)}")
-
-    datalist = {"dataroot": dataset.dataroot}
-
-    config_dict = asdict(config)
-    datalist.update({k: config_dict.pop(k) for k in ["work_dir", "info"]})
-    datalist.update({"params": config_dict})
-    return datalist

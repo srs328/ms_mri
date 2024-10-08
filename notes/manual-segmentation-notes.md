@@ -47,6 +47,9 @@ ms1518 (cyst makes boundaries rly confusing)
 ms1540
 ms1547
 ms1548
+ms2081
+ms2083
+ms2097
 
 ### Choroid
 

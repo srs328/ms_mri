@@ -8,11 +8,16 @@ figures/
 screenshots/
 *.nii*
 
+scratch.py
+
 *.code-workspace
 *cp_work_dir*
 
 scratch.py
 .*
+!.gitignore
+
+fsf
 
 
 # Byte-compiled / optimized / DLL files

@@ -3,7 +3,7 @@ from pathlib import Path
 import pytest
 import shutil
 
-from train import data_file_manager, cli
+from monai_training import preprocess
 
 
 @pytest.fixture
@@ -38,19 +38,19 @@ def multilabel_onesubj_only():
 
 
 def test_prepare_dataset_badlabel(dataroot):
-    dataset = cli.prepare_dataset(dataroot, "flair", "foo")
+    dataset = preprocess.prepare_dataset(dataroot, "flair", "foo")
     assert len(dataset) == 0
 
 
 def test_prepare_dataset_onelabel(dataroot, label_onesubj_only):
-    dataset = cli.prepare_dataset(dataroot, "flair", label_onesubj_only)
+    dataset = preprocess.prepare_dataset(dataroot, "flair", label_onesubj_only)
     assert len(dataset) == 1
     assert dataset[0].label is not None
     assert dataset[0].subid == "1002"
 
 
 def test_prepare_dataset_onemultilabel(dataroot, multilabel_onesubj_only):
-    dataset = cli.prepare_dataset(dataroot, "flair", multilabel_onesubj_only)
+    dataset = preprocess.prepare_dataset(dataroot, "flair", multilabel_onesubj_only)
     assert len(dataset) == 1
     assert dataset[0].label == dataset[0].root / "bar_baz_foo.nii.gz"
     assert dataset[0].subid == "1001"
