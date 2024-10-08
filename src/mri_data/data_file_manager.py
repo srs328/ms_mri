@@ -108,7 +108,7 @@ class DataSet(Record):
 
 
 def scan_3Tpioneer_bids(
-    dataroot, modality=None, label=None, subdir=None, suppress_output=True
+    dataroot, image=None, label=None, subdir=None, suppress_output=True
 ) -> DataSet:
     dataroot = Path(dataroot)
     sub_dirs = [
@@ -131,15 +131,15 @@ def scan_3Tpioneer_bids(
             if subdir is not None:
                 scan_dir = scan_dir / subdir
 
-            if modality is not None:
-                image_path = scan_dir / f"{modality}.nii.gz"
+            if image is not None:
+                image_path = scan_dir / image
                 if not image_path.is_file():
                     image_path = None
             else:
                 image_path = None
             
             if label is not None:
-                label_path = scan_dir / f"{label}.nii.gz"
+                label_path = scan_dir / label
                 if not label_path.is_file() and label is not None:
                     label_path = None
             else:
@@ -175,10 +175,28 @@ def filter_first_ses(dataset: DataSet) -> DataSet:
         dataset_new.append(scans_sorted[0])
     
     return dataset_new
+
+
+def filter_has_label(dataset: DataSet) -> DataSet:
+    dataset_new = DataSet("DataSet", Scan)
+    for scan in dataset:
+        if scan.label is not None:
+            dataset_new.append(scan)
+    return dataset_new
+
+
+def filter_has_image(dataset: DataSet) -> DataSet:
+    dataset_new = DataSet("DataSet", Scan)
+    for scan in dataset:
+        if scan.image is not None:
+            dataset_new.append(scan)
+    return dataset_new
     
 
 filters = {
-    "first_ses": filter_first_ses
+    "first_ses": filter_first_ses,
+    "has_label": filter_has_label,
+    "has_image": filter_has_image
 }
 
 

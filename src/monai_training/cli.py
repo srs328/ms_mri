@@ -7,7 +7,7 @@ import sys
 from monai_training import preprocess, training
 
 logger.remove(0)
-logger.add(sys.stderr, level="INFO", format="{level} | {message}")
+logger.add(sys.stderr, level="DEBUG", format="{level} | {message}")
 
 @click.group()
 def cli():
@@ -31,9 +31,14 @@ def train(dataroot, work_dir, modality, label, filters):
     training.train(datalist_file)
 
 
-@cli.command()
-def prepare_data(dataroot):
-    pass
+@cli.command("prepare-data")
+@click.option("-i", "--dataroot", required=True, type=str)
+@click.option("-m", "--modality", required=True, multiple=True)
+@click.option("-l", "--label", required=True, multiple=True)
+@click.option("-f", "--filters", multiple=True)
+def prepare_data(dataroot, modality, label, filters):
+    logger.debug("Starting")
+    dataset, info = preprocess.prepare_dataset(dataroot, modality, label, filters=filters)
     
 
 if __name__ == "__main__":
@@ -43,4 +48,6 @@ if __name__ == "__main__":
 '''
 monai-training train -i "/mnt/h/3TPioneer_bids" -o /home/srs-9/Projects/ms_mri/training_work_dirs/pineal_tmp" \
     -m flair -l pineal_SRS -f first_ses
+
+monai-training prepare-data -i "/media/hemondlab/Data1/3Tpioneer_bids" -m flair -l pineal_SRS -f first_ses
 '''

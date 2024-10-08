@@ -1,6 +1,7 @@
 import json
 from loguru import logger
 from subprocess import CalledProcessError
+from tqdm import tqdm
 
 from mri_data import data_file_manager as dfm
 from mri_data import utils
@@ -31,13 +32,27 @@ def prepare_dataset(dataroot, modality, label, filters=None):
         label_name = f"{label[0]}.nii.gz"
         label_ids = [(label[0], 1)]  #! this might not always be true, revisit
 
-    dataset = dfm.scan_3Tpioneer_bids(dataroot, modality, label)
+    dataset_info = {"image_info": image_ids, "label_info": label_ids}
+
+    logger.debug("Starting scan_3Tpioneer_bids()")
+    dataset = dfm.scan_3Tpioneer_bids(dataroot, image_name, label_name)
+
+    logger.debug(f"Filters: {[filter for filter in filters]}")
     if filters is not None:
         for filter in filters:
             dataset = dfm.filters[filter](dataset)
 
+    if len(modality) == 1 and len(label) == 1:
+        dataset = dfm.filter_has_image(dataset)
+        dataset = dfm.filter_has_label(dataset)
+        if len(dataset) == 0:
+            raise Exception("Empty dataset")
+        logger.info(f"Collected dataset with images: {image_name} and labels: {label_name}, size: {len(dataset)}")
+        return dataset, dataset_info
+
+    logger.info(f"Creating images: {image_name} and labels: {label_name}")
     dataset_copy = dfm.DataSet("DataSet", dfm.Scan)
-    for scan in dataset:
+    for scan in tqdm(dataset):
         if scan.label is None and len(label) > 1:
             try:
                 utils.combine_labels(scan, label, label_name)
@@ -65,9 +80,11 @@ def prepare_dataset(dataroot, modality, label, filters=None):
                 logger.success(f"Saved {scan.image}")
 
         dataset_copy.append(scan)
+    
+    if len(dataset_copy) == 0:
+        raise Exception("Empty dataset")
 
-    dataset_info = {"image_info": image_ids, "label_info": label_ids}
-
+    logger.info(f"Collected dataset with images: {image_name} and labels: {label_name}, size: {len(dataset)}")
     return dataset_copy, dataset_info
 
 

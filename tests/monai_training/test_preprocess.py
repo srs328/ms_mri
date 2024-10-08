@@ -8,7 +8,8 @@ from monai_training import preprocess
 
 @pytest.fixture
 def dataroot():
-    return "/home/srs-9/Projects/ms_mri/tests/data"
+    # return "/home/srs-9/Projects/ms_mri/tests/data"
+    return "/home/hemondlab/Dev/ms_mri/Data/3Tpioneer_bids"
 
 
 @pytest.fixture

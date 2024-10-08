@@ -50,6 +50,13 @@ ms1548
 ms2081
 ms2083
 ms2097
+ms2126 (good ex of flair vs t1)
+ms2132 (...)
+ms2144 (massive proteinacious cyst)
+ms2146 (weird shape)
+ms2164 (cyst)
+ms2187 (weird shape)
+
 
 ### Choroid
 
@@ -86,7 +93,6 @@ ms1548
 ms1437
 ms2081
 ms2083
-ms2097
 ms2097
 ms2126
 ms2132

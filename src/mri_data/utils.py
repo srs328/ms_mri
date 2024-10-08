@@ -110,6 +110,7 @@ def find_label(scan: Scan, label_prefix: str, suffix_list: list[str]) -> Path:
     logger.debug(f"No label in {[lab.name for lab in labels]} matched search")
     raise FileNotFoundError
 
+Path.iterdir
 
 def load_nifti(path) -> np.ndarray:
     img = nib.load(path)
@@ -122,3 +123,15 @@ def dice_score(seg1, seg2):
     if volume_sum == 0:
         return 1.0
     return 2.0 * intersection / volume_sum
+
+
+def rename(dataset, src, dst, script_file=None):
+    rename_commands = []
+    for scan in dataset:
+        # smbShare paths are case insensitive, so need to compare to exact string
+        if src in os.listdir(scan.root):
+            rename_commands.append(f"mv {scan.root / src} {scan.root / dst}")
+    if script_file is None:
+        script_file = "rename_commands.sh"
+    with open(script_file, 'w') as f:
+        f.writelines([cmd + "\n" for cmd in rename_commands])
