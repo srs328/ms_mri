@@ -15,3 +15,5 @@ Issues
 - remap scroll lock to S for itksnap: `xmodmap -e "keycode 78 = s"`  
 - remap home to S for itksnap: `xmodmap -e "keycode 110 = s"`
   - [Guide](https://askubuntu.com/questions/296155/how-can-i-remap-keyboard-keys)
+
+- thoop
