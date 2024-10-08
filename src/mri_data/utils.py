@@ -3,6 +3,7 @@ from loguru import logger
 import nibabel as nib
 import numpy as np
 import os
+from pathlib import Path
 from subprocess import run
 import time
 
@@ -87,7 +88,7 @@ def combine_labels(scan, labels, combined_label_name):
     return label_values
 
 
-def find_label(scan: Scan, label_prefix: str, suffix_list: list[str]):
+def find_label(scan: Scan, label_prefix: str, suffix_list: list[str]) -> Path:
     """find label for scan, and if there are multiple, return one 
     based on priority of suffixes
 
@@ -97,11 +98,13 @@ def find_label(scan: Scan, label_prefix: str, suffix_list: list[str]):
         suffix (list[str]): list of suffixes in order of priority
     """
     root_dir = scan.root
-    labels = list([root_dir.glob(f"{label_prefix}*.nii.gz")])
+    labels = list(root_dir.glob(f"{label_prefix}*.nii.gz"))
 
     for suffix in suffix_list:
+        print(suffix)
         for lab in labels:
-            if label_prefix + suffix == lab.stem:
+            print(lab.stem)
+            if (label_prefix + suffix + ".nii.gz").lower() == lab.name.lower():
                 return lab
     
     logger.debug(f"No label in {[lab.name for lab in labels]} matched search")

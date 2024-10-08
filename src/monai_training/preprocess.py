@@ -7,7 +7,7 @@ from mri_data import utils
 
 
 # later make the label use a glob in case there are initials after label name
-def prepare_dataset(dataroot, modality, label):
+def prepare_dataset(dataroot, modality, label, filters=None):
     if isinstance(modality, str):
         modality = [modality]
     if len(modality) > 1:
@@ -32,6 +32,10 @@ def prepare_dataset(dataroot, modality, label):
         label_ids = [(label[0], 1)]  #! this might not always be true, revisit
 
     dataset = dfm.scan_3Tpioneer_bids(dataroot, modality, label)
+    if filters is not None:
+        for filter in filters:
+            dataset = dfm.filters[filter](dataset)
+
     dataset_copy = dfm.DataSet("DataSet", dfm.Scan)
     for scan in dataset:
         if scan.label is None and len(label) > 1:
