@@ -1,15 +1,19 @@
+from loguru import logger
 import os
 from pathlib import Path
 import pytest
+import re
 import shutil
 
 from monai_training import preprocess
+
+current_dir = Path(__file__).absolute().parent
 
 
 @pytest.fixture
 def dataroot():
     # return "/home/srs-9/Projects/ms_mri/tests/data"
-    return "/home/hemondlab/Dev/ms_mri/Data/3Tpioneer_bids"
+    return "/home/srs-9/Projects/ms_mri/Data/3Tpioneer_bids"
 
 
 @pytest.fixture
@@ -36,6 +40,17 @@ def multilabel_onesubj_only():
         os.remove(dst_path)
 
     os.remove(root / "bar_baz_foo.nii.gz")
+
+
+def test_prepare_dataset_multiscanlabel(dataroot):
+    logger.add(current_dir / "new_files.log", serialize=True, level='DEBUG')
+    modality = ["t1", "flair"]
+    label = ["pineal", "choroid", "pituitary"]
+    suffix_list = ["ch", "SRS", ""]
+    dataset, info = preprocess.prepare_dataset(dataroot, modality, 
+                                               label, suffix_list, filters=["first-ses"])
+    assert len(dataset) > 0
+    assert re.match("choroid_pineal_pituitary", )
 
 
 def test_prepare_dataset_badlabel(dataroot):

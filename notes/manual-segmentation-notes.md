@@ -57,7 +57,6 @@ ms2146 (weird shape)
 ms2164 (cyst)
 ms2187 (weird shape)
 
-
 ### Choroid
 
 #### Done by me

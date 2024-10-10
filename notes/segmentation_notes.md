@@ -10,7 +10,6 @@
 - sub-ms1003 may be under-labeled
 - sub-ms1007 missing a sliver?
 
-
 ## Pituitary
 
 ### Pituitary 1

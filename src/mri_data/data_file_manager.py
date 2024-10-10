@@ -1,5 +1,6 @@
 from __future__ import annotations
 from dataclasses import dataclass
+from loguru import logger
 import os
 from pathlib import Path
 from abc import ABC, abstractmethod
@@ -7,6 +8,17 @@ import re
 import warnings
 
 from mri_data.record import Record
+
+
+class FileLogger:
+    def __init__(self):
+        self.logger = logger.bind(file="")
+
+    def log(self, level, message, file=""):
+        self.logger = logger.bind(file=file)
+        self.logger.log(level, message)
+
+file_logger = FileLogger()
 
 
 # Right now it's unused, but could make a method in DataSet that returns a Subject object.
@@ -101,7 +113,7 @@ class DataSet(Record):
 
     @property
     def dataroot(self):
-        return self.Data[0].root
+        return self._records[0].root
 
     def __str__(self):
         return ", ".join([str(scan) for scan in self])
@@ -130,6 +142,9 @@ def scan_3Tpioneer_bids(
             scan_dir = ses_dir
             if subdir is not None:
                 scan_dir = scan_dir / subdir
+            
+            # logger.debug(f"scan_dir: {scan_dir}")
+            file_logger.log("DEBUG", f"scan_dir: {scan_dir}", file=scan_dir)
 
             if image is not None:
                 image_path = scan_dir / image
@@ -161,6 +176,32 @@ def scan_3Tpioneer_bids(
                     warnings.warn(f"No label for sub-{subid} ses-{sesid}")
 
     return dataset
+
+
+def nifti_name(filename: str) -> str:
+    fileparts = filename.split('.')
+    if '.'.join(fileparts[-2:]) != "nii.gz":
+        raise ValueError("Filename does not have .nii.gz as extension")
+    return '.'.join(fileparts[:-2])
+
+
+def parse_image_name(filename: str) -> list[str]:
+    name = nifti_name(filename)
+    return name.split('.')
+
+
+def parse_label_parts(filename: str) -> list[tuple[str,str]]:
+    labels = parse_image_name(filename)
+    label_parts = []
+    for label in labels:
+        parts  = label.split('-')
+        if len(parts) > 2:
+            raise ValueError(f"Cannot parse label {filename}")
+        if len(parts) == 1:
+            label_parts.append((parts[0], ""))
+        else:
+            label_parts.append((parts[0], parts[1]))
+    return label_parts
 
 
 def filter_first_ses(dataset: DataSet) -> DataSet:

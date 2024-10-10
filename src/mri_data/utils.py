@@ -56,14 +56,14 @@ def set_label_value(label_path, output_path, val):
 
 
 # return a tuple that gives the value for each label name
-def combine_labels(scan, labels, combined_label_name):
+def combine_labels(scan, labels, combined_label_name, suffix_list=None):
     if isinstance(labels, str) or len(labels) < 2:
         raise ValueError("Expected more than one label")
 
     label_values = set()
     tmp_files = []
     for i, lab in enumerate(labels):
-        base_label = scan.root / f"{lab}.nii.gz"
+        base_label = find_label(scan, lab, suffix_list)
         tmp_filepath = scan.root / f"tmp_{lab}_{int(time.time())}.nii.gz"
         try:
             # print("Trying set_label_value with", lab)
@@ -88,7 +88,7 @@ def combine_labels(scan, labels, combined_label_name):
     return label_values
 
 
-def find_label(scan: Scan, label_prefix: str, suffix_list: list[str]) -> Path:
+def find_label(scan: Scan, label_prefix: str, suffix_list: list[str] = None) -> Path:
     """find label for scan, and if there are multiple, return one 
     based on priority of suffixes
 
@@ -97,6 +97,8 @@ def find_label(scan: Scan, label_prefix: str, suffix_list: list[str]) -> Path:
         label_prefix (str): prefix of the label
         suffix (list[str]): list of suffixes in order of priority
     """
+    if suffix_list is None:
+        suffix_list = [""]
     root_dir = scan.root
     labels = list(root_dir.glob(f"{label_prefix}*.nii.gz"))
 
@@ -108,9 +110,9 @@ def find_label(scan: Scan, label_prefix: str, suffix_list: list[str]) -> Path:
                 return lab
     
     logger.debug(f"No label in {[lab.name for lab in labels]} matched search")
-    raise FileNotFoundError
+    raise FileNotFoundError(f"Could not find label matching {label_prefix} " +
+                            f"for subject {scan.subid} ses {scan.sesid}")
 
-Path.iterdir
 
 def load_nifti(path) -> np.ndarray:
     img = nib.load(path)
@@ -125,13 +127,40 @@ def dice_score(seg1, seg2):
     return 2.0 * intersection / volume_sum
 
 
-def rename(dataset, src, dst, script_file=None):
-    rename_commands = []
+def rename(dataset, src, dst, script_file=None, run_script=False, to_raise=True):
+    """
+    takes a DataSet object and saves bash script to rename any file named src 
+    in each scan's root dir to dst. This function itself makes no changes to the 
+    file system of the dataset
+
+    Args:
+        dataset (DataSet): DataSet object containing scans' paths
+        src (str): name of file to rename
+        dst (str): name of new file
+        script_file (str, optional): relative or absolute path to save rename 
+            script to. Defaults to None.
+    """
+    rename_commands = ["#" + "!/bin/sh", ""]
     for scan in dataset:
         # smbShare paths are case insensitive, so need to compare to exact string
         if src in os.listdir(scan.root):
-            rename_commands.append(f"mv {scan.root / src} {scan.root / dst}")
+            src_path = scan.root / src
+            dst_path = scan.root / dst
+            if dst_path.is_file():
+                if to_raise:
+                    raise FileExistsError
+                else: 
+                    continue
+            rename_commands.append(f"mv {src_path} {dst_path}")
+    
     if script_file is None:
-        script_file = "rename_commands.sh"
+        script_file = "tmp/rename_commands.sh"
+        if not os.path.exists("tmp"):
+            os.makedirs("tmp")
     with open(script_file, 'w') as f:
         f.writelines([cmd + "\n" for cmd in rename_commands])
+    if run_script:
+        run(["chmod", "+x", script_file])
+        run(script_file)
+    
+
