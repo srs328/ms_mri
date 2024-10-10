@@ -11,6 +11,7 @@ class Record(MutableSequence):
             records = []
         self.fields = fields
         defaults = [""] * len(fields)
+        print(self.fields)
         self.Data = namedtuple(recordname, self.fields, defaults=defaults)
         self._records = [self.Data(**record) for record in records]
         self.valid_fieldnames = set(self.fields)

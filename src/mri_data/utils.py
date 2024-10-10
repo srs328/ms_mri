@@ -8,7 +8,7 @@ from subprocess import run
 import time
 from typing import Callable, Optional
 
-from .data_file_manager import Scan
+from .data_file_manager import Scan, nifti_name
 
 
 def merge_images(image_paths, merged_path):
@@ -67,32 +67,34 @@ def combine_labels(
     if isinstance(labels, str) or len(labels) < 2:
         raise ValueError("Expected more than one label")
 
+    logger.debug(f"Combining labels for {scan.info()}")
     label_names = []
     label_values = []
     tmp_files = []
-    for i, lab in enumerate(labels):
-        label_names.append(find_label(scan, lab, suffix_list))
-        tmp_filepath = scan.root / f"tmp_{lab}_{int(time.time())}.nii.gz"
-        try:
-            logger.debug("Trying set_label_value with", lab)
-            set_label_value(label_names[i], tmp_filepath, label_id_func(i))
-        except FileNotFoundError:
-            logger.error(print("Failed set_label_value for", lab))
-            for path in tmp_files:
-                os.remove(path)
-            tmp_files = []
-            raise
-        else:
-            logger.debug("finished setting label value")
-            tmp_files.append(tmp_filepath)
-            label_values.append((lab, 2**i))
+    try:
+        for i, lab in enumerate(labels):
+            base_label = find_label(scan, lab, suffix_list)
+            label_names.append(nifti_name(base_label.name))
+            tmp_filepath = scan.root / f"tmp_{lab}_{int(time.time())}.nii.gz"
+            try:
+                logger.debug("Trying set_label_value with", lab)
+                set_label_value(base_label, tmp_filepath, label_id_func(i))
+            except FileNotFoundError:
+                logger.error(print("Failed set_label_value for", lab))
+                raise
+            else:
+                logger.debug("finished setting label value")
+                tmp_files.append(tmp_filepath)
+                label_values.append((lab, 2**i))
 
-    combined_label_name = ".".join(label_names) + ".nii.gz"
-    merged_label = scan.root / combined_label_name
-    merge_labels(tmp_files, merged_label)
-
-    for path in tmp_files:
-        os.remove(path)
+        combined_label_name = ".".join(label_names) + ".nii.gz"
+        merged_label = scan.root / combined_label_name
+        merge_labels(tmp_files, merged_label)
+    except Exception:
+        raise
+    finally:
+        for path in tmp_files:
+            os.remove(path)
 
     return combined_label_name, label_values
 
@@ -106,15 +108,14 @@ def find_label(scan: Scan, label_prefix: str, suffix_list: list[str] = None) -> 
         label_prefix (str): prefix of the label
         suffix (list[str]): list of suffixes in order of priority
     """
+    logger.debug(f"Looking for label {label_prefix} in {scan.root}")
     if suffix_list is None:
         suffix_list = [""]
     root_dir = scan.root
     labels = list(root_dir.glob(f"{label_prefix}*.nii.gz"))
 
     for suffix in suffix_list:
-        # print(suffix)
         for lab in labels:
-            # print(lab.stem)
             if (label_prefix + "-" + suffix + ".nii.gz").lower() == lab.name.lower():
                 return lab
 

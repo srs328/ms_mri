@@ -1,5 +1,5 @@
 from __future__ import annotations
-from attrs import define, field
+from attrs import define, field, validators
 from dataclasses import dataclass
 from loguru import logger
 import os
@@ -9,11 +9,13 @@ import re
 from typing import Self
 import warnings
 
+from networkx import is_path
+
 from mri_data.record import Record
+
 
 # ? should subid and sesid be ints instead of strs?
 # ? should scan.image and scan.label be just the file names?
-# TODO add validator to scan for existence of root
 
 
 class FileLogger:
@@ -36,34 +38,43 @@ class Subject:
     scans: list[Path]
 
 
-# TODO expand this to include modality
-@define(slots=True)
+def path_exists(instance, attribute, value):
+    if value is not None and not value.is_dir():
+        raise ValueError(f"Invalid value for {attribute}, {value} is not a directory")
+
+
+def image_exists_or_none(instance, attribute, value):
+    if value is None:
+        return
+    path = instance.root / value
+    if not path.is_file():
+        raise ValueError(f"Invalid value for {attribute}, {path} is not a file")
+
+
+@define(slots=True, weakref_slot=False)
 class Scan:
     subid: str
     sesid: str
-    root: Path = field()
-
-    # @root.validator
-    # def check(self, attribute, value):
-    #     if not value.is_dir():
-    #         print(value)
-    #         raise FileNotFoundError(f"root must be an existing directory")
-
-    image: Path = None
-    label: Path = None
+    dataroot: Path = field(
+        validator=[validators.validators.instance_of(Path), path_exists]
+    )
+    root: Path = field(validator=[validators.validators.instance_of(Path), path_exists])
+    image: Path = field(default=None, validator=[image_exists_or_none])
+    label: Path = field(default=None, validator=[image_exists_or_none])
     cond: str = None
     id: int | None = None
 
     @classmethod
     def new_scan(
-        cls, dataroot, subid, sesid, image=None, label=None, cond=None
+        cls, dataroot, subid, sesid, image=None, label=None, cond=None, subdir=""
     ) -> Self:
-        root = Scan.path(dataroot, subid, sesid)
-        return cls(subid, sesid, root, image, label, cond)
+        root = Scan.path(dataroot, subid, sesid, subdir=subdir)
+        return cls(subid, sesid, Path(dataroot), root, image, label, cond)
 
     def __post_init__(self):
         if self.id is None:
             self.id = int(self.subid) * int(self.sesid)
+        print("Scan fields", self._field_names())
 
     def has_label(self):
         if self.label is not None:
@@ -85,7 +96,7 @@ class Scan:
         self.label = self.root / label_name
 
     def info(self):
-        pass
+        return f"{self.__class__.__name__}(subid={self.subid}, sesid={self.sesid})"
 
     @classmethod
     def _field_names(cls):
@@ -100,18 +111,17 @@ class Scan:
 
     @property
     def relative_path(self):
-        return f"sub-{self.subid}/ses-{self.sesid}"
+        return self.root.relative_to(self.dataroot)
 
     @staticmethod
-    def path(dataroot, subid, sesid):
-        return Path(dataroot) / f"sub-{subid}/ses-{sesid}"
+    def path(dataroot, subid, sesid, subdir=""):
+        return Path(dataroot) / f"sub-ms{subid}" / f"ses-{sesid}" / subdir
 
 
 # could subclass DataSet and have initial values for things like fields and Scan as Data
 # ? Does this need to be a subclass, what if the DataSet class had these two functions
 # ! test if this would work with a struct other than Scan (say, namedtuple)
 class DataSet(Record):
-
     def __init__(self, recordname: str, scan_struct, records=None):
         fields = scan_struct._field_names()
         super().__init__(recordname, fields, records=records)
@@ -177,8 +187,7 @@ def scan_3Tpioneer_bids(
             if subdir is not None:
                 scan_dir = scan_dir / subdir
 
-            # logger.debug(f"scan_dir: {scan_dir}")
-            file_logger.log("DEBUG", f"scan_dir: {scan_dir}", file=scan_dir)
+            logger.debug(f"scan_dir: {scan_dir}")
 
             if image is not None:
                 image_path = scan_dir / image
@@ -276,7 +285,6 @@ filters = {
 
 
 class Data(ABC):
-
     @abstractmethod
     def subjects(self):
         pass

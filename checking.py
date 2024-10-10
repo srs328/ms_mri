@@ -16,3 +16,9 @@ def get_scan(image=None, label=None):
     if label is not None:
         scan.set_label(label)
     return scan
+
+
+"""
+import checking
+scan = checking.get_scan()
+"""

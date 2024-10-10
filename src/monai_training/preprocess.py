@@ -14,8 +14,8 @@ class FileLogger:
     def __init__(self):
         self.logger = logger.bind(new_file="")
 
-    def log(self, level, message, file=""):
-        self.logger = logger.bind(new_file=file)
+    def log(self, level, message, new_file=""):
+        self.logger = logger.bind(new_file=new_file)
         self.logger.log(level, message)
 
 
@@ -68,7 +68,7 @@ class DataSetProcesser:
             self.modality = modality
         if len(self.modality) > 1:
             self.modality.sort()
-            self.image_name = "_".join(self.modality) + ".nii.gz"
+            self.image_name = ".".join(self.modality) + ".nii.gz"
             image_ids = [(mod, i) for i, mod in enumerate(self.modality)]
         else:
             self.image_name = f"{self.modality[0]}.nii.gz"
@@ -107,10 +107,12 @@ class DataSetProcesser:
     def prepare_labels(self, label: list[str] | str, suffix_list: list[str] = None):
         if isinstance(label, str):
             self.label = [label]
+        else:
+            self.label = label
         if len(self.label) > 1:
             self.label = list(self.label)
             self.label.sort()
-            self.label_name = "_".join(self.label) + ".nii.gz"
+            self.label_name = ".".join(self.label) + ".nii.gz"
             # ? combine_labels() returns label_ids, idk if I should set that here or then
             label_ids = [(lab, 2**i) for i, lab in enumerate(self.label)]
         else:
@@ -131,7 +133,7 @@ class DataSetProcesser:
             if len(self.label) > 1:
                 try:
                     this_label_name, _ = utils.combine_labels(
-                        scan, self.label, suffix_list=suffix_list
+                        scan, self.label, label_id_func, suffix_list=suffix_list
                     )
                 except FileNotFoundError:
                     continue
@@ -144,6 +146,7 @@ class DataSetProcesser:
                         "SUCCESS", f"Saved {scan.label}", new_file=scan.label
                     )
                     dataset_copy.append(scan)
+            logger.info(len(dataset_copy))
 
         self.dataset = dataset_copy
 
