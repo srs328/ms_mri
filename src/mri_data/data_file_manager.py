@@ -1,13 +1,19 @@
 from __future__ import annotations
+from attrs import define, field
 from dataclasses import dataclass
 from loguru import logger
 import os
 from pathlib import Path
 from abc import ABC, abstractmethod
 import re
+from typing import Self
 import warnings
 
 from mri_data.record import Record
+
+# ? should subid and sesid be ints instead of strs?
+# ? should scan.image and scan.label be just the file names?
+# TODO add validator to scan for existence of root
 
 
 class FileLogger:
@@ -17,6 +23,7 @@ class FileLogger:
     def log(self, level, message, file=""):
         self.logger = logger.bind(file=file)
         self.logger.log(level, message)
+
 
 file_logger = FileLogger()
 
@@ -30,15 +37,29 @@ class Subject:
 
 
 # TODO expand this to include modality
-@dataclass(slots=True)
+@define(slots=True)
 class Scan:
     subid: str
     sesid: str
-    root: Path
+    root: Path = field()
+
+    # @root.validator
+    # def check(self, attribute, value):
+    #     if not value.is_dir():
+    #         print(value)
+    #         raise FileNotFoundError(f"root must be an existing directory")
+
     image: Path = None
     label: Path = None
     cond: str = None
     id: int | None = None
+
+    @classmethod
+    def new_scan(
+        cls, dataroot, subid, sesid, image=None, label=None, cond=None
+    ) -> Self:
+        root = Scan.path(dataroot, subid, sesid)
+        return cls(subid, sesid, root, image, label, cond)
 
     def __post_init__(self):
         if self.id is None:
@@ -57,6 +78,15 @@ class Scan:
                 dict_form[k] = str(v)
         return dict_form
 
+    def set_image(self, image_name):
+        self.image = self.root / image_name
+
+    def set_label(self, label_name):
+        self.label = self.root / label_name
+
+    def info(self):
+        pass
+
     @classmethod
     def _field_names(cls):
         return cls.__slots__
@@ -71,6 +101,10 @@ class Scan:
     @property
     def relative_path(self):
         return f"sub-{self.subid}/ses-{self.sesid}"
+
+    @staticmethod
+    def path(dataroot, subid, sesid):
+        return Path(dataroot) / f"sub-{subid}/ses-{sesid}"
 
 
 # could subclass DataSet and have initial values for things like fields and Scan as Data
@@ -142,7 +176,7 @@ def scan_3Tpioneer_bids(
             scan_dir = ses_dir
             if subdir is not None:
                 scan_dir = scan_dir / subdir
-            
+
             # logger.debug(f"scan_dir: {scan_dir}")
             file_logger.log("DEBUG", f"scan_dir: {scan_dir}", file=scan_dir)
 
@@ -152,7 +186,7 @@ def scan_3Tpioneer_bids(
                     image_path = None
             else:
                 image_path = None
-            
+
             if label is not None:
                 label_path = scan_dir / label
                 if not label_path.is_file() and label is not None:
@@ -167,7 +201,7 @@ def scan_3Tpioneer_bids(
                     sesid=sesid,
                     root=ses_dir,
                     image=image_path,
-                    label=label_path
+                    label=label_path,
                 )
             )
 
@@ -179,22 +213,22 @@ def scan_3Tpioneer_bids(
 
 
 def nifti_name(filename: str) -> str:
-    fileparts = filename.split('.')
-    if '.'.join(fileparts[-2:]) != "nii.gz":
+    fileparts = filename.split(".")
+    if ".".join(fileparts[-2:]) != "nii.gz":
         raise ValueError("Filename does not have .nii.gz as extension")
-    return '.'.join(fileparts[:-2])
+    return ".".join(fileparts[:-2])
 
 
 def parse_image_name(filename: str) -> list[str]:
     name = nifti_name(filename)
-    return name.split('.')
+    return name.split(".")
 
 
-def parse_label_parts(filename: str) -> list[tuple[str,str]]:
+def parse_label_parts(filename: str) -> list[tuple[str, str]]:
     labels = parse_image_name(filename)
     label_parts = []
     for label in labels:
-        parts  = label.split('-')
+        parts = label.split("-")
         if len(parts) > 2:
             raise ValueError(f"Cannot parse label {filename}")
         if len(parts) == 1:
@@ -214,7 +248,7 @@ def filter_first_ses(dataset: DataSet) -> DataSet:
         scans = dataset.retrieve(subid=sub)
         scans_sorted = sorted(scans, key=lambda s: int(s.sesid))
         dataset_new.append(scans_sorted[0])
-    
+
     return dataset_new
 
 
@@ -232,12 +266,12 @@ def filter_has_image(dataset: DataSet) -> DataSet:
         if scan.image is not None:
             dataset_new.append(scan)
     return dataset_new
-    
+
 
 filters = {
     "first_ses": filter_first_ses,
     "has_label": filter_has_label,
-    "has_image": filter_has_image
+    "has_image": filter_has_image,
 }
 
 

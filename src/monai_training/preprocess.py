@@ -18,6 +18,7 @@ class FileLogger:
         self.logger = logger.bind(new_file=file)
         self.logger.log(level, message)
 
+
 file_logger = FileLogger()
 
 
@@ -28,35 +29,38 @@ class DataSetProcesser:
     label_name: str = ""
     modality: list[str] = Factory(list)
     label: list[str] = Factory(list)
-    info: dict[str,tuple] = Factory(dict)
+    info: dict[str, tuple] = Factory(dict)
 
-    #? won't worry about filters for now
+    # ? won't worry about filters for now
     #! two ways I approach write factory function, idk which to go with (see notes)
     @classmethod
     def new_dataset0(cls, dataroot, scan_func):
         return cls(scan_func(dataroot))
 
     @classmethod
-    def new_dataset(cls, dataroot: str | os.PathLike, scan_func: Callable, 
-                    *args, **kwargs) -> Self:
-        #TODO figure out how to handle label initials from parse_label_name()
+    def new_dataset(
+        cls, dataroot: str | os.PathLike, scan_func: Callable, *args, **kwargs
+    ) -> Self:
+        # TODO figure out how to handle label initials from parse_label_name()
         dsp = cls(scan_func(dataroot, *args, **kwargs))
         dsp.info = dict()
         if all([scan.image for scan in dsp.dataset]):
             dsp.image_name = dsp.dataset[0].image.name
             dsp.modality = dfm.parse_image_name(dsp.image_name)
-            dsp.info.update({'image_info': 
-                         [(mod, i) for i, mod in enumerate(dsp.modality)]})
-        
-        #! the labels include the initials as of now 
+            dsp.info.update(
+                {"image_info": [(mod, i) for i, mod in enumerate(dsp.modality)]}
+            )
+
+        #! the labels include the initials as of now
         if all([scan.label for scan in dsp.dataset]):
             dsp.label_name = dsp.dataset[0].label.name
             dsp.label = dfm.parse_image_name(dsp.label_name)
-            dsp.info.update({'label_info':
-                         [[(lab, 2**i) for i, lab in enumerate(dsp.label)]]})
-        
+            dsp.info.update(
+                {"label_info": [[(lab, 2**i) for i, lab in enumerate(dsp.label)]]}
+            )
+
         return dsp
-    
+
     def prepare_images(self, modality: list[str] | str):
         if isinstance(modality, str):
             self.modality = [modality]
@@ -69,14 +73,14 @@ class DataSetProcesser:
         else:
             self.image_name = f"{self.modality[0]}.nii.gz"
             image_ids = [(self.modality[0], 0)]
-        self.info.update({'image_info': image_ids})
+        self.info.update({"image_info": image_ids})
 
         dataset_copy = dfm.DataSet("DataSet", dfm.Scan)
         for scan in self.dataset:
             if scan.image is not None:
                 dataset_copy.append(scan)
                 continue
-            image_path = (scan.root / self.image_name)
+            image_path = scan.root / self.image_name
             if image_path.is_file():
                 scan.image = image_path
                 dataset_copy.append(scan)
@@ -93,9 +97,11 @@ class DataSetProcesser:
                     raise
                 else:
                     scan.image = scan.root / merged_image
-                    file_logger.log('SUCCESS', f"Saved {scan.image}", new_file=scan.image)
+                    file_logger.log(
+                        "SUCCESS", f"Saved {scan.image}", new_file=scan.image
+                    )
                     dataset_copy.append(scan)
-        
+
         self.dataset = dataset_copy
 
     def prepare_labels(self, label: list[str] | str, suffix_list: list[str] = None):
@@ -110,33 +116,41 @@ class DataSetProcesser:
         else:
             self.label_name = f"{self.label[0]}.nii.gz"
             label_ids = [(self.label[0], 1)]  #! this might not always be true, revisit
-        self.info.update({'label_info': label_ids})
+        self.info.update({"label_info": label_ids})
 
         dataset_copy = dfm.DataSet("DataSet", dfm.Scan)
         for scan in self.dataset:
             if scan.label is not None:
                 dataset_copy.append(scan)
                 continue
-            label_path = (scan.root / self.label_name)
+            label_path = scan.root / self.label_name
             if label_path.is_file():
                 scan.label = label_path
                 dataset_copy.append(scan)
                 continue
             if len(self.label) > 1:
                 try:
-                    utils.combine_labels(scan, self.label, self.label_name, suffix_list=suffix_list)
+                    this_label_name, _ = utils.combine_labels(
+                        scan, self.label, suffix_list=suffix_list
+                    )
                 except FileNotFoundError:
                     continue
                 except CalledProcessError:
                     logger.error("Something went wrong merging labels")
                     raise
                 else:
-                    scan.label = scan.root / self.label_name
-                    file_logger.log('SUCCESS', f"Saved {scan.label}", new_file=scan.label)
+                    scan.label = scan.root / this_label_name
+                    file_logger.log(
+                        "SUCCESS", f"Saved {scan.label}", new_file=scan.label
+                    )
                     dataset_copy.append(scan)
 
         self.dataset = dataset_copy
-        
+
+
+def label_id_func(i: int) -> int:
+    return 2**i
+
 
 # later make the label use a glob in case there are initials after label name
 def prepare_dataset(dataroot, modality, label, filters=None, suffix_list=None):
@@ -165,10 +179,10 @@ def prepare_dataset(dataroot, modality, label, filters=None, suffix_list=None):
 
     dataset_info = {"image_info": image_ids, "label_info": label_ids}
 
-    file_logger.log('DEBUG', "Starting scan_3Tpioneer_bids()")
+    file_logger.log("DEBUG", "Starting scan_3Tpioneer_bids()")
     dataset = dfm.scan_3Tpioneer_bids(dataroot, image_name, label_name)
 
-    file_logger.log('DEBUG', f"Filters: {[filter for filter in filters]}")
+    file_logger.log("DEBUG", f"Filters: {[filter for filter in filters]}")
     if filters is not None:
         for filter in filters:
             dataset = dfm.filters[filter](dataset)
@@ -178,7 +192,9 @@ def prepare_dataset(dataroot, modality, label, filters=None, suffix_list=None):
         dataset = dfm.filter_has_label(dataset)
         if len(dataset) == 0:
             raise Exception("Empty dataset")
-        logger.info(f"Collected dataset with images: {image_name} and labels: {label_name}, size: {len(dataset)}")
+        logger.info(
+            f"Collected dataset with images: {image_name} and labels: {label_name}, size: {len(dataset)}"
+        )
         return dataset, dataset_info
 
     logger.info(f"Creating images: {image_name} and labels: {label_name}")
@@ -194,7 +210,7 @@ def prepare_dataset(dataroot, modality, label, filters=None, suffix_list=None):
                 raise
             else:
                 scan.label = scan.root / label_name
-                file_logger.log('SUCCESS', f"Saved {scan.label}", new_file=scan.label)
+                file_logger.log("SUCCESS", f"Saved {scan.label}", new_file=scan.label)
 
         if scan.image is None and len(modality) > 1:
             base_images = [scan.root / f"{mod}.nii.gz" for mod in modality]
@@ -208,14 +224,16 @@ def prepare_dataset(dataroot, modality, label, filters=None, suffix_list=None):
                 raise
             else:
                 scan.image = scan.root / merged_image
-                file_logger.log('SUCCESS', f"Saved {scan.image}", new_file=scan.image)
+                file_logger.log("SUCCESS", f"Saved {scan.image}", new_file=scan.image)
 
         dataset_copy.append(scan)
-    
+
     if len(dataset_copy) == 0:
         raise Exception("Empty dataset")
 
-    logger.info(f"Collected dataset with images: {image_name} and labels: {label_name}, size: {len(dataset)}")
+    logger.info(
+        f"Collected dataset with images: {image_name} and labels: {label_name}, size: {len(dataset)}"
+    )
     return dataset_copy, dataset_info
 
 
