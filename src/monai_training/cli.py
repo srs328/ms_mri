@@ -53,7 +53,7 @@ def prepare_training(dataroot, modality, label, filters, work_dir):
     dataset_proc = DataSetProcesser.new_dataset(
         dataroot, scan_3Tpioneer_bids, filters=filters
     )
-    dataset_proc.prepare_labels(label, ["CH", "SRS", "ED", "DT"])
+    dataset_proc.prepare_labels(label, ["CH", "SRS", "ED", "DT"], resave=True)
     dataset_proc.prepare_images(modality)
 
     dataset_proc.dataset.sort(key=lambda s: s.subid)

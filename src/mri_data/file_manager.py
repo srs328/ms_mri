@@ -1,5 +1,6 @@
 from __future__ import annotations
 from attrs import define, field, validators
+from collections.abc import Mapping
 from dataclasses import dataclass
 from loguru import logger
 import os
@@ -53,7 +54,7 @@ def image_exists_or_none(instance, attribute, value):
 
 
 @define(slots=True, weakref_slot=False)
-class Scan:
+class Scan(Mapping):
     subid: str
     sesid: str
     dataroot: Path = field(validator=[validators.instance_of(Path), path_exists])
@@ -73,7 +74,10 @@ class Scan:
     def __post_init__(self):
         if self.id is None:
             self.id = int(self.subid) * int(self.sesid)
-        print("Scan fields", self._field_names())
+        self.root = Path(self.root)
+        self.image = Path(self.image)
+        self.label = Path(self.label)
+        self.dataroot = Path(self.dataroot)
 
     def has_label(self):
         if self.label is not None:
@@ -146,7 +150,7 @@ class Scan:
 
     @classmethod
     def from_dict(cls, dict_form):
-        for k in ["root", "image", "label"]:
+        for k in ["root", "image", "label", "dataroot"]:
             if dict_form[k] is not None:
                 dict_form[k] = Path(dict_form[k])
         return cls(**dict_form)
@@ -159,15 +163,32 @@ class Scan:
     def path(dataroot, subid, sesid, subdir=""):
         return Path(dataroot) / f"sub-ms{subid}" / f"ses-{sesid}" / subdir
 
+    def __getitem__(self, key):
+        return super().__getitem__(key)
 
-# could subclass DataSet and have initial values for things like fields and Scan as Data
-# ? Does this need to be a subclass, what if the DataSet class had these two functions
+    def __iter__(self):
+        for key in self.__slots__:
+            yield super.__getitem__(key)
+
+    def __len__(self):
+        return len(self.__slots__)
+
+
 # ! test if this would work with a struct other than Scan (say, namedtuple)
+# TODO DataSet and Record hierarchy and structure is pretty wonky
+# scan_struct can only be scan, so no point in acting like it can take any struct
 class DataSet(Record):
     def __init__(self, recordname: str, scan_struct, records=None):
         fields = scan_struct._field_names()
         super().__init__(recordname, fields, records=records)
         self.Data = scan_struct
+
+    @classmethod
+    def create_dataset(cls, recordname, scan_struct, records=None):
+        if records is None:
+            records = []
+        # records = [scan_struct.from_dict(record) for record in records]
+        return cls(recordname, scan_struct, records=records)
 
     def add_label(self, subid, sesid, label):
         try:
@@ -202,7 +223,7 @@ class DataSet(Record):
 
     @property
     def dataroot(self):
-        return self._records[0].root
+        return self._records[0].dataroot
 
     def __str__(self):
         return ", ".join([str(scan) for scan in self])
@@ -334,8 +355,6 @@ def rename(dataset, src, dst, script_file=None, run_script=False, to_raise=True)
     rename_commands = ["#" + "!/bin/sh", ""]
     for scan in dataset:
         # smbShare paths are case insensitive, so need to compare to exact string
-        if scan.subid == "1191":
-            print("thoo")
         if src in os.listdir(scan.root):
             src_path = scan.root / src
             dst_path = scan.root / dst

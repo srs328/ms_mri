@@ -68,44 +68,49 @@ def combine_labels(
     labels: list[str],
     label_id_func: Callable,
     suffix_list: Optional[list[str]] = None,
+    resave=False,
 ) -> tuple[str, list]:
     if isinstance(labels, str) or len(labels) < 2:
         raise ValueError("Expected more than one label")
 
+    # find files with correct prefix and suffix and assign a value for each
     logger.debug(f"Combining labels for {scan.info()}")
-    label_names = []
+    base_labels = []
     label_values = []
     tmp_files = []
     for i, lab in enumerate(labels):
-        base_label = scan.find_label(lab, suffix_list)
-        label_names.append(nifti_name(base_label.name))
-        combined_label_name = ".".join(label_names) + ".nii.gz"
-        merged_label = scan.root / combined_label_name
-        label_values.append((lab, 2**i))
+        base_labels.append(scan.find_label(lab, suffix_list))
+        label_values.append((lab, label_id_func(i)))
 
-    if merged_label.is_file():
+    # set the name of the combined label
+    label_names = [nifti_name(base_label.name) for base_label in base_labels]
+    combined_label_name = ".".join(label_names) + ".nii.gz"
+    merged_label = scan.root / combined_label_name
+    # return if the combined label exists already
+    if merged_label.is_file() and not resave:
         return combined_label_name, label_values
 
+    # create the combined label
     try:
-        for i, lab in enumerate(labels):
-            base_label = scan.find_label(lab, suffix_list)
-            label_names.append(nifti_name(base_label.name))
+        # modify each label to have the assigned value
+        for lab, label_value, base_label in zip(labels, label_values, base_labels):
             tmp_filepath = scan.root / f"tmp_{lab}_{int(time.time())}.nii.gz"
             try:
                 logger.debug("Trying set_label_value with", lab)
-                set_label_value(base_label, tmp_filepath, label_id_func(i))
+                set_label_value(base_label, tmp_filepath, label_value[1])
             except FileNotFoundError:
-                logger.error(print("Failed set_label_value for", lab))
+                logger.error("Failed set_label_value for", lab)
                 raise
             else:
                 logger.debug("finished setting label value")
                 tmp_files.append(tmp_filepath)
-                label_values.append((lab, 2**i))
 
+        # merge the labels
         merge_labels(tmp_files, merged_label)
     except Exception:
         raise
     finally:
+        # delete the temporary files
         for path in tmp_files:
             os.remove(path)
 

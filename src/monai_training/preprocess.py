@@ -118,7 +118,13 @@ class DataSetProcesser:
 
         self.dataset = dataset_copy
 
-    def prepare_labels(self, label: list[str] | str, suffix_list: list[str] = None):
+    def prepare_labels(
+        self,
+        label: list[str] | str,
+        suffix_list: list[str] = None,
+        id_label: Callable = lambda i: i,
+        resave=False,
+    ):
         logger.info("Prepare Labels")
         if isinstance(label, str):
             self.label = [label]
@@ -129,7 +135,7 @@ class DataSetProcesser:
             self.label.sort()
             self.label_name = ".".join(self.label) + ".nii.gz"
             # ? combine_labels() returns label_ids, idk if I should set that here or then
-            label_ids = [(lab, set_label_id(i)) for i, lab in enumerate(self.label)]
+            label_ids = [(lab, id_label(i)) for i, lab in enumerate(self.label)]
             logger.debug(self.label_name)
         else:
             self.label_name = f"{self.label[0]}.nii.gz"
@@ -151,7 +157,11 @@ class DataSetProcesser:
                 logger.debug(f"Need to create {self.label_name}")
                 try:
                     this_label_name, _ = utils.combine_labels(
-                        scan, self.label, set_label_id, suffix_list=suffix_list
+                        scan,
+                        self.label,
+                        id_label,
+                        suffix_list=suffix_list,
+                        resave=resave,
                     )
                 except FileNotFoundError:
                     continue
@@ -170,7 +180,7 @@ class DataSetProcesser:
         self.dataset = dataset_copy
 
 
-def set_label_id(i: int) -> int:
+def power_of_two(i: int) -> int:
     return 2**i
 
 
@@ -188,7 +198,7 @@ def load_dataset(path):
 
     info = struct["info"]
     dataset_list = struct["data"]
-    dataset = dfm.DataSet("DataSet", dfm.Scan, records=dataset_list)
+    dataset = dfm.DataSet.create_dataset("DataSet", dfm.Scan, records=dataset_list)
     return dataset, info
 
 
