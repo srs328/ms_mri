@@ -7,6 +7,7 @@ from pathlib import Path
 from abc import ABC, abstractmethod
 import re
 from typing import Self
+from subprocess import run
 import warnings
 
 from mri_data.record import Record
@@ -86,6 +87,35 @@ class Scan:
             if isinstance(v, Path):
                 dict_form[k] = str(v)
         return dict_form
+
+    def find_label(self, label_prefix: str, suffix_list: list[str] = None) -> Path:
+        """find label for scan, and if there are multiple, return one
+        based on priority of suffixes
+
+        Args:
+            scan (Scan): Scan for the subj+ses of interest
+            label_prefix (str): prefix of the label
+            suffix (list[str]): list of suffixes in order of priority
+        """
+        logger.debug(f"Looking for label {label_prefix} in {self.root}")
+        if suffix_list is None:
+            suffix_list = [""]
+        root_dir = self.root
+        labels = list(root_dir.glob(f"{label_prefix}*.nii.gz"))
+
+        for suffix in suffix_list:
+            label_parts = [label_prefix]
+            if len(suffix) > 0:
+                label_parts.append(suffix)
+            for lab in labels:
+                if ("-".join(label_parts) + ".nii.gz").lower() == lab.name.lower():
+                    return lab
+
+        logger.debug(f"No label in {[lab.name for lab in labels]} matched search")
+        raise FileNotFoundError(
+            f"Could not find label matching {label_prefix} "
+            + f"for subject {self.subid} ses {self.sesid}"
+        )
 
     @property
     def image_path(self):
@@ -286,6 +316,45 @@ filters = {
     "has_label": filter_has_label,
     "has_image": filter_has_image,
 }
+
+
+def rename(dataset, src, dst, script_file=None, run_script=False, to_raise=True):
+    """
+    takes a DataSet object and saves bash script to rename any file named src
+    in each scan's root dir to dst. This function itself makes no changes to the
+    file system of the dataset
+
+    Args:
+        dataset (DataSet): DataSet object containing scans' paths
+        src (str): name of file to rename
+        dst (str): name of new file
+        script_file (str, optional): relative or absolute path to save rename
+            script to. Defaults to None.
+    """
+    rename_commands = ["#" + "!/bin/sh", ""]
+    for scan in dataset:
+        # smbShare paths are case insensitive, so need to compare to exact string
+        if scan.subid == "1191":
+            print("thoo")
+        if src in os.listdir(scan.root):
+            src_path = scan.root / src
+            dst_path = scan.root / dst
+            if dst_path.is_file():
+                if to_raise:
+                    raise FileExistsError
+                else:
+                    continue
+            rename_commands.append(f"mv {src_path} {dst_path}")
+
+    if script_file is None:
+        script_file = "tmp/rename_commands.sh"
+        if not os.path.exists("tmp"):
+            os.makedirs("tmp")
+    with open(script_file, "w") as f:
+        f.writelines([cmd + "\n" for cmd in rename_commands])
+    if run_script:
+        run(["chmod", "+x", script_file])
+        run(script_file)
 
 
 class Data(ABC):

@@ -63,7 +63,7 @@ def rename(dataroot, src, dst, script_file, run_script, to_raise):
         "to_raise": to_raise,
     }
 
-    utils.rename(dataset, src, dst, **kwargs)
+    data_file_manager.rename(dataset, src, dst, **kwargs)
 
 
 if __name__ == "__main__":

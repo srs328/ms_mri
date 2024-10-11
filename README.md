@@ -23,6 +23,8 @@ See [this doc](notes/training_cli.md) for notes about the training command line 
 - Hacky work around in utils for not recreating combined labels
 - Training multi label not working
   - Double check how the monai tutorials handle multiple labels
+- Figure out why I get issues with "no such file or directory:" on $PATH
+  - Also why does zsh have all the windows PATH items while bash doesn't
 
 ### Old
 
