@@ -1,6 +1,7 @@
 import pytest
 
-from mri_data import data_file_manager as dfm
+from mri_data import file_manager as dfm
+
 
 @pytest.fixture
 def dataroot():

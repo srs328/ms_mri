@@ -6,7 +6,7 @@ from subprocess import CalledProcessError
 from tqdm import tqdm
 from typing import Callable, Self
 
-from mri_data import data_file_manager as dfm
+from mri_data import file_manager as dfm
 from mri_data import utils
 
 

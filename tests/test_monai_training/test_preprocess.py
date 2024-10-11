@@ -8,8 +8,8 @@ import shutil
 import sys
 
 from monai_training.preprocess import DataSetProcesser
-from mri_data import data_file_manager as dfm
-from mri_data.logging0 import Formatter
+from mri_data import file_manager as dfm
+from mri_data.loggers import Formatter
 
 current_dir = Path(__file__).absolute().parent
 logger.remove()

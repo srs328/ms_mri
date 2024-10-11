@@ -6,7 +6,7 @@ import sys
 
 from monai_training import preprocess, training
 from monai_training.preprocess import DataSetProcesser
-from mri_data.data_file_manager import scan_3Tpioneer_bids
+from mri_data.file_manager import scan_3Tpioneer_bids
 
 logger.remove()
 logger.add(sys.stderr, level="INFO", format="{level} | {message}")

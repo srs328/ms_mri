@@ -1,4 +1,4 @@
-from mri_data import data_file_manager as dfm
+from mri_data import file_manager as dfm
 
 dataroot = "/home/srs-9/Projects/ms_mri/data/3Tpioneer_bids"
 

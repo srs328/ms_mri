@@ -6,7 +6,7 @@ import nibabel as nibabel
 import random
 from dataclasses import dataclass
 
-from mri_data.data_file_manager import DataSet
+from mri_data.file_manager import DataSet
 
 
 @dataclass

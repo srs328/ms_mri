@@ -1,7 +1,7 @@
 from pathlib import Path
 import pytest
 
-from mri_data.data_file_manager import Scan
+from mri_data.file_manager import Scan
 
 
 @pytest.fixture
