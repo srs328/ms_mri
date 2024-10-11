@@ -11,8 +11,7 @@ screenshots/
 scratch.py
 
 *.code-workspace
-*cp_work_dir*
-
+training_work_dirs/
 scratch.py
 .*
 !.gitignore
