@@ -5,11 +5,16 @@ from pathlib import Path
 import pytest
 import re
 import shutil
+import sys
 
 from monai_training.preprocess import DataSetProcesser
 from mri_data import data_file_manager as dfm
+from mri_data.logging0 import Formatter
 
 current_dir = Path(__file__).absolute().parent
+logger.remove()
+formater = Formatter()
+logger.add(sys.stderr, level="DEBUG", format=formater.format)
 logger.add(current_dir / "new_files.log", serialize=True, level="DEBUG")
 
 #! why aren't all the logs from preprocess showing up in the tests? (e.g. logger.info on line 149)
@@ -52,31 +57,36 @@ def multilabel_onesubj_only(dataroot):
         dst_path = root / f"{lab}.nii.gz"
         os.remove(dst_path)
 
-    os.remove(root / "bar_baz_foo.nii.gz")
+    os.remove(root / "bar.baz.foo.nii.gz")
 
 
-# def test_prepare_dataset_badlabel(dataroot):
-#     dataset_proc = DataSetProcesser.new_dataset(dataroot, dfm.scan_3Tpioneer_bids)
-#     dataset_proc.prepare_labels("foo")
-#     dataset_proc.prepare_images("flair")
-#     assert len(dataset_proc.dataset) == 0
+def test_prepare_dataset_badlabel(dataroot):
+    dataset_proc = DataSetProcesser.new_dataset(dataroot, dfm.scan_3Tpioneer_bids)
+    dataset_proc.prepare_labels("foo")
+    dataset_proc.prepare_images("flair")
+    assert len(dataset_proc.dataset) == 0
 
 
-# def test_prepare_dataset_onelabel(dataroot, label_onesubj_only):
-#     dataset_proc = DataSetProcesser.new_dataset(dataroot, dfm.scan_3Tpioneer_bids)
-#     dataset_proc.prepare_labels(label_onesubj_only)
-#     dataset_proc.prepare_images("flair")
-#     assert len(dataset_proc.dataset) == 1
-#     assert dataset_proc.dataset[0].label is not None
-#     assert dataset_proc.dataset[0].subid == "1010"
+def test_prepare_dataset_onelabel(dataroot, label_onesubj_only):
+    dataset_proc = DataSetProcesser.new_dataset(dataroot, dfm.scan_3Tpioneer_bids)
+    dataset_proc.prepare_labels(label_onesubj_only)
+    dataset_proc.prepare_images("flair")
+    assert len(dataset_proc.dataset) == 1
+    assert dataset_proc.dataset[0].label is not None
+    assert dataset_proc.dataset[0].subid == "1010"
 
 
-# def test_prepare_dataset_onemultilabel(dataroot, multilabel_onesubj_only):
-#     dataset = prepare_dataset(dataroot, "flair", multilabel_onesubj_only)
-#     assert len(dataset) == 1
-#     assert dataset[0].label == dataset[0].root / "bar_baz_foo.nii.gz"
-#     assert dataset[0].subid == "1001"
-#     assert os.path.exists(dataset[0].root / "bar_baz_foo.nii.gz")
+def test_prepare_dataset_onemultilabel(dataroot, multilabel_onesubj_only):
+    dataset_proc = DataSetProcesser.new_dataset(dataroot, dfm.scan_3Tpioneer_bids)
+    dataset_proc.prepare_labels(multilabel_onesubj_only)
+    dataset_proc.prepare_images("flair")
+    assert len(dataset_proc.dataset) == 1
+    assert (
+        dataset_proc.dataset[0].label_path
+        == dataset_proc.dataset[0].root / "bar.baz.foo.nii.gz"
+    )
+    assert dataset_proc.dataset[0].subid == "1010"
+    assert os.path.exists(dataset_proc.dataset[0].root / "bar.baz.foo.nii.gz")
 
 
 def test_prepare_dataset_multilabel(dataroot, log_file):

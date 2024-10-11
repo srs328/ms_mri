@@ -95,7 +95,7 @@ class Scan:
 
     @image_path.setter
     def image_path(self, path: Path | os.PathLike):
-        self.image = Path(path).relative_to(self.root)
+        self.image = Path(path).relative_to(self.root).name
 
     @property
     def label_path(self):
@@ -105,7 +105,7 @@ class Scan:
 
     @label_path.setter
     def label_path(self, path: Path | os.PathLike):
-        self.label = Path(path).relative_to(self.root)
+        self.label = Path(path).relative_to(self.root).name
 
     def info(self):
         return f"{self.__class__.__name__}(subid={self.subid}, sesid={self.sesid})"
@@ -167,6 +167,9 @@ class DataSet(Record):
     def serialize(self):
         return [scan.asdict() for scan in self]
 
+    def sort(self, key=None):
+        self._records = sorted(self, key=key)
+
     @property
     def dataroot(self):
         return self._records[0].root
@@ -206,10 +209,10 @@ def scan_3Tpioneer_bids(dataroot, image=None, label=None, subdir=None) -> DataSe
             label_file = label
             if label_file is not None and not (scan_dir / label_file).is_file():
                 label_file = None
-
+            scanid = int(subid) * int(sesid)
             dataset.append(
                 dict(
-                    id=id,
+                    id=scanid,
                     subid=subid,
                     sesid=sesid,
                     dataroot=dataroot,

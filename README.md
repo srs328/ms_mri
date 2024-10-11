@@ -19,6 +19,11 @@ See [this doc](notes/training_cli.md) for notes about the training command line 
 
 ## Issues
 
+- Permission errors with WD Black drive, e.g. when setting the work_dir in it
+- Hacky work around in utils for not recreating combined labels
+- Training multi label not working
+  - Double check how the monai tutorials handle multiple labels
+
 ### Old
 
 - sub-ms1196 t1 is bad

@@ -5,10 +5,14 @@ import numpy as np
 import os
 from pathlib import Path
 from subprocess import run
+import sys
 import time
 from typing import Callable, Optional
 
 from .data_file_manager import Scan, nifti_name
+
+logger.remove()
+logger.add(sys.stderr, level="INFO")
 
 
 def merge_images(image_paths, merged_path):
@@ -25,6 +29,8 @@ def merge_images(image_paths, merged_path):
 
 
 def merge_labels(label_paths, merged_path):
+    if merged_path.is_file():
+        return merged_path
     label_paths = [str(p) for p in label_paths]
     for p in label_paths:
         if not os.path.isfile(p):
@@ -57,13 +63,13 @@ def set_label_value(label_path, output_path, val):
 
 
 # return a tuple that gives the value for each label name
+# ! have a hacky work around for not recreating files, fix later
 def combine_labels(
     scan: Scan,
     labels: list[str],
     label_id_func: Callable,
     suffix_list: Optional[list[str]] = None,
 ) -> tuple[str, list]:
-
     if isinstance(labels, str) or len(labels) < 2:
         raise ValueError("Expected more than one label")
 
@@ -71,6 +77,16 @@ def combine_labels(
     label_names = []
     label_values = []
     tmp_files = []
+    for i, lab in enumerate(labels):
+        base_label = find_label(scan, lab, suffix_list)
+        label_names.append(nifti_name(base_label.name))
+        combined_label_name = ".".join(label_names) + ".nii.gz"
+        merged_label = scan.root / combined_label_name
+        label_values.append((lab, 2**i))
+
+    if merged_label.is_file():
+        return combined_label_name, label_values
+
     try:
         for i, lab in enumerate(labels):
             base_label = find_label(scan, lab, suffix_list)
@@ -87,8 +103,6 @@ def combine_labels(
                 tmp_files.append(tmp_filepath)
                 label_values.append((lab, 2**i))
 
-        combined_label_name = ".".join(label_names) + ".nii.gz"
-        merged_label = scan.root / combined_label_name
         merge_labels(tmp_files, merged_label)
     except Exception:
         raise
@@ -115,8 +129,11 @@ def find_label(scan: Scan, label_prefix: str, suffix_list: list[str] = None) -> 
     labels = list(root_dir.glob(f"{label_prefix}*.nii.gz"))
 
     for suffix in suffix_list:
+        label_parts = [label_prefix]
+        if len(suffix) > 0:
+            label_parts.append(suffix)
         for lab in labels:
-            if (label_prefix + "-" + suffix + ".nii.gz").lower() == lab.name.lower():
+            if ("-".join(label_parts) + ".nii.gz").lower() == lab.name.lower():
                 return lab
 
     logger.debug(f"No label in {[lab.name for lab in labels]} matched search")
@@ -155,6 +172,8 @@ def rename(dataset, src, dst, script_file=None, run_script=False, to_raise=True)
     rename_commands = ["#" + "!/bin/sh", ""]
     for scan in dataset:
         # smbShare paths are case insensitive, so need to compare to exact string
+        if scan.subid == "1191":
+            print("thoo")
         if src in os.listdir(scan.root):
             src_path = scan.root / src
             dst_path = scan.root / dst

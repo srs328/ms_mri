@@ -37,13 +37,25 @@ class DataSetProcesser:
     def new_dataset0(cls, dataroot, scan_func):
         return cls(scan_func(dataroot))
 
+    # TODO figure out how to handle label initials from parse_label_name()
+    # TODO   will need to use it during the label exists check (if label_path.is_file():)
+    # TODO use tqdm
     @classmethod
     def new_dataset(
-        cls, dataroot: str | os.PathLike, scan_func: Callable, *args, **kwargs
+        cls,
+        dataroot: str | os.PathLike,
+        scan_func: Callable,
+        *args,
+        filters=None,
+        **kwargs,
     ) -> Self:
-        # TODO figure out how to handle label initials from parse_label_name()
         dsp = cls(scan_func(dataroot, *args, **kwargs))
         dsp.info = dict()
+
+        if filters is not None:
+            for filter in filters:
+                dsp.dataset = dfm.filters[filter](dsp.dataset)
+
         if all([scan.image for scan in dsp.dataset]):
             dsp.image_name = dsp.dataset[0].image
             dsp.modality = dfm.parse_image_name(dsp.image_name)
@@ -62,11 +74,13 @@ class DataSetProcesser:
         return dsp
 
     def prepare_images(self, modality: list[str] | str):
+        logger.info("Prepare Images")
         if isinstance(modality, str):
             self.modality = [modality]
         else:
             self.modality = modality
         if len(self.modality) > 1:
+            self.modality = list(self.modality)
             self.modality.sort()
             self.image_name = ".".join(self.modality) + ".nii.gz"
             image_ids = [(mod, i) for i, mod in enumerate(self.modality)]
@@ -105,6 +119,7 @@ class DataSetProcesser:
         self.dataset = dataset_copy
 
     def prepare_labels(self, label: list[str] | str, suffix_list: list[str] = None):
+        logger.info("Prepare Labels")
         if isinstance(label, str):
             self.label = [label]
         else:
@@ -114,7 +129,8 @@ class DataSetProcesser:
             self.label.sort()
             self.label_name = ".".join(self.label) + ".nii.gz"
             # ? combine_labels() returns label_ids, idk if I should set that here or then
-            label_ids = [(lab, 2**i) for i, lab in enumerate(self.label)]
+            label_ids = [(lab, set_label_id(i)) for i, lab in enumerate(self.label)]
+            logger.debug(self.label_name)
         else:
             self.label_name = f"{self.label[0]}.nii.gz"
             label_ids = [(self.label[0], 1)]  #! this might not always be true, revisit
@@ -127,13 +143,15 @@ class DataSetProcesser:
                 continue
             label_path = scan.root / self.label_name
             if label_path.is_file():
+                logger.debug(f"Label {label_path.name} exists")
                 scan.label_path = label_path
                 dataset_copy.append(scan)
                 continue
             if len(self.label) > 1:
+                logger.debug(f"Need to create {self.label_name}")
                 try:
                     this_label_name, _ = utils.combine_labels(
-                        scan, self.label, label_id_func, suffix_list=suffix_list
+                        scan, self.label, set_label_id, suffix_list=suffix_list
                     )
                 except FileNotFoundError:
                     continue
@@ -152,8 +170,26 @@ class DataSetProcesser:
         self.dataset = dataset_copy
 
 
-def label_id_func(i: int) -> int:
+def set_label_id(i: int) -> int:
     return 2**i
+
+
+def save_dataset(dataset, save_path, dataset_info=None):
+    struct = {"info": dataset_info}
+    struct.update({"data": dataset.serialize()})
+
+    with open(save_path, "w") as f:
+        json.dump(struct, f, indent=4)
+
+
+def load_dataset(path):
+    with open(path, "r") as f:
+        struct = json.load(f)
+
+    info = struct["info"]
+    dataset_list = struct["data"]
+    dataset = dfm.DataSet("DataSet", dfm.Scan, records=dataset_list)
+    return dataset, info
 
 
 # later make the label use a glob in case there are initials after label name
@@ -239,21 +275,3 @@ def prepare_dataset(dataroot, modality, label, filters=None, suffix_list=None):
         f"Collected dataset with images: {image_name} and labels: {label_name}, size: {len(dataset)}"
     )
     return dataset_copy, dataset_info
-
-
-def save_dataset(dataset, save_path, dataset_info=None):
-    struct = {"info": dataset_info}
-    struct.update({"data": dataset.serialize()})
-
-    with open(save_path, "w") as f:
-        json.dump(struct, f, indent=4)
-
-
-def load_dataset(path):
-    with open(path, "r") as f:
-        struct = json.load(f)
-
-    info = struct["info"]
-    dataset_list = struct["data"]
-    dataset = dfm.DataSet("DataSet", dfm.Scan, records=dataset_list)
-    return dataset, info
