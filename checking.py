@@ -21,4 +21,13 @@ def get_scan(image=None, label=None):
 """
 import checking
 scan = checking.get_scan()
+
+from mri_data import data_file_manager as dfm
+dataset = dfm.scan_3Tpioneer_bids("/home/srs-9/Projects/ms_mri/data/3Tpioneer_bids", image="t1.nii.gz", label="choroid_t1_flair-CH.nii.gz")
+scan = dataset[0]
+
+/home/srs-9/Projects/ms_mri/data/3Tpioneer_bids/sub-ms1019/ses-20190608
+
+/home/srs-9/Projects/ms_mri/data/3Tpioneer_bids/sub-ms1010/ses-20180208
+/home/srs-9/Projects/ms_mri/data/3Tpioneer_bids/sub-1010/ses-20180208
 """

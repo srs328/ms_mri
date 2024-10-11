@@ -9,8 +9,6 @@ import re
 from typing import Self
 import warnings
 
-from networkx import is_path
-
 from mri_data.record import Record
 
 
@@ -40,7 +38,9 @@ class Subject:
 
 def path_exists(instance, attribute, value):
     if value is not None and not value.is_dir():
-        raise ValueError(f"Invalid value for {attribute}, {value} is not a directory")
+        raise ValueError(
+            f"Invalid value for {attribute.name}, {value} is not a directory"
+        )
 
 
 def image_exists_or_none(instance, attribute, value):
@@ -48,17 +48,15 @@ def image_exists_or_none(instance, attribute, value):
         return
     path = instance.root / value
     if not path.is_file():
-        raise ValueError(f"Invalid value for {attribute}, {path} is not a file")
+        raise ValueError(f"Invalid value for {attribute.name}, {path} is not a file")
 
 
 @define(slots=True, weakref_slot=False)
 class Scan:
     subid: str
     sesid: str
-    dataroot: Path = field(
-        validator=[validators.validators.instance_of(Path), path_exists]
-    )
-    root: Path = field(validator=[validators.validators.instance_of(Path), path_exists])
+    dataroot: Path = field(validator=[validators.instance_of(Path), path_exists])
+    root: Path = field(validator=[validators.instance_of(Path), path_exists])
     image: Path = field(default=None, validator=[image_exists_or_none])
     label: Path = field(default=None, validator=[image_exists_or_none])
     cond: str = None
@@ -89,11 +87,25 @@ class Scan:
                 dict_form[k] = str(v)
         return dict_form
 
-    def set_image(self, image_name):
-        self.image = self.root / image_name
+    @property
+    def image_path(self):
+        if self.image is None:
+            return None
+        return self.root / self.image
 
-    def set_label(self, label_name):
-        self.label = self.root / label_name
+    @image_path.setter
+    def image_path(self, path: Path | os.PathLike):
+        self.image = Path(path).relative_to(self.root)
+
+    @property
+    def label_path(self):
+        if self.label is None:
+            return None
+        return self.root / self.label
+
+    @label_path.setter
+    def label_path(self, path: Path | os.PathLike):
+        self.label = Path(path).relative_to(self.root)
 
     def info(self):
         return f"{self.__class__.__name__}(subid={self.subid}, sesid={self.sesid})"
@@ -163,9 +175,7 @@ class DataSet(Record):
         return ", ".join([str(scan) for scan in self])
 
 
-def scan_3Tpioneer_bids(
-    dataroot, image=None, label=None, subdir=None, suppress_output=True
-) -> DataSet:
+def scan_3Tpioneer_bids(dataroot, image=None, label=None, subdir=None) -> DataSet:
     dataroot = Path(dataroot)
     sub_dirs = [
         Path(item.path)
@@ -189,34 +199,25 @@ def scan_3Tpioneer_bids(
 
             logger.debug(f"scan_dir: {scan_dir}")
 
-            if image is not None:
-                image_path = scan_dir / image
-                if not image_path.is_file():
-                    image_path = None
-            else:
-                image_path = None
+            image_file = image
+            if image_file is not None and not (scan_dir / image_file).is_file():
+                image_file = None
 
-            if label is not None:
-                label_path = scan_dir / label
-                if not label_path.is_file() and label is not None:
-                    label_path = None
-            else:
-                label_path = None
+            label_file = label
+            if label_file is not None and not (scan_dir / label_file).is_file():
+                label_file = None
 
             dataset.append(
                 dict(
                     id=id,
                     subid=subid,
                     sesid=sesid,
+                    dataroot=dataroot,
                     root=ses_dir,
-                    image=image_path,
-                    label=label_path,
+                    image=image_file,
+                    label=label_file,
                 )
             )
-
-            if not suppress_output:
-                if label_path is None:
-                    warnings.warn(f"No label for sub-{subid} ses-{sesid}")
 
     return dataset
 

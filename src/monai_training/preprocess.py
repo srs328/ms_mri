@@ -45,7 +45,7 @@ class DataSetProcesser:
         dsp = cls(scan_func(dataroot, *args, **kwargs))
         dsp.info = dict()
         if all([scan.image for scan in dsp.dataset]):
-            dsp.image_name = dsp.dataset[0].image.name
+            dsp.image_name = dsp.dataset[0].image
             dsp.modality = dfm.parse_image_name(dsp.image_name)
             dsp.info.update(
                 {"image_info": [(mod, i) for i, mod in enumerate(dsp.modality)]}
@@ -53,7 +53,7 @@ class DataSetProcesser:
 
         #! the labels include the initials as of now
         if all([scan.label for scan in dsp.dataset]):
-            dsp.label_name = dsp.dataset[0].label.name
+            dsp.label_name = dsp.dataset[0].label
             dsp.label = dfm.parse_image_name(dsp.label_name)
             dsp.info.update(
                 {"label_info": [[(lab, 2**i) for i, lab in enumerate(dsp.label)]]}
@@ -82,7 +82,7 @@ class DataSetProcesser:
                 continue
             image_path = scan.root / self.image_name
             if image_path.is_file():
-                scan.image = image_path
+                scan.image_path = image_path
                 dataset_copy.append(scan)
                 continue
             if len(self.modality) > 1:
@@ -96,9 +96,9 @@ class DataSetProcesser:
                     logger.error("Something went wrong merging images")
                     raise
                 else:
-                    scan.image = scan.root / merged_image
+                    scan.image_path = scan.root / merged_image
                     file_logger.log(
-                        "SUCCESS", f"Saved {scan.image}", new_file=scan.image
+                        "SUCCESS", f"Saved {scan.image_path}", new_file=scan.image_path
                     )
                     dataset_copy.append(scan)
 
@@ -127,7 +127,7 @@ class DataSetProcesser:
                 continue
             label_path = scan.root / self.label_name
             if label_path.is_file():
-                scan.label = label_path
+                scan.label_path = label_path
                 dataset_copy.append(scan)
                 continue
             if len(self.label) > 1:
@@ -141,11 +141,12 @@ class DataSetProcesser:
                     logger.error("Something went wrong merging labels")
                     raise
                 else:
-                    scan.label = scan.root / this_label_name
+                    scan.label_path = scan.root / this_label_name
                     file_logger.log(
-                        "SUCCESS", f"Saved {scan.label}", new_file=scan.label
+                        "SUCCESS", f"Saved {scan.label_path}", new_file=scan.label_path
                     )
                     dataset_copy.append(scan)
+
             logger.info(len(dataset_copy))
 
         self.dataset = dataset_copy
