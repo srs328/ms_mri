@@ -4,15 +4,15 @@ from collections.abc import MutableSequence
 
 
 # based on: https://stackoverflow.com/questions/15418386/what-is-the-best-data-structure-for-storing-a-set-of-four-or-more-values
+# ? can this work with namedtuple too?
 class Record(MutableSequence):
 
-    def __init__(self, recordname: str, fields: list, records=None):
+    def __init__(self, struct, records=None):
         if records is None:
             records = []
-        self.fields = fields
-        defaults = [""] * len(fields)
-        print(self.fields)
-        self.Data = namedtuple(recordname, self.fields, defaults=defaults)
+        self.Data = struct
+        # this doesn't work with namedtuple and Data._field doesn't work with Scan
+        self.fields = self.Data._field_names()
         self._records = [self.Data(**record) for record in records]
         self.valid_fieldnames = set(self.fields)
 
