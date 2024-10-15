@@ -1,4 +1,7 @@
+from pathlib import Path
+import json
 from mri_data import file_manager as dfm
+from monai_training.preprocess import load_dataset
 
 dataroot = "/home/srs-9/Projects/ms_mri/data/3Tpioneer_bids"
 
@@ -16,6 +19,27 @@ def get_scan(image=None, label=None):
     if label is not None:
         scan.set_label(label)
     return scan
+
+
+dataroot = Path("/mnt/h/3Tpioneer_bids")
+dataset_file = "/mnt/h/training_work_dirs/choroid_pineal_pituitary2/dataset.json"
+
+with open(dataset_file, "r") as f:
+    struct = json.load(f)
+
+info = struct["info"]
+dataset_list = struct["data"]
+
+dataset = dfm.scan_3Tpioneer_bids(
+    dataroot, image="flair.nii.gz", label="pineal-SRS.nii.gz"
+)
+
+dataset = dfm.filter_has_image(dataset)
+dataset = dfm.filter_has_label(dataset)
+
+# dataset = dfm.DataSet(records=dataset_list)
+# scan = dataset[0]
+thoo = 4
 
 
 """

@@ -54,13 +54,13 @@ def image_exists_or_none(instance, attribute, value):
 
 
 @define(slots=True, weakref_slot=False)
-class Scan(Mapping):
-    subid: str
-    sesid: str
-    dataroot: Path = field(validator=[validators.instance_of(Path), path_exists])
-    root: Path = field(validator=[validators.instance_of(Path), path_exists])
-    image: Path = field(default=None, validator=[image_exists_or_none])
-    label: Path = field(default=None, validator=[image_exists_or_none])
+class Scan:
+    subid: str = field(converter=str)
+    sesid: str = field(converter=str)
+    dataroot: Path = field(converter=Path, validator=[path_exists])
+    root: Path = field(converter=Path, validator=[path_exists])
+    image: str = field(default=None, validator=[image_exists_or_none])
+    label: str = field(default=None, validator=[image_exists_or_none])
     cond: str = None
     id: int | None = None
 
@@ -74,23 +74,6 @@ class Scan(Mapping):
     def __post_init__(self):
         if self.id is None:
             self.id = int(self.subid) * int(self.sesid)
-        self.root = Path(self.root)
-        self.image = Path(self.image)
-        self.label = Path(self.label)
-        self.dataroot = Path(self.dataroot)
-
-    def has_label(self):
-        if self.label is not None:
-            return True
-        else:
-            return False
-
-    def asdict(self):
-        dict_form = {k: getattr(self, k) for k in self._field_names()}
-        for k, v in dict_form.items():
-            if isinstance(v, Path):
-                dict_form[k] = str(v)
-        return dict_form
 
     def find_label(self, label_prefix: str, suffix_list: list[str] = None) -> Path:
         """find label for scan, and if there are multiple, return one
@@ -121,6 +104,12 @@ class Scan(Mapping):
             + f"for subject {self.subid} ses {self.sesid}"
         )
 
+    def has_label(self):
+        if self.label is not None:
+            return True
+        else:
+            return False
+
     @property
     def image_path(self):
         if self.image is None:
@@ -141,20 +130,6 @@ class Scan(Mapping):
     def label_path(self, path: Path | os.PathLike):
         self.label = Path(path).relative_to(self.root).name
 
-    def info(self):
-        return f"{self.__class__.__name__}(subid={self.subid}, sesid={self.sesid})"
-
-    @classmethod
-    def _field_names(cls):
-        return cls.__slots__
-
-    @classmethod
-    def from_dict(cls, dict_form):
-        for k in ["root", "image", "label", "dataroot"]:
-            if dict_form[k] is not None:
-                dict_form[k] = Path(dict_form[k])
-        return cls(**dict_form)
-
     @property
     def relative_path(self):
         return self.root.relative_to(self.dataroot)
@@ -163,32 +138,31 @@ class Scan(Mapping):
     def path(dataroot, subid, sesid, subdir=""):
         return Path(dataroot) / f"sub-ms{subid}" / f"ses-{sesid}" / subdir
 
-    def __getitem__(self, key):
-        return super().__getitem__(key)
-
-    def __iter__(self):
-        for key in self.__slots__:
-            yield super.__getitem__(key)
-
-    def __len__(self):
-        return len(self.__slots__)
-
-
-# ! test if this would work with a struct other than Scan (say, namedtuple)
-# TODO DataSet and Record hierarchy and structure is pretty wonky
-# scan_struct can only be scan, so no point in acting like it can take any struct
-class DataSet(Record):
-    def __init__(self, recordname: str, scan_struct, records=None):
-        fields = scan_struct._field_names()
-        super().__init__(recordname, fields, records=records)
-        self.Data = scan_struct
+    def info(self):
+        return f"{self.__class__.__name__}(subid={self.subid}, sesid={self.sesid})"
 
     @classmethod
-    def create_dataset(cls, recordname, scan_struct, records=None):
-        if records is None:
-            records = []
-        # records = [scan_struct.from_dict(record) for record in records]
-        return cls(recordname, scan_struct, records=records)
+    def _field_names(cls):
+        return cls.__slots__
+
+    def asdict(self):
+        dict_form = {k: getattr(self, k) for k in self._field_names()}
+        for k, v in dict_form.items():
+            if isinstance(v, Path):
+                dict_form[k] = str(v)
+        return dict_form
+
+    @classmethod
+    def from_dict(cls, dict_form):
+        for k in ["root", "image", "label", "dataroot"]:
+            if dict_form[k] is not None:
+                dict_form[k] = Path(dict_form[k])
+        return cls(**dict_form)
+
+
+class DataSet(Record):
+    def __init__(self, records=None):
+        super().__init__(Scan, records=records)
 
     def add_label(self, subid, sesid, label):
         try:
@@ -231,13 +205,14 @@ class DataSet(Record):
 
 def scan_3Tpioneer_bids(dataroot, image=None, label=None, subdir=None) -> DataSet:
     dataroot = Path(dataroot)
+
     sub_dirs = [
         Path(item.path)
         for item in os.scandir(dataroot)
         if item.is_dir() and "sub" in item.name
     ]
 
-    dataset = DataSet("DataSet", Scan)
+    dataset = DataSet()
 
     for sub_dir in sub_dirs:
         subid = re.match(r"sub-ms(\d{4})", sub_dir.name)[1]
@@ -250,8 +225,6 @@ def scan_3Tpioneer_bids(dataroot, image=None, label=None, subdir=None) -> DataSe
             scan_dir = ses_dir
             if subdir is not None:
                 scan_dir = scan_dir / subdir
-
-            logger.debug(f"scan_dir: {scan_dir}")
 
             image_file = image
             if image_file is not None and not (scan_dir / image_file).is_file():
@@ -307,7 +280,7 @@ def filter_first_ses(dataset: DataSet) -> DataSet:
     for scan in dataset:
         subjects.add(scan.subid)
 
-    dataset_new = DataSet("DataSet", Scan)
+    dataset_new = DataSet()
     for sub in subjects:
         scans = dataset.retrieve(subid=sub)
         scans_sorted = sorted(scans, key=lambda s: int(s.sesid))
@@ -317,7 +290,7 @@ def filter_first_ses(dataset: DataSet) -> DataSet:
 
 
 def filter_has_label(dataset: DataSet) -> DataSet:
-    dataset_new = DataSet("DataSet", Scan)
+    dataset_new = DataSet()
     for scan in dataset:
         if scan.label is not None:
             dataset_new.append(scan)
@@ -325,7 +298,7 @@ def filter_has_label(dataset: DataSet) -> DataSet:
 
 
 def filter_has_image(dataset: DataSet) -> DataSet:
-    dataset_new = DataSet("DataSet", Scan)
+    dataset_new = DataSet()
     for scan in dataset:
         if scan.image is not None:
             dataset_new.append(scan)

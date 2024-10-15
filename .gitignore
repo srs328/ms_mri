@@ -8,8 +8,6 @@ figures/
 screenshots/
 *.nii*
 
-scratch.py
-
 *.code-workspace
 training_work_dirs/
 scratch.py

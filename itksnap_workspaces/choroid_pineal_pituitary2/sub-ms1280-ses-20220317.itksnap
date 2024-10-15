@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE registry [
+<!ELEMENT registry (entry*,folder*)>
+<!ELEMENT folder (entry*,folder*)>
+<!ELEMENT entry EMPTY>
+<!ATTLIST folder key CDATA #REQUIRED>
+<!ATTLIST entry key CDATA #REQUIRED>
+<!ATTLIST entry value CDATA #REQUIRED>
+]>
+<registry>
+  <entry key="SaveLocation" value="/home/srs-9/Projects/ms_mri/itksnap_workspaces/choroid_pineal_pituitary2" />
+  <entry key="Version" value="20230925" />
+  <folder key="Layers" >
+    <folder key="Layer[000]" >
+      <entry key="AbsolutePath" value="H:/3Tpioneer_bids/sub-ms1280/ses-20220317/flair.nii.gz" />
+      <entry key="Role" value="MainRole" />
+      <entry key="Tags" value="FLAIR-MRI" />
+      <folder key="ProjectMetaData" >
+        <folder key="Files" >
+          <folder key="Grey" >
+            <entry key="Dimensions" value="192 300 300" />
+          </folder>
+        </folder>
+      </folder>
+    </folder>
+    <folder key="Layer[001]" >
+      <entry key="AbsolutePath" value="H:/3Tpioneer_bids/sub-ms1280/ses-20220317/t1.nii.gz" />
+      <entry key="Role" value="OverlayRole" />
+      <entry key="Tags" value="T1-MRI" />
+    </folder>
+    <folder key="Layer[002]" >
+      <entry key="AbsolutePath" value="H:/3Tpioneer_bids/sub-ms1280/ses-20220317/choroid_t1_flair-ED.pineal-SRS.pituitary-CH.nii.gz" />
+      <entry key="Role" value="SegmentationRole" />
+      <entry key="Tags" value="choroid_t1_flair-ED.pineal-SRS.pituitary-CH" />
+    </folder>
+  </folder>
+</registry>
