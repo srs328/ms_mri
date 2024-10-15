@@ -198,7 +198,7 @@ def load_dataset(path):
 
     info = struct["info"]
     dataset_list = struct["data"]
-    dataset = dfm.DataSet.create_dataset("DataSet", dfm.Scan, records=dataset_list)
+    dataset = dfm.DataSet(records=dataset_list)
     return dataset, info
 
 
