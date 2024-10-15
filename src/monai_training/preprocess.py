@@ -175,8 +175,7 @@ class DataSetProcesser:
                     )
                     dataset_copy.append(scan)
 
-            logger.info(len(dataset_copy))
-
+        logger.info(f"Dataset size: {len(dataset_copy)}")
         self.dataset = dataset_copy
 
 
