@@ -4,18 +4,19 @@ import nibabel as nib
 import numpy as np
 import os
 from subprocess import run
-import sys
 import time
 from typing import Callable, Optional
 
 from .file_manager import Scan, nifti_name
 from . import file_manager
 
-logger.remove()
-logger.add(sys.stderr, level="INFO")
 
-
-def merge_images(image_paths, merged_path):
+def merge_images(image_paths, merged_path, resave=False):
+    if os.path.exists(merged_path) and not resave:
+        logger.debug(f"{merged_path} already exists, returning")
+        return merged_path
+    elif os.path.exists(merged_path) and resave:
+        logger.debug(f"{merged_path} already exists, but overwriting")
     image_paths = [str(p) for p in image_paths]
     for p in image_paths:
         if not os.path.isfile(p):

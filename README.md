@@ -10,6 +10,8 @@ See [this doc](notes/training_cli.md) for notes about the training command line 
 - Shared drive
   - smb://umwssnas01.umassmed.edu/MS-neuroimaging$
   - \\umwssnas01\MS-neuroimaging$
+- Sync command for WD_Black_5TB to smbShare:
+  - `rsync --ignore-existing --progress -r /media/hemondlab/Data/3Tpioneer_bids /media/smbshare`
 
 ### Ubuntu Desktop
 
@@ -25,6 +27,8 @@ See [this doc](notes/training_cli.md) for notes about the training command line 
   - Double check how the monai tutorials handle multiple labels
 - Figure out why I get issues with "no such file or directory:" on $PATH
   - Also why does zsh have all the windows PATH items while bash doesn't
+
+Running `run_inference_` giving the error: `No such file or directory: '/home/srs-9/Projects/ms_mri/training_work_dirs/pineal1/swinunetr_0/model_fold0/progress.yaml'. I think I fixed the paths everywhere I could, so it's possible that monai sets the path of the training_work_dir somewhere in one of its own config files.
 
 ### Old
 

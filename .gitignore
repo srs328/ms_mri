@@ -10,6 +10,7 @@ screenshots/
 
 *.code-workspace
 training_work_dirs/
+*cp_work_dir
 scratch.py
 .*
 !.gitignore

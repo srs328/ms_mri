@@ -1,10 +1,9 @@
 import os
 from pathlib import Path
-import numpy as np
 import json
+from loguru import logger
 
-import mri_data
-import monai_training
+# add logic that discludes a scan from list if the inference already exists for it
 
 from monai.apps.auto3dseg import (
     AlgoEnsembleBestN,
@@ -17,52 +16,63 @@ from mri_data import utils
 from mri_data.file_manager import scan_3Tpioneer_bids, Scan, DataSet
 from monai_training import preprocess
 
-msmri_home = Path("/home/srs-9/Projects/ms_mri")
-training_work_dirs = Path("/mnt/h/training_work_dirs")
 
-dataroot = "/mnt/h/3Tpioneer_bids"
+log_dir = ".logs"
+if not os.path.exists(log_dir):
+    os.makedirs(log_dir)
+logger.add(os.path.join(log_dir, "file_{time:%Y_%m_%d}.log"), rotation="6h", level='DEBUG')
+
+
+projects_root = Path("/home/hemondlab/Dev")
+drive_root = Path("/media/smbshare")
+
+msmri_home = projects_root / "ms_mri"
+training_work_dirs = drive_root / "training_work_dirs"
+
+# dataroot = "/media/hemondlab/Data/3Tpioneer_bids"
+dataroot = drive_root / "3Tpioneer_bids"
 work_dir = msmri_home / "training_work_dirs" / "pineal1"
-train_dataset_file = work_dir / "training-dataset.json"
+train_dataset_file = work_dir / "training-dataset-desktop1.json"
 
 
-# get all but the train subjects for inference
-dataset_train, _ = preprocess.load_dataset(train_dataset_file)
+# # get all but the train subjects for inference
+# dataset_train, _ = preprocess.load_dataset(train_dataset_file)
 
-dataset_proc = preprocess.DataSetProcesser.new_dataset(
-    dataroot, scan_3Tpioneer_bids, filters=["first_ses"]
-)
-dataset_full = dataset_proc.dataset
-dataset_train2 = DataSet.dataset_like(dataset_train, ["subid", "sesid"])
-dataset_inference = DataSet.from_scans(set(dataset_full) - set(dataset_train2))
+# dataset_proc = preprocess.DataSetProcesser.new_dataset(
+#     dataroot, scan_3Tpioneer_bids, filters=["first_ses"]
+# )
+# dataset_full = dataset_proc.dataset
+# dataset_train2 = DataSet.dataset_like(dataset_train, ["subid", "sesid"])
+# dataset_inference = DataSet.from_scans(set(dataset_full) - set(dataset_train2))
 
 
-# prepare the inference scans
-dataset_proc = preprocess.DataSetProcesser(dataset_inference)
-dataset_proc.prepare_images(["flair", "t1"])
+# # prepare the inference scans
+# dataset_proc = preprocess.DataSetProcesser(dataset_inference)
+# dataset_proc.prepare_images(["flair", "t1"])
 
-# save the config files
-images = []
-for scan in dataset_proc.dataset:
-    infile: Path = scan.image_path
-    images.append({"image": str(infile.relative_to(dataset_proc.dataset.dataroot))})
+# # save the config files
+# images = []
+# for scan in dataset_proc.dataset:
+#     infile: Path = scan.image_path
+#     images.append({"image": str(infile.relative_to(dataset_proc.dataset.dataroot))})
 
-datalist = {"testing": images}
+# datalist = {"testing": images}
 
-datalist_file = work_dir / "datalist.json"
-with open(datalist_file, "w") as f:
-    json.dump(datalist, f)
+# datalist_file = work_dir / "datalist.json"
+# with open(datalist_file, "w") as f:
+#     json.dump(datalist, f)
 
-task = {
-    "name": "infer_pineal",
-    "task": "segmentation",
-    "modality": "MRI",
-    "datalist": str(work_dir / "datalist.json"),
-    "dataroot": str(dataroot),
-}
+# task = {
+#     "name": "infer_pineal",
+#     "task": "segmentation",
+#     "modality": "MRI",
+#     "datalist": str(work_dir / "datalist.json"),
+#     "dataroot": str(dataroot),
+# }
 
-task_file = os.path.join(work_dir, "inference-task.json")
-with open(task_file, "w") as f:
-    json.dump(task, f)
+# task_file = os.path.join(work_dir, "inference-task.json")
+# with open(task_file, "w") as f:
+#     json.dump(task, f)
 
 
 # init inference model
@@ -71,7 +81,7 @@ input_cfg = (
 )  # path to the task input YAML file created by the users
 history = import_bundle_algo_history(work_dir, only_trained=True)
 
-save_dir = Path("/mnt/h/3Tpioneer_bids_predictions")
+save_dir = Path("/media/smbshare/3Tpioneer_bids_predictions")
 
 ## model ensemble
 n_best = 5

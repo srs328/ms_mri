@@ -109,8 +109,9 @@ class DataSetProcesser:
                 except FileNotFoundError:
                     continue
                 except CalledProcessError:
-                    logger.error("Something went wrong merging images")
-                    raise
+                    logger.exception(f"Something went wrong merging images for {scan.info}")
+                    continue
+                    # raise
                 else:
                     scan.image_path = scan.root / merged_image
                     file_logger.log(
