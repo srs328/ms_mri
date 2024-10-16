@@ -8,6 +8,8 @@ from monai_training import preprocess, training
 from monai_training.preprocess import DataSetProcesser
 from mri_data.file_manager import scan_3Tpioneer_bids
 
+# TODO: I can create a module mri_data.paths so that I can easily import all the paths I use
+
 logger.remove()
 logger.add(sys.stderr, level="INFO", format="{level} | {message}")
 

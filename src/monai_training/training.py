@@ -100,7 +100,7 @@ def setup_training(dataset, info, work_dir):
         ],
     }
 
-    datalist_file = os.path.join(work_dir, "datalist.json")
+    datalist_file = os.path.join(work_dir, "training-datalist.json")
     with open(datalist_file, "w") as f:
         json.dump(datalist, f, indent=4)
 

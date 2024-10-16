@@ -1,6 +1,5 @@
 from __future__ import annotations
-from attrs import define, field, validators
-from collections.abc import Mapping
+from attrs import define, field
 from dataclasses import dataclass
 from loguru import logger
 import os
@@ -40,6 +39,7 @@ class Subject:
 
 def path_exists(instance, attribute, value):
     if value is not None and not value.is_dir():
+        print(value, attribute)
         raise ValueError(
             f"Invalid value for {attribute.name}, {value} is not a directory"
         )
@@ -53,12 +53,12 @@ def image_exists_or_none(instance, attribute, value):
         raise ValueError(f"Invalid value for {attribute.name}, {path} is not a file")
 
 
-@define(slots=True, weakref_slot=False)
+@define(slots=True, weakref_slot=False, unsafe_hash=True)
 class Scan:
     subid: str = field(converter=str)
     sesid: str = field(converter=str)
     dataroot: Path = field(converter=Path, validator=[path_exists])
-    root: Path = field(converter=Path, validator=[path_exists])
+    root: Path = field(default=None, converter=Path, validator=[path_exists])
     image: str = field(default=None, validator=[image_exists_or_none])
     label: str = field(default=None, validator=[image_exists_or_none])
     cond: str = None
@@ -71,38 +71,11 @@ class Scan:
         root = Scan.path(dataroot, subid, sesid, subdir=subdir)
         return cls(subid, sesid, Path(dataroot), root, image, label, cond)
 
-    def __post_init__(self):
+    def __attrs_post_init__(self):
         if self.id is None:
             self.id = int(self.subid) * int(self.sesid)
-
-    def find_label(self, label_prefix: str, suffix_list: list[str] = None) -> Path:
-        """find label for scan, and if there are multiple, return one
-        based on priority of suffixes
-
-        Args:
-            scan (Scan): Scan for the subj+ses of interest
-            label_prefix (str): prefix of the label
-            suffix (list[str]): list of suffixes in order of priority
-        """
-        logger.debug(f"Looking for label {label_prefix} in {self.root}")
-        if suffix_list is None:
-            suffix_list = [""]
-        root_dir = self.root
-        labels = list(root_dir.glob(f"{label_prefix}*.nii.gz"))
-
-        for suffix in suffix_list:
-            label_parts = [label_prefix]
-            if len(suffix) > 0:
-                label_parts.append(suffix)
-            for lab in labels:
-                if ("-".join(label_parts) + ".nii.gz").lower() == lab.name.lower():
-                    return lab
-
-        logger.debug(f"No label in {[lab.name for lab in labels]} matched search")
-        raise FileNotFoundError(
-            f"Could not find label matching {label_prefix} "
-            + f"for subject {self.subid} ses {self.sesid}"
-        )
+        if self.root is None:
+            self.root = Scan.path(self.dataroot, self.subid, self.sesid)
 
     def has_label(self):
         if self.label is not None:
@@ -163,6 +136,16 @@ class Scan:
 class DataSet(Record):
     def __init__(self, records=None):
         super().__init__(Scan, records=records)
+
+    @classmethod
+    def dataset_like(cls, dataset: Self, keys: list[str]) -> Self:
+        keys = set(keys)
+        keys.update(["dataroot", "root"])
+        return cls(records=[{k: getattr(scan, k) for k in keys} for scan in dataset])
+
+    @classmethod
+    def from_scans(cls, scans):
+        return cls(records=[scan.asdict() for scan in scans])
 
     def add_label(self, subid, sesid, label):
         try:
@@ -247,6 +230,37 @@ def scan_3Tpioneer_bids(dataroot, image=None, label=None, subdir=None) -> DataSe
             )
 
     return dataset
+
+
+# this should not be a method Scan
+def find_label(scan, label_prefix: str, suffix_list: list[str] = None) -> Path:
+    """find label for scan, and if there are multiple, return one
+    based on priority of suffixes
+
+    Args:
+        scan (Scan): Scan for the subj+ses of interest
+        label_prefix (str): prefix of the label
+        suffix (list[str]): list of suffixes in order of priority
+    """
+    logger.debug(f"Looking for label {label_prefix} in {scan.root}")
+    if suffix_list is None:
+        suffix_list = [""]
+    root_dir = scan.root
+    labels = list(root_dir.glob(f"{label_prefix}*.nii.gz"))
+
+    for suffix in suffix_list:
+        label_parts = [label_prefix]
+        if len(suffix) > 0:
+            label_parts.append(suffix)
+        for lab in labels:
+            if ("-".join(label_parts) + ".nii.gz").lower() == lab.name.lower():
+                return lab
+
+    logger.debug(f"No label in {[lab.name for lab in labels]} matched search")
+    raise FileNotFoundError(
+        f"Could not find label matching {label_prefix} "
+        + f"for subject {scan.subid} ses {scan.sesid}"
+    )
 
 
 def nifti_name(filename: str) -> str:

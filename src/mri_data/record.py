@@ -1,4 +1,4 @@
-from collections import defaultdict, namedtuple
+from collections import defaultdict
 
 from collections.abc import MutableSequence
 
@@ -6,7 +6,6 @@ from collections.abc import MutableSequence
 # based on: https://stackoverflow.com/questions/15418386/what-is-the-best-data-structure-for-storing-a-set-of-four-or-more-values
 # ? can this work with namedtuple too?
 class Record(MutableSequence):
-
     def __init__(self, struct, records=None):
         if records is None:
             records = []

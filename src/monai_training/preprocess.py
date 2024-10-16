@@ -53,6 +53,8 @@ class DataSetProcesser:
         dsp.info = dict()
 
         if filters is not None:
+            if isinstance(filters, str):
+                filters = [filters]
             for filter in filters:
                 dsp.dataset = dfm.filters[filter](dsp.dataset)
 
@@ -89,7 +91,7 @@ class DataSetProcesser:
             image_ids = [(self.modality[0], 0)]
         self.info.update({"image_info": image_ids})
 
-        dataset_copy = dfm.DataSet("DataSet", dfm.Scan)
+        dataset_copy = dfm.DataSet()
         for scan in self.dataset:
             if scan.image is not None:
                 dataset_copy.append(scan)
@@ -142,7 +144,7 @@ class DataSetProcesser:
             label_ids = [(self.label[0], 1)]  #! this might not always be true, revisit
         self.info.update({"label_info": label_ids})
 
-        dataset_copy = dfm.DataSet("DataSet", dfm.Scan)
+        dataset_copy = dfm.DataSet()
         for scan in self.dataset:
             if scan.label is not None:
                 dataset_copy.append(scan)
@@ -174,6 +176,16 @@ class DataSetProcesser:
                         "SUCCESS", f"Saved {scan.label_path}", new_file=scan.label_path
                     )
                     dataset_copy.append(scan)
+            else:
+                try:
+                    scan.label_path = scan.root / dfm.find_label(
+                        scan, self.label[0], suffix_list=suffix_list
+                    )
+                except FileNotFoundError:
+                    continue
+                else:
+                    logger.info(f"Found label {scan.label} for {scan.info()}")
+                    dataset_copy.append(scan)
 
         logger.info(f"Dataset size: {len(dataset_copy)}")
         self.dataset = dataset_copy
@@ -203,6 +215,7 @@ def load_dataset(path):
 
 # later make the label use a glob in case there are initials after label name
 def prepare_dataset(dataroot, modality, label, filters=None, suffix_list=None):
+    count = 0
     if isinstance(modality, str):
         modality = [modality]
     if len(modality) > 1:
@@ -249,6 +262,9 @@ def prepare_dataset(dataroot, modality, label, filters=None, suffix_list=None):
     logger.info(f"Creating images: {image_name} and labels: {label_name}")
     dataset_copy = dfm.DataSet("DataSet", dfm.Scan)
     for scan in tqdm(dataset):
+        if count > 200:
+            break
+        count += 1
         if scan.label is None and len(label) > 1:
             try:
                 utils.combine_labels(scan, label, label_name, suffix_list=suffix_list)

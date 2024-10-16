@@ -9,6 +9,7 @@ import time
 from typing import Callable, Optional
 
 from .file_manager import Scan, nifti_name
+from . import file_manager
 
 logger.remove()
 logger.add(sys.stderr, level="INFO")
@@ -79,7 +80,7 @@ def combine_labels(
     label_values = []
     tmp_files = []
     for i, lab in enumerate(labels):
-        base_labels.append(scan.find_label(lab, suffix_list))
+        base_labels.append(file_manager.find_label(scan, lab, suffix_list))
         label_values.append((lab, label_id_func(i)))
 
     # set the name of the combined label
