@@ -30,6 +30,8 @@ See [this doc](notes/training_cli.md) for notes about the training command line 
 
 Running `run_inference_` giving the error: `No such file or directory: '/home/srs-9/Projects/ms_mri/training_work_dirs/pineal1/swinunetr_0/model_fold0/progress.yaml'. I think I fixed the paths everywhere I could, so it's possible that monai sets the path of the training_work_dir somewhere in one of its own config files.
 
+- Until I can figure that out, I created symlinks to match the paths where training was done
+
 ### Old
 
 - sub-ms1196 t1 is bad
