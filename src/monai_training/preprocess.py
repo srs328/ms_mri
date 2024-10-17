@@ -52,11 +52,16 @@ class DataSetProcesser:
         dsp = cls(scan_func(dataroot, *args, **kwargs))
         dsp.info = dict()
 
+        # if filters is not None:
+        #     if isinstance(filters, str):
+        #         filters = [filters]
+        #     for filter in filters:
+        #         dsp.dataset = dfm.filters[filter](dsp.dataset)
         if filters is not None:
-            if isinstance(filters, str):
+            if isinstance(filters, Callable):
                 filters = [filters]
             for filter in filters:
-                dsp.dataset = dfm.filters[filter](dsp.dataset)
+                dsp.dataset = filter(dsp.dataset)
 
         if all([scan.image for scan in dsp.dataset]):
             dsp.image_name = dsp.dataset[0].image
@@ -74,6 +79,10 @@ class DataSetProcesser:
             )
 
         return dsp
+    
+    # instead this should take a function that returns true or false, not loop through
+    def filter_data(self, filter: Callable):
+        self.dataset = filter(self.dataset)
 
     def prepare_images(self, modality: list[str] | str):
         logger.info("Prepare Images")
