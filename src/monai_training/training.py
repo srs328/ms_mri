@@ -107,6 +107,31 @@ def setup_training(dataset, info, work_dir):
     return datalist_file
 
 
+def create_datalist(train_data, test_data, work_dir, dataroot, train_params, info=None):
+    datalist = {
+        "work_dir": work_dir,
+        "dataroot": str(dataroot),
+        "train_params": train_params,
+        "testing": test_data,
+        "training": [
+            {
+                "fold": i % train_params["n_folds"],
+                "image": c["image"],
+                "label": c["label"],
+            }
+            for i, c in enumerate(train_data)
+        ],
+    }
+    if info is not None:
+        datalist.update({"info": info})
+
+    datalist_file = os.path.join(work_dir, "datalist.json")
+    with open(datalist_file, "w") as f:
+        json.dump(datalist, f, indent=4)
+
+    return datalist_file
+
+
 def load_train_params():
     path = files("monai_training") / "config" / "train-params.json"
     with open(path, "r") as f:
