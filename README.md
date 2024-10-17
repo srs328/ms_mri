@@ -12,6 +12,7 @@ See [this doc](notes/training_cli.md) for notes about the training command line 
   - \\umwssnas01\MS-neuroimaging$
 - Sync command for WD_Black_5TB to smbShare:
   - `rsync --ignore-existing --progress -r /media/hemondlab/Data/3Tpioneer_bids /media/smbshare`
+  - `rsync --ignore-existing --progress -r /media/smbshare/3Tpioneer_bids_predictions /media/hemondlab/Data/` 
 
 ### Ubuntu Desktop
 
@@ -37,3 +38,7 @@ Running `run_inference_` giving the error: `No such file or directory: '/home/sr
 - sub-ms1196 t1 is bad
 - Check the processed versions of some scans, which are messed up
   
+  ### Research on datalist.json
+
+- [`ensemble_builder`](https://docs.monai.io/en/1.3.0/_modules/monai/apps/auto3dseg/ensemble_builder.html) has class `AlgoEnsembleBuilder` which is used in my inference. That contains `AlgoEnsemble`, which is important. Also, a `ConfigParser` is used to parse the task file
+  - Read about [MONAI bundle configuration](https://docs.monai.io/en/latest/config_syntax.html)
