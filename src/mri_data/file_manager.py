@@ -176,7 +176,7 @@ class DataSet(Record):
         return [scan.asdict() for scan in self]
 
     def sort(self, key=None):
-        self._records = sorted(self, key=lambda s: int(s.subid))
+        self._records = sorted(self, key=key)
 
     @property
     def dataroot(self):
@@ -309,7 +309,6 @@ def filter_has_label(dataset: DataSet) -> DataSet:
         if scan.label is not None:
             dataset_new.append(scan)
     return dataset_new
-    
 
 
 def filter_has_image(dataset: DataSet) -> DataSet:
@@ -318,13 +317,6 @@ def filter_has_image(dataset: DataSet) -> DataSet:
         if scan.image is not None:
             dataset_new.append(scan)
     return dataset_new
-
-
-filters = {
-    "first_ses": filter_first_ses,
-    "has_label": filter_has_label,
-    "has_image": filter_has_image,
-}
 
 
 def rename(dataset, src, dst, script_file=None, run_script=False, to_raise=True):

@@ -46,7 +46,7 @@ class DataSetProcesser:
         dataroot: str | os.PathLike,
         scan_func: Callable,
         *args,
-        filters=None,
+        filters: list[Callable] = None,
         **kwargs,
     ) -> Self:
         dsp = cls(scan_func(dataroot, *args, **kwargs))
@@ -79,7 +79,7 @@ class DataSetProcesser:
             )
 
         return dsp
-    
+
     # instead this should take a function that returns true or false, not loop through
     def filter_data(self, filter: Callable):
         self.dataset = filter(self.dataset)
@@ -118,7 +118,9 @@ class DataSetProcesser:
                 except FileNotFoundError:
                     continue
                 except CalledProcessError:
-                    logger.exception(f"Something went wrong merging images for {scan.info}")
+                    logger.exception(
+                        f"Something went wrong merging images for {scan.info}"
+                    )
                     continue
                     # raise
                 else:
