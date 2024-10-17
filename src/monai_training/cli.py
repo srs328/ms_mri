@@ -6,12 +6,20 @@ import sys
 
 from monai_training import preprocess, training
 from monai_training.preprocess import DataSetProcesser
+from mri_data import file_manager as fm
 from mri_data.file_manager import scan_3Tpioneer_bids
 
 # TODO: I can create a module mri_data.paths so that I can easily import all the paths I use
 
 logger.remove()
 logger.add(sys.stderr, level="INFO", format="{level} | {message}")
+
+log_dir = ".logs"
+if not os.path.exists(log_dir):
+    os.makedirs(log_dir)
+logger.add(
+    os.path.join(log_dir, "file_{time:%Y_%m_%d}.log"), rotation="6h", level="DEBUG"
+)
 
 
 @click.group()
@@ -44,6 +52,13 @@ def train(work_dir, datalist_file, dataroot, modality, label, filters):
     training.train(datalist_file)
 
 
+filter_table = {
+    "first_ses": fm.filter_first_ses,
+    "has_label": fm.filter_has_label,
+    "has_image": fm.filter_has_image,
+}
+
+
 @cli.command("prepare-data")
 @click.option("-i", "--dataroot", required=True, type=str)
 @click.option("-m", "--modality", required=True, multiple=True)
@@ -52,6 +67,9 @@ def train(work_dir, datalist_file, dataroot, modality, label, filters):
 @click.option("-d", "--work-dir", type=str, required=True)
 def prepare_training(dataroot, modality, label, filters, work_dir):
     logger.info("Starting")
+
+    filters = [filter_table[filter] for filter in filters]
+    print(filters)
     dataset_proc = DataSetProcesser.new_dataset(
         dataroot, scan_3Tpioneer_bids, filters=filters
     )
@@ -74,6 +92,8 @@ def prepare_training(dataroot, modality, label, filters, work_dir):
 
 if __name__ == "__main__":
     cli()
+
+    # monai-training prepare-data -i /mnt/h/3Tpioneer_bids -m t1 -m flair -l choroid_t1_flair -d /home/srs-9/Projects/ms_mri/training_work_dirs/choroid_resegment1 -f first_ses
 
 
 """
