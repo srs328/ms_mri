@@ -12,8 +12,8 @@ See [this doc](notes/training_cli.md) for notes about the training command line 
   - \\umwssnas01\MS-neuroimaging$
 - Sync command for WD_Black_5TB to smbShare:
   - `rsync --ignore-existing --progress -r /media/hemondlab/Data/3Tpioneer_bids /media/smbshare`
-  - `rsync --ignore-existing --progress -r /media/smbshare/3Tpioneer_bids_predictions
-    /media/hemondlab/Data/`
+  - `rsync --ignore-existing --progress -r /media/smbshare/3Tpioneer_bids_predictions /media/hemondlab/Data/`
+  - `rsync --ignore-existing --progress -r /media/hemondlab/Data/3Tpioneer_bids_predictions /media/smbshare/`
 
 ### Ubuntu Desktop
 
@@ -55,3 +55,6 @@ the path of the training_work_dir somewhere in one of its own config files.
   `AlgoEnsemble`, which is important. Also, a `ConfigParser` is used to parse the
   task file
   - Read about [MONAI bundle configuration](https://docs.monai.io/en/latest/config_syntax.html)
+
+
+  /dev/dm-3

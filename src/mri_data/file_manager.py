@@ -16,6 +16,10 @@ from mri_data.record import Record
 # ? should subid and sesid be ints instead of strs?
 # ? should scan.image and scan.label be just the file names?
 
+#! Just realized, Scan currently may not be amenable to having images that are in subdirectories of root.
+#!  this is because of the use of "Path.name" in certain places like the setter for "Scan.image_path"
+# TODO to fix this, use relative paths somehow
+
 
 class FileLogger:
     def __init__(self):
@@ -131,6 +135,36 @@ class Scan:
             if dict_form[k] is not None:
                 dict_form[k] = Path(dict_form[k])
         return cls(**dict_form)
+    
+
+@define
+class Scan2(Scan):
+    image: dict[str, str] = field(default=dict())
+    label: dict[str, str] = field(default=dict())
+
+    def add_image(self, key: str, name: str):
+        self.image.update({key: name})
+
+    def add_label(self, key: str, name: str):
+        self.label.update({key: name})
+
+    @property
+    def image_path(self, key: str = None):
+        if self.image is None:
+            return None
+        if key is not None:
+            return self.root / self.image[key]
+        else:
+            return {k: self.root / v for k, v in self.image.items()}
+
+    #? 
+    @image_path.setter
+    def image_path(self, path: Path | os.PathLike, key: str = None):
+        if key is not None:
+            self.image[key] = Path(path).relative_to(self.root).name
+        else:
+            self.image = {}
+        self.image = Path(path).relative_to(self.root).name
 
 
 class DataSet(Record):

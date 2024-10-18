@@ -32,25 +32,33 @@ logger.add(
     os.path.join(log_dir, "file_{time:%Y_%m_%d}.log"), rotation="6h", level="DEBUG"
 )
 
+#! Set these variables
+work_dir_name = "choroid_resegment1"
+train_dataset_file_name = "training-dataset-desktop1.json"
+prediction_postfix = "choroid_resegment_pred"
+task_name = "infer_choroid"
+modalities = ["flair", "t1"]
+save_dir = Path("/media/smbshare/3Tpioneer_bids_predictions")
+
+
 hostname = platform.node()
 if hostname == "rhinocampus":
     drive_root = Path("/media/smbshare")
 else:
     drive_root = Path("/mnt/h")
 
+
 projects_root = Path("/home/srs-9/Projects")
+drive_root = Path("/media/smbshare")
 
 msmri_home = projects_root / "ms_mri"
-training_work_dirs = drive_root / "training_work_dirs"
+# training_work_dirs = drive_root / "training_work_dirs" #? don't know why I did this
+training_work_dirs = msmri_home / "training_work_dirs"
 
 # dataroot = "/media/hemondlab/Data/3Tpioneer_bids"
 dataroot = drive_root / "3Tpioneer_bids"
-
-#! Set these variables
-work_dir = msmri_home / "training_work_dirs" / "choroid_resegment1"
-train_dataset_file = work_dir / "training-dataset.json"
-prediction_postfix = "choroid_resegment_pred"
-modalities = ["flair", "t1"]
+work_dir = training_work_dirs / work_dir_name
+train_dataset_file = work_dir / train_dataset_file_name
 
 prediction_filename = (
     ".".join(sorted(modalities)) + "_" + prediction_postfix + ".nii.gz"
@@ -81,7 +89,6 @@ if do_preparation:
     # prepare the inference scans
     dataset_proc = preprocess.DataSetProcesser(dataset_inference)
     dataset_proc.prepare_images(["flair", "t1"])
-
     dataset_proc.dataset.sort(key=lambda s: s.subid)
 
     # scan1 = dataset_proc.dataset.find_scan(subid=ms)
@@ -99,7 +106,7 @@ if do_preparation:
         json.dump(datalist, f)
 
     task = {
-        "name": "infer_pineal",
+        "name": task_name,
         "task": "segmentation",
         "modality": "MRI",
         "datalist": str(work_dir / "datalist.json"),
@@ -114,9 +121,8 @@ if do_inference:
     output = io.StringIO
 
     # init inference model
-    input_cfg = (
-        work_dir / taskfile_name
-    )  # path to the task input YAML file created by the users
+    # path to the task input YAML file created by the users
+    input_cfg = task_file  
     history = import_bundle_algo_history(work_dir, only_trained=True)
 
     save_dir = drive_root / "3Tpioneer_bids_predictions"
