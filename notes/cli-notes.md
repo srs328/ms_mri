@@ -18,6 +18,8 @@ def asdict(self):
     return dict_form
 ```
 
+Add a function to make it easy to see all the predictions that have been produced
+
 Figure out how to deal with git and logs. I want some logs to be ignored and some
 not. e.g. new_files.log is very large should should be ignored
 
