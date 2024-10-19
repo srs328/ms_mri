@@ -11,9 +11,9 @@ See [this doc](notes/training_cli.md) for notes about the training command line 
   - smb://umwssnas01.umassmed.edu/MS-neuroimaging$
   - \\umwssnas01\MS-neuroimaging$
 - Sync command for WD_Black_5TB to smbShare:
-  - `rsync --ignore-existing --progress -r /media/hemondlab/Data/3Tpioneer_bids /media/smbshare`
-  - `rsync --ignore-existing --progress -r /media/smbshare/3Tpioneer_bids_predictions /media/hemondlab/Data/`
-  - `rsync --ignore-existing --progress -r /media/hemondlab/Data/3Tpioneer_bids_predictions /media/smbshare/`
+  - `rsync --ignore-existing --progress -r /media/WD_BLACK_DATA/3Tpioneer_bids /media/smbshare`
+  - `rsync --ignore-existing --progress -r /media/smbshare/3Tpioneer_bids_predictions /media/WD_BLACK_DATA/`
+  - `rsync --ignore-existing --progress -r /media/WD_BLACK_DATA/3Tpioneer_bids_predictions /media/smbshare/`
 
 - Copying data between Windows drives
   - robocopy H:\3Tpioneer_bids_predictions\ G:\Data\3Tpioneer_bids_predictions\ /E /xo /xn

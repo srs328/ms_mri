@@ -36,6 +36,7 @@ modalities = ["t1"]
 save_folder = "3Tpioneer_bids_predictions"
 win_root = Path("/mnt/g/Data")
 
+# -----------------
 
 # set paths
 hostname = platform.node()
@@ -63,6 +64,8 @@ taskfile_name = "inference-task.json"
 task_file = os.path.join(work_dir, taskfile_name)
 save_dir = drive_root / save_folder
 
+# -----------------
+
 
 def inference_exists(dataset: DataSet) -> DataSet:
     count = 0
@@ -89,11 +92,10 @@ def check_valid_nifti(dataset: DataSet) -> DataSet:
     logger.info(f"{count} scans already have inference")
     return dataset_new
 
+# -----------------
+
 
 if do_preparation:
-    # dataset_train2 has the same subject/sessions that are in dataset_train but with a subset of the keys
-    #   so that they can be compared to scans in the full data set when getting the set difference
-
     # scan the dataroot to get all the scans
     dataset_proc = preprocess.DataSetProcesser.new_dataset(
         dataroot,
@@ -108,6 +110,7 @@ if do_preparation:
     )
     # correct the dataroot in case using a different system
     dataset_train.dataroot = dataroot
+
     # copy the training dataset but with only the bare attributes
     dataset_train2 = DataSet.dataset_like(dataset_train, ["subid", "sesid"])
     dataset_inference = DataSet.from_scans(set(dataset_full) - set(dataset_train2))
@@ -141,6 +144,9 @@ if do_preparation:
 
     with open(task_file, "w") as f:
         json.dump(task, f)
+
+# -----------------
+
 
 if do_inference:
     input_cfg = task_file  # path to the task input YAML file created by the users

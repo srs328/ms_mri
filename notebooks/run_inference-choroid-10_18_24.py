@@ -13,12 +13,13 @@ from monai.apps.auto3dseg import (
 )
 from monai.utils.enums import AlgoKeys
 
-from mri_data.file_manager import scan_3Tpioneer_bids, Scan, DataSet, filter_first_ses
+from mri_data import file_manager as fm
+from mri_data.file_manager import scan_3Tpioneer_bids, DataSet, filter_first_ses
 from monai_training import preprocess
 
 
 do_preparation = True
-do_inference = True
+do_inference = False
 
 
 log_dir = ".logs"
@@ -31,22 +32,18 @@ logger.add(
 
 #! Set these variables
 work_dir_name = "choroid_resegment1"
-train_dataset_file_name = "training-dataset-desktop1.json"
+# train_dataset_file_name = "training-dataset-desktop1.json"
+train_dataset_file_name = "training-dataset.json"
+
 prediction_postfix = "choroid_resegment_pred"
 task_name = "infer_choroid"
 modalities = ["flair", "t1"]
-save_dir = Path("/media/smbshare/3Tpioneer_bids_predictions")
+save_folder = "3Tpioneer_bids_predictions"
 
+# -----------------
 
-hostname = platform.node()
-if hostname == "rhinocampus":
-    drive_root = Path("/media/smbshare")
-else:
-    drive_root = Path("/mnt/h")
-
-
+drive_root = fm.get_drive_root()
 projects_root = Path("/home/srs-9/Projects")
-drive_root = Path("/media/smbshare")
 
 msmri_home = projects_root / "ms_mri"
 # training_work_dirs = drive_root / "training_work_dirs" #? don't know why I did this
@@ -60,8 +57,13 @@ train_dataset_file = work_dir / train_dataset_file_name
 prediction_filename = (
     ".".join(sorted(modalities)) + "_" + prediction_postfix + ".nii.gz"
 )
+logger.info(prediction_filename)
 
 taskfile_name = "inference-task.json"
+task_file = os.path.join(work_dir, taskfile_name)
+save_dir = drive_root / save_folder
+
+# -----------------
 
 
 def inference_exists(dataset: DataSet) -> DataSet:
@@ -75,17 +77,22 @@ def inference_exists(dataset: DataSet) -> DataSet:
     logger.info(f"{count} scans already have inference")
     return dataset_new
 
+# -----------------
+
 
 if do_preparation:
-    # the scans that were used in the training
-    dataset_train, _ = preprocess.load_dataset(train_dataset_file)
-
-    # dataset_train2 has the same subject/sessions that are in dataset_train but with a subset of the keys
-    #   so that they can be compared to scans in the full data set when getting the set difference
+    # scan the dataroot to get all the scans
     dataset_proc = preprocess.DataSetProcesser.new_dataset(
         dataroot, scan_3Tpioneer_bids, filters=[filter_first_ses, inference_exists]
     )
     dataset_full = dataset_proc.dataset
+
+    # load the scans that were used in the training
+    dataset_train, _ = preprocess.load_dataset(train_dataset_file)
+    # correct the dataroot in case using a different system
+    dataset_train.dataroot = dataroot
+
+    # copy the training dataset but with only the bare attributes
     dataset_train2 = DataSet.dataset_like(dataset_train, ["subid", "sesid"])
     dataset_inference = DataSet.from_scans(set(dataset_full) - set(dataset_train2))
 
@@ -116,9 +123,11 @@ if do_preparation:
         "dataroot": str(dataroot),
     }
 
-    task_file = os.path.join(work_dir, taskfile_name)
     with open(task_file, "w") as f:
         json.dump(task, f)
+
+# -----------------
+
 
 if do_inference:
     output = io.StringIO

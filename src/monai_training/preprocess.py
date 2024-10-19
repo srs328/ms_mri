@@ -5,9 +5,10 @@ import os
 from pathlib import Path
 from subprocess import CalledProcessError
 from tqdm import tqdm
-from typing import Callable, Self
+from typing import Callable, Optional, Self
 
 from mri_data import file_manager as fm
+from mri_data.file_manager import DataSet
 from mri_data import utils
 
 
@@ -31,6 +32,7 @@ class DataSetProcesser:
     modality: list[str] = Factory(list)
     label: list[str] = Factory(list)
     info: dict[str, tuple] = Factory(dict)
+    suppress_exceptions: bool = False
 
     # ? won't worry about filters for now
     #! two ways I approach write factory function, idk which to go with (see notes)
@@ -119,9 +121,10 @@ class DataSetProcesser:
                 except FileNotFoundError:
                     continue
                 except CalledProcessError:
-                    logger.exception(
-                        f"Something went wrong merging images for {scan.info}"
-                    )
+                    if not self.suppress_exceptions:
+                        logger.exception(
+                            f"Something went wrong merging images for {scan.info}"
+                        )
                     continue
                     # raise
                 else:
@@ -208,8 +211,12 @@ def power_of_two(i: int) -> int:
     return 2**i
 
 
-def save_dataset(dataset, save_path, dataset_info=None):
-    struct = {"info": dataset_info}
+def save_dataset(dataset: DataSet, save_path: Path | os.PathLike, info: Optional[dict] = None):
+    if info is None:
+        info = dict()
+    info.update({'dataroot': str(dataset.dataroot)})
+
+    struct = {"info": info}
     struct.update({"data": dataset.serialize()})
 
     with open(save_path, "w") as f:
@@ -219,11 +226,24 @@ def save_dataset(dataset, save_path, dataset_info=None):
 def load_dataset(path):
     with open(path, "r") as f:
         struct = json.load(f)
+    
+    # this is here till all the previously saved datasets are fixed
+    struct = tmp_fix_dataset(path, struct)
 
     info = struct["info"]
     dataset_list = struct["data"]
-    dataset = fm.DataSet(records=dataset_list)
+    dataset = fm.DataSet(info['dataroot'], records=dataset_list)
     return dataset, info
+
+# previously I had saved a bunch of datasets without dataroot in info.
+def tmp_fix_dataset(path, struct):
+    drive_root = fm.get_drive_root()
+    dataroot = drive_root / "3Tpioneer_bids"
+
+    dataset_list = struct["data"]
+    dataset = fm.DataSet(dataroot, records=dataset_list)
+    save_dataset(dataset, path, info=struct['info'])
+    return struct
 
 
 def parse_datalist(

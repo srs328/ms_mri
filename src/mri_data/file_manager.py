@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from loguru import logger
 import os
 from pathlib import Path
+import platform
 from abc import ABC, abstractmethod
 import re
 from typing import Self
@@ -31,6 +32,32 @@ class FileLogger:
 
 
 file_logger = FileLogger()
+
+
+#? this could be put into a config file that is loaded
+drive_roots = {
+    'windows': {
+        'Data drive': "/mnt/h",
+        'Gold SDD': "/mnt/g/Data",
+        'default': "/mnt/h"
+    },
+    'ubuntu': {
+        'smbshare': "/media/smbshare",
+        'Data drive': "/media/WD_BLACK_DATA",
+        'default': "/media/smbshare"
+    }
+}
+
+
+def get_drive_root(drive="default"):
+    hostname = platform.node()
+    if hostname == "rhinocampus":
+        return Path(drive_roots["ubuntu"][drive])
+    elif hostname == "Lenovo_Desktop" or hostname == "srs-Yoga_7i":
+        return Path(drive_roots["windows"][drive])
+    else:
+        raise RuntimeError("Don't know what host this is being run on")
+    
 
 
 # Right now it's unused, but could make a method in DataSet that returns a Subject object.
