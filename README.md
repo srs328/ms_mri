@@ -15,6 +15,11 @@ See [this doc](notes/training_cli.md) for notes about the training command line 
   - `rsync --ignore-existing --progress -r /media/smbshare/3Tpioneer_bids_predictions /media/hemondlab/Data/`
   - `rsync --ignore-existing --progress -r /media/hemondlab/Data/3Tpioneer_bids_predictions /media/smbshare/`
 
+- Copying data between Windows drives
+  - robocopy H:\3Tpioneer_bids_predictions\ G:\Data\3Tpioneer_bids_predictions\ /E /xo /xn
+  - robocopy G:\Data\3Tpioneer_bids_predictions\ H:\3Tpioneer_bids_predictions\ /E /xo /xn
+  - robocopy H:\3Tpioneer_bids\ G:\Data\3Tpioneer_bids\ /E /xo /xn
+
 ### Ubuntu Desktop
 
 - remap scroll lock to S for itksnap: `xmodmap -e "keycode 78 = s"`  

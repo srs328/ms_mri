@@ -66,7 +66,7 @@ taskfile_name = "inference-task.json"
 
 def inference_exists(dataset: DataSet) -> DataSet:
     count = 0
-    dataset_new = DataSet()
+    dataset_new = DataSet(dataset.dataroot)
     for scan in dataset:
         if not (save_dir / scan.relative_path / prediction_filename).is_file():
             dataset_new.append(scan)
@@ -93,8 +93,6 @@ if do_preparation:
     dataset_proc = preprocess.DataSetProcesser(dataset_inference)
     dataset_proc.prepare_images(["flair", "t1"])
     dataset_proc.dataset.sort(key=lambda s: s.subid)
-
-    # scan1 = dataset_proc.dataset.find_scan(subid=ms)
 
     # save the config files
     images = []

@@ -101,7 +101,7 @@ class DataSetProcesser:
             image_ids = [(self.modality[0], 0)]
         self.info.update({"image_info": image_ids})
 
-        dataset_copy = fm.DataSet()
+        dataset_copy = fm.DataSet(self.dataset.dataroot)
         for scan in self.dataset:
             if scan.image is not None:
                 dataset_copy.append(scan)
@@ -157,7 +157,7 @@ class DataSetProcesser:
             label_ids = [(self.label[0], 1)]  #! this might not always be true, revisit
         self.info.update({"label_info": label_ids})
 
-        dataset_copy = fm.DataSet()
+        dataset_copy = fm.DataSet(self.dataset.dataroot)
         for scan in self.dataset:
             if scan.label is not None:
                 dataset_copy.append(scan)
@@ -234,7 +234,7 @@ def parse_datalist(
     with open(datalist_file, "r") as f:
         datalist = json.load(f)
 
-    dataset = fm.DataSet()
+    dataset = fm.DataSet(dataroot)
     for scan_dict in datalist["training"]:
         subid, sesid = fm.parse_scan_path(scan_dict["image"])
         scan = fm.Scan.new_scan(

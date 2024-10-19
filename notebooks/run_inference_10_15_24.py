@@ -68,7 +68,7 @@ taskfile_name = "inference-task.json"
 
 
 def inference_exists(dataset: DataSet) -> DataSet:
-    dataset_new = DataSet()
+    dataset_new = DataSet(dataset.dataroot)
     for scan in dataset:
         if not (scan.root / prediction_filename).is_file():
             dataset_new.append(scan)
@@ -122,7 +122,7 @@ if do_inference:
 
     # init inference model
     # path to the task input YAML file created by the users
-    input_cfg = task_file  
+    input_cfg = task_file
     history = import_bundle_algo_history(work_dir, only_trained=True)
 
     save_dir = drive_root / "3Tpioneer_bids_predictions"
