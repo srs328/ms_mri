@@ -8,7 +8,7 @@ import shutil
 import sys
 
 from monai_training.preprocess import DataSetProcesser
-from mri_data import file_manager as dfm
+from mri_data import file_manager as fm
 from mri_data.loggers import Formatter
 
 current_dir = Path(__file__).absolute().parent
@@ -61,14 +61,14 @@ def multilabel_onesubj_only(dataroot):
 
 
 def test_prepare_dataset_badlabel(dataroot):
-    dataset_proc = DataSetProcesser.new_dataset(dataroot, dfm.scan_3Tpioneer_bids)
+    dataset_proc = DataSetProcesser.new_dataset(dataroot, fm.scan_3Tpioneer_bids)
     dataset_proc.prepare_labels("foo")
     dataset_proc.prepare_images("flair")
     assert len(dataset_proc.dataset) == 0
 
 
 def test_prepare_dataset_onelabel(dataroot, label_onesubj_only):
-    dataset_proc = DataSetProcesser.new_dataset(dataroot, dfm.scan_3Tpioneer_bids)
+    dataset_proc = DataSetProcesser.new_dataset(dataroot, fm.scan_3Tpioneer_bids)
     dataset_proc.prepare_labels(label_onesubj_only)
     dataset_proc.prepare_images("flair")
     assert len(dataset_proc.dataset) == 1
@@ -77,7 +77,7 @@ def test_prepare_dataset_onelabel(dataroot, label_onesubj_only):
 
 
 def test_prepare_dataset_onemultilabel(dataroot, multilabel_onesubj_only):
-    dataset_proc = DataSetProcesser.new_dataset(dataroot, dfm.scan_3Tpioneer_bids)
+    dataset_proc = DataSetProcesser.new_dataset(dataroot, fm.scan_3Tpioneer_bids)
     dataset_proc.prepare_labels(multilabel_onesubj_only)
     dataset_proc.prepare_images("flair")
     assert len(dataset_proc.dataset) == 1
@@ -94,7 +94,7 @@ def test_prepare_dataset_multilabel(dataroot, log_file):
         pass
     label = ["pineal", "choroid_t1_flair", "pituitary"]
     suffix_list = ["CH", "SRS", ""]
-    dataset_proc = DataSetProcesser.new_dataset(dataroot, dfm.scan_3Tpioneer_bids)
+    dataset_proc = DataSetProcesser.new_dataset(dataroot, fm.scan_3Tpioneer_bids)
     dataset_proc.prepare_labels(label, suffix_list)
     assert len(dataset_proc.dataset) > 0
     assert (
@@ -117,7 +117,7 @@ def test_prepare_dataset_multiimage(dataroot, log_file):
     with open(log_file, "w"):
         pass
     modality = ["t1", "flair"]
-    dataset_proc = DataSetProcesser.new_dataset(dataroot, dfm.scan_3Tpioneer_bids)
+    dataset_proc = DataSetProcesser.new_dataset(dataroot, fm.scan_3Tpioneer_bids)
     dataset_proc.prepare_images(modality)
     assert len(dataset_proc.dataset) > 0
     assert (

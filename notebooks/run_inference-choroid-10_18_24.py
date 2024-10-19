@@ -6,8 +6,6 @@ import platform
 import json
 from loguru import logger
 
-# add logic that discludes a scan from list if the inference already exists for it
-
 from monai.apps.auto3dseg import (
     AlgoEnsembleBestN,
     AlgoEnsembleBuilder,
@@ -15,7 +13,6 @@ from monai.apps.auto3dseg import (
 )
 from monai.utils.enums import AlgoKeys
 
-from mri_data import utils
 from mri_data.file_manager import scan_3Tpioneer_bids, Scan, DataSet, filter_first_ses
 from monai_training import preprocess
 
@@ -74,13 +71,13 @@ def inference_exists(dataset: DataSet) -> DataSet:
         if not (save_dir / scan.relative_path / prediction_filename).is_file():
             dataset_new.append(scan)
         else:
-            count+=1
+            count += 1
     logger.info(f"{count} scans already have inference")
     return dataset_new
 
 
 if do_preparation:
-    # the scans that were used in the training 
+    # the scans that were used in the training
     dataset_train, _ = preprocess.load_dataset(train_dataset_file)
 
     # dataset_train2 has the same subject/sessions that are in dataset_train but with a subset of the keys
@@ -89,7 +86,7 @@ if do_preparation:
         dataroot, scan_3Tpioneer_bids, filters=[filter_first_ses, inference_exists]
     )
     dataset_full = dataset_proc.dataset
-    dataset_train2 = DataSet.dataset_like(dataset_train, ['subid', 'sesid'])
+    dataset_train2 = DataSet.dataset_like(dataset_train, ["subid", "sesid"])
     dataset_inference = DataSet.from_scans(set(dataset_full) - set(dataset_train2))
 
     # prepare the inference scans
@@ -139,10 +136,11 @@ if do_inference:
     builder.set_ensemble_method(AlgoEnsembleBestN(n_best=n_best))
     ensemble = builder.get_ensemble()
     save_params = {
-        "_target_": "SaveImage", 
-        "output_dir": save_dir, 
-        "data_root_dir": dataroot, 
-        "output_postfix": prediction_postfix, 
-        "separate_folder": False}
-                                
-    pred = ensemble(pred_param = {"image_save_func": save_params})
+        "_target_": "SaveImage",
+        "output_dir": save_dir,
+        "data_root_dir": dataroot,
+        "output_postfix": prediction_postfix,
+        "separate_folder": False,
+    }
+
+    pred = ensemble(pred_param={"image_save_func": save_params})

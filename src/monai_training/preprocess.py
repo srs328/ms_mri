@@ -2,11 +2,12 @@ from attrs import define, Factory
 import json
 from loguru import logger
 import os
+from pathlib import Path
 from subprocess import CalledProcessError
 from tqdm import tqdm
 from typing import Callable, Self
 
-from mri_data import file_manager as dfm
+from mri_data import file_manager as fm
 from mri_data import utils
 
 
@@ -24,7 +25,7 @@ file_logger = FileLogger()
 
 @define
 class DataSetProcesser:
-    dataset: dfm.DataSet
+    dataset: fm.DataSet
     image_name: str = ""
     label_name: str = ""
     modality: list[str] = Factory(list)
@@ -65,7 +66,7 @@ class DataSetProcesser:
 
         if all([scan.image for scan in dsp.dataset]):
             dsp.image_name = dsp.dataset[0].image
-            dsp.modality = dfm.parse_image_name(dsp.image_name)
+            dsp.modality = fm.parse_image_name(dsp.image_name)
             dsp.info.update(
                 {"image_info": [(mod, i) for i, mod in enumerate(dsp.modality)]}
             )
@@ -73,7 +74,7 @@ class DataSetProcesser:
         #! the labels include the initials as of now
         if all([scan.label for scan in dsp.dataset]):
             dsp.label_name = dsp.dataset[0].label
-            dsp.label = dfm.parse_image_name(dsp.label_name)
+            dsp.label = fm.parse_image_name(dsp.label_name)
             dsp.info.update(
                 {"label_info": [[(lab, 2**i) for i, lab in enumerate(dsp.label)]]}
             )
@@ -100,7 +101,7 @@ class DataSetProcesser:
             image_ids = [(self.modality[0], 0)]
         self.info.update({"image_info": image_ids})
 
-        dataset_copy = dfm.DataSet()
+        dataset_copy = fm.DataSet()
         for scan in self.dataset:
             if scan.image is not None:
                 dataset_copy.append(scan)
@@ -156,7 +157,7 @@ class DataSetProcesser:
             label_ids = [(self.label[0], 1)]  #! this might not always be true, revisit
         self.info.update({"label_info": label_ids})
 
-        dataset_copy = dfm.DataSet()
+        dataset_copy = fm.DataSet()
         for scan in self.dataset:
             if scan.label is not None:
                 dataset_copy.append(scan)
@@ -190,7 +191,7 @@ class DataSetProcesser:
                     dataset_copy.append(scan)
             else:
                 try:
-                    scan.label_path = scan.root / dfm.find_label(
+                    scan.label_path = scan.root / fm.find_label(
                         scan, self.label[0], suffix_list=suffix_list
                     )
                 except FileNotFoundError:
@@ -221,8 +222,44 @@ def load_dataset(path):
 
     info = struct["info"]
     dataset_list = struct["data"]
-    dataset = dfm.DataSet(records=dataset_list)
+    dataset = fm.DataSet(records=dataset_list)
     return dataset, info
+
+
+def parse_datalist(
+    datalist_file: Path | os.PathLike, dataroot: Path | os.PathLike
+) -> fm.DataSet:
+    logger.info(f"Loading {datalist_file}")
+    logger.info(f"{datalist_file} exists: {datalist_file.is_file()}")
+    with open(datalist_file, "r") as f:
+        datalist = json.load(f)
+
+    dataset = fm.DataSet()
+    for scan_dict in datalist["training"]:
+        subid, sesid = fm.parse_scan_path(scan_dict["image"])
+        scan = fm.Scan.new_scan(
+            dataroot,
+            subid,
+            sesid,
+            image=scan_dict["image"],
+            label=scan_dict["label"],
+            cond="tr",
+        )
+        dataset.append(scan)
+
+    for scan_dict in datalist["testing"]:
+        subid, sesid = fm.parse_scan_path(scan_dict["image"])
+        scan = fm.Scan.new_scan(
+            dataroot,
+            subid,
+            sesid,
+            image=scan_dict["image"],
+            label=scan_dict["label"],
+            cond="ts",
+        )
+        dataset.append(scan)
+
+    return dataset
 
 
 # later make the label use a glob in case there are initials after label name
@@ -254,16 +291,16 @@ def prepare_dataset(dataroot, modality, label, filters=None, suffix_list=None):
     dataset_info = {"image_info": image_ids, "label_info": label_ids}
 
     file_logger.log("DEBUG", "Starting scan_3Tpioneer_bids()")
-    dataset = dfm.scan_3Tpioneer_bids(dataroot, image_name, label_name)
+    dataset = fm.scan_3Tpioneer_bids(dataroot, image_name, label_name)
 
     file_logger.log("DEBUG", f"Filters: {[filter for filter in filters]}")
     if filters is not None:
         for filter in filters:
-            dataset = dfm.filters[filter](dataset)
+            dataset = fm.filters[filter](dataset)
 
     if len(modality) == 1 and len(label) == 1:
-        dataset = dfm.filter_has_image(dataset)
-        dataset = dfm.filter_has_label(dataset)
+        dataset = fm.filter_has_image(dataset)
+        dataset = fm.filter_has_label(dataset)
         if len(dataset) == 0:
             raise Exception("Empty dataset")
         logger.info(
@@ -272,7 +309,7 @@ def prepare_dataset(dataroot, modality, label, filters=None, suffix_list=None):
         return dataset, dataset_info
 
     logger.info(f"Creating images: {image_name} and labels: {label_name}")
-    dataset_copy = dfm.DataSet("DataSet", dfm.Scan)
+    dataset_copy = fm.DataSet("DataSet", fm.Scan)
     for scan in tqdm(dataset):
         if count > 200:
             break

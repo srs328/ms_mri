@@ -57,6 +57,20 @@ def image_exists_or_none(instance, attribute, value):
         raise ValueError(f"Invalid value for {attribute.name}, {path} is not a file")
 
 
+def parse_scan_path(path: Path | os.PathLike) -> tuple[str, str]:
+    re_sub = re.compile(r"sub-ms(\d{4})")
+    re_ses = re.compile(r"ses-(\d+)")
+    for part in Path(path).parts:
+        if match := re_sub.match(part):
+            subid = match[1]
+        elif match := re_ses.match(part):
+            sesid = match[1]
+    try:
+        return subid, sesid
+    except UnboundLocalError:
+        return None
+
+
 @define(slots=True, weakref_slot=False, unsafe_hash=True)
 class Scan:
     subid: str = field(converter=str)
@@ -135,7 +149,7 @@ class Scan:
             if dict_form[k] is not None:
                 dict_form[k] = Path(dict_form[k])
         return cls(**dict_form)
-    
+
 
 @define
 class Scan2(Scan):
@@ -157,7 +171,7 @@ class Scan2(Scan):
         else:
             return {k: self.root / v for k, v in self.image.items()}
 
-    #? 
+    # ?
     @image_path.setter
     def image_path(self, path: Path | os.PathLike, key: str = None):
         if key is not None:

@@ -1,19 +1,19 @@
 from pathlib import Path
 import json
-from mri_data import file_manager as dfm
+from mri_data import file_manager as fm
 from monai_training.preprocess import load_dataset
 
 dataroot = "/home/srs-9/Projects/ms_mri/data/3Tpioneer_bids"
 
 
 def initialize_dataset():
-    return dfm.scan_3Tpioneer_bids(dataroot)
+    return fm.scan_3Tpioneer_bids(dataroot)
 
 
 def get_scan(image=None, label=None):
     subid = 1010
     sesid = 20180208
-    scan = dfm.Scan.new_scan(dataroot, subid, sesid)
+    scan = fm.Scan.new_scan(dataroot, subid, sesid)
     if image is not None:
         scan.set_image(image)
     if label is not None:
@@ -30,12 +30,12 @@ with open(dataset_file, "r") as f:
 info = struct["info"]
 dataset_list = struct["data"]
 
-dataset = dfm.scan_3Tpioneer_bids(
+dataset = fm.scan_3Tpioneer_bids(
     dataroot, image="flair.nii.gz", label="pineal-SRS.nii.gz"
 )
 
-dataset = dfm.filter_has_image(dataset)
-dataset = dfm.filter_has_label(dataset)
+dataset = fm.filter_has_image(dataset)
+dataset = fm.filter_has_label(dataset)
 
 # dataset = dfm.DataSet(records=dataset_list)
 # scan = dataset[0]
