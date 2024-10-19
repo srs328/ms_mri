@@ -18,6 +18,9 @@ def asdict(self):
     return dict_form
 ```
 
+Figure out how to deal with git and logs. I want some logs to be ignored and some
+not. e.g. new_files.log is very large should should be ignored
+
 ### utils.py
 
 Just `info` and `root`

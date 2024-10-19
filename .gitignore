@@ -10,12 +10,11 @@ screenshots/
 *.code-workspace
 training_work_dirs/
 *cp_work_dir
-scratch.py
 .*
 !.gitignore
 
 fsf
-
+src/mri_data/new_files.log
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
