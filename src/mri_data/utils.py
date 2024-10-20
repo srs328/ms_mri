@@ -119,6 +119,11 @@ def combine_labels(
     return combined_label_name, label_values
 
 
+# function for assigning id's to labels
+def power_of_two(i: int) -> int:
+    return 2**i
+
+
 def load_nifti(path) -> np.ndarray:
     img = nib.load(path)
     return img.get_fdata()
