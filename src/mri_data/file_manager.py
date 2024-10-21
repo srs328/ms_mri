@@ -34,18 +34,14 @@ class FileLogger:
 file_logger = FileLogger()
 
 
-#? this could be put into a config file that is loaded
+# ? this could be put into a config file that is loaded
 drive_roots = {
-    'windows': {
-        'Data drive': "/mnt/h",
-        'Gold SDD': "/mnt/g/Data",
-        'default': "/mnt/h"
+    "windows": {"Data drive": "/mnt/h", "Gold SDD": "/mnt/g/Data", "default": "/mnt/h"},
+    "ubuntu": {
+        "smbshare": "/media/smbshare",
+        "Data drive": "/media/WD_BLACK_DATA",
+        "default": "/media/smbshare",
     },
-    'ubuntu': {
-        'smbshare': "/media/smbshare",
-        'Data drive': "/media/WD_BLACK_DATA",
-        'default': "/media/smbshare"
-    }
 }
 
 
@@ -53,11 +49,10 @@ def get_drive_root(drive="default"):
     hostname = platform.node()
     if hostname == "rhinocampus":
         return Path(drive_roots["ubuntu"][drive])
-    elif hostname == "Lenovo_Desktop" or hostname == "srs-Yoga_7i":
+    elif hostname == "Lenovo_Desktop" or hostname == "srs-9-Yoga7i":
         return Path(drive_roots["windows"][drive])
     else:
         raise RuntimeError("Don't know what host this is being run on")
-    
 
 
 # Right now it's unused, but could make a method in DataSet that returns a Subject object.
@@ -195,10 +190,16 @@ class Scan2(Scan):
     label: dict[str, str] = field(default=dict())
 
     def add_image(self, key: str, name: str):
-        self.image.update({key: name})
+        if (self.root / name).is_file():
+            self.image.update({key: name})
+        else:
+            raise FileNotFoundError(f"{self.root/name} does not exist")
 
     def add_label(self, key: str, name: str):
-        self.label.update({key: name})
+        if (self.root / name).is_file():
+            self.label.update({key: name})
+        else:
+            raise FileNotFoundError(f"{self.root/name} does not exist")
 
     @property
     def image_path(self, key: str = None):
@@ -209,7 +210,6 @@ class Scan2(Scan):
         else:
             return {k: self.root / v for k, v in self.image.items()}
 
-    # ?
     @image_path.setter
     def image_path(self, path: Path | os.PathLike, key: str = None):
         if key is not None:
@@ -268,7 +268,7 @@ class DataSet(Record):
     def serialize(self):
         return [scan.asdict() for scan in self]
 
-    def sort(self, key=None):
+    def sort(self, key=lambda s: s.subid):
         self._records = sorted(self, key=key)
 
     @property
@@ -340,7 +340,6 @@ def find_label(scan, label_prefix: str, suffix_list: list[str] = None) -> Path:
         label_prefix (str): prefix of the label
         suffix (list[str]): list of suffixes in order of priority
     """
-    logger.debug(f"Looking for label {label_prefix} in {scan.root}")
     if suffix_list is None:
         suffix_list = [""]
     root_dir = scan.root
@@ -352,6 +351,7 @@ def find_label(scan, label_prefix: str, suffix_list: list[str] = None) -> Path:
             label_parts.append(suffix)
         for lab in labels:
             if ("-".join(label_parts) + ".nii.gz").lower() == lab.name.lower():
+                logger.debug("Found {} for {}", lab.name, scan.info())
                 return lab
 
     logger.debug(f"No label in {[lab.name for lab in labels]} matched search")
