@@ -28,10 +28,10 @@ logger.add(
 )
 
 #! Set these variables
-work_dir_name = "cp_work_dir_pituitary1"
+work_dir_name = "pineal1"
 train_dataset_file_name = "training-dataset.json"
-prediction_postfix = "pituitary_pred"
-task_name = "infer_pituitary"
+prediction_postfix = "pineal1_pred"
+task_name = "infer_pineal"
 modalities = ["t1"]
 save_folder = "3Tpioneer_bids_predictions"
 win_root = Path("/mnt/g/Data")
