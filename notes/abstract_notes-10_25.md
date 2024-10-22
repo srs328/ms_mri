@@ -1,20 +1,22 @@
 # Abstract
 
 clinical characteristics
+
 - cysts
-   - diameter?
+  - diameter?
 - empty sella
 
-QA Assessment - 15-20 subj
+## QA Assessment
+
+15-20 subj
 
 ### Choroid
+
 - choroid selected?
 - Under/overselected?
 - Extra tissue selected outside of ROI
 
 ### Pituitary
-
-
 
 ### Pineal
 
