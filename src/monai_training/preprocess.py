@@ -105,7 +105,7 @@ class DataSetProcesser:
         self.info.update({"image_info": image_ids})
 
         dataset_copy = fm.DataSet(self.dataset.dataroot)
-        for scan in self.dataset:
+        for scan in tqdm(self.dataset, total=len(self.dataset)):
             if scan.image is not None:
                 dataset_copy.append(scan)
                 continue
@@ -162,7 +162,7 @@ class DataSetProcesser:
         self.info.update({"label_info": label_ids})
 
         dataset_copy = fm.DataSet(self.dataset.dataroot)
-        for scan in self.dataset:
+        for scan in tqdm(self.dataset, total=len(self.dataset)):
             if scan.label is not None:
                 dataset_copy.append(scan)
                 continue
