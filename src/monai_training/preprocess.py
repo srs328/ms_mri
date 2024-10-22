@@ -1,15 +1,16 @@
-from attrs import define, Factory
 import json
-from loguru import logger
 import os
 from pathlib import Path
 from subprocess import CalledProcessError
-from tqdm import tqdm
 from typing import Callable, Optional, Self
 
+from attrs import Factory, define
+from loguru import logger
+from tqdm import tqdm
+
 from mri_data import file_manager as fm
-from mri_data.file_manager import DataSet
 from mri_data import utils
+from mri_data.file_manager import DataSet
 
 
 class FileLogger:
@@ -53,14 +54,12 @@ class DataSetProcesser:
         suppress_exceptions: bool = False,
         **kwargs,
     ) -> Self:
-        dsp = cls(scan_func(dataroot, *args, **kwargs), suppress_exceptions=suppress_exceptions)
+        dsp = cls(
+            scan_func(dataroot, *args, **kwargs),
+            suppress_exceptions=suppress_exceptions,
+        )
         dsp.info = dict()
 
-        # if filters is not None:
-        #     if isinstance(filters, str):
-        #         filters = [filters]
-        #     for filter in filters:
-        #         dsp.dataset = dfm.filters[filter](dsp.dataset)
         if filters is not None:
             if isinstance(filters, Callable):
                 filters = [filters]

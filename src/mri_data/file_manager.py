@@ -1,18 +1,19 @@
 from __future__ import annotations
-from attrs import define, field
-from dataclasses import dataclass
-from loguru import logger
+
 import os
-from pathlib import Path
 import platform
-from abc import ABC, abstractmethod
 import re
-from typing import Self
-from subprocess import run
 import warnings
+from abc import ABC, abstractmethod
+from dataclasses import dataclass
+from pathlib import Path
+from subprocess import run
+from typing import Self
+
+from attrs import define, field
+from loguru import logger
 
 from mri_data.record import Record
-
 
 # ? should subid and sesid be ints instead of strs?
 # ? should scan.image and scan.label be just the file names?
@@ -252,15 +253,15 @@ class DataSet(Record):
         for scan in self._records:
             scan.label = label_name
 
-    # def add_label0(self, subid, sesid, label):
-    #     try:
-    #         scan = self.find_scan(subid, sesid)
-    #     except LookupError:
-    #         warnings.warn(
-    #             f"No scan exists for subject: {subid} and session: {sesid}", UserWarning
-    #         )
-    #     else:
-    #         scan.label = label
+    def add_label(self, subid, sesid, label):
+        try:
+            scan = self.find_scan(subid, sesid)
+        except LookupError:
+            warnings.warn(
+                f"No scan exists for subject: {subid} and session: {sesid}", UserWarning
+            )
+        else:
+            scan.label = label
 
     def find_scan(self, subid, sesid):
         sub_scans = self.retrieve(subid=subid)
@@ -424,6 +425,14 @@ def filter_has_label(dataset: DataSet) -> DataSet:
 
 
 def filter_has_image(dataset: DataSet) -> DataSet:
+    dataset_new = DataSet(dataset.dataroot)
+    for scan in dataset:
+        if scan.image is not None:
+            dataset_new.append(scan)
+    return dataset_new
+
+
+def filter_subject(dataset: DataSet) -> DataSet:
     dataset_new = DataSet(dataset.dataroot)
     for scan in dataset:
         if scan.image is not None:
