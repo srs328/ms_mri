@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from loguru import logger
 import os
 from pathlib import Path
+import platform
 from abc import ABC, abstractmethod
 import re
 from typing import Self
@@ -31,6 +32,27 @@ class FileLogger:
 
 
 file_logger = FileLogger()
+
+
+# ? this could be put into a config file that is loaded
+drive_roots = {
+    "windows": {"Data drive": "/mnt/h", "Gold SDD": "/mnt/g/Data", "default": "/mnt/h"},
+    "ubuntu": {
+        "smbshare": "/media/smbshare",
+        "Data drive": "/media/WD_BLACK_DATA",
+        "default": "/media/smbshare",
+    },
+}
+
+
+def get_drive_root(drive="default"):
+    hostname = platform.node()
+    if hostname == "rhinocampus":
+        return Path(drive_roots["ubuntu"][drive])
+    elif hostname == "Lenovo_Desktop" or hostname == "srs-9-Yoga7i":
+        return Path(drive_roots["windows"][drive])
+    else:
+        raise RuntimeError("Don't know what host this is being run on")
 
 
 # Right now it's unused, but could make a method in DataSet that returns a Subject object.
@@ -168,10 +190,16 @@ class Scan2(Scan):
     label: dict[str, str] = field(default=dict())
 
     def add_image(self, key: str, name: str):
-        self.image.update({key: name})
+        if (self.root / name).is_file():
+            self.image.update({key: name})
+        else:
+            raise FileNotFoundError(f"{self.root/name} does not exist")
 
     def add_label(self, key: str, name: str):
-        self.label.update({key: name})
+        if (self.root / name).is_file():
+            self.label.update({key: name})
+        else:
+            raise FileNotFoundError(f"{self.root/name} does not exist")
 
     @property
     def image_path(self, key: str = None):
@@ -182,7 +210,6 @@ class Scan2(Scan):
         else:
             return {k: self.root / v for k, v in self.image.items()}
 
-    # ?
     @image_path.setter
     def image_path(self, path: Path | os.PathLike, key: str = None):
         if key is not None:
@@ -192,15 +219,19 @@ class Scan2(Scan):
         self.image = Path(path).relative_to(self.root).name
 
 
+# it's a little messy changing the dataroot since I have to make sure
+#   scan.root and scan.dataroot are both changed
 class DataSet(Record):
     def __init__(self, dataroot, records=None):
         super().__init__(Scan, records=records)
         self._dataroot = dataroot
 
     @classmethod
-    def dataset_like(cls, dataset: Self, keys: list[str]) -> Self:
+    def dataset_like(cls, dataset: Self, keys: list[str] = None) -> Self:
+        if keys is None:
+            keys = []
         keys = set(keys)
-        keys.update(["dataroot", "root"])
+        keys.update(["dataroot", "root", "subid", "sesid"])
         return cls(
             dataroot=dataset.dataroot,
             records=[{k: getattr(scan, k) for k in keys} for scan in dataset],
@@ -213,15 +244,23 @@ class DataSet(Record):
         scans.add(scan)
         return cls(dataroot=dataroot, records=[scan.asdict() for scan in scans])
 
-    def add_label(self, subid, sesid, label):
-        try:
-            scan = self.find_scan(subid, sesid)
-        except LookupError:
-            warnings.warn(
-                f"No scan exists for subject: {subid} and session: {sesid}", UserWarning
-            )
-        else:
-            scan.label = label
+    def add_images(self, image_name):
+        for scan in self._records:
+            scan.image = image_name
+
+    def add_labels(self, label_name):
+        for scan in self._records:
+            scan.label = label_name
+
+    # def add_label0(self, subid, sesid, label):
+    #     try:
+    #         scan = self.find_scan(subid, sesid)
+    #     except LookupError:
+    #         warnings.warn(
+    #             f"No scan exists for subject: {subid} and session: {sesid}", UserWarning
+    #         )
+    #     else:
+    #         scan.label = label
 
     def find_scan(self, subid, sesid):
         sub_scans = self.retrieve(subid=subid)
@@ -241,7 +280,7 @@ class DataSet(Record):
     def serialize(self):
         return [scan.asdict() for scan in self]
 
-    def sort(self, key=None):
+    def sort(self, key=lambda s: s.subid):
         self._records = sorted(self, key=key)
 
     @property
@@ -250,8 +289,10 @@ class DataSet(Record):
 
     @dataroot.setter
     def dataroot(self, dataroot: Path):
+        self._dataroot = dataroot
         for scan in self._records:
             scan.root = dataroot / scan.relative_path
+            scan.dataroot = dataroot
 
     def __str__(self):
         return ", ".join([str(scan) for scan in self])
@@ -313,7 +354,6 @@ def find_label(scan, label_prefix: str, suffix_list: list[str] = None) -> Path:
         label_prefix (str): prefix of the label
         suffix (list[str]): list of suffixes in order of priority
     """
-    logger.debug(f"Looking for label {label_prefix} in {scan.root}")
     if suffix_list is None:
         suffix_list = [""]
     root_dir = scan.root
@@ -325,6 +365,7 @@ def find_label(scan, label_prefix: str, suffix_list: list[str] = None) -> Path:
             label_parts.append(suffix)
         for lab in labels:
             if ("-".join(label_parts) + ".nii.gz").lower() == lab.name.lower():
+                logger.debug("Found {} for {}", lab.name, scan.info())
                 return lab
 
     logger.debug(f"No label in {[lab.name for lab in labels]} matched search")

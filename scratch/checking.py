@@ -37,7 +37,7 @@ dataset = fm.scan_3Tpioneer_bids(
 dataset = fm.filter_has_image(dataset)
 dataset = fm.filter_has_label(dataset)
 
-# dataset = dfm.DataSet(records=dataset_list)
+# dataset = dfm.DataSet(dataroot, records=dataset_list)
 # scan = dataset[0]
 thoo = 4
 

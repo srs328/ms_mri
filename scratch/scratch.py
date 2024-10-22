@@ -7,6 +7,7 @@ import re
 import shutil
 
 from monai_training.preprocess import DataSetProcesser
+from monai_training import preprocess
 from mri_data import file_manager as fm
 
 dataroot = Path("/home/srs-9/Projects/ms_mri/data/3Tpioneer_bids")
@@ -101,4 +102,5 @@ def check_dct_behavior():
 
 
 if __name__ == "__main__":
-    test_multilabel()
+    # test_multilabel()
+    dataset, info = preprocess.load_dataset("/home/hemondlab/Projects/ms_mri/training_work_dirs/pineal1/training-dataset.json")

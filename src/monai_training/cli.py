@@ -47,7 +47,7 @@ def train(work_dir, datalist_file, dataroot, modality, label, filters):
     dataset, info = preprocess.prepare_dataset(
         dataroot, modality, label, filters=filters
     )
-    preprocess.save_dataset(dataset, work_dir / "dataset.json", dataset_info=info)
+    preprocess.save_dataset(dataset, work_dir / "dataset.json", info=info)
     datalist_file = training.setup_training(dataset, info, work_dir)
     training.train(datalist_file)
 
@@ -84,10 +84,28 @@ def prepare_training(dataroot, modality, label, filters, work_dir):
 
     dataset_save = os.path.join(work_dir, "dataset.json")
     preprocess.save_dataset(
-        dataset_proc.dataset, dataset_save, dataset_info=dataset_proc.info
+        dataset_proc.dataset, dataset_save, info=dataset_proc.info
     )
 
     training.setup_training(dataset_proc.dataset, dataset_proc.info, work_dir)
+
+
+@cli.command()
+@click.option("-i", "--dataroot", required=True, type=str)
+@click.option("-d", "--inference-root", required=True, type=str)
+@click.option("-f", "--label-filename", required=True, type=str)
+def count_inference_labels(dataroot, inference_root, label_filename):
+    dataset_proc = preprocess.DataSetProcesser.new_dataset(
+        dataroot, scan_3Tpioneer_bids, filters=[fm.filter_first_ses]
+    )
+    dataset = dataset_proc.dataset
+
+    inference_labels = []
+    for scan in dataset:
+        inference_label = (inference_root / scan.relative_path / label_filename)
+        if inference_label.is_file():
+            inference_labels.append(inference_label)
+    logger.info("{}/{} scans already have inference", len(inference_labels), len(dataset))
 
 
 if __name__ == "__main__":

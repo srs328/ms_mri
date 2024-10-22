@@ -37,20 +37,24 @@ def merge_labels(label_paths, merged_path):
         if not os.path.isfile(p):
             raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), p)
 
+    logger.debug("Merging labels: {}", label_paths)
     label_inputs = [label_paths[0]]
     for path in label_paths[1:]:
         label_inputs.extend(["-add", path])
     cmd_parts = ["fslmaths", *label_inputs, merged_path]
     run(cmd_parts, check=True, stderr=True, stdout=True)
+    logger.debug("Merged label is: {}", merged_path)
     return merged_path
 
 
 def set_label_value(label_path, output_path, val):
+    logger.debug("thoo0")
     if not os.path.isfile(label_path):
         raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), label_path)
     if not os.path.isdir(os.path.dirname(output_path)):
         raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), output_path)
 
+    logger.debug("thoo1")
     cmd_parts = [
         "fslmaths",
         str(label_path),
@@ -59,24 +63,25 @@ def set_label_value(label_path, output_path, val):
         str(val),
         str(output_path),
     ]
-    run(cmd_parts, check=True, stderr=True, stdout=True)
+    logger.debug("thoo3")
+    run(cmd_parts, check=True)
+    logger.debug("thoo4")
     return output_path
 
 
-# return a tuple that gives the value for each label name
-# ! have a hacky work around for not recreating files, fix later
 def combine_labels(
     scan: Scan,
     labels: list[str],
     label_id_func: Callable,
     suffix_list: Optional[list[str]] = None,
+    combined_label_name: Optional[str] = None,
     resave=False,
 ) -> tuple[str, list]:
     if isinstance(labels, str) or len(labels) < 2:
         raise ValueError("Expected more than one label")
 
-    # find files with correct prefix and suffix and assign a value for each
-    logger.debug(f"Combining labels for {scan.info()}")
+    # find files with correct prefix and assign a value for each
+    logger.info(f"Combining labels for {scan.info()}")
     base_labels = []
     label_values = []
     tmp_files = []
@@ -85,26 +90,29 @@ def combine_labels(
         label_values.append((lab, label_id_func(i)))
 
     # set the name of the combined label
-    label_names = [nifti_name(base_label.name) for base_label in base_labels]
-    combined_label_name = ".".join(label_names) + ".nii.gz"
+    if combined_label_name is None:
+        label_names = [nifti_name(base_label.name) for base_label in base_labels]
+        combined_label_name = ".".join(label_names) + ".nii.gz"
+
     merged_label = scan.root / combined_label_name
     # return if the combined label exists already
     if merged_label.is_file() and not resave:
+        logger.debug("{} exists", merged_label)
         return combined_label_name, label_values
 
     # create the combined label
     try:
         # modify each label to have the assigned value
-        for lab, label_value, base_label in zip(labels, label_values, base_labels):
+        for lab, lab_val, base_lab in zip(labels, label_values, base_labels):
             tmp_filepath = scan.root / f"tmp_{lab}_{int(time.time())}.nii.gz"
             try:
-                logger.debug("Trying set_label_value with", lab)
-                set_label_value(base_label, tmp_filepath, label_value[1])
+                logger.debug("Setting {} with id {}", lab, lab_val[1])
+                set_label_value(base_lab, tmp_filepath, lab_val[1])
+                logger.debug("thoo")
             except FileNotFoundError:
-                logger.error("Failed set_label_value for", lab)
+                logger.error("Failed set_label_value for {}", lab)
                 raise
             else:
-                logger.debug("finished setting label value")
                 tmp_files.append(tmp_filepath)
 
         # merge the labels
@@ -112,11 +120,18 @@ def combine_labels(
     except Exception:
         raise
     finally:
+        logger.success("Saved combined label to {}", merged_label)
         # delete the temporary files
         for path in tmp_files:
             os.remove(path)
+            logger.debug("Removed temporary file {}", path.name)
 
     return combined_label_name, label_values
+
+
+# function for assigning id's to labels
+def power_of_two(i: int) -> int:
+    return 2**i
 
 
 def load_nifti(path) -> np.ndarray:

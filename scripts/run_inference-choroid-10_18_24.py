@@ -1,7 +1,8 @@
+import contextlib
+import io
 import os
 from pathlib import Path
 import platform
-import numpy as np
 import json
 from loguru import logger
 
@@ -12,14 +13,16 @@ from monai.apps.auto3dseg import (
 )
 from monai.utils.enums import AlgoKeys
 
+from mri_data import file_manager as fm
 from mri_data.file_manager import scan_3Tpioneer_bids, DataSet, filter_first_ses
 from monai_training import preprocess
 
-do_preparation = True
-do_inference = True
 
-current_file_path = Path(__file__).resolve()
-log_dir = current_file_path.parent / ".logs"
+do_preparation = True
+do_inference = False
+
+
+log_dir = ".logs"
 
 if not os.path.exists(log_dir):
     os.makedirs(log_dir)
@@ -28,25 +31,22 @@ logger.add(
 )
 
 #! Set these variables
-work_dir_name = "pineal1"
+work_dir_name = "choroid_resegment1"
+# train_dataset_file_name = "training-dataset-desktop1.json"
 train_dataset_file_name = "training-dataset.json"
-prediction_postfix = "pineal1_pred"
-task_name = "infer_pineal"
-modalities = ["t1"]
+
+prediction_postfix = "choroid_resegment_pred"
+task_name = "infer_choroid"
+modalities = ["flair", "t1"]
 save_folder = "3Tpioneer_bids_predictions"
-win_root = Path("/mnt/g/Data")
 
+# -----------------
 
-# set paths
-hostname = platform.node()
-if hostname == "rhinocampus":
-    drive_root = Path("/media/smbshare")
-else:
-    drive_root = win_root
-
+drive_root = fm.get_drive_root()
 projects_root = Path("/home/srs-9/Projects")
 
 msmri_home = projects_root / "ms_mri"
+# training_work_dirs = drive_root / "training_work_dirs" #? don't know why I did this
 training_work_dirs = msmri_home / "training_work_dirs"
 
 # dataroot = "/media/hemondlab/Data/3Tpioneer_bids"
@@ -63,6 +63,8 @@ taskfile_name = "inference-task.json"
 task_file = os.path.join(work_dir, taskfile_name)
 save_dir = drive_root / save_folder
 
+# -----------------
+
 
 def inference_exists(dataset: DataSet) -> DataSet:
     count = 0
@@ -75,46 +77,28 @@ def inference_exists(dataset: DataSet) -> DataSet:
     logger.info(f"{count} scans already have inference")
     return dataset_new
 
-
-def check_valid_nifti(dataset: DataSet) -> DataSet:
-    count = 0
-    dataset_new = DataSet(dataset.dataroot)
-    for scan in dataset:
-        # don't want to waste time loading every file, so just check that this file exist
-        #   if flair.t1 exists, that means at some point, the t1 was able to be loaded, so it's valid
-        if (scan.root / "flair.t1.nii.gz").is_file():
-            dataset_new.append(scan)
-        else:
-            count += 1
-    logger.info(f"{count} scans already have inference")
-    return dataset_new
+# -----------------
 
 
 if do_preparation:
-    # dataset_train2 has the same subject/sessions that are in dataset_train but with a subset of the keys
-    #   so that they can be compared to scans in the full data set when getting the set difference
-
     # scan the dataroot to get all the scans
     dataset_proc = preprocess.DataSetProcesser.new_dataset(
-        dataroot,
-        scan_3Tpioneer_bids,
-        filters=[filter_first_ses, inference_exists, check_valid_nifti],
+        dataroot, scan_3Tpioneer_bids, filters=[filter_first_ses, inference_exists]
     )
     dataset_full = dataset_proc.dataset
 
     # load the scans that were used in the training
-    dataset_train = preprocess.parse_datalist(
-        work_dir / "training-datalist.json", dataroot
-    )
+    dataset_train, _ = preprocess.load_dataset(train_dataset_file)
     # correct the dataroot in case using a different system
     dataset_train.dataroot = dataroot
+
     # copy the training dataset but with only the bare attributes
     dataset_train2 = DataSet.dataset_like(dataset_train, ["subid", "sesid"])
     dataset_inference = DataSet.from_scans(set(dataset_full) - set(dataset_train2))
 
     # prepare the inference scans
     dataset_proc = preprocess.DataSetProcesser(dataset_inference)
-    dataset_proc.prepare_images(modalities)
+    dataset_proc.prepare_images(["flair", "t1"])
     dataset_proc.dataset.sort(key=lambda s: s.subid)
 
     # save the config files
@@ -142,7 +126,14 @@ if do_preparation:
     with open(task_file, "w") as f:
         json.dump(task, f)
 
+# -----------------
+
+
 if do_inference:
+    output = io.StringIO
+
+    # init inference model
+    # path to the task input YAML file created by the users
     input_cfg = task_file  # path to the task input YAML file created by the users
     history = import_bundle_algo_history(work_dir, only_trained=True)
 
