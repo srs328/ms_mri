@@ -10,6 +10,8 @@
   in its root folder
 - [ ] Rename all the inferred labels with something more descriptive of which training
   they were produced from (e.g. t1_pituitary_pred → t1_pituitary1_pred)
+- [ ] The trainings for pituitary1 and choroid1 were via the old notebook. Convert exactly what
+  was done into a command with associated datalist and dataset
 - [x] Make a function and format saved datasets/datalist to be more easily usable
   across devices where the paths are different
 

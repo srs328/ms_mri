@@ -54,7 +54,7 @@ def get_dice_score(labels, directory=None):
 @click.option("-o", "--out", "dst", type=str, required=True)
 @click.option("-f", "--script-file", type=str)
 @click.option("--run-script/--no-run-script", default=False)
-@click.option("--to-raise/--not-to-raise", default=True)
+@click.option("--to-raise/--dont-raise", default=True)
 def rename(dataroot, src, dst, script_file, run_script, to_raise):
     dataset = file_manager.scan_3Tpioneer_bids(dataroot)
     kwargs = {

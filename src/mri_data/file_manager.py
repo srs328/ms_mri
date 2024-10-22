@@ -219,15 +219,19 @@ class Scan2(Scan):
         self.image = Path(path).relative_to(self.root).name
 
 
+# it's a little messy changing the dataroot since I have to make sure
+#   scan.root and scan.dataroot are both changed
 class DataSet(Record):
     def __init__(self, dataroot, records=None):
         super().__init__(Scan, records=records)
         self._dataroot = dataroot
 
     @classmethod
-    def dataset_like(cls, dataset: Self, keys: list[str]) -> Self:
+    def dataset_like(cls, dataset: Self, keys: list[str] = None) -> Self:
+        if keys is None:
+            keys = []
         keys = set(keys)
-        keys.update(["dataroot", "root"])
+        keys.update(["dataroot", "root", "subid", "sesid"])
         return cls(
             dataroot=dataset.dataroot,
             records=[{k: getattr(scan, k) for k in keys} for scan in dataset],
@@ -240,15 +244,23 @@ class DataSet(Record):
         scans.add(scan)
         return cls(dataroot=dataroot, records=[scan.asdict() for scan in scans])
 
-    def add_label(self, subid, sesid, label):
-        try:
-            scan = self.find_scan(subid, sesid)
-        except LookupError:
-            warnings.warn(
-                f"No scan exists for subject: {subid} and session: {sesid}", UserWarning
-            )
-        else:
-            scan.label = label
+    def add_images(self, image_name):
+        for scan in self._records:
+            scan.image = image_name
+
+    def add_labels(self, label_name):
+        for scan in self._records:
+            scan.label = label_name
+
+    # def add_label0(self, subid, sesid, label):
+    #     try:
+    #         scan = self.find_scan(subid, sesid)
+    #     except LookupError:
+    #         warnings.warn(
+    #             f"No scan exists for subject: {subid} and session: {sesid}", UserWarning
+    #         )
+    #     else:
+    #         scan.label = label
 
     def find_scan(self, subid, sesid):
         sub_scans = self.retrieve(subid=subid)
@@ -277,8 +289,10 @@ class DataSet(Record):
 
     @dataroot.setter
     def dataroot(self, dataroot: Path):
+        self._dataroot = dataroot
         for scan in self._records:
             scan.root = dataroot / scan.relative_path
+            scan.dataroot = dataroot
 
     def __str__(self):
         return ", ".join([str(scan) for scan in self])
