@@ -50,9 +50,10 @@ class DataSetProcesser:
         scan_func: Callable,
         *args,
         filters: list[Callable] = None,
+        suppress_exceptions: bool = False,
         **kwargs,
     ) -> Self:
-        dsp = cls(scan_func(dataroot, *args, **kwargs))
+        dsp = cls(scan_func(dataroot, *args, **kwargs), suppress_exceptions=suppress_exceptions)
         dsp.info = dict()
 
         # if filters is not None:

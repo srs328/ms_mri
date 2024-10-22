@@ -19,7 +19,7 @@ from monai_training import preprocess
 
 
 do_preparation = True
-do_inference = False
+do_inference = True
 
 
 log_dir = ".logs"
@@ -83,7 +83,8 @@ def inference_exists(dataset: DataSet) -> DataSet:
 if do_preparation:
     # scan the dataroot to get all the scans
     dataset_proc = preprocess.DataSetProcesser.new_dataset(
-        dataroot, scan_3Tpioneer_bids, filters=[filter_first_ses, inference_exists]
+        dataroot, scan_3Tpioneer_bids, filters=[filter_first_ses, inference_exists],
+        suppress_exceptions=True
     )
     dataset_full = dataset_proc.dataset
 
