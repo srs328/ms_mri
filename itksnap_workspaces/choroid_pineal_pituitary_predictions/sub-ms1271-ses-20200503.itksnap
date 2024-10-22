@@ -8,30 +8,30 @@
 <!ATTLIST entry value CDATA #REQUIRED>
 ]>
 <registry>
-  <entry key="SaveLocation" value="/home/srs-9/Projects/ms_mri/itksnap_workspaces/choroid_pineal_pituitary2" />
+  <entry key="SaveLocation" value="/home/srs-9/Projects/ms_mri/itksnap_workspaces/choroid_pineal_pituitary_predictions" />
   <entry key="Version" value="20240422" />
   <folder key="Layers" >
     <folder key="Layer[000]" >
-      <entry key="AbsolutePath" value="H:/3Tpioneer_bids/sub-ms1010/ses-20180208/flair.nii.gz" />
+      <entry key="AbsolutePath" value="H:/3Tpioneer_bids/sub-ms1271/ses-20200503/flair.nii.gz" />
       <entry key="Role" value="MainRole" />
       <entry key="Tags" value="FLAIR-MRI" />
       <folder key="ProjectMetaData" >
         <folder key="Files" >
           <folder key="Grey" >
-            <entry key="Dimensions" value="240 300 300" />
+            <entry key="Dimensions" value="216 324 324" />
           </folder>
         </folder>
       </folder>
     </folder>
     <folder key="Layer[001]" >
-      <entry key="AbsolutePath" value="H:/3Tpioneer_bids/sub-ms1010/ses-20180208/t1.nii.gz" />
+      <entry key="AbsolutePath" value="H:/3Tpioneer_bids/sub-ms1271/ses-20200503/t1.nii.gz" />
       <entry key="Role" value="OverlayRole" />
       <entry key="Tags" value="T1-MRI" />
     </folder>
     <folder key="Layer[002]" >
-      <entry key="AbsolutePath" value="H:/3Tpioneer_bids/sub-ms1010/ses-20180208/choroid_t1_flair-CH.pineal-CH.pituitary-CH.nii.gz" />
+      <entry key="AbsolutePath" value="H:/3Tpioneer_bids_predictions/sub-ms1271/ses-20200503/choroid_resegment1.pineal1.pituitary1.nii.gz" />
       <entry key="Role" value="SegmentationRole" />
-      <entry key="Tags" value="choroid_t1_flair-CH.pineal-CH.pituitary-CH" />
+      <entry key="Tags" value="choroid_resegment1.pineal1.pituitary1" />
     </folder>
   </folder>
 </registry>
