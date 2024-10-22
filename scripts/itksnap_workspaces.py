@@ -54,10 +54,10 @@ if __name__ == "__main__":
     dataset, _ = load_dataset(dataset_file)
     commands = []
     for scan in dataset:
-        commands.append(create_workspace(scan, workspace_root, dataset_name) + "\n")
+        commands.append(create_workspace(scan, save_dir) + "\n")
 
     current_dir = Path(__file__).absolute().parent
-    with open(current_dir / "create-workspaces.sh", "w") as f:
+    with open(current_dir / "create-workspaces2.sh", "w") as f:
         f.writelines(commands)
 
 """

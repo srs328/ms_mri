@@ -9,7 +9,7 @@
 ]>
 <registry>
   <entry key="SaveLocation" value="/home/srs-9/Projects/ms_mri/itksnap_workspaces/choroid_pineal_pituitary2" />
-  <entry key="Version" value="20230925" />
+  <entry key="Version" value="20240422" />
   <folder key="Layers" >
     <folder key="Layer[000]" >
       <entry key="AbsolutePath" value="H:/3Tpioneer_bids/sub-ms1010/ses-20180208/flair.nii.gz" />

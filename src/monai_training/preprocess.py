@@ -208,14 +208,12 @@ class DataSetProcesser:
         self.dataset = dataset_copy
 
 
-def power_of_two(i: int) -> int:
-    return 2**i
-
-
-def save_dataset(dataset: DataSet, save_path: Path | os.PathLike, info: Optional[dict] = None):
+def save_dataset(
+    dataset: DataSet, save_path: Path | os.PathLike, info: Optional[dict] = None
+):
     if info is None:
         info = dict()
-    info.update({'dataroot': str(dataset.dataroot)})
+    info.update({"dataroot": str(dataset.dataroot)})
 
     struct = {"info": info}
     struct.update({"data": dataset.serialize()})
@@ -227,14 +225,15 @@ def save_dataset(dataset: DataSet, save_path: Path | os.PathLike, info: Optional
 def load_dataset(path):
     with open(path, "r") as f:
         struct = json.load(f)
-    
+
     # this is here till all the previously saved datasets are fixed
     struct = tmp_fix_dataset(path, struct)
 
     info = struct["info"]
     dataset_list = struct["data"]
-    dataset = fm.DataSet(info['dataroot'], records=dataset_list)
+    dataset = fm.DataSet(info["dataroot"], records=dataset_list)
     return dataset, info
+
 
 # previously I had saved a bunch of datasets without dataroot in info.
 def tmp_fix_dataset(path, struct):
@@ -243,7 +242,7 @@ def tmp_fix_dataset(path, struct):
 
     dataset_list = struct["data"]
     dataset = fm.DataSet(dataroot, records=dataset_list)
-    save_dataset(dataset, path, info=struct['info'])
+    save_dataset(dataset, path, info=struct["info"])
     return struct
 
 
@@ -281,92 +280,3 @@ def parse_datalist(
         dataset.append(scan)
 
     return dataset
-
-
-# later make the label use a glob in case there are initials after label name
-def prepare_dataset(dataroot, modality, label, filters=None, suffix_list=None):
-    count = 0
-    if isinstance(modality, str):
-        modality = [modality]
-    if len(modality) > 1:
-        modality = list(modality)
-        modality.sort()
-        image_name = "_".join(modality) + ".nii.gz"
-        image_ids = [(mod, i) for i, mod in enumerate(modality)]
-    else:
-        image_name = f"{modality[0]}.nii.gz"
-        image_ids = [(modality[0], 0)]
-
-    if isinstance(label, str):
-        label = [label]
-    if len(label) > 1:
-        label = list(label)
-        label.sort()
-        label_name = "_".join(label) + ".nii.gz"
-        # ? combine_labels() returns label_ids, idk if I should set that here or then
-        label_ids = [(lab, 2**i) for i, lab in enumerate(label)]
-    else:
-        label_name = f"{label[0]}.nii.gz"
-        label_ids = [(label[0], 1)]  #! this might not always be true, revisit
-
-    dataset_info = {"image_info": image_ids, "label_info": label_ids}
-
-    file_logger.log("DEBUG", "Starting scan_3Tpioneer_bids()")
-    dataset = fm.scan_3Tpioneer_bids(dataroot, image_name, label_name)
-
-    file_logger.log("DEBUG", f"Filters: {[filter for filter in filters]}")
-    if filters is not None:
-        for filter in filters:
-            dataset = fm.filters[filter](dataset)
-
-    if len(modality) == 1 and len(label) == 1:
-        dataset = fm.filter_has_image(dataset)
-        dataset = fm.filter_has_label(dataset)
-        if len(dataset) == 0:
-            raise Exception("Empty dataset")
-        logger.info(
-            f"Collected dataset with images: {image_name} and labels: {label_name}, size: {len(dataset)}"
-        )
-        return dataset, dataset_info
-
-    logger.info(f"Creating images: {image_name} and labels: {label_name}")
-    dataset_copy = fm.DataSet("DataSet", fm.Scan)
-    for scan in tqdm(dataset):
-        if count > 200:
-            break
-        count += 1
-        if scan.label is None and len(label) > 1:
-            try:
-                utils.combine_labels(scan, label, label_name, suffix_list=suffix_list)
-            except FileNotFoundError:
-                continue
-            except CalledProcessError:
-                logger.error("Something went wrong merging labels")
-                raise
-            else:
-                scan.label = scan.root / label_name
-                file_logger.log("SUCCESS", f"Saved {scan.label}", new_file=scan.label)
-
-        if scan.image is None and len(modality) > 1:
-            base_images = [scan.root / f"{mod}.nii.gz" for mod in modality]
-            merged_image = scan.root / image_name
-            try:
-                utils.merge_images(base_images, merged_image)
-            except FileNotFoundError:
-                continue
-            except CalledProcessError:
-                logger.error("Something went wrong merging images")
-                raise
-            else:
-                scan.image = scan.root / merged_image
-                file_logger.log("SUCCESS", f"Saved {scan.image}", new_file=scan.image)
-
-        dataset_copy.append(scan)
-
-    if len(dataset_copy) == 0:
-        raise Exception("Empty dataset")
-
-    logger.info(
-        f"Collected dataset with images: {image_name} and labels: {label_name}, size: {len(dataset)}"
-    )
-    return dataset_copy, dataset_info
