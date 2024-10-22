@@ -42,19 +42,19 @@ def create_workspace(scan, save_dir):
 
 if __name__ == "__main__":
     args = sys.argv[1:]
-    dataset_file = args[0]
-    workspace_root = args[1]
-    dataset_name = args[2]
+    dataroot = args[0]
+    inference_root = args[1]
+    workspace_root = args[3]
+    dataset_name = args[4]
 
     save_dir = os.path.join(workspace_root, dataset_name)
     if not os.path.exists(save_dir):
         logger.info()
         os.makedirs(save_dir)
 
-    dataset, _ = load_dataset(dataset_file)
     commands = []
     for scan in dataset:
-        commands.append(create_workspace(scan, save_dir) + "\n")
+        commands.append(create_workspace(scan, workspace_root, dataset_name) + "\n")
 
     current_dir = Path(__file__).absolute().parent
     with open(current_dir / "create-workspaces2.sh", "w") as f:
