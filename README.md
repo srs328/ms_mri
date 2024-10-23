@@ -48,3 +48,7 @@ the path of the training_work_dir somewhere in one of its own config files.
   - Read about [MONAI bundle configuration](https://docs.monai.io/en/latest/config_syntax.html)
 
   /dev/dm-3
+
+## Software
+
+[Better FSL install and config guides](https://fsl.fmrib.ox.ac.uk/fsl/docs/#/)
