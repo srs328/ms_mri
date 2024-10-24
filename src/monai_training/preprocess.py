@@ -25,6 +25,7 @@ class FileLogger:
 file_logger = FileLogger()
 
 
+# TODO fix so that it uses the new filtering method everywhere
 @define
 class DataSetProcesser:
     dataset: fm.DataSet
@@ -83,9 +84,24 @@ class DataSetProcesser:
 
         return dsp
 
-    # instead this should take a function that returns true or false, not loop through
-    def filter_data(self, filter: Callable):
-        self.dataset = filter(self.dataset)
+    def filter(self, filters: list[Callable], args_list: list[Optional[tuple]]):
+        """filters out scans based on criteria
+
+        Args:
+            filters (list[Callable]): a list of predicate functions
+            args_list (list[Optional[tuple]]): 
+                a list containing the additional arguments for each function as
+                tuples or None if a function takes no arguments
+        """
+        args_list = [arg if arg is not None else [] for arg in args_list]
+        new_dataset = DataSet(self.dataset.dataroot)
+        for scan in self.dataset:
+            if all(
+                filter_func(scan, *args)
+                for filter_func, args in zip(filters, args_list)
+            ):
+                new_dataset.append(scan)
+        self.dataset = new_dataset
 
     def prepare_images(self, modality: list[str] | str):
         logger.info("Prepare Images")
@@ -119,6 +135,7 @@ class DataSetProcesser:
                 try:
                     utils.merge_images(base_images, merged_image)
                 except FileNotFoundError:
+                    logger.warning("Couldn't prepare image for {}", scan.info())
                     continue
                 except CalledProcessError:
                     if not self.suppress_exceptions:
@@ -133,6 +150,7 @@ class DataSetProcesser:
                         "SUCCESS", f"Saved {scan.image_path}", new_file=scan.image_path
                     )
                     dataset_copy.append(scan)
+                    continue
 
         self.dataset = dataset_copy
 
@@ -182,6 +200,7 @@ class DataSetProcesser:
                         resave=resave,
                     )
                 except FileNotFoundError:
+                    logger.warning("Couldn't prepare image for {}", scan.info())
                     continue
                 except CalledProcessError:
                     logger.error("Something went wrong merging labels")
@@ -198,6 +217,7 @@ class DataSetProcesser:
                         scan, self.label[0], suffix_list=suffix_list
                     )
                 except FileNotFoundError:
+                    logger.warning("Couldn't prepare image for {}", scan.info())
                     continue
                 else:
                     logger.info(f"Found label {scan.label} for {scan.info()}")

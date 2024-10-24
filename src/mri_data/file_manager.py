@@ -8,7 +8,7 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from pathlib import Path
 from subprocess import run
-from typing import Self
+from typing import Callable, Self
 
 from attrs import define, field
 from loguru import logger
@@ -50,7 +50,7 @@ def get_drive_root(drive="default"):
     hostname = platform.node()
     if hostname == "rhinocampus":
         return Path(drive_roots["ubuntu"][drive])
-    elif hostname == "Lenovo_Desktop" or hostname == "srs-9-Yoga7i":
+    elif hostname == "LenovoDesktop" or hostname == "srs-9-Yoga7i":
         return Path(drive_roots["windows"][drive])
     else:
         raise RuntimeError("Don't know what host this is being run on")
@@ -255,7 +255,7 @@ class DataSet(Record):
 
     def add_label(self, subid, sesid, label):
         try:
-            scan = self.find_scan(subid, sesid)
+            scan = self.find_scan(subid=subid, sesid=sesid)[0]
         except LookupError:
             warnings.warn(
                 f"No scan exists for subject: {subid} and session: {sesid}", UserWarning
@@ -263,7 +263,7 @@ class DataSet(Record):
         else:
             scan.label = label
 
-    def find_scan(self, subid, sesid):
+    def find_scan0(self, subid, sesid):
         sub_scans = self.retrieve(subid=subid)
         for scan in sub_scans:
             if scan.sesid == sesid:
@@ -272,6 +272,20 @@ class DataSet(Record):
         raise LookupError(
             f"No scan exists for subject: {subid} and session: {sesid}", subid, sesid
         )
+    
+    def find_scan(self, subid=None, sesid=None):
+        if subid is not None and sesid is None:
+            return self.retrieve(subid=subid)
+        elif sesid is not None and subid is None:
+            return self.retrieve(sesid=sesid)
+        elif subid is not None and sesid is not None:
+            sub_scans = set(self.retrieve(subid=subid))
+            ses_scans = set(self.retrieve(sesid=sesid))
+            scans = list(set.intersection(sub_scans, ses_scans))
+            return sorted(scans, key=lambda s: (s.subid, s.sesid))
+        else:
+            raise TypeError("find_scan() expects at least one of 'subid' or 'sesid")
+        
 
     def remove_scan(self, scan):
         idx = self.retrieve(id=scan.id, get_index=True)[0]
