@@ -3,6 +3,7 @@ from __future__ import annotations
 import os
 import platform
 import re
+import copy
 import warnings
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
@@ -54,6 +55,7 @@ def get_drive_root(drive="default"):
         return Path(drive_roots["windows"][drive])
     else:
         raise RuntimeError("Don't know what host this is being run on")
+
 
 
 # Right now it's unused, but could make a method in DataSet that returns a Subject object.
@@ -120,14 +122,14 @@ class Scan:
         if self._root is None:
             self._root = Scan.path(self.dataroot, self.subid, self.sesid)
 
-    def has_label(self):
+    def has_label(self) -> bool:
         if self.label is not None:
             return True
         else:
             return False
 
     @property
-    def root(self):
+    def root(self) -> Path:
         return self._root
 
     @root.setter
@@ -135,7 +137,7 @@ class Scan:
         self._root = root
 
     @property
-    def image_path(self):
+    def image_path(self) -> Path:
         if self.image is None:
             return None
         return self.root / self.image
@@ -145,7 +147,7 @@ class Scan:
         self.image = Path(path).relative_to(self.root).name
 
     @property
-    def label_path(self):
+    def label_path(self) -> Path:
         if self.label is None:
             return None
         return self.root / self.label
@@ -155,21 +157,21 @@ class Scan:
         self.label = Path(path).relative_to(self.root).name
 
     @property
-    def relative_path(self):
+    def relative_path(self) -> Path:
         return self.root.relative_to(self.dataroot)
 
     @staticmethod
-    def path(dataroot, subid, sesid, subdir=""):
+    def path(dataroot, subid, sesid, subdir="") -> Path:
         return Path(dataroot) / f"sub-ms{subid}" / f"ses-{sesid}" / subdir
 
-    def info(self):
+    def info(self) -> str:
         return f"{self.__class__.__name__}(subid={self.subid}, sesid={self.sesid})"
 
     @classmethod
-    def _field_names(cls):
+    def _field_names(cls) -> list:
         return cls.__slots__
 
-    def asdict(self):
+    def asdict(self) -> dict:
         dict_form = {k: getattr(self, k) for k in self._field_names()}
         for k, v in dict_form.items():
             if isinstance(v, Path):
@@ -178,7 +180,7 @@ class Scan:
         return dict_form
 
     @classmethod
-    def from_dict(cls, dict_form):
+    def from_dict(cls, dict_form) -> Self:
         for k in ["root", "image", "label", "dataroot"]:
             if dict_form[k] is not None:
                 dict_form[k] = Path(dict_form[k])
@@ -262,7 +264,7 @@ class DataSet(Record):
             )
         else:
             scan.label = label
-
+    
     def find_scan0(self, subid, sesid):
         sub_scans = self.retrieve(subid=subid)
         for scan in sub_scans:
@@ -390,8 +392,10 @@ def find_label(scan, label_prefix: str, suffix_list: list[str] = None) -> Path:
     )
 
 
-def nifti_name(filename: str) -> str:
-    fileparts = filename.split(".")
+def nifti_name(file: Path | str) -> str:
+    if isinstance(file, Path):
+        file = file.name
+    fileparts = file.split(".")
     if ".".join(fileparts[-2:]) != "nii.gz":
         raise ValueError("Filename does not have .nii.gz as extension")
     return ".".join(fileparts[:-2])
