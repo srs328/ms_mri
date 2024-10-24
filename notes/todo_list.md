@@ -6,6 +6,8 @@
 
 ## File Management
 
+- [ ] Would it make sense to subclass Path for working with nifti files, then override methods/properties like
+  `stem`, `with_stem`, `with_name`, etc so that they handle `.nii.gz`?
 - [ ] Inferred labels should be named in such a way that indicates which training
   they were produced from
 - [ ] The new Scan class should have a function that returns all niftis in
@@ -16,8 +18,18 @@
   they were produced from (e.g. t1_pituitary_pred → t1_pituitary1_pred)
 - [ ] The trainings for pituitary1 and choroid1 were via the old notebook. Convert exactly what
   was done into a command with associated datalist and dataset
+- [ ] Fix `find_labels()` so that it actually gets labels with initials
+  - It worked on pineal but not choroid. Maybe it's because pineal didn't have labels without initials,
+    whereas for choroid, it defaulted to one w/o initials since it was available
 - [x] Make a function and format saved datasets/datalist to be more easily usable
   across devices where the paths are different
+
+## Training
+
+- [ ] Train choroid segmentation with the actual fixed segmentation (screwed it up the first time, didn't collect right labels)
+- [ ] Fix the training code so that the ensemble_predict files have the same name format as the inference ones
+- [ ] In evaluate training, fix the spots that are hard coded
+- [ ] Figure out why `ensemble_out_dir` for old trainings has a subdirectory `3Tpioneer_bids`, but new ones don't
 
 ## Logging
 

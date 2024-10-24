@@ -102,7 +102,7 @@ def parse_scan_path(path: Path | os.PathLike) -> tuple[str, str]:
 class Scan:
     subid: str = field(converter=str)
     sesid: str = field(converter=str)
-    dataroot: Path = field(converter=Path)
+    _dataroot: Path = field(converter=Path)
     _root: Path = field(default=None, converter=Path)
     image: str = field(default=None)
     label: str = field(default=None)
@@ -127,14 +127,30 @@ class Scan:
             return True
         else:
             return False
+        
+    def with_root(self, dataroot) -> Self:
+        new_scan = copy.deepcopy(self)
+        new_scan.dataroot = dataroot
+        return new_scan
 
     @property
     def root(self) -> Path:
         return self._root
 
+    # TODO changing root can get sticky, the dataroot must remain the same 
     @root.setter
     def root(self, root):
         self._root = root
+
+    @property
+    def dataroot(self) -> Path:
+        return self._dataroot
+
+    @dataroot.setter
+    def dataroot(self, dataroot):
+        relative_path = self.relative_path
+        self._dataroot = dataroot
+        self._root = self._dataroot / relative_path
 
     @property
     def image_path(self) -> Path:
@@ -177,6 +193,7 @@ class Scan:
             if isinstance(v, Path):
                 dict_form[k] = str(v)
         dict_form["root"] = dict_form.pop("_root")
+        dict_form["dataroot"] = dict_form.pop("_dataroot")
         return dict_form
 
     @classmethod

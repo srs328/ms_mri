@@ -10,6 +10,8 @@ clinical characteristics
 
 15-20 subj
 
+Look at `inspect_inference_labels.ipynb`
+
 ### Choroid
 
 - choroid selected?

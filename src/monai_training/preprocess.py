@@ -24,7 +24,7 @@ class FileLogger:
 
 file_logger = FileLogger()
 
-
+# FIXME thoosl
 # TODO fix so that it uses the new filtering method everywhere
 @define
 class DataSetProcesser:
@@ -228,7 +228,8 @@ class DataSetProcesser:
 
 
 def save_dataset(
-    dataset: DataSet, save_path: Path | os.PathLike, info: Optional[dict] = None
+    dataset: DataSet, save_path: Path | os.PathLike, info: Optional[dict] = None,
+    indent: Optional[int] = 4
 ):
     if info is None:
         info = dict()
@@ -238,7 +239,7 @@ def save_dataset(
     struct.update({"data": dataset.serialize()})
 
     with open(save_path, "w") as f:
-        json.dump(struct, f, indent=4)
+        json.dump(struct, f, indent=indent)
 
 
 def load_dataset(path):
@@ -265,6 +266,8 @@ def tmp_fix_dataset(path, struct):
     return struct
 
 
+# TODO make this agnostic to whatever dataroot is in the datalist file. Change the paths
+# to use the dataroot that is passed to this function
 def parse_datalist(
     datalist_file: Path | os.PathLike, dataroot: Path | os.PathLike
 ) -> fm.DataSet:
