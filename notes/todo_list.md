@@ -19,3 +19,8 @@
 
 - [ ] See if I can capture Monai logs using `| tee`. Might need to do something extra
   to capture stderr ([look here](https://serverfault.com/questions/201061/capturing-stderr-and-stdout-to-file-using-tee))
+
+## Code Style
+
+- [ ] Find any instance where I use a list comprehension as a function argument
+  or in constructer and change to generator expression (see [PEP 289](https://peps.python.org/pep-0289/))

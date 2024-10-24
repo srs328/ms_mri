@@ -4,6 +4,9 @@ Monai [Installation Guide](https://docs.monai.io/en/stable/installation.html).
 
 See [this doc](notes/training_cli.md) for notes about the training command line interface
 
+`requirements.txt` generated with `pipreqs . --mode no-pin`. The `--scan-notebooks`
+option resulted in error related to notebook not being in JSON format correctly
+
 ## Reference
 
 ### Ubuntu Desktop
