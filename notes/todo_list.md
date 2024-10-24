@@ -1,5 +1,9 @@
 # To Do List
 
+## Project Structure
+
+- [ ] Rename the notebooks in `/notebooks` to not have "notebook" in the name, but have an expressive title
+
 ## File Management
 
 - [ ] Inferred labels should be named in such a way that indicates which training
