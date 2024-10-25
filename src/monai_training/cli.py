@@ -2,12 +2,13 @@ import click
 from loguru import logger
 import os
 from pathlib import Path
+from subprocess import run
 import sys
 
 from monai_training import preprocess, training
 from monai_training.preprocess import DataSetProcesser
 from mri_data import file_manager as fm
-from mri_data.file_manager import scan_3Tpioneer_bids
+from mri_data.file_manager import scan_3Tpioneer_bids, Scan
 
 # TODO: I can create a module mri_data.paths so that I can easily import all the paths I use
 
@@ -83,9 +84,7 @@ def prepare_training(dataroot, modality, label, filters, work_dir):
         os.makedirs(work_dir)
 
     dataset_save = os.path.join(work_dir, "dataset.json")
-    preprocess.save_dataset(
-        dataset_proc.dataset, dataset_save, info=dataset_proc.info
-    )
+    preprocess.save_dataset(dataset_proc.dataset, dataset_save, info=dataset_proc.info)
 
     training.setup_training(dataset_proc.dataset, dataset_proc.info, work_dir)
 
@@ -102,21 +101,81 @@ def count_inference_labels(dataroot, inference_root, label_filename):
 
     inference_labels = []
     for scan in dataset:
-        inference_label = (inference_root / scan.relative_path / label_filename)
+        inference_label = inference_root / scan.relative_path / label_filename
         if inference_label.is_file():
             inference_labels.append(inference_label)
-    logger.info("{}/{} scans already have inference", len(inference_labels), len(dataset))
+    logger.info(
+        "{}/{} scans already have inference", len(inference_labels), len(dataset)
+    )
+
+
+# FIXME there are many conditional here, and I'm not sure what cases are unaccounted for
+# TODO Find the itksnap install directory on the Ubuntu desktop
+@cli.command("open-itksnap")
+@click.option("--subid", type=click.STRING, required=True)
+@click.option("--sesid", type=click.STRING, required=True)
+@click.option("--dataroot", type=click.STRING)
+@click.option("--labelroot", type=click.STRING)
+@click.option(
+    "-i", "--image", "images", type=click.STRING, required=True, multiple=True
+)
+@click.option("-s", "--seg", "labels", type=click.STRING, required=True, multiple=True)
+@click.option("--inference/--not-inference", default=False)
+@click.option("--win/--not-win", default=False)
+@click.option("-o", "--save-dir", click.STRING)
+def open_itksnap_workspace(
+    subid, sesid, dataroot, labelroot, images, labels, inference, win, save_dir
+):
+    if win:
+        drive_root = Path(r"H:")
+        itksnap = "/mnt/c/Program Files/ITK-SNAP 4.2/bin/ITK-SNAP.exe"
+        itksnap_wt = "/mnt/c/Program Files/ITK-SNAP 4.2/bin/itksnap-wt.exe"
+    else:
+        drive_root = fm.get_drive_root()
+        itksnap = "itksnap"
+        itksnap_wt = "itksnap-wt"
+
+    if dataroot is None:
+        dataroot = drive_root / "3Tpioneer_bids"
+
+    if labelroot is None:
+        if not inference:
+            labelroot = dataroot
+        else:
+            labelroot = drive_root / "3Tpioneer_bids_predictions"
+
+    scan = Scan.new_scan(dataroot, subid, sesid)
+    inference = scan.with_root(labelroot)
+
+    image_paths = [str((scan.root) / image) for image in images]
+    label_paths = [str(scan.with_root(labelroot).root / label) for label in labels]
+
+    command = [f"'{itksnap}'", "-g"]
+    command.extend(" -o ".join(image_paths).split(" "))
+    command.append("-s")
+    command.extend(" -s ".join(label_paths).split(" "))
+
+    click.echo(" ".join(command))
+
+    # top line doesn't work, see cli-notes.md
+    #// run(command, shell=True)
+    run(["/bin/bash", "-c", " ".join(command)])
+
+    if save_dir:
+        save_dir = Path(save_dir)
+        if not save_dir.is_dir():
+            os.makedirs(save_dir)
+        save_path = save_dir / f"sub-{subid}-ses{sesid}.itksnap"
+        if not save_path.is_file():
+            command = [f"'{itksnap_wt}'", "-layers-set-main"]
+            command.extend(" -layers-add-anat ".join(image_paths).split(" "))
+            command.append("-layers-add-seg")
+            command.extend(" -layers-add-seg ".join(label_paths).split(" "))
+            command.extend(["-o", save_path])
+            
+            click.echo(" ".join(command))
+            run(["/bin/bash", "-c", " ".join(command)])
 
 
 if __name__ == "__main__":
     cli()
-
-    # monai-training prepare-data -i /mnt/h/3Tpioneer_bids -m t1 -m flair -l choroid_t1_flair -d /home/srs-9/Projects/ms_mri/training_work_dirs/choroid_resegment1 -f first_ses
-
-
-"""
-monai-training train -i "/mnt/h/3TPioneer_bids" -o /home/srs-9/Projects/ms_mri/training_work_dirs/pineal_tmp" \
-    -m flair -l pineal_SRS -f first_ses
-
-monai-training prepare-data -i "/media/hemondlab/Data1/3Tpioneer_bids" -m flair -l pineal_SRS -f first_ses
-"""

@@ -1,7 +1,6 @@
 from importlib.resources import files
 import json
 import os
-from monai.apps.auto3dseg import AutoRunner
 import nibabel as nibabel
 import random
 from dataclasses import dataclass
@@ -18,34 +17,37 @@ class DataList:
     train_params: dict
 
 
-def train0():
-    work_dir = "/home/srs-9/Projects/ms_mri/training_work_dirs/cp_work_dir_choroid4"
-    datalist_file = os.path.join(work_dir, "datalist.json")
-    dataroot_dir = "/mnt/h/3Tpioneer_bids"
-    runner = AutoRunner(
-        work_dir=work_dir,
-        algos=["swinunetr"],
-        input={
-            "modality": "MRI",
-            "datalist": datalist_file,
-            "dataroot": dataroot_dir,
-        },
-    )
+# def train0():
+#     work_dir = "/home/srs-9/Projects/ms_mri/training_work_dirs/cp_work_dir_choroid4"
+#     datalist_file = os.path.join(work_dir, "datalist.json")
+#     dataroot_dir = "/mnt/h/3Tpioneer_bids"
+#     runner = AutoRunner(
+#         work_dir=work_dir,
+#         algos=["swinunetr"],
+#         input={
+#             "modality": "MRI",
+#             "datalist": datalist_file,
+#             "dataroot": dataroot_dir,
+#         },
+#     )
 
-    max_epochs = 100
+#     max_epochs = 100
 
-    train_param = {
-        "num_epochs_per_validation": 1,
-        # "num_images_per_batch": 2,
-        "num_epochs": max_epochs,
-        "num_warmup_epochs": 1,
-    }
-    runner.set_training_params(train_param)
+#     train_param = {
+#         "num_epochs_per_validation": 1,
+#         # "num_images_per_batch": 2,
+#         "num_epochs": max_epochs,
+#         "num_warmup_epochs": 1,
+#     }
+#     runner.set_training_params(train_param)
 
-    runner.run()
+#     runner.run()
 
 
 def train(datalist_file):
+    # don't import till it's needed since it takes awhile
+    from monai.apps.auto3dseg import AutoRunner
+
     with open(datalist_file, "r") as f:
         struct = json.load(f)
 
@@ -163,4 +165,4 @@ def assign_conditions(dataset: DataSet, fraction_ts) -> DataSet:
 
 
 if __name__ == "__main__":
-    train0()
+    train()

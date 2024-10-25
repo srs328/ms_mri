@@ -52,3 +52,11 @@ Label naming convention
 In DataSetProcessor, don't know which factory function to go with. If I go with
 the long one, will need to think about what happens to a fully specified object
 if the prepare functions are called
+
+### cli
+
+#### open_itksnap_workspace()
+
+- With `run(command, shell=True)`, itksnap starts but doesn't open any of the images
+- To open the images, I had to do: `run(["/bin/bash", "-c", " ".join(command)])`
+- I figured this out from [this stackoverflow answer](https://stackoverflow.com/questions/12060863/python-subprocess-call-a-bash-alias), but I still don't understand why the first doesn't work

@@ -15,3 +15,16 @@
 ### Pituitary 1
 
 - sub-ms1005 has discontinuities in a slice (e.g. coronal)
+
+## Inference Notes
+
+### sub-ms1038
+
+- No pineal
+- Very scant choroid label, but scan is low quality, abnormal looking
+- Pituitary over labeled
+
+### sub-ms1071
+
+- Got pituitary
+- No pineal

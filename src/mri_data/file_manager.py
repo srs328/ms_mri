@@ -9,7 +9,7 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from pathlib import Path
 from subprocess import run
-from typing import Callable, Self
+from typing import Self
 
 from attrs import define, field
 from loguru import logger
@@ -55,7 +55,6 @@ def get_drive_root(drive="default"):
         return Path(drive_roots["windows"][drive])
     else:
         raise RuntimeError("Don't know what host this is being run on")
-
 
 
 # Right now it's unused, but could make a method in DataSet that returns a Subject object.
@@ -127,7 +126,7 @@ class Scan:
             return True
         else:
             return False
-        
+
     def with_root(self, dataroot) -> Self:
         new_scan = copy.deepcopy(self)
         new_scan.dataroot = dataroot
@@ -137,7 +136,7 @@ class Scan:
     def root(self) -> Path:
         return self._root
 
-    # TODO changing root can get sticky, the dataroot must remain the same 
+    # TODO changing root can get sticky, the dataroot must remain the same
     @root.setter
     def root(self, root):
         self._root = root
@@ -281,7 +280,7 @@ class DataSet(Record):
             )
         else:
             scan.label = label
-    
+
     def find_scan0(self, subid, sesid):
         sub_scans = self.retrieve(subid=subid)
         for scan in sub_scans:
@@ -291,7 +290,7 @@ class DataSet(Record):
         raise LookupError(
             f"No scan exists for subject: {subid} and session: {sesid}", subid, sesid
         )
-    
+
     def find_scan(self, subid=None, sesid=None):
         if subid is not None and sesid is None:
             return self.retrieve(subid=subid)
@@ -304,7 +303,6 @@ class DataSet(Record):
             return sorted(scans, key=lambda s: (s.subid, s.sesid))
         else:
             raise TypeError("find_scan() expects at least one of 'subid' or 'sesid")
-        
 
     def remove_scan(self, scan):
         idx = self.retrieve(id=scan.id, get_index=True)[0]

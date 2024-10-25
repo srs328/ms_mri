@@ -6,6 +6,7 @@ import os
 from subprocess import run
 import time
 from typing import Callable, Optional
+from nipype.interfaces import fsl
 
 from .file_manager import Scan, nifti_name
 from . import file_manager
@@ -145,3 +146,19 @@ def dice_score(seg1, seg2):
     if volume_sum == 0:
         return 1.0
     return 2.0 * intersection / volume_sum
+
+
+def compute_volume(path):
+    # Create an instance of the ImageStats interface
+    stats = fsl.ImageStats()
+
+    # Specify the input image
+    stats.inputs.in_file = path
+
+    # Define the operations you want to perform
+    stats.inputs.op_string = '-M -V'  # Calculate mean and volume
+
+    # Run the interface
+    result = stats.run()
+    
+    return result.outputs.out_stat[1:]
