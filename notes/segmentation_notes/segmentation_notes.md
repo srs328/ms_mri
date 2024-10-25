@@ -10,11 +10,17 @@
 - sub-ms1003 may be under-labeled
 - sub-ms1007 missing a sliver?
 
+### Choroid Resegment
+
 ## Pituitary
 
-### Pituitary 1
-
 - sub-ms1005 has discontinuities in a slice (e.g. coronal)
+
+## Pineal
+
+- ms1010 good besides extraneous region
+- ms1029 got the pineal, but got large extraneous region too
+- ms1188 got pineal but underlabeled
 
 ## Inference Notes
 
