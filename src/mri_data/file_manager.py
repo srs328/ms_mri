@@ -323,7 +323,6 @@ class DataSet(Record):
     def dataroot(self, dataroot: Path):
         self._dataroot = dataroot
         for scan in self._records:
-            scan.root = dataroot / scan.relative_path
             scan.dataroot = dataroot
 
     def __str__(self):

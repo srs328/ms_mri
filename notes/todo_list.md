@@ -1,5 +1,9 @@
 # To Do List
 
+## Segmentation
+
+- [ ] Look into deepedit
+
 ## Project Structure
 
 - [ ] Rename the notebooks in `/notebooks` to not have "notebook" in the name, but have an expressive title
