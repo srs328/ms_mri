@@ -18,7 +18,7 @@ from mri_data.file_manager import scan_3Tpioneer_bids, DataSet, filter_first_ses
 from monai_training import preprocess
 
 
-do_preparation = True
+do_preparation = False
 do_inference = True
 
 

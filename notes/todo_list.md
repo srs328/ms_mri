@@ -8,6 +8,10 @@
 
 - [ ] Rename the notebooks in `/notebooks` to not have "notebook" in the name, but have an expressive title
 
+## itksnap
+
+- [ ] Complete/refine `itksnap_workspaces/create_manual_labels_workspaces.ipynb`
+
 ## File Management
 
 - [ ] Would it make sense to subclass Path for working with nifti files, then override methods/properties like

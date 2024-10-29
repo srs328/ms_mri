@@ -11,7 +11,16 @@ from loguru import logger
 from monai_training.preprocess import DataSetProcesser
 from mri_data import file_manager as fm
 
-dataroot = Path("/home/srs-9/Projects/ms_mri/data/3Tpioneer_bids")
+dataroot = Path("/mnt/h/3Tpioneer_bids")
+
+modalities = ["flair", "t1"]
+
+dataset_proc = DataSetProcesser.new_dataset(dataroot, fm.scan_3Tpioneer_bids, filters=[fm.filter_first_ses])
+dataset_proc.prepare_images(modalities)
+dataset_proc.dataset.sort()
+dataset_proc.prepare_labels(["choroid_t1_flair"], suffix_list=["CH", "ED", "DT"])
+
+dataset = dataset_proc.dataset
 
 # print(Scan._field_names)
 

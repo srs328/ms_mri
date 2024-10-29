@@ -394,7 +394,9 @@ def find_label(scan, label_prefix: str, suffix_list: list[str] = None) -> Path:
         label_parts = [label_prefix]
         if len(suffix) > 0:
             label_parts.append(suffix)
+        logger.debug("Testing {}".format(("-".join(label_parts) + ".nii.gz").lower()))
         for lab in labels:
+            logger.debug("Checking {}", lab.name.lower())
             if ("-".join(label_parts) + ".nii.gz").lower() == lab.name.lower():
                 logger.debug("Found {} for {}", lab.name, scan.info())
                 return lab

@@ -9,6 +9,10 @@ option resulted in error related to notebook not being in JSON format correctly
 
 ## Reference
 
+To save the monai log to a file during training, run the script like this: 
+
+`python monai_analysis/choroid_resegment1/run_inference-choroid-10_18_24.py 2>&1 | tee -a inference.log`
+
 ### Ubuntu Desktop
 
 - remap scroll lock to S for itksnap: `xmodmap -e "keycode 78 = s"`  

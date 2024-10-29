@@ -103,7 +103,7 @@ class DataSetProcesser:
                 new_dataset.append(scan)
         self.dataset = new_dataset
 
-    def prepare_images(self, modality: list[str] | str):
+    def prepare_images(self, modality: list[str] | str, log_exceptions: bool = False):
         logger.info("Prepare Images")
         if isinstance(modality, str):
             self.modality = [modality]
@@ -139,9 +139,12 @@ class DataSetProcesser:
                     continue
                 except CalledProcessError:
                     if not self.suppress_exceptions:
-                        logger.exception(
-                            f"Something went wrong merging images for {scan.info}"
-                        )
+                        if log_exceptions:
+                            logger.exception(
+                                f"Something went wrong merging images for {scan.info}"
+                            )
+                        else:
+                            logger.error(f"Something went wrong merging images for {scan.info}")
                     continue
                     # raise
                 else:
@@ -184,7 +187,7 @@ class DataSetProcesser:
                 dataset_copy.append(scan)
                 continue
             label_path = scan.root / self.label_name
-            if label_path.is_file():
+            if label_path.is_file() and not suffix_list:
                 logger.debug(f"Label {label_path.name} exists")
                 scan.label_path = label_path
                 dataset_copy.append(scan)

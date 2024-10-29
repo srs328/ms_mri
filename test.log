@@ -1,0 +1,18 @@
+Image Exception : #22 :: Failed to read volume /mnt/h/3Tpioneer_bids/sub-ms2120/ses-20170920/flair.nii.gz
+Error : Error: short read, file may be truncated
+terminate called after throwing an instance of 'std::runtime_error'
+  what():  Failed to read volume /mnt/h/3Tpioneer_bids/sub-ms2120/ses-20170920/flair.nii.gz
+Error : Error: short read, file may be truncated
+/usr/local/fsl/share/fsl/bin/fslmerge: line 2: 10613 Aborted                 (core dumped) /usr/local/fsl/bin/fslmerge "$@"
+Image Exception : #22 :: Failed to read volume /mnt/h/3Tpioneer_bids/sub-ms1196/ses-20161004/t1.nii.gz
+Error : Error: short read, file may be truncated
+terminate called after throwing an instance of 'std::runtime_error'
+  what():  Failed to read volume /mnt/h/3Tpioneer_bids/sub-ms1196/ses-20161004/t1.nii.gz
+Error : Error: short read, file may be truncated
+/usr/local/fsl/share/fsl/bin/fslmerge: line 2: 10820 Aborted                 (core dumped) /usr/local/fsl/bin/fslmerge "$@"
+/home/srs-9/.virtualenvs/monai/lib/python3.12/site-packages/ignite/handlers/checkpoint.py:17: DeprecationWarning: `TorchScript` support for functional optimizers is deprecated and will be removed in a future PyTorch release. Consider using the `torch.compile` optimizer instead.
+  from torch.distributed.optim import ZeroRedundancyOptimizer
+2024-10-28 16:14:13.377 | INFO     | __main__:<module>:60 - flair.t1_choroid_resegment_pred.nii.gz
+Ensembling (rank 0)...:   0%|          | 0/529 [00:00<?, ?it/s]monai.networks.nets.swin_unetr SwinUNETR.__init__:img_size: Argument `img_size` has been deprecated since version 1.3. It will be removed in version 1.5. The img_size argument is not required anymore and checks on the input size are run during forward().
+You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+`torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
