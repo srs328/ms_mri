@@ -1,5 +1,9 @@
 # To Do List
 
+## Important
+
+- [ ] Make it so that the training script/notebook automatically makes a copy of `datalist.json` called `training-datalist.json`
+
 ## Segmentation
 
 - [ ] Look into deepedit
