@@ -3,6 +3,7 @@ from loguru import logger
 import nibabel as nib
 import numpy as np
 import os
+from pathlib import Path
 from subprocess import run
 import time
 from typing import Callable, Optional
@@ -162,3 +163,43 @@ def compute_volume(path):
     result = stats.run()
     
     return result.outputs.out_stat[1:]
+
+
+def create_itksnap_workspace_cmd(label_scan, image_scan, save_dir):
+    label_path = file_manager.convert_to_winroot(label_scan.label_path)
+    image_names = file_manager.parse_image_name(image_scan.image)
+    label_root = Path(label_scan.root)
+    image_root = Path(image_scan.root)
+
+    image_paths = [(image_root / name).with_suffix(".nii.gz") for name in image_names]
+    image_paths = [file_manager.convert_to_winroot(p) for p in image_paths]
+
+    main_image = "-layers-set-main {} -tags-add {}-MRI".format(
+        image_paths[0], image_names[0].upper()
+    )
+    extra_images = " ".join(
+        [
+            "-layers-add-anat {} -tags-add {}-MRI".format(path, name.upper())
+            for path, name in zip(image_paths[1:], image_names[1:])
+        ]
+    )
+    seg = "-layers-add-seg {} -tags-add {}".format(label_path, nifti_name(label_scan.label))
+
+    save_path = os.path.join(save_dir, f"sub-ms{label_scan.subid}-ses-{label_scan.sesid}.itksnap")
+    save = f"-o {save_path}"
+
+    command_parts = ["itksnap-wt.exe", main_image, extra_images, seg, save]
+    command = " ".join(command_parts)
+    # run(command)
+    return command
+
+
+def open_itksnap_workspace_cmd(images: list[str], labels: list[str]):
+    command = ["itksnap"]
+    command.extend(["-g", images[0], "-o"])
+    # command.extend(" ".join(["-o {}".format(im) for im in images[1:]]).split(" "))
+    command.extend(" -o ".join(images[1:]).split(" "))
+    command.append("-s")
+    command.extend(" -s ".join(labels).split(" "))
+    return " ".join(command)
+
