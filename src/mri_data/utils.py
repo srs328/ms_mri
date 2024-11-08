@@ -195,6 +195,8 @@ def create_itksnap_workspace_cmd(label_scan, image_scan, save_dir):
 
 
 def open_itksnap_workspace_cmd(images: list[str], labels: list[str]):
+    images = [str(file_manager.convert_to_winroot(Path(p))) for p in images]
+    labels = [str(file_manager.convert_to_winroot(Path(p))) for p in labels]
     command = ["itksnap"]
     command.extend(["-g", images[0], "-o"])
     # command.extend(" ".join(["-o {}".format(im) for im in images[1:]]).split(" "))
