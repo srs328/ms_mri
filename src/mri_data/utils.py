@@ -32,8 +32,6 @@ def merge_images(image_paths, merged_path, resave=False):
 
 
 def merge_labels(label_paths, merged_path):
-    if merged_path.is_file():
-        return merged_path
     label_paths = [str(p) for p in label_paths]
     for p in label_paths:
         if not os.path.isfile(p):
@@ -65,7 +63,7 @@ def set_label_value(label_path, output_path, val):
         str(val),
         str(output_path),
     ]
-    logger.debug("thoo3")
+    logger.debug(" ".join(cmd_parts))
     run(cmd_parts, check=True)
     logger.debug("thoo4")
     return output_path
@@ -195,8 +193,8 @@ def create_itksnap_workspace_cmd(label_scan, image_scan, save_dir):
 
 
 def open_itksnap_workspace_cmd(images: list[str], labels: list[str]):
-    images = [str(file_manager.convert_to_winroot(Path(p))) for p in images]
-    labels = [str(file_manager.convert_to_winroot(Path(p))) for p in labels]
+    images = [str(Path(p)) for p in images]
+    labels = [str(Path(p)) for p in labels]
     command = ["itksnap"]
     command.extend(["-g", images[0], "-o"])
     # command.extend(" ".join(["-o {}".format(im) for im in images[1:]]).split(" "))

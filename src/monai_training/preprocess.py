@@ -161,7 +161,7 @@ class DataSetProcesser:
         self,
         label: list[str] | str,
         suffix_list: list[str] = None,
-        id_label: Callable = lambda i: i,
+        id_label: Callable = lambda i: i+1,
         resave=False,
     ):
         logger.info("Prepare Labels")
