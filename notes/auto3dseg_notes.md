@@ -1,5 +1,7 @@
 # Auto3dSeg
 
+[YouTube tutorial](https://www.youtube.com/watch?v=wEfLVnL-7D4)
+
 ## Dice
 
 - Dice Score is a measure of similarity between predicted segmentation and ground truth segmentation mask
