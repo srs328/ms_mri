@@ -49,12 +49,16 @@ drive_roots = {
 
 def get_drive_root(drive="default"):
     hostname = platform.node()
-    if hostname == "rhinocampus":
+    if hostname == "rhinocampus" or hostname == "ryzen9":
         return Path(drive_roots["ubuntu"][drive])
     elif hostname == "LenovoDesktop" or hostname == "srs-9-Yoga7i":
         return Path(drive_roots["windows"][drive])
     else:
         raise RuntimeError("Don't know what host this is being run on")
+    
+
+def convert_to_winroot(path: Path):
+    return Path("H:/") / path.relative_to("/mnt/h")
 
 
 # Right now it's unused, but could make a method in DataSet that returns a Subject object.

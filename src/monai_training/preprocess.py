@@ -161,7 +161,7 @@ class DataSetProcesser:
         self,
         label: list[str] | str,
         suffix_list: list[str] = None,
-        id_label: Callable = lambda i: i,
+        id_label: Callable = lambda i: i+1,
         resave=False,
     ):
         logger.info("Prepare Labels")
@@ -274,6 +274,11 @@ def tmp_fix_dataset(path, struct):
 def parse_datalist(
     datalist_file: Path | os.PathLike, dataroot: Path | os.PathLike
 ) -> fm.DataSet:
+    if type(dataroot) is str:
+        dataroot = Path(dataroot)
+    if type(datalist_file) is str:
+        datalist_file = Path(datalist_file)
+
     logger.info(f"Loading {datalist_file}")
     logger.info(f"{datalist_file} exists: {datalist_file.is_file()}")
     with open(datalist_file, "r") as f:
