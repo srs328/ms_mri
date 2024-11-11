@@ -1,5 +1,22 @@
 # Segmentation Notes
 
+## General
+
+### 1003
+
+- Giant choroid doesn't get fully labeled
+- pineal1 had some extra labelling outside pineal
+- choroid_pineal_pituitary2 did not have extra pineal labeling, but did have some extra pituitary labeling
+
+### 1004
+
+- Missed pineal completely in pineal1
+- Got pineal in choroid_pineal_pituitary2
+
+### 1005
+
+- Missed pineal in pineal1, but got pineal in choroid_pineal_pituitary2
+
 ## Choroid Plexus
 
 ### Choroid 1
@@ -38,8 +55,6 @@ Good
 `itksnap -g $dataroot/sub-ms1003/ses-20170329/flair.nii.gz -o $dataroot/sub-ms1003/ses-20170329/t1.nii.gz -s $inference_root/sub-ms1003/ses-20170329/flair.t1_choroid_resegment2_pred.nii.gz`
 
 Giant choroid. Not well labeled
-
-
 
 ---
 ### sub-ms1038
