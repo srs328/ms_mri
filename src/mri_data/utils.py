@@ -139,9 +139,9 @@ def load_nifti(path) -> np.ndarray:
     return img.get_fdata()
 
 
-def dice_score(seg1, seg2):
-    intersection = np.sum((seg1 > 0) & (seg2 > 0))
-    volume_sum = np.sum(seg1 > 0) + np.sum(seg2 > 0)
+def dice_score(seg1, seg2, seg1_val=1, seg2_val=1):
+    intersection = np.sum((seg1 == seg1_val) & (seg2 == seg2_val))
+    volume_sum = np.sum(seg1 == seg1_val) + np.sum(seg2 == seg2_val)
     if volume_sum == 0:
         return 1.0
     return 2.0 * intersection / volume_sum
@@ -155,11 +155,11 @@ def compute_volume(path):
     stats.inputs.in_file = path
 
     # Define the operations you want to perform
-    stats.inputs.op_string = '-M -V'  # Calculate mean and volume
+    stats.inputs.op_string = "-M -V"  # Calculate mean and volume
 
     # Run the interface
     result = stats.run()
-    
+
     return result.outputs.out_stat[1:]
 
 
@@ -181,9 +181,13 @@ def create_itksnap_workspace_cmd(label_scan, image_scan, save_dir):
             for path, name in zip(image_paths[1:], image_names[1:])
         ]
     )
-    seg = "-layers-add-seg {} -tags-add {}".format(label_path, nifti_name(label_scan.label))
+    seg = "-layers-add-seg {} -tags-add {}".format(
+        label_path, nifti_name(label_scan.label)
+    )
 
-    save_path = os.path.join(save_dir, f"sub-ms{label_scan.subid}-ses-{label_scan.sesid}.itksnap")
+    save_path = os.path.join(
+        save_dir, f"sub-ms{label_scan.subid}-ses-{label_scan.sesid}.itksnap"
+    )
     save = f"-o {save_path}"
 
     command_parts = ["itksnap-wt.exe", main_image, extra_images, seg, save]
@@ -205,4 +209,3 @@ def open_itksnap_workspace_cmd(images: list[str], labels: list[str], win=False):
     command.append("-s")
     command.extend(" -s ".join(labels).split(" "))
     return " ".join(command)
-
