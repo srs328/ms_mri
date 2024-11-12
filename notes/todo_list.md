@@ -7,6 +7,7 @@
 ## Segmentation
 
 - [ ] Look into deepedit
+- [ ] Try the CP segmentation approach described in Bergsland et. al to compare to the Monai results
 
 ## Project Structure
 
@@ -42,6 +43,7 @@
 - [ ] Fix the training code so that the ensemble_predict files have the same name format as the inference ones
 - [ ] In evaluate training, fix the spots that are hard coded
 - [ ] Figure out why `ensemble_out_dir` for old trainings has a subdirectory `3Tpioneer_bids`, but new ones don't
+- [ ] View [YouTube tutorial](https://www.youtube.com/watch?v=wEfLVnL-7D4) for auto3dseg
 
 ## Logging
 

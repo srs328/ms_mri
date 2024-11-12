@@ -130,6 +130,10 @@ def create_datalist(train_data, test_data, work_dir, dataroot, train_params, inf
     datalist_file = os.path.join(work_dir, "datalist.json")
     with open(datalist_file, "w") as f:
         json.dump(datalist, f, indent=4)
+    
+    datalist_file_backup = os.path.join(work_dir, "training-datalist.json")
+    with open(datalist_file, "w") as f:
+        json.dump(datalist, f, indent=4)
 
     return datalist_file
 
