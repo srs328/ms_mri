@@ -391,6 +391,8 @@ def find_label(scan, label_prefix: str, suffix_list: list[str] = None) -> Path:
     """
     if suffix_list is None:
         suffix_list = [""]
+    if "" not in suffix_list:
+        suffix_list.append("")
     root_dir = scan.root
     labels = list(root_dir.glob(f"{label_prefix}*.nii.gz"))
 
