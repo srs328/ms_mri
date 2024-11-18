@@ -207,5 +207,5 @@ def open_itksnap_workspace_cmd(images: list[str], labels: list[str], win=False):
     # command.extend(" ".join(["-o {}".format(im) for im in images[1:]]).split(" "))
     command.extend(" -o ".join(images[1:]).split(" "))
     command.append("-s")
-    command.extend(" -s ".join(labels).split(" "))
+    command.extend(labels)
     return " ".join(command)
