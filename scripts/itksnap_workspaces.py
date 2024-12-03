@@ -36,7 +36,7 @@ def create_workspace(scan, save_dir):
 
     command_parts = ["itksnap-wt.exe", main_image, extra_images, seg, save]
     command = " ".join(command_parts)
-    run(command)
+    # run(command)
     return command
 
 
@@ -57,7 +57,7 @@ if __name__ == "__main__":
         commands.append(create_workspace(scan, save_dir) + "\n")
 
     current_dir = Path(__file__).absolute().parent
-    with open(current_dir / "create-workspaces2.sh", "w") as f:
+    with open(current_dir / "create-workspaces3.sh", "w") as f:
         f.writelines(commands)
 
 """
