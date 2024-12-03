@@ -8,6 +8,7 @@ from subprocess import run
 import time
 from typing import Callable, Optional
 from nipype.interfaces import fsl
+from skimage.metrics import hausdorff_distance
 
 from .file_manager import Scan, nifti_name
 from . import file_manager
@@ -143,8 +144,26 @@ def dice_score(seg1, seg2, seg1_val=1, seg2_val=1):
     intersection = np.sum((seg1 == seg1_val) & (seg2 == seg2_val))
     volume_sum = np.sum(seg1 == seg1_val) + np.sum(seg2 == seg2_val)
     if volume_sum == 0:
-        return 1.0
+        #? Why did I originally make this 1.0? Was there good reason, or mistake?
+        #return 1.0
+        return None
     return 2.0 * intersection / volume_sum
+
+
+def iou(seg1, seg2, seg1_val=1, seg2_val=1):
+    intersection = np.sum((seg1 == seg1_val) & (seg2 == seg2_val))
+    union = np.sum((seg1 == seg1_val) | (seg2 == seg2_val))
+    if union == 0:
+        return 1.0
+    return intersection / union
+
+
+def hausdorff_dist(seg1, seg2, seg1_val=1, seg2_val=1):
+    seg1_fix = np.zeros_like(seg1)
+    seg1_fix[seg1==seg1_val] = 1
+    seg2_fix = np.zeros_like(seg2)
+    seg2_fix[seg2==seg2_val] = 1
+    return hausdorff_distance(seg1_fix, seg2_fix)
 
 
 def compute_volume(path):
