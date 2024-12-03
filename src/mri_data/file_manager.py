@@ -379,6 +379,44 @@ def scan_3Tpioneer_bids(dataroot, image=None, label=None, subdir=None) -> DataSe
     return dataset
 
 
+def scan_lesjak(dataroot, image=None, label=None, subdir=None) -> DataSet:
+    dataroot = Path(dataroot)
+
+    sub_dirs = [
+        Path(item.path)
+        for item in os.scandir(dataroot)
+        if item.is_dir() and "patient" in item.name
+    ]
+
+    dataset = DataSet(dataroot)
+
+    for i, sub_dir in enumerate(sub_dirs):
+        scan_dir = sub_dir
+        if subdir is not None:
+            scan_dir = scan_dir / subdir
+
+        image_file = image
+        if image_file is not None and not (scan_dir / image_file).is_file():
+            image_file = None
+
+        label_file = label
+        if label_file is not None and not (scan_dir / label_file).is_file():
+            label_file = None
+        scanid = i+1
+        dataset.append(
+            dict(
+                id=scanid,
+                subid=sub_dir.name,
+                sesid=None,
+                dataroot=dataroot,
+                root=scan_dir,
+                image=image_file,
+                label=label_file,
+            )
+        )
+        
+    return dataset
+
 # this should not be a method Scan
 def find_label(scan, label_prefix: str, suffix_list: list[str] = None) -> Path:
     """find label for scan, and if there are multiple, return one
