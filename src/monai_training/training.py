@@ -155,11 +155,13 @@ def assign_conditions(dataset: DataSet, fraction_ts) -> DataSet:
     n_ts = int(fraction_ts * n_scans)
     inds = [i for i in range(n_scans)]
     random.shuffle(inds)
+    print(inds)
 
-    for i in scans_no_label:
-        inds.remove(i)
-        inds.insert(0, i)
+    # for i in scans_no_label:
+    #     inds.remove(i)
+    #     inds.insert(0, i)
 
+    print(inds)
     for i in inds[:n_ts]:
         dataset[i].cond = "ts"
     for i in inds[n_ts:]:
