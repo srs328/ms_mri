@@ -1,6 +1,6 @@
 {
     "info": {
-        "dataroot": "/mnt/h/3Tpioneer_bids"
+        "dataroot": "/media/smbshare/3Tpioneer_bids"
     },
     "data": [
         {
@@ -10,8 +10,8 @@
             "label": null,
             "cond": "ts",
             "id": 20382010080,
-            "root": "/mnt/h/3Tpioneer_bids/sub-ms1010/ses-20180208",
-            "dataroot": "/mnt/h/3Tpioneer_bids"
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1010/ses-20180208",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
         },
         {
             "subid": "1011",
@@ -20,8 +20,8 @@
             "label": null,
             "cond": "tr",
             "id": 20402901021,
-            "root": "/mnt/h/3Tpioneer_bids/sub-ms1011/ses-20180911",
-            "dataroot": "/mnt/h/3Tpioneer_bids"
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1011/ses-20180911",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
         },
         {
             "subid": "1019",
@@ -30,8 +30,8 @@
             "label": null,
             "cond": "tr",
             "id": 20574229552,
-            "root": "/mnt/h/3Tpioneer_bids/sub-ms1019/ses-20190608",
-            "dataroot": "/mnt/h/3Tpioneer_bids"
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1019/ses-20190608",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
         },
         {
             "subid": "1029",
@@ -40,8 +40,8 @@
             "label": null,
             "cond": "tr",
             "id": 20755769664,
-            "root": "/mnt/h/3Tpioneer_bids/sub-ms1029/ses-20170816",
-            "dataroot": "/mnt/h/3Tpioneer_bids"
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1029/ses-20170816",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
         },
         {
             "subid": "1033",
@@ -50,8 +50,8 @@
             "label": null,
             "cond": "ts",
             "id": 20836763861,
-            "root": "/mnt/h/3Tpioneer_bids/sub-ms1033/ses-20171117",
-            "dataroot": "/mnt/h/3Tpioneer_bids"
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1033/ses-20171117",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
         },
         {
             "subid": "1037",
@@ -60,8 +60,8 @@
             "label": null,
             "cond": "tr",
             "id": 20958296796,
-            "root": "/mnt/h/3Tpioneer_bids/sub-ms1037/ses-20210508",
-            "dataroot": "/mnt/h/3Tpioneer_bids"
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1037/ses-20210508",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
         },
         {
             "subid": "1038",
@@ -70,8 +70,8 @@
             "label": null,
             "cond": "tr",
             "id": 20927150178,
-            "root": "/mnt/h/3Tpioneer_bids/sub-ms1038/ses-20161031",
-            "dataroot": "/mnt/h/3Tpioneer_bids"
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1038/ses-20161031",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
         },
         {
             "subid": "1080",
@@ -80,8 +80,8 @@
             "label": null,
             "cond": "tr",
             "id": 21794849280,
-            "root": "/mnt/h/3Tpioneer_bids/sub-ms1080/ses-20180416",
-            "dataroot": "/mnt/h/3Tpioneer_bids"
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1080/ses-20180416",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
         },
         {
             "subid": "1085",
@@ -90,8 +90,8 @@
             "label": null,
             "cond": "tr",
             "id": 21938947380,
-            "root": "/mnt/h/3Tpioneer_bids/sub-ms1085/ses-20220228",
-            "dataroot": "/mnt/h/3Tpioneer_bids"
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1085/ses-20220228",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
         },
         {
             "subid": "1087",
@@ -100,8 +100,8 @@
             "label": null,
             "cond": "tr",
             "id": 21958179379,
-            "root": "/mnt/h/3Tpioneer_bids/sub-ms1087/ses-20200717",
-            "dataroot": "/mnt/h/3Tpioneer_bids"
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1087/ses-20200717",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
         },
         {
             "subid": "1089",
@@ -110,8 +110,8 @@
             "label": null,
             "cond": "tr",
             "id": 22009356468,
-            "root": "/mnt/h/3Tpioneer_bids/sub-ms1089/ses-20210612",
-            "dataroot": "/mnt/h/3Tpioneer_bids"
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1089/ses-20210612",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
         },
         {
             "subid": "1109",
@@ -120,8 +120,8 @@
             "label": null,
             "cond": "tr",
             "id": 22379956027,
-            "root": "/mnt/h/3Tpioneer_bids/sub-ms1109/ses-20180303",
-            "dataroot": "/mnt/h/3Tpioneer_bids"
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1109/ses-20180303",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
         },
         {
             "subid": "1119",
@@ -130,8 +130,8 @@
             "label": null,
             "cond": "ts",
             "id": 22560170190,
-            "root": "/mnt/h/3Tpioneer_bids/sub-ms1119/ses-20161010",
-            "dataroot": "/mnt/h/3Tpioneer_bids"
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1119/ses-20161010",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
         },
         {
             "subid": "1152",
@@ -140,8 +140,8 @@
             "label": null,
             "cond": "tr",
             "id": 23236449408,
-            "root": "/mnt/h/3Tpioneer_bids/sub-ms1152/ses-20170529",
-            "dataroot": "/mnt/h/3Tpioneer_bids"
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1152/ses-20170529",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
         },
         {
             "subid": "1163",
@@ -150,8 +150,8 @@
             "label": null,
             "cond": "tr",
             "id": 23470394841,
-            "root": "/mnt/h/3Tpioneer_bids/sub-ms1163/ses-20180907",
-            "dataroot": "/mnt/h/3Tpioneer_bids"
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1163/ses-20180907",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
         },
         {
             "subid": "1188",
@@ -160,8 +160,8 @@
             "label": null,
             "cond": "tr",
             "id": 23998455360,
-            "root": "/mnt/h/3Tpioneer_bids/sub-ms1188/ses-20200720",
-            "dataroot": "/mnt/h/3Tpioneer_bids"
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1188/ses-20200720",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
         },
         {
             "subid": "1191",
@@ -170,8 +170,8 @@
             "label": null,
             "cond": "tr",
             "id": 24046437684,
-            "root": "/mnt/h/3Tpioneer_bids/sub-ms1191/ses-20190124",
-            "dataroot": "/mnt/h/3Tpioneer_bids"
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1191/ses-20190124",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
         },
         {
             "subid": "1234",
@@ -180,8 +180,8 @@
             "label": null,
             "cond": "tr",
             "id": 24902384076,
-            "root": "/mnt/h/3Tpioneer_bids/sub-ms1234/ses-20180214",
-            "dataroot": "/mnt/h/3Tpioneer_bids"
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1234/ses-20180214",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
         },
         {
             "subid": "1259",
@@ -190,8 +190,8 @@
             "label": null,
             "cond": "ts",
             "id": 25432810977,
-            "root": "/mnt/h/3Tpioneer_bids/sub-ms1259/ses-20200803",
-            "dataroot": "/mnt/h/3Tpioneer_bids"
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1259/ses-20200803",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
         },
         {
             "subid": "1265",
@@ -200,8 +200,8 @@
             "label": null,
             "cond": "tr",
             "id": 25527860655,
-            "root": "/mnt/h/3Tpioneer_bids/sub-ms1265/ses-20180127",
-            "dataroot": "/mnt/h/3Tpioneer_bids"
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1265/ses-20180127",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
         },
         {
             "subid": "1272",
@@ -210,8 +210,8 @@
             "label": null,
             "cond": "tr",
             "id": 25708525560,
-            "root": "/mnt/h/3Tpioneer_bids/sub-ms1272/ses-20211105",
-            "dataroot": "/mnt/h/3Tpioneer_bids"
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1272/ses-20211105",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
         },
         {
             "subid": "1280",
@@ -220,8 +220,8 @@
             "label": null,
             "cond": "tr",
             "id": 25882005760,
-            "root": "/mnt/h/3Tpioneer_bids/sub-ms1280/ses-20220317",
-            "dataroot": "/mnt/h/3Tpioneer_bids"
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1280/ses-20220317",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
         },
         {
             "subid": "1293",
@@ -230,8 +230,8 @@
             "label": null,
             "cond": "tr",
             "id": 26068339797,
-            "root": "/mnt/h/3Tpioneer_bids/sub-ms1293/ses-20161129",
-            "dataroot": "/mnt/h/3Tpioneer_bids"
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1293/ses-20161129",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
         },
         {
             "subid": "1321",
@@ -240,8 +240,8 @@
             "label": null,
             "cond": "tr",
             "id": 26685547420,
-            "root": "/mnt/h/3Tpioneer_bids/sub-ms1321/ses-20201020",
-            "dataroot": "/mnt/h/3Tpioneer_bids"
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1321/ses-20201020",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
         },
         {
             "subid": "1355",
@@ -250,8 +250,8 @@
             "label": null,
             "cond": "tr",
             "id": 27384690920,
-            "root": "/mnt/h/3Tpioneer_bids/sub-ms1355/ses-20210104",
-            "dataroot": "/mnt/h/3Tpioneer_bids"
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1355/ses-20210104",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
         },
         {
             "subid": "1437",
@@ -260,8 +260,8 @@
             "label": null,
             "cond": "ts",
             "id": 29042492811,
-            "root": "/mnt/h/3Tpioneer_bids/sub-ms1437/ses-20210503",
-            "dataroot": "/mnt/h/3Tpioneer_bids"
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1437/ses-20210503",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
         },
         {
             "subid": "1498",
@@ -270,8 +270,8 @@
             "label": null,
             "cond": "tr",
             "id": 30275481796,
-            "root": "/mnt/h/3Tpioneer_bids/sub-ms1498/ses-20210602",
-            "dataroot": "/mnt/h/3Tpioneer_bids"
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1498/ses-20210602",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
         },
         {
             "subid": "1518",
@@ -280,8 +280,8 @@
             "label": null,
             "cond": "tr",
             "id": 30694287888,
-            "root": "/mnt/h/3Tpioneer_bids/sub-ms1518/ses-20220216",
-            "dataroot": "/mnt/h/3Tpioneer_bids"
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1518/ses-20220216",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
         },
         {
             "subid": "1540",
@@ -290,8 +290,8 @@
             "label": null,
             "cond": "tr",
             "id": 31109881880,
-            "root": "/mnt/h/3Tpioneer_bids/sub-ms1540/ses-20201222",
-            "dataroot": "/mnt/h/3Tpioneer_bids"
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1540/ses-20201222",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
         },
         {
             "subid": "1547",
@@ -300,8 +300,8 @@
             "label": null,
             "cond": "ts",
             "id": 31280836587,
-            "root": "/mnt/h/3Tpioneer_bids/sub-ms1547/ses-20220321",
-            "dataroot": "/mnt/h/3Tpioneer_bids"
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1547/ses-20220321",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
         },
         {
             "subid": "1548",
@@ -310,8 +310,8 @@
             "label": null,
             "cond": "tr",
             "id": 31286052144,
-            "root": "/mnt/h/3Tpioneer_bids/sub-ms1548/ses-20210628",
-            "dataroot": "/mnt/h/3Tpioneer_bids"
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1548/ses-20210628",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
         },
         {
             "subid": "2081",
@@ -320,8 +320,8 @@
             "label": null,
             "cond": "ts",
             "id": 41974194524,
-            "root": "/mnt/h/3Tpioneer_bids/sub-ms2081/ses-20170204",
-            "dataroot": "/mnt/h/3Tpioneer_bids"
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms2081/ses-20170204",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
         },
         {
             "subid": "2083",
@@ -330,8 +330,8 @@
             "label": null,
             "cond": "tr",
             "id": 42015155666,
-            "root": "/mnt/h/3Tpioneer_bids/sub-ms2083/ses-20170502",
-            "dataroot": "/mnt/h/3Tpioneer_bids"
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms2083/ses-20170502",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
         },
         {
             "subid": "2097",
@@ -340,8 +340,8 @@
             "label": null,
             "cond": "tr",
             "id": 42299054631,
-            "root": "/mnt/h/3Tpioneer_bids/sub-ms2097/ses-20171223",
-            "dataroot": "/mnt/h/3Tpioneer_bids"
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms2097/ses-20171223",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
         },
         {
             "subid": "2126",
@@ -350,8 +350,8 @@
             "label": null,
             "cond": "ts",
             "id": 42905282224,
-            "root": "/mnt/h/3Tpioneer_bids/sub-ms2126/ses-20181224",
-            "dataroot": "/mnt/h/3Tpioneer_bids"
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms2126/ses-20181224",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
         },
         {
             "subid": "2132",
@@ -360,8 +360,8 @@
             "label": null,
             "cond": "tr",
             "id": 43046838900,
-            "root": "/mnt/h/3Tpioneer_bids/sub-ms2132/ses-20190825",
-            "dataroot": "/mnt/h/3Tpioneer_bids"
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms2132/ses-20190825",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
         },
         {
             "subid": "2144",
@@ -370,8 +370,8 @@
             "label": null,
             "cond": "tr",
             "id": 43288264768,
-            "root": "/mnt/h/3Tpioneer_bids/sub-ms2144/ses-20190422",
-            "dataroot": "/mnt/h/3Tpioneer_bids"
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms2144/ses-20190422",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
         },
         {
             "subid": "2146",
@@ -380,8 +380,8 @@
             "label": null,
             "cond": "ts",
             "id": 43329922482,
-            "root": "/mnt/h/3Tpioneer_bids/sub-ms2146/ses-20191017",
-            "dataroot": "/mnt/h/3Tpioneer_bids"
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms2146/ses-20191017",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
         },
         {
             "subid": "2164",
@@ -390,8 +390,8 @@
             "label": null,
             "cond": "tr",
             "id": 43713044532,
-            "root": "/mnt/h/3Tpioneer_bids/sub-ms2164/ses-20200113",
-            "dataroot": "/mnt/h/3Tpioneer_bids"
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms2164/ses-20200113",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
         },
         {
             "subid": "2187",
@@ -400,8 +400,8 @@
             "label": null,
             "cond": "ts",
             "id": 44178998697,
-            "root": "/mnt/h/3Tpioneer_bids/sub-ms2187/ses-20200731",
-            "dataroot": "/mnt/h/3Tpioneer_bids"
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms2187/ses-20200731",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
         }
     ]
 }
