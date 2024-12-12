@@ -9,6 +9,7 @@ import time
 from typing import Callable, Optional
 from nipype.interfaces import fsl
 from skimage.metrics import hausdorff_distance
+from medpy.metric.binary import hd95
 
 from .file_manager import Scan, nifti_name
 from . import file_manager
@@ -163,7 +164,7 @@ def hausdorff_dist(seg1, seg2, seg1_val=1, seg2_val=1):
     seg1_fix[seg1==seg1_val] = 1
     seg2_fix = np.zeros_like(seg2)
     seg2_fix[seg2==seg2_val] = 1
-    return hausdorff_distance(seg1_fix, seg2_fix)
+    return hd95(seg1_fix, seg2_fix)
 
 
 def compute_volume(path):
