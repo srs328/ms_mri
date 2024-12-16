@@ -50,6 +50,7 @@ Goal is to be able to do something like: ...
 
 - [Choroid plexus segmentation deep learning](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10543490/)
   - [Github of their segmentation tool](https://github.com/hettk/chp_seg)
+- [Another ChP segmentation tool](https://github.com/EhsanTadayon/choroid-plexus-segmentation)
 
 ## Issues
 
