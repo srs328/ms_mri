@@ -452,6 +452,44 @@ def find_label(scan, label_prefix: str, suffix_list: list[str] = None) -> Path:
     )
 
 
+def find_labels(scan, label_prefix: str, suffix_list: list[str] = None, exclude_no_suffix=False) -> tuple[Path]:
+    """find label for scan, and if there are multiple, return one
+    based on priority of suffixes
+
+    Args:
+        scan (Scan): Scan for the subj+ses of interest
+        label_prefix (str): prefix of the label
+        suffix (list[str]): list of suffixes in order of priority
+    """
+    if suffix_list is None:
+        suffix_list = [""]
+    if "" not in suffix_list and not exclude_no_suffix:
+        suffix_list.append("")
+    root_dir = scan.root
+    labels = list(root_dir.glob(f"{label_prefix}*.nii.gz"))
+
+    return_labels = []
+    for suffix in suffix_list:
+        label_parts = [label_prefix]
+        if len(suffix) > 0:
+            label_parts.append(suffix)
+        logger.debug("Testing {}".format(("-".join(label_parts) + ".nii.gz").lower()))
+        for lab in labels:
+            logger.debug("Checking {}", lab.name.lower())
+            if ("-".join(label_parts) + ".nii.gz").lower() == lab.name.lower():
+                logger.debug("Found {} for {}", lab.name, scan.info())
+                return_labels.append(lab)
+
+    if len(return_labels) > 0:
+        return return_labels
+    
+    logger.debug(f"No label in {[lab.name for lab in labels]} matched search")
+    raise FileNotFoundError(
+        f"Could not find label matching {label_prefix} "
+        + f"for subject {scan.subid} ses {scan.sesid}"
+    )
+
+
 def nifti_name(file: Path | str) -> str:
     if isinstance(file, Path):
         file = file.name
