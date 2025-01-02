@@ -24,6 +24,7 @@ class FileLogger:
 
 file_logger = FileLogger()
 
+
 # FIXME thoosl
 # TODO fix so that it uses the new filtering method everywhere
 @define
@@ -84,16 +85,22 @@ class DataSetProcesser:
 
         return dsp
 
-    def filter(self, filters: list[Callable], args_list: list[Optional[tuple]]):
+    def filter(
+        self, filters: list[Callable], args_list: Optional[list[Optional[tuple]]] = None
+    ):
         """filters out scans based on criteria
 
         Args:
             filters (list[Callable]): a list of predicate functions
-            args_list (list[Optional[tuple]]): 
+            args_list (list[Optional[tuple]]):
                 a list containing the additional arguments for each function as
                 tuples or None if a function takes no arguments
         """
-        args_list = [arg if arg is not None else [] for arg in args_list]
+        if args_list is not None:
+            args_list = [arg if arg is not None else [] for arg in args_list]
+        else:
+            args_list = [[] for _ in filters]
+
         new_dataset = DataSet(self.dataset.dataroot)
         for scan in self.dataset:
             if all(
@@ -144,7 +151,9 @@ class DataSetProcesser:
                                 f"Something went wrong merging images for {scan.info}"
                             )
                         else:
-                            logger.error(f"Something went wrong merging images for {scan.info}")
+                            logger.error(
+                                f"Something went wrong merging images for {scan.info}"
+                            )
                     continue
                     # raise
                 else:
@@ -161,7 +170,7 @@ class DataSetProcesser:
         self,
         label: list[str] | str,
         suffix_list: list[str] = None,
-        id_label: Callable = lambda i: i+1,
+        id_label: Callable = lambda i: i + 1,
         resave=False,
     ):
         logger.info("Prepare Labels")
@@ -231,8 +240,10 @@ class DataSetProcesser:
 
 
 def save_dataset(
-    dataset: DataSet, save_path: Path | os.PathLike, info: Optional[dict] = None,
-    indent: Optional[int] = 4
+    dataset: DataSet,
+    save_path: Path | os.PathLike,
+    info: Optional[dict] = None,
+    indent: Optional[int] = 4,
 ):
     if info is None:
         info = dict()

@@ -10,9 +10,12 @@ from typing import Callable, Optional
 from nipype.interfaces import fsl
 from skimage.metrics import hausdorff_distance
 from medpy.metric.binary import hd95
+import logging
 
 from .file_manager import Scan, nifti_name
 from . import file_manager
+
+logging.getLogger("nipype.interface").setLevel(logging.CRITICAL)
 
 
 def merge_images(image_paths, merged_path, resave=False):
@@ -145,8 +148,8 @@ def dice_score(seg1, seg2, seg1_val=1, seg2_val=1):
     intersection = np.sum((seg1 == seg1_val) & (seg2 == seg2_val))
     volume_sum = np.sum(seg1 == seg1_val) + np.sum(seg2 == seg2_val)
     if volume_sum == 0:
-        #? Why did I originally make this 1.0? Was there good reason, or mistake?
-        #return 1.0
+        # ? Why did I originally make this 1.0? Was there good reason, or mistake?
+        # return 1.0
         return None
     return 2.0 * intersection / volume_sum
 
@@ -161,13 +164,13 @@ def iou(seg1, seg2, seg1_val=1, seg2_val=1):
 
 def hausdorff_dist(seg1, seg2, seg1_val=1, seg2_val=1):
     seg1_fix = np.zeros_like(seg1)
-    seg1_fix[seg1==seg1_val] = 1
+    seg1_fix[seg1 == seg1_val] = 1
     seg2_fix = np.zeros_like(seg2)
-    seg2_fix[seg2==seg2_val] = 1
+    seg2_fix[seg2 == seg2_val] = 1
     return hd95(seg1_fix, seg2_fix)
 
 
-def compute_volume(path, index_mask_file=None):
+def compute_volume(path, index_mask_file=None, terminal_output="none"):
     # Create an instance of the ImageStats interface
     stats = fsl.ImageStats()
 
@@ -178,6 +181,8 @@ def compute_volume(path, index_mask_file=None):
 
     # Define the operations you want to perform
     stats.inputs.op_string = "-V"  # Calculate mean and volume
+
+    # stats.terminal_output = terminal_output
 
     # Run the interface
     result = stats.run()

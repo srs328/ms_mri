@@ -55,7 +55,7 @@ def get_drive_root(drive="default"):
         return Path(drive_roots["windows"][drive])
     else:
         raise RuntimeError("Don't know what host this is being run on")
-    
+
 
 def convert_to_winroot(path: Path):
     return Path("H:/") / path.relative_to("/mnt/h")
@@ -329,6 +329,10 @@ class DataSet(Record):
         for scan in self._records:
             scan.dataroot = dataroot
 
+    @property
+    def scans(self) -> list[Scan]:
+        return self._records
+
     def __str__(self):
         return ", ".join([str(scan) for scan in self])
 
@@ -402,7 +406,7 @@ def scan_lesjak(dataroot, image=None, label=None, subdir=None) -> DataSet:
         label_file = label
         if label_file is not None and not (scan_dir / label_file).is_file():
             label_file = None
-        scanid = i+1
+        scanid = i + 1
         dataset.append(
             dict(
                 id=scanid,
@@ -414,8 +418,9 @@ def scan_lesjak(dataroot, image=None, label=None, subdir=None) -> DataSet:
                 label=label_file,
             )
         )
-        
+
     return dataset
+
 
 # this should not be a method Scan
 def find_label(scan, label_prefix: str, suffix_list: list[str] = None) -> Path:
@@ -452,7 +457,9 @@ def find_label(scan, label_prefix: str, suffix_list: list[str] = None) -> Path:
     )
 
 
-def find_labels(scan, label_prefix: str, suffix_list: list[str] = None, exclude_no_suffix=False) -> tuple[Path]:
+def find_labels(
+    scan, label_prefix: str, suffix_list: list[str] = None, exclude_no_suffix=False
+) -> tuple[Path]:
     """find label for scan, and if there are multiple, return one
     based on priority of suffixes
 
@@ -482,7 +489,7 @@ def find_labels(scan, label_prefix: str, suffix_list: list[str] = None, exclude_
 
     if len(return_labels) > 0:
         return return_labels
-    
+
     logger.debug(f"No label in {[lab.name for lab in labels]} matched search")
     raise FileNotFoundError(
         f"Could not find label matching {label_prefix} "
@@ -538,6 +545,13 @@ def filter_has_label(dataset: DataSet) -> DataSet:
         if scan.label is not None:
             dataset_new.append(scan)
     return dataset_new
+
+
+def has_label(scan: Scan) -> bool:
+    if scan.label is not None:
+        return True
+    else:
+        return False
 
 
 def filter_has_image(dataset: DataSet) -> DataSet:
