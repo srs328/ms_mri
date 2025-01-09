@@ -145,23 +145,25 @@ def load_train_params():
     return train_params
 
 
-def assign_conditions(dataset: DataSet, fraction_ts) -> DataSet:
+def assign_conditions(dataset: DataSet, fraction_ts=None, n_ts=None) -> DataSet:
     scans_no_label = []
     for i, scan in enumerate(dataset):
         if not scan.has_label():
             scans_no_label.append(i)
 
     n_scans = len(dataset)
-    n_ts = int(fraction_ts * n_scans)
+    if fraction_ts is not None:
+        n_ts = int(fraction_ts * n_scans)
+    elif n_ts is None:
+        raise ValueError("Fraction of number of test cases not provided")
+    
     inds = [i for i in range(n_scans)]
     random.shuffle(inds)
-    print(inds)
 
     # for i in scans_no_label:
     #     inds.remove(i)
     #     inds.insert(0, i)
 
-    print(inds)
     for i in inds[:n_ts]:
         dataset[i].cond = "ts"
     for i in inds[n_ts:]:
