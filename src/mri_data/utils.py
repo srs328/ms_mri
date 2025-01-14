@@ -239,5 +239,5 @@ def open_itksnap_workspace_cmd(images: list[str], labels: list[str] = None, win=
     command.extend(" -o ".join(images[1:]).split(" "))
     if len(labels) > 0:
         command.append("-s")
-        command.extend(" -s ".join(labels).split(" "))
+        command.extend(" ".join(labels).split(" "))
     return " ".join(command)

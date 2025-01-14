@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-root="/mnt/h" # edit this to be smbshare root
+root="/media/smbshare" # edit this to be smbshare root
 default_app=fsleyes
 
 
@@ -51,6 +51,11 @@ echo "Using $app"
 dataroot="$root/3Tpioneer_bids"
 inf_root="$root/3Tpioneer_bids_predictions"
 
+if [ ! -d $dataroot ]; then
+    echo "$dataroot does not exist, check script"
+    exit 1
+fi
+
 inf_filename=flair.t1_choroid_pineal_pituitary3_pred.nii.gz
 
 subj_dir="sub-ms${subid}"
@@ -61,7 +66,7 @@ ses=()
 for ses_dir in "${ses_dirs[@]}"
 do
     if [[ "${ses_dir}" =~ ^ses-([0-9]{8}) ]]; then 
-        sessions+=(${BASH_REMATCH[1]})
+        sessions+=("${BASH_REMATCH[1]}")
     fi
 done
 

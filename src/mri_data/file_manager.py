@@ -262,6 +262,8 @@ class DataSet(Record):
 
     @classmethod
     def from_scans(cls, scans) -> Self:
+        if not isinstance(scans, set):
+            scans = set(scans)
         scan = scans.pop()
         dataroot = scan.dataroot
         scans.add(scan)
