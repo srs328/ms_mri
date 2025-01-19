@@ -37,12 +37,12 @@ done
 
 subid=${script_args[0]}
 
-if [ -z $subid ]; then
+if [ -z "$subid" ]; then
     echo "Error: no subject id"
     exit 1
 fi
 
-if [ -z $app ]; then
+if [ -z "$app" ]; then
     app=$default_app
 fi
 echo "Using $app" 
@@ -56,8 +56,6 @@ if [ ! -d $dataroot ]; then
     echo "$dataroot does not exist, check script"
     exit 1
 fi
-
-inf_filename=flair.t1_choroid_pineal_pituitary3_pred.nii.gz
 
 subj_dir="sub-ms${subid}"
 
@@ -75,7 +73,7 @@ first_ses=${sessions[0]}
 
 for ses in "${sessions[@]:1}"
 do
-    diff=$(( ($(date -d "$ses" +%s) - $(date -d "$first_ses" +%s)) ))
+    diff=$(( $(date -d "$ses" +%s) - $(date -d "$first_ses" +%s) ))
     if [[ $diff -lt 0 ]]; then
         first_ses=ses
     fi
@@ -86,14 +84,32 @@ ses_dir="ses-$first_ses"
 scan_path="$dataroot/$subj_dir/$ses_dir"
 inf_path="$inf_root/$subj_dir/$ses_dir"
 
-if [ ! -f "$inf_path/$inf_filename" ]; then  
-    echo "$inf_path/$inf_filename does not exist"
+flair_t1_inf_filename=flair.t1_choroid_pineal_pituitary3_pred.nii.gz
+t1_inf_filename=t1_choroid_pineal_pituitary_T1-1_pred.nii.gz
+
+flair_scan="$scan_path/flair.nii.gz"
+t1_scan="$scan_path/t1.nii.gz"
+
+flair_t1_inference="$inf_path/$flair_t1_inf_filename"
+t1_inference="$inf_path/$t1_inf_filename"
+
+if [ ! -f "$flair_t1_inference" ]; then  
+    echo "Inference on flair.t1 does not exist"
+    echo "$flair_t1_inference not found"
     echo "The subject you entered may not have an inference"
     exit 1
 fi
 
-if [ $app == "itksnap" ]; then
-    itksnap -g "$scan_path/flair.nii.gz" -o "$scan_path/t1.nii.gz" -s "$inf_path/$inf_filename"
-elif [ $app == "fsleyes" ]; then
-    fsleyes "$scan_path/t1.nii.gz" "$scan_path/flair.nii.gz" "$inf_path/$inf_filename" -ot label -l freesurfercolorlut
+if [ ! -f "$t1_inference" ]; then  
+    echo "Inference on t1 does not exist"
+    echo "$t1_inference not found"
+    echo "The subject you entered may not have an inference done on the t1 alone"
+fi
+
+if [ "$app" == "itksnap" ]; then
+    itksnap -g "$flair_scan" -o "$t1_scan" -s "$t1_inference" "$flair_t1_inference"
+elif [ "$app" == "fsleyes" ]; then
+    fsleyes "$flair_scan" "$t1_scan" \
+        "$t1_inference" -ot label -l freesurfercolorlut \
+        "$flair_t1_inference" -ot label -l freesurfercolorlut
 fi
