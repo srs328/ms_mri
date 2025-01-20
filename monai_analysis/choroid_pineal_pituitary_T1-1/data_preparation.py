@@ -52,7 +52,7 @@ new_columns = {}
 for col in df.columns:
     new_columns[col] = col.replace(" ", "_")
 df.rename(columns=new_columns, inplace=True)
-df.head()
+
 
 dataset_proc = DataSetProcesser.new_dataset(dataroot, scan_3Tpioneer_bids, filters=[fm.filter_first_ses])
 full_dataset = dataset_proc.dataset
@@ -62,6 +62,18 @@ dataset = dataset_proc.dataset
 inference_dataset_proc = DataSetProcesser.new_dataset(inference_root, scan_3Tpioneer_bids, filters=[fm.filter_first_ses])
 inference_dataset_proc.prepare_labels("t1_choroid_pineal_pituitary_T1-1_pred")
 inference_dataset = inference_dataset_proc.dataset
+
+
+segs = {}
+for scan in dataset:
+    segs[scan.subid] = scan.label_path
+    df.loc[int(scan.subid), ('scan_folder',)] = dataroot / scan.relative_path
+    df.loc[int(scan.subid), ('label',)] = scan.label_path
+
+for scan in inference_dataset:
+    segs[scan.subid] = scan.label_path
+    df.loc[int(scan.subid), ('scan_folder',)] = dataroot / scan.relative_path
+    df.loc[int(scan.subid), ('label',)] = scan.label_path
 
 
 try:
