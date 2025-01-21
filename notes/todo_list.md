@@ -54,3 +54,6 @@
 
 - [ ] Find any instance where I use a list comprehension as a function argument
   or in constructer and change to generator expression (see [PEP 289](https://peps.python.org/pep-0289/))
+
+
+brain and lesion vol cubic and prl, thalamus, cortical thickness, 
