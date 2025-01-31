@@ -1,0 +1,7 @@
+ANCOVA with jasp for volume analysis
+
+Dunns test 
+
+Jamovi is another software
+
+variance inflation factor (careful if > 2)
