@@ -22,6 +22,7 @@ dataroot = drive_root / "3Tpioneer_bids"
 clinical_data_root = drive_root / "Secure_Data" / "Large"
 project_dataroot = msmri_home / "data"
 analysis_dir = msmri_home / "monai_analysis" / "choroid_pineal_pituitary_T1-1"  #* Edit this
+inf_label = "t1_choroid_pineal_pituitary_T1-1_pred"
 
 
 def subject_to_subid(subject):
@@ -60,7 +61,7 @@ dataset_proc.prepare_labels(["choroid_t1_flair", "pineal", "pituitary"], ["CH", 
 dataset = dataset_proc.dataset
 
 inference_dataset_proc = DataSetProcesser.new_dataset(inference_root, scan_3Tpioneer_bids, filters=[fm.filter_first_ses])
-inference_dataset_proc.prepare_labels("t1_choroid_pineal_pituitary_T1-1_pred")
+inference_dataset_proc.prepare_labels(inf_label)
 inference_dataset = inference_dataset_proc.dataset
 
 
