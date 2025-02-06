@@ -241,3 +241,26 @@ def open_itksnap_workspace_cmd(images: list[str], labels: list[str] = None, win=
         command.append("-s")
         command.extend(" ".join(labels).split(" "))
     return " ".join(command)
+
+def fsleyes_cmd(images: list[str], 
+                labels: list[str] = None, 
+                outlines: list[str] = None):
+    
+    if images is None:
+        images = []
+    if labels is None:
+        labels = []
+    if outlines is None:
+        outlines = []
+    images = [str(p) for p in images]
+    labels = [str(p) for p in labels]
+    outlines = [str(p) for p in outlines]
+
+    command = ["fsleyes"]
+    command.extend(images)
+    for label in labels:
+        command.extend([label, "-ot", "label", "-l", "freesurfercolorlut"])
+    for outline in outlines:
+        command.extend([outline, "-ot", "label", "-o"])
+    
+    return " ".join(command)
