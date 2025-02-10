@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-root="/media/smbshare" # edit this to be smbshare root
+root="/mnt/h" # edit this to be smbshare root
 default_app=fsleyes
 
 
@@ -86,12 +86,14 @@ inf_path="$inf_root/$subj_dir/$ses_dir"
 
 flair_t1_inf_filename=flair.t1_choroid_pineal_pituitary3_pred.nii.gz
 t1_inf_filename=t1_choroid_pineal_pituitary_T1-1_pred.nii.gz
+flair_inf_filename=flair_choroid_pineal_pituitary_FLAIR-1_pred.nii.gz
 
 flair_scan="$scan_path/flair.nii.gz"
 t1_scan="$scan_path/t1.nii.gz"
 
 flair_t1_inference="$inf_path/$flair_t1_inf_filename"
 t1_inference="$inf_path/$t1_inf_filename"
+flair_inference="$inf_path/$flair_inf_filename"
 
 if [ ! -f "$flair_t1_inference" ]; then  
     echo "Inference on flair.t1 does not exist"
@@ -111,5 +113,5 @@ if [ "$app" == "itksnap" ]; then
 elif [ "$app" == "fsleyes" ]; then
     fsleyes "$flair_scan" "$t1_scan" \
         "$t1_inference" -ot label -l freesurfercolorlut \
-        "$flair_t1_inference" -ot label -l freesurfercolorlut
+        "$flair_inference" -ot label -l freesurfercolorlut
 fi
