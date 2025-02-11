@@ -4,6 +4,7 @@
 
 - Bland-Altman plots
 - Note that with the flair model, use of flair_contrast
+  - flair contrast is a significant covariate for predicting all volumes
 
 ## Analysis
 
