@@ -477,6 +477,10 @@ def find_labels(
     root_dir = scan.root
     labels = list(root_dir.glob(f"{label_prefix}*.nii.gz"))
 
+    logger.debug(f"checking {root_dir}, labels are:")
+    logger.debug(labels)
+
+
     return_labels = []
     for suffix in suffix_list:
         label_parts = [label_prefix]
