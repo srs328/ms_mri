@@ -20,3 +20,9 @@
 - Could pituitary volume not be associated with MS, but it's dimensions or shape still be? Try pyradiomics on it
 - Can I register all to MNI to have a standard way of evaluating the inference labels, then transform them back?
 - Resegment all the pineals. Start with my flair segmentation and erase around what I can see in T1
+- Do PRL cause faster disease progression (ie worse EDSS with less dzdur)
+
+## Questions
+
+- EDSS "." issue
+- What mediation analysis results to trust?

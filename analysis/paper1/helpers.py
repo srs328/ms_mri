@@ -9,7 +9,7 @@ monai_analysis_dir = msmri_home / "monai_analysis"
 
 analysis_folders = {
     "t1": "choroid_pineal_pituitary_T1-1",
-    "flair": "choroid_pineal_pituitary_FLAIR-1"
+    "flair": "choroid_pineal_pituitary_FLAIR-1",
 }
 
 
@@ -22,10 +22,6 @@ def subject_to_subid(subject):
         return return_val
     else:
         return None
-    
-
-def clean_df(df):
-    pass
 
 
 def set_prl_levels(df):
@@ -40,12 +36,46 @@ def set_prl_levels(df):
 
 def fix_edss(df):
     df.loc[:, "extracted_EDSS"] = [
-            float(val) if val != "." else None for val in df["extracted_EDSS"]
-        ]  #! figure out what to do with "."
-    df.loc[:, ["EDSS"]] = pd.Categorical(df["extracted_EDSS"], ordered=True)
+        float(val) if val != "." else None for val in df["extracted_EDSS"]
+    ]  #! figure out what to do with "."
+    df = df.rename(columns={"extracted_EDSS": "EDSS"})
     return df
 
 
+# ['MS', 'NIND', 'UNK', 'HC', 'OIND', 'RIS']
+def set_dz_type3(df):
+    df.loc[:, "dz_type3"] = df["ms_type"]
+    ms_subtypes = ["PPMS", "SPMS", "RPMS", "PRMS", "RRMS", "CIS"]
+    df.loc[df["ms_type"].isin(ms_subtypes), "dz_type3"] = "MS"
+    df["dz_type3"].unique()
+    return df
+
+
+def set_dz_type5(df):
+    df.loc[:, "dz_type5"] = df["ms_type"]
+    df.loc[df["ms_type"].isin(["CIS", "RRMS"]), "dz_type5"] = "RMS"
+    df.loc[df["ms_type"].isin(["PPMS", "SPMS", "RPMS", "PRMS"]), "dz_type5"] = "PMS"
+    return df
+
+
+def clean_df(df):
+    not_nas = (
+        ~df["pineal_volume"].isna()
+        & ~df["choroid_volume"].isna()
+        & ~df["pituitary_volume"].isna()
+    )
+    df = df.loc[not_nas, :]
+
+    df.loc[df["PRL"] == "#VALUE!", "PRL"] = None
+    df.loc[:, "PRL"] = [
+        int(val) if val != "#VALUE!" and val is not None else None for val in df["PRL"]
+    ]
+    df.loc[df["dzdur"] == "#VALUE!", "dzdur"] = None
+
+    return df
+
+
+# not necessary for newest data files in analysis/paper1/data
 def load_data(modality):
     analysis_dir = analysis_folders[modality]
     df_vols = pd.read_csv(analysis_dir / "clinical_data_full.csv")
@@ -78,7 +108,7 @@ def load_data(modality):
         how="outer",
         on="subid",
     )
-    
+
     df.loc[df["PRL"] == "#VALUE!", "PRL"] = None
     df.loc[:, "PRL"] = [
         int(val) if val != "#VALUE!" and val is not None else None for val in df["PRL"]
@@ -90,5 +120,3 @@ def load_data(modality):
     df.loc[:, ["norm_choroid_volume"]] = df["choroid_volume"] / df["tiv"]
     df.loc[:, ["norm_pineal_volume"]] = df["pineal_volume"] / df["tiv"]
     df.loc[:, ["norm_pituitary_volume"]] = df["pituitary_volume"] / df["tiv"]
-
-    
