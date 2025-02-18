@@ -120,3 +120,13 @@ def load_data(modality):
     df.loc[:, ["norm_choroid_volume"]] = df["choroid_volume"] / df["tiv"]
     df.loc[:, ["norm_pineal_volume"]] = df["pineal_volume"] / df["tiv"]
     df.loc[:, ["norm_pituitary_volume"]] = df["pituitary_volume"] / df["tiv"]
+
+
+def get_armss(edsss, ages):
+    armsss = edsss
+    for ind, edss, age in zip(edsss.index, edsss, ages):
+        a_edss = edsss[(ages >= age-2) & (ages <= age+2)]
+        ranks = a_edss.rank()
+        armsss.loc[ind] = ranks.loc[ind] / (len(a_edss) + 1) * 10
+
+    return armsss
