@@ -1,0 +1,3721 @@
+{
+	"analyses" : 
+	[
+		{
+			"dynamicModule" : 
+			{
+				"analysisEntry" : "Ancova",
+				"moduleMaintainer" : "JASP Team <info@jasp-stats.org>",
+				"moduleName" : "jaspAnova",
+				"moduleVersion" : "0.19.2",
+				"moduleWebsite" : "jasp-stats.org"
+			},
+			"hasReport" : false,
+			"id" : 0,
+			"name" : "Ancova",
+			"options" : 
+			{
+				".meta" : 
+				{
+					"barPlotHorizontalAxis" : 
+					{
+						"shouldEncode" : true
+					},
+					"barPlotSeparatePlots" : 
+					{
+						"shouldEncode" : true
+					},
+					"contrasts" : 
+					{
+						"shouldEncode" : true
+					},
+					"covariates" : 
+					{
+						"shouldEncode" : true
+					},
+					"customContrasts" : 
+					{
+						"shouldEncode" : true
+					},
+					"dependent" : 
+					{
+						"shouldEncode" : true
+					},
+					"descriptivePlotHorizontalAxis" : 
+					{
+						"shouldEncode" : true
+					},
+					"descriptivePlotSeparateLines" : 
+					{
+						"shouldEncode" : true
+					},
+					"descriptivePlotSeparatePlot" : 
+					{
+						"shouldEncode" : true
+					},
+					"fixedFactors" : 
+					{
+						"shouldEncode" : true
+					},
+					"kruskalWallisFactors" : 
+					{
+						"shouldEncode" : true
+					},
+					"marginalMeanTerms" : 
+					{
+						"shouldEncode" : true
+					},
+					"modelTerms" : 
+					{
+						"shouldEncode" : true
+					},
+					"postHocTerms" : 
+					{
+						"shouldEncode" : true
+					},
+					"rainCloudHorizontalAxis" : 
+					{
+						"shouldEncode" : true
+					},
+					"rainCloudSeparatePlots" : 
+					{
+						"shouldEncode" : true
+					},
+					"restrictedMarginalMeanTerms" : 
+					{
+						"shouldEncode" : true
+					},
+					"simpleMainEffectFactor" : 
+					{
+						"shouldEncode" : true
+					},
+					"simpleMainEffectModeratorFactorOne" : 
+					{
+						"shouldEncode" : true
+					},
+					"simpleMainEffectModeratorFactorTwo" : 
+					{
+						"shouldEncode" : true
+					},
+					"wlsWeights" : 
+					{
+						"shouldEncode" : true
+					}
+				},
+				"barPlotCiInterval" : 0.94999999999999996,
+				"barPlotErrorBarType" : "ci",
+				"barPlotErrorBars" : true,
+				"barPlotHorizontalAxis" : 
+				{
+					"types" : 
+					[
+						"nominal"
+					],
+					"value" : "dz_type5"
+				},
+				"barPlotHorizontalZeroFix" : true,
+				"barPlotSeparatePlots" : 
+				{
+					"types" : [],
+					"value" : ""
+				},
+				"contrastCi" : false,
+				"contrastCiLevel" : 0.94999999999999996,
+				"contrastEffectSize" : false,
+				"contrasts" : 
+				{
+					"optionKey" : "variable",
+					"types" : 
+					[
+						"nominal"
+					],
+					"value" : 
+					[
+						{
+							"contrast" : "none",
+							"variable" : 
+							[
+								"dz_type5"
+							]
+						}
+					]
+				},
+				"covariates" : 
+				{
+					"types" : 
+					[
+						"scale",
+						"scale",
+						"scale"
+					],
+					"value" : 
+					[
+						"Female",
+						"tiv",
+						"age"
+					]
+				},
+				"customContrasts" : [],
+				"dependent" : 
+				{
+					"types" : 
+					[
+						"scale"
+					],
+					"value" : "choroid_volume"
+				},
+				"descriptivePlotCiLevel" : 0.94999999999999996,
+				"descriptivePlotErrorBar" : false,
+				"descriptivePlotErrorBarType" : "ci",
+				"descriptivePlotHorizontalAxis" : 
+				{
+					"types" : [],
+					"value" : ""
+				},
+				"descriptivePlotSeparateLines" : 
+				{
+					"types" : [],
+					"value" : ""
+				},
+				"descriptivePlotSeparatePlot" : 
+				{
+					"types" : [],
+					"value" : ""
+				},
+				"descriptives" : false,
+				"effectSizeCi" : false,
+				"effectSizeCiLevel" : 0.94999999999999996,
+				"effectSizeEstimates" : false,
+				"effectSizeEtaSquared" : false,
+				"effectSizeGeneralEtaSquared" : false,
+				"effectSizeOmegaSquared" : true,
+				"effectSizePartialEtaSquared" : false,
+				"effectSizePartialOmegaSquared" : false,
+				"factorCovariateIndependenceCheck" : false,
+				"fixedFactors" : 
+				{
+					"types" : 
+					[
+						"nominal"
+					],
+					"value" : 
+					[
+						"dz_type5"
+					]
+				},
+				"homogeneityCorrectionBrown" : false,
+				"homogeneityCorrectionNone" : true,
+				"homogeneityCorrectionWelch" : false,
+				"homogeneityTests" : true,
+				"kruskalCiLevel" : 0.94999999999999996,
+				"kruskalEffectSizeEstimates" : false,
+				"kruskalEpsilon" : true,
+				"kruskalEta" : false,
+				"kruskalWallisFactors" : 
+				{
+					"types" : 
+					[
+						"nominal"
+					],
+					"value" : 
+					[
+						"dz_type5"
+					]
+				},
+				"marginalMeanBootstrap" : false,
+				"marginalMeanBootstrapSamples" : 1000,
+				"marginalMeanCiCorrection" : "none",
+				"marginalMeanComparedToZero" : false,
+				"marginalMeanTerms" : 
+				{
+					"optionKey" : "variable",
+					"types" : [],
+					"value" : []
+				},
+				"modelTerms" : 
+				{
+					"optionKey" : "components",
+					"types" : 
+					[
+						"nominal",
+						"scale",
+						"scale",
+						"scale"
+					],
+					"value" : 
+					[
+						{
+							"components" : 
+							[
+								"dz_type5"
+							]
+						},
+						{
+							"components" : 
+							[
+								"Female"
+							]
+						},
+						{
+							"components" : 
+							[
+								"tiv"
+							]
+						},
+						{
+							"components" : 
+							[
+								"age"
+							]
+						}
+					]
+				},
+				"normalizeErrorBarsDescriptives" : true,
+				"plotHeight" : 320,
+				"plotHeightDescriptivesPlotLegend" : 300,
+				"plotHeightDescriptivesPlotNoLegend" : 300,
+				"plotHeightQQPlot" : 300,
+				"plotWidth" : 480,
+				"plotWidthDescriptivesPlotLegend" : 430,
+				"plotWidthDescriptivesPlotNoLegend" : 350,
+				"plotWidthQQPlot" : 300,
+				"postHocCi" : false,
+				"postHocCiLevel" : 0.94999999999999996,
+				"postHocConditionalTable" : false,
+				"postHocCorrectionBonferroni" : true,
+				"postHocCorrectionHolm" : false,
+				"postHocCorrectionScheffe" : false,
+				"postHocCorrectionSidak" : false,
+				"postHocCorrectionTukey" : true,
+				"postHocLetterAlpha" : 0.050000000000000003,
+				"postHocLetterTable" : false,
+				"postHocSignificanceFlag" : false,
+				"postHocTerms" : 
+				{
+					"optionKey" : "variable",
+					"types" : 
+					[
+						"nominal"
+					],
+					"value" : 
+					[
+						{
+							"variable" : 
+							[
+								"dz_type5"
+							]
+						}
+					]
+				},
+				"postHocTypeDunn" : false,
+				"postHocTypeDunnet" : true,
+				"postHocTypeGames" : true,
+				"postHocTypeStandard" : true,
+				"postHocTypeStandardBootstrap" : false,
+				"postHocTypeStandardBootstrapSamples" : 1000,
+				"postHocTypeStandardEffectSize" : true,
+				"qqPlot" : true,
+				"rainCloudHorizontalAxis" : 
+				{
+					"types" : [],
+					"value" : ""
+				},
+				"rainCloudHorizontalDisplay" : false,
+				"rainCloudSeparatePlots" : 
+				{
+					"types" : [],
+					"value" : ""
+				},
+				"rainCloudYAxisLabel" : "",
+				"randomFactors" : 
+				{
+					"types" : [],
+					"value" : []
+				},
+				"restrictedAvailableCoefficients" : false,
+				"restrictedBootstrap" : false,
+				"restrictedBootstrapCiLevel" : 0.94999999999999996,
+				"restrictedBootstrapSamples" : 1000,
+				"restrictedHeterogeneityCorrection" : "none",
+				"restrictedInformedHypothesisTestForAllModels" : false,
+				"restrictedInterceptInclusion" : false,
+				"restrictedMarginalMeanForAllModels" : false,
+				"restrictedMarginalMeanTerms" : 
+				{
+					"optionKey" : "variable",
+					"types" : [],
+					"value" : []
+				},
+				"restrictedModelComparison" : "complement",
+				"restrictedModelComparisonCoefficients" : false,
+				"restrictedModelComparisonCoefficientsHighlight" : true,
+				"restrictedModelComparisonMatrix" : false,
+				"restrictedModelComparisonReference" : "Model 1",
+				"restrictedModelComparisonWeights" : true,
+				"restrictedModelSummaryForAllModels" : false,
+				"restrictedModels" : 
+				[
+					{
+						"informedHypothesisTest" : false,
+						"marginalMean" : false,
+						"name" : 
+						[
+							"Model 1"
+						],
+						"summary" : false,
+						"syntax" : ""
+					}
+				],
+				"simpleMainEffectFactor" : 
+				{
+					"types" : [],
+					"value" : ""
+				},
+				"simpleMainEffectModeratorFactorOne" : 
+				{
+					"types" : [],
+					"value" : ""
+				},
+				"simpleMainEffectModeratorFactorTwo" : 
+				{
+					"types" : [],
+					"value" : ""
+				},
+				"sumOfSquares" : "type1",
+				"vovkSellke" : false,
+				"wlsWeights" : 
+				{
+					"types" : [],
+					"value" : ""
+				}
+			},
+			"progress" : null,
+			"rSources" : {},
+			"results" : 
+			{
+				".meta" : 
+				[
+					{
+						"info" : "",
+						"meta" : 
+						[
+							{
+								"info" : "",
+								"name" : "anovaContainer_anovaTable",
+								"title" : "ANCOVA - choroid_volume",
+								"type" : "table"
+							},
+							{
+								"info" : "",
+								"meta" : 
+								[
+									{
+										"info" : "",
+										"meta" : 
+										[
+											{
+												"info" : "",
+												"name" : "anovaContainer_descriptivesContainer_containerBarPlots_",
+												"title" : "",
+												"type" : "image"
+											}
+										],
+										"name" : "anovaContainer_descriptivesContainer_containerBarPlots",
+										"title" : "Bar plots",
+										"type" : "collection"
+									}
+								],
+								"name" : "anovaContainer_descriptivesContainer",
+								"title" : "Descriptives",
+								"type" : "collection"
+							},
+							{
+								"info" : "",
+								"meta" : 
+								[
+									{
+										"info" : "",
+										"name" : "anovaContainer_assumptionsContainer_leveneTable",
+										"title" : "Test for Equality of Variances (Levene's)",
+										"type" : "table"
+									},
+									{
+										"info" : "",
+										"name" : "anovaContainer_assumptionsContainer_qqPlot",
+										"title" : "Q-Q Plot",
+										"type" : "image"
+									}
+								],
+								"name" : "anovaContainer_assumptionsContainer",
+								"title" : "Assumption Checks",
+								"type" : "collection"
+							},
+							{
+								"info" : "",
+								"meta" : 
+								[
+									{
+										"info" : "",
+										"meta" : [],
+										"name" : "anovaContainer_ordinalRestrictions_basicInfoContainer",
+										"title" : "Syntax information",
+										"type" : "collection"
+									}
+								],
+								"name" : "anovaContainer_ordinalRestrictions",
+								"title" : "Order Restricted Hypotheses",
+								"type" : "collection"
+							},
+							{
+								"info" : "",
+								"meta" : 
+								[
+									{
+										"info" : "",
+										"meta" : 
+										[
+											{
+												"info" : "",
+												"name" : "anovaContainer_postHocContainer_postHocStandardContainer_dz_type51",
+												"title" : "Post Hoc Comparisons - dz_type5",
+												"type" : "table"
+											}
+										],
+										"name" : "anovaContainer_postHocContainer_postHocStandardContainer",
+										"title" : "Standard (HSD)",
+										"type" : "collection"
+									},
+									{
+										"info" : "",
+										"meta" : 
+										[
+											{
+												"info" : "",
+												"name" : "anovaContainer_postHocContainer_postHocGamesContainer_dz_type5",
+												"title" : "Games-Howell Post Hoc Comparisons - dz_type5",
+												"type" : "table"
+											}
+										],
+										"name" : "anovaContainer_postHocContainer_postHocGamesContainer",
+										"title" : "Games-Howell",
+										"type" : "collection"
+									},
+									{
+										"info" : "",
+										"meta" : 
+										[
+											{
+												"info" : "",
+												"name" : "anovaContainer_postHocContainer_postHocDunnettContainer_dz_type5",
+												"title" : "Dunnett Post Hoc Comparisons - dz_type5",
+												"type" : "table"
+											}
+										],
+										"name" : "anovaContainer_postHocContainer_postHocDunnettContainer",
+										"title" : "Dunnett",
+										"type" : "collection"
+									}
+								],
+								"name" : "anovaContainer_postHocContainer",
+								"title" : "Post Hoc Tests",
+								"type" : "collection"
+							},
+							{
+								"info" : "",
+								"meta" : 
+								[
+									{
+										"info" : "",
+										"name" : "anovaContainer_kruskalContainer_kruskalTable",
+										"title" : "Kruskal-Wallis Test",
+										"type" : "table"
+									}
+								],
+								"name" : "anovaContainer_kruskalContainer",
+								"title" : "Kruskal-Wallis Test",
+								"type" : "collection"
+							}
+						],
+						"name" : "anovaContainer",
+						"title" : "",
+						"type" : "collection"
+					}
+				],
+				"anovaContainer" : 
+				{
+					"collection" : 
+					{
+						"anovaContainer_anovaTable" : 
+						{
+							"casesAcrossColumns" : false,
+							"data" : 
+							[
+								{
+									".isNewGroup" : true,
+									"Df" : 3,
+									"F value" : 19.541633033445532,
+									"Mean Sq" : 6648086.8248052076,
+									"Pr(>F)" : 5.7634123158415048e-12,
+									"Sum Sq" : 19944260.474415623,
+									"cases" : "dz_type5"
+								},
+								{
+									".isNewGroup" : false,
+									"Df" : 1,
+									"F value" : 34.920965078210983,
+									"Mean Sq" : 11880153.897506883,
+									"Pr(>F)" : 6.5325355644265317e-09,
+									"Sum Sq" : 11880153.897506883,
+									"cases" : "Female"
+								},
+								{
+									".isNewGroup" : false,
+									"Df" : 1,
+									"F value" : 7.4840935919783842,
+									"Mean Sq" : 2546097.5507668671,
+									"Pr(>F)" : 0.0064561825642934318,
+									"Sum Sq" : 2546097.5507668671,
+									"cases" : "tiv"
+								},
+								{
+									".isNewGroup" : false,
+									"Df" : 1,
+									"F value" : 56.284127272637726,
+									"Mean Sq" : 19147927.111642599,
+									"Pr(>F)" : 3.0832910265371687e-13,
+									"Sum Sq" : 19147927.111642599,
+									"cases" : "age"
+								},
+								{
+									".isNewGroup" : true,
+									"Df" : 478,
+									"F value" : "",
+									"Mean Sq" : 340201.19062859268,
+									"Pr(>F)" : "",
+									"Sum Sq" : 162616169.12046731,
+									"cases" : "Residuals"
+								}
+							],
+							"footnotes" : 
+							[
+								{
+									"cols" : null,
+									"myOrder" : 0,
+									"rows" : null,
+									"symbol" : "<em>Note.</em>",
+									"text" : "Type I Sum of Squares"
+								}
+							],
+							"name" : "anovaContainer_anovaTable",
+							"overTitle" : false,
+							"schema" : 
+							{
+								"fields" : 
+								[
+									{
+										"name" : "cases",
+										"title" : "Cases",
+										"type" : "string"
+									},
+									{
+										"format" : "sf:4;dp:3",
+										"name" : "Sum Sq",
+										"title" : "Sum of Squares",
+										"type" : "number"
+									},
+									{
+										"name" : "Df",
+										"title" : "df",
+										"type" : "integer"
+									},
+									{
+										"format" : "sf:4;dp:3",
+										"name" : "Mean Sq",
+										"title" : "Mean Square",
+										"type" : "number"
+									},
+									{
+										"format" : "sf:4;dp:3",
+										"name" : "F value",
+										"title" : "F",
+										"type" : "number"
+									},
+									{
+										"format" : "dp:3;p:.001",
+										"name" : "Pr(>F)",
+										"title" : "p",
+										"type" : "pvalue"
+									}
+								]
+							},
+							"status" : "complete",
+							"title" : "ANCOVA - choroid_volume"
+						},
+						"anovaContainer_assumptionsContainer" : 
+						{
+							"collection" : 
+							{
+								"anovaContainer_assumptionsContainer_leveneTable" : 
+								{
+									"casesAcrossColumns" : false,
+									"data" : 
+									[
+										{
+											"F" : 1.0283136114407054,
+											"df1" : 3.0,
+											"df2" : 481.0,
+											"p" : 0.37971236984353157
+										}
+									],
+									"footnotes" : [],
+									"name" : "anovaContainer_assumptionsContainer_leveneTable",
+									"overTitle" : false,
+									"schema" : 
+									{
+										"fields" : 
+										[
+											{
+												"format" : "sf:4;dp:3",
+												"name" : "F",
+												"title" : "F",
+												"type" : "number"
+											},
+											{
+												"format" : "sf:4;dp:3",
+												"name" : "df1",
+												"title" : "df1",
+												"type" : "number"
+											},
+											{
+												"format" : "sf:4;dp:3",
+												"name" : "df2",
+												"title" : "df2",
+												"type" : "number"
+											},
+											{
+												"format" : "dp:3;p:.001",
+												"name" : "p",
+												"title" : "p",
+												"type" : "pvalue"
+											}
+										]
+									},
+									"status" : "complete",
+									"title" : "Test for Equality of Variances (Levene's)"
+								},
+								"anovaContainer_assumptionsContainer_qqPlot" : 
+								{
+									"aspectRatio" : 0.0,
+									"convertible" : true,
+									"data" : "resources/0/_2_t-321295963.png",
+									"editOptions" : 
+									{
+										"error" : "success",
+										"xAxis" : 
+										{
+											"settings" : 
+											{
+												"breaks" : 
+												[
+													-4,
+													-3,
+													-2,
+													-1,
+													0,
+													1,
+													2,
+													3,
+													4
+												],
+												"breaksType" : "range",
+												"expand" : 
+												[
+													0.050000000000000003,
+													0,
+													0.050000000000000003,
+													0
+												],
+												"labels" : 
+												[
+													"-4",
+													"-3",
+													"-2",
+													"-1",
+													"0",
+													"1",
+													"2",
+													"3",
+													"4"
+												],
+												"limits" : 
+												[
+													-4,
+													4
+												],
+												"limitsType" : "manual",
+												"range" : 
+												[
+													-4,
+													4,
+													1
+												],
+												"title" : "Theoretical quantiles",
+												"titleType" : "character"
+											},
+											"type" : "ScaleContinuous"
+										},
+										"yAxis" : 
+										{
+											"settings" : 
+											{
+												"breaks" : 
+												[
+													-4,
+													-3,
+													-2,
+													-1,
+													0,
+													1,
+													2,
+													3,
+													4
+												],
+												"breaksType" : "range",
+												"expand" : 
+												[
+													0.050000000000000003,
+													0,
+													0.050000000000000003,
+													0
+												],
+												"labels" : 
+												[
+													"-4",
+													"-3",
+													"-2",
+													"-1",
+													"0",
+													"1",
+													"2",
+													"3",
+													"4"
+												],
+												"limits" : 
+												[
+													-4,
+													4
+												],
+												"limitsType" : "manual",
+												"range" : 
+												[
+													-4,
+													4,
+													1
+												],
+												"title" : "Standardized residuals",
+												"titleType" : "character"
+											},
+											"type" : "ScaleContinuous"
+										}
+									},
+									"editable" : false,
+									"errorType" : "fatalError",
+									"height" : 300,
+									"name" : "anovaContainer_assumptionsContainer_qqPlot",
+									"reasonNotEditable" : "unknown reason",
+									"revision" : 0,
+									"status" : "complete",
+									"title" : "Q-Q Plot",
+									"width" : 300
+								}
+							},
+							"initCollapsed" : false,
+							"name" : "anovaContainer_assumptionsContainer",
+							"title" : "Assumption Checks"
+						},
+						"anovaContainer_descriptivesContainer" : 
+						{
+							"collection" : 
+							{
+								"anovaContainer_descriptivesContainer_containerBarPlots" : 
+								{
+									"collection" : 
+									{
+										"anovaContainer_descriptivesContainer_containerBarPlots_" : 
+										{
+											"aspectRatio" : 0.0,
+											"convertible" : true,
+											"data" : "resources/0/_3_t-321295030.png",
+											"editOptions" : 
+											{
+												"error" : "success",
+												"xAxis" : 
+												{
+													"settings" : 
+													{
+														"labels" : 
+														[
+															"NIND",
+															"OIND",
+															"PMS",
+															"RMS"
+														],
+														"title" : "dz_type5",
+														"titleType" : "character"
+													},
+													"type" : "ScaleDiscrete"
+												},
+												"yAxis" : 
+												{
+													"settings" : 
+													{
+														"breaks" : 
+														[
+															0,
+															500,
+															1000,
+															1500,
+															2000,
+															2500,
+															3000
+														],
+														"breaksType" : "range",
+														"expand" : 
+														[
+															0.050000000000000003,
+															0,
+															0.050000000000000003,
+															0
+														],
+														"labels" : 
+														[
+															"0",
+															"500",
+															"1000",
+															"1500",
+															"2000",
+															"2500",
+															"3000"
+														],
+														"limits" : 
+														[
+															0,
+															3000
+														],
+														"limitsType" : "breaks",
+														"range" : 
+														[
+															0,
+															3000,
+															500
+														],
+														"title" : "choroid_volume",
+														"titleType" : "character"
+													},
+													"type" : "ScaleContinuous"
+												}
+											},
+											"editable" : false,
+											"errorType" : "fatalError",
+											"height" : 500,
+											"name" : "anovaContainer_descriptivesContainer_containerBarPlots_",
+											"reasonNotEditable" : "unknown reason",
+											"revision" : 0,
+											"status" : "complete",
+											"title" : "",
+											"width" : 500
+										}
+									},
+									"initCollapsed" : false,
+									"name" : "anovaContainer_descriptivesContainer_containerBarPlots",
+									"title" : "Bar plots"
+								}
+							},
+							"initCollapsed" : false,
+							"name" : "anovaContainer_descriptivesContainer",
+							"title" : "Descriptives"
+						},
+						"anovaContainer_kruskalContainer" : 
+						{
+							"collection" : 
+							{
+								"anovaContainer_kruskalContainer_kruskalTable" : 
+								{
+									"casesAcrossColumns" : false,
+									"data" : 
+									[
+										{
+											"df" : 3,
+											"factor" : "dz_type5",
+											"p" : 2.7667789117478965e-09,
+											"statistic" : 42.760426461215474
+										}
+									],
+									"footnotes" : [],
+									"name" : "anovaContainer_kruskalContainer_kruskalTable",
+									"overTitle" : false,
+									"schema" : 
+									{
+										"fields" : 
+										[
+											{
+												"name" : "factor",
+												"title" : "Factor",
+												"type" : "string"
+											},
+											{
+												"format" : "sf:4;dp:3",
+												"name" : "statistic",
+												"title" : "Statistic",
+												"type" : "number"
+											},
+											{
+												"name" : "df",
+												"title" : "df",
+												"type" : "integer"
+											},
+											{
+												"format" : "dp:3;p:.001",
+												"name" : "p",
+												"title" : "p",
+												"type" : "pvalue"
+											}
+										]
+									},
+									"status" : "complete",
+									"title" : "Kruskal-Wallis Test"
+								}
+							},
+							"initCollapsed" : false,
+							"name" : "anovaContainer_kruskalContainer",
+							"title" : "Kruskal-Wallis Test"
+						},
+						"anovaContainer_ordinalRestrictions" : 
+						{
+							"collection" : 
+							{
+								"anovaContainer_ordinalRestrictions_basicInfoContainer" : 
+								{
+									"collection" : {},
+									"initCollapsed" : false,
+									"name" : "anovaContainer_ordinalRestrictions_basicInfoContainer",
+									"title" : "Syntax information"
+								}
+							},
+							"initCollapsed" : false,
+							"name" : "anovaContainer_ordinalRestrictions",
+							"title" : "Order Restricted Hypotheses"
+						},
+						"anovaContainer_postHocContainer" : 
+						{
+							"collection" : 
+							{
+								"anovaContainer_postHocContainer_postHocDunnettContainer" : 
+								{
+									"collection" : 
+									{
+										"anovaContainer_postHocContainer_postHocDunnettContainer_dz_type5" : 
+										{
+											"casesAcrossColumns" : false,
+											"data" : 
+											[
+												{
+													"SE" : 151.9262628970877,
+													"contrast" : "OIND - NIND",
+													"meanDiff" : 34.277260302327036,
+													"p" : 0.98916873846506326,
+													"t" : 0.22561774145360158
+												},
+												{
+													"SE" : 119.51641961796842,
+													"contrast" : "PMS - NIND",
+													"meanDiff" : 483.84564677291564,
+													"p" : 0.00016656271905046705,
+													"t" : 4.0483612906035633
+												},
+												{
+													"SE" : 103.59982889686574,
+													"contrast" : "RMS - NIND",
+													"meanDiff" : -58.269574303175659,
+													"p" : 0.87198495261962816,
+													"t" : -0.56244855733481347
+												}
+											],
+											"footnotes" : 
+											[
+												{
+													"cols" : null,
+													"myOrder" : 0,
+													"rows" : null,
+													"symbol" : "<em>Note.</em>",
+													"text" : "Results based on uncorrected means."
+												}
+											],
+											"name" : "anovaContainer_postHocContainer_postHocDunnettContainer_dz_type5",
+											"overTitle" : false,
+											"schema" : 
+											{
+												"fields" : 
+												[
+													{
+														"name" : "contrast",
+														"title" : "Comparison",
+														"type" : "string"
+													},
+													{
+														"format" : "sf:4;dp:3",
+														"name" : "meanDiff",
+														"title" : "Mean Difference",
+														"type" : "number"
+													},
+													{
+														"format" : "sf:4;dp:3",
+														"name" : "SE",
+														"title" : "SE",
+														"type" : "number"
+													},
+													{
+														"format" : "sf:4;dp:3",
+														"name" : "t",
+														"title" : "t",
+														"type" : "number"
+													},
+													{
+														"format" : "dp:3;p:.001",
+														"name" : "p",
+														"title" : "p<sub>dunnett</sub>",
+														"type" : "pvalue"
+													}
+												]
+											},
+											"status" : "complete",
+											"title" : "Dunnett Post Hoc Comparisons - dz_type5"
+										}
+									},
+									"initCollapsed" : false,
+									"name" : "anovaContainer_postHocContainer_postHocDunnettContainer",
+									"title" : "Dunnett"
+								},
+								"anovaContainer_postHocContainer_postHocGamesContainer" : 
+								{
+									"collection" : 
+									{
+										"anovaContainer_postHocContainer_postHocGamesContainer_dz_type5" : 
+										{
+											"casesAcrossColumns" : false,
+											"data" : 
+											[
+												{
+													"SE" : 143.78402971162177,
+													"contrast" : "NIND - OIND",
+													"df" : 68.954688056775112,
+													"meanDiff" : -34.277260302325658,
+													"pTukey" : 0.99518896627544051,
+													"t" : -0.23839407179693961
+												},
+												{
+													"SE" : 126.41648432480876,
+													"contrast" : "NIND - PMS",
+													"df" : 85.845808333955617,
+													"meanDiff" : -483.84564677291382,
+													"pTukey" : 0.0013789169122130351,
+													"t" : -3.8273936295344431
+												},
+												{
+													"SE" : 108.12299706853148,
+													"contrast" : "NIND - RMS",
+													"df" : 52.179624672686806,
+													"meanDiff" : 58.269574303178842,
+													"pTukey" : 0.94909497240423257,
+													"t" : 0.53891934077859405
+												},
+												{
+													"SE" : 125.28427427973108,
+													"contrast" : "OIND - PMS",
+													"df" : 62.466559809558476,
+													"meanDiff" : -449.56838647058817,
+													"pTukey" : 0.0035696407712609846,
+													"t" : -3.5883864040813691
+												},
+												{
+													"SE" : 106.79702415252932,
+													"contrast" : "OIND - RMS",
+													"df" : 36.254619098412753,
+													"meanDiff" : 92.5468346055045,
+													"pTukey" : 0.82194382980363856,
+													"t" : 0.86656754099559496
+												},
+												{
+													"SE" : 81.932195605683702,
+													"contrast" : "PMS - RMS",
+													"df" : 123.51276180950595,
+													"meanDiff" : 542.11522107609267,
+													"pTukey" : 5.9837270693918754e-09,
+													"t" : 6.6166324125516986
+												}
+											],
+											"footnotes" : 
+											[
+												{
+													"cols" : null,
+													"myOrder" : 0,
+													"rows" : null,
+													"symbol" : "<em>Note.</em>",
+													"text" : "Results based on uncorrected means."
+												}
+											],
+											"name" : "anovaContainer_postHocContainer_postHocGamesContainer_dz_type5",
+											"overTitle" : false,
+											"schema" : 
+											{
+												"fields" : 
+												[
+													{
+														"name" : "contrast",
+														"title" : "Comparison",
+														"type" : "string"
+													},
+													{
+														"format" : "sf:4;dp:3",
+														"name" : "meanDiff",
+														"title" : "Mean Difference",
+														"type" : "number"
+													},
+													{
+														"format" : "sf:4;dp:3",
+														"name" : "SE",
+														"title" : "SE",
+														"type" : "number"
+													},
+													{
+														"format" : "sf:4;dp:3",
+														"name" : "t",
+														"title" : "t",
+														"type" : "number"
+													},
+													{
+														"format" : "sf:4;dp:3",
+														"name" : "df",
+														"title" : "df",
+														"type" : "number"
+													},
+													{
+														"format" : "dp:3;p:.001",
+														"name" : "pTukey",
+														"title" : "p<sub>tukey</sub>",
+														"type" : "pvalue"
+													}
+												]
+											},
+											"status" : "complete",
+											"title" : "Games-Howell Post Hoc Comparisons - dz_type5"
+										}
+									},
+									"initCollapsed" : false,
+									"name" : "anovaContainer_postHocContainer_postHocGamesContainer",
+									"title" : "Games-Howell"
+								},
+								"anovaContainer_postHocContainer_postHocStandardContainer" : 
+								{
+									"collection" : 
+									{
+										"anovaContainer_postHocContainer_postHocStandardContainer_dz_type51" : 
+										{
+											"casesAcrossColumns" : false,
+											"data" : 
+											[
+												{
+													".isNewGroup" : true,
+													"SE" : 139.11044552805677,
+													"bonferroni" : 1.0,
+													"cohenD" : 0.0024400468526795116,
+													"contrast_A" : "NIND",
+													"contrast_B" : "OIND",
+													"df" : 478.0,
+													"estimate" : 1.4232004754214387,
+													"t.ratio" : 0.010230723293416507,
+													"tukey" : 0.99999961479889476
+												},
+												{
+													".isNewGroup" : false,
+													"SE" : 113.27684945346577,
+													"bonferroni" : 0.051583781598980055,
+													"cohenD" : -0.51243888530139792,
+													"contrast_A" : "NIND",
+													"contrast_B" : "PMS",
+													"df" : 478.0,
+													"estimate" : -298.88904157083994,
+													"t.ratio" : -2.6385712792411642,
+													"tukey" : 0.042575313327162578
+												},
+												{
+													".isNewGroup" : false,
+													"SE" : 95.789396747490102,
+													"bonferroni" : 1.0,
+													"cohenD" : -0.092665552452468436,
+													"contrast_A" : "NIND",
+													"contrast_B" : "RMS",
+													"df" : 478.0,
+													"estimate" : -54.048822120244068,
+													"t.ratio" : -0.56424639840588897,
+													"tukey" : 0.94260095544340605
+												},
+												{
+													".isNewGroup" : false,
+													"SE" : 125.62863782289925,
+													"bonferroni" : 0.10327621296825121,
+													"cohenD" : -0.51487893215407743,
+													"contrast_A" : "OIND",
+													"contrast_B" : "PMS",
+													"df" : 478.0,
+													"estimate" : -300.31224204626136,
+													"t.ratio" : -2.3904759874067603,
+													"tukey" : 0.080262093739066787
+												},
+												{
+													".isNewGroup" : false,
+													"SE" : 112.51849570495511,
+													"bonferroni" : 1.0,
+													"cohenD" : -0.095105599305147948,
+													"contrast_A" : "OIND",
+													"contrast_B" : "RMS",
+													"df" : 478.0,
+													"estimate" : -55.472022595665507,
+													"t.ratio" : -0.49300359241491903,
+													"tukey" : 0.96063545609707779
+												},
+												{
+													".isNewGroup" : false,
+													"SE" : 79.069079614296143,
+													"bonferroni" : 0.012438196401580136,
+													"cohenD" : 0.41977333284892948,
+													"contrast_A" : "PMS",
+													"contrast_B" : "RMS",
+													"df" : 478.0,
+													"estimate" : 244.84021945059584,
+													"t.ratio" : 3.096535594507253,
+													"tukey" : 0.01111695189757822
+												}
+											],
+											"footnotes" : 
+											[
+												{
+													"cols" : null,
+													"myOrder" : 0,
+													"rows" : null,
+													"symbol" : "<em>Note.</em>",
+													"text" : "P-value adjusted for comparing a family of 4 estimates."
+												},
+												{
+													"cols" : null,
+													"myOrder" : 0,
+													"rows" : null,
+													"symbol" : "<em>Note.</em>",
+													"text" : "Results are averaged over the levels of: Female"
+												}
+											],
+											"name" : "anovaContainer_postHocContainer_postHocStandardContainer_dz_type51",
+											"overTitle" : false,
+											"schema" : 
+											{
+												"fields" : 
+												[
+													{
+														"combine" : true,
+														"name" : "contrast_A",
+														"title" : " ",
+														"type" : "string"
+													},
+													{
+														"name" : "contrast_B",
+														"title" : " ",
+														"type" : "string"
+													},
+													{
+														"format" : "sf:4;dp:3",
+														"name" : "estimate",
+														"title" : "Mean Difference",
+														"type" : "number"
+													},
+													{
+														"format" : "sf:4;dp:3",
+														"name" : "SE",
+														"title" : "SE",
+														"type" : "number"
+													},
+													{
+														"name" : "df",
+														"title" : "df",
+														"type" : "integer"
+													},
+													{
+														"format" : "sf:4;dp:3",
+														"name" : "t.ratio",
+														"title" : "t",
+														"type" : "number"
+													},
+													{
+														"format" : "sf:4;dp:3",
+														"name" : "cohenD",
+														"title" : "Cohen's d",
+														"type" : "number"
+													},
+													{
+														"format" : "dp:3;p:.001",
+														"name" : "tukey",
+														"title" : "p<sub>tukey</sub>",
+														"type" : "pvalue"
+													},
+													{
+														"format" : "dp:3;p:.001",
+														"name" : "bonferroni",
+														"title" : "p<sub>bonf</sub>",
+														"type" : "pvalue"
+													}
+												]
+											},
+											"status" : "complete",
+											"title" : "Post Hoc Comparisons - dz_type5"
+										}
+									},
+									"initCollapsed" : false,
+									"name" : "anovaContainer_postHocContainer_postHocStandardContainer",
+									"title" : "Standard (HSD)"
+								}
+							},
+							"initCollapsed" : false,
+							"name" : "anovaContainer_postHocContainer",
+							"title" : "Post Hoc Tests"
+						}
+					},
+					"initCollapsed" : false,
+					"name" : "anovaContainer",
+					"title" : ""
+				},
+				"citation" : 
+				[
+					"JASP Team (2025). JASP (Version 0.19.3) [Computer software]."
+				],
+				"name" : ""
+			},
+			"rfile" : "",
+			"status" : "complete",
+			"title" : "Choroid Volume",
+			"titleDef" : "ANCOVA",
+			"userdata" : null
+		},
+		{
+			"dynamicModule" : 
+			{
+				"analysisEntry" : "Ancova",
+				"moduleMaintainer" : "JASP Team <info@jasp-stats.org>",
+				"moduleName" : "jaspAnova",
+				"moduleVersion" : "0.19.2",
+				"moduleWebsite" : "jasp-stats.org"
+			},
+			"hasReport" : false,
+			"id" : 2,
+			"name" : "Ancova",
+			"options" : 
+			{
+				".meta" : 
+				{
+					"barPlotHorizontalAxis" : 
+					{
+						"shouldEncode" : true
+					},
+					"barPlotSeparatePlots" : 
+					{
+						"shouldEncode" : true
+					},
+					"contrasts" : 
+					{
+						"shouldEncode" : true
+					},
+					"covariates" : 
+					{
+						"shouldEncode" : true
+					},
+					"customContrasts" : 
+					{
+						"shouldEncode" : true
+					},
+					"dependent" : 
+					{
+						"shouldEncode" : true
+					},
+					"descriptivePlotHorizontalAxis" : 
+					{
+						"shouldEncode" : true
+					},
+					"descriptivePlotSeparateLines" : 
+					{
+						"shouldEncode" : true
+					},
+					"descriptivePlotSeparatePlot" : 
+					{
+						"shouldEncode" : true
+					},
+					"fixedFactors" : 
+					{
+						"shouldEncode" : true
+					},
+					"kruskalWallisFactors" : 
+					{
+						"shouldEncode" : true
+					},
+					"marginalMeanTerms" : 
+					{
+						"shouldEncode" : true
+					},
+					"modelTerms" : 
+					{
+						"shouldEncode" : true
+					},
+					"postHocTerms" : 
+					{
+						"shouldEncode" : true
+					},
+					"rainCloudHorizontalAxis" : 
+					{
+						"shouldEncode" : true
+					},
+					"rainCloudSeparatePlots" : 
+					{
+						"shouldEncode" : true
+					},
+					"restrictedMarginalMeanTerms" : 
+					{
+						"shouldEncode" : true
+					},
+					"simpleMainEffectFactor" : 
+					{
+						"shouldEncode" : true
+					},
+					"simpleMainEffectModeratorFactorOne" : 
+					{
+						"shouldEncode" : true
+					},
+					"simpleMainEffectModeratorFactorTwo" : 
+					{
+						"shouldEncode" : true
+					},
+					"wlsWeights" : 
+					{
+						"shouldEncode" : true
+					}
+				},
+				"barPlotCiInterval" : 0.94999999999999996,
+				"barPlotErrorBarType" : "ci",
+				"barPlotErrorBars" : true,
+				"barPlotHorizontalAxis" : 
+				{
+					"types" : 
+					[
+						"nominal"
+					],
+					"value" : "dz_type3"
+				},
+				"barPlotHorizontalZeroFix" : true,
+				"barPlotSeparatePlots" : 
+				{
+					"types" : [],
+					"value" : ""
+				},
+				"contrastCi" : false,
+				"contrastCiLevel" : 0.94999999999999996,
+				"contrastEffectSize" : false,
+				"contrasts" : 
+				{
+					"optionKey" : "variable",
+					"types" : 
+					[
+						"nominal"
+					],
+					"value" : 
+					[
+						{
+							"contrast" : "none",
+							"variable" : 
+							[
+								"dz_type3"
+							]
+						}
+					]
+				},
+				"covariates" : 
+				{
+					"types" : 
+					[
+						"scale",
+						"scale",
+						"scale"
+					],
+					"value" : 
+					[
+						"tiv",
+						"age",
+						"Female"
+					]
+				},
+				"customContrasts" : [],
+				"dependent" : 
+				{
+					"types" : 
+					[
+						"scale"
+					],
+					"value" : "pineal_volume"
+				},
+				"descriptivePlotCiLevel" : 0.94999999999999996,
+				"descriptivePlotErrorBar" : false,
+				"descriptivePlotErrorBarType" : "ci",
+				"descriptivePlotHorizontalAxis" : 
+				{
+					"types" : [],
+					"value" : ""
+				},
+				"descriptivePlotSeparateLines" : 
+				{
+					"types" : [],
+					"value" : ""
+				},
+				"descriptivePlotSeparatePlot" : 
+				{
+					"types" : [],
+					"value" : ""
+				},
+				"descriptives" : false,
+				"effectSizeCi" : false,
+				"effectSizeCiLevel" : 0.94999999999999996,
+				"effectSizeEstimates" : false,
+				"effectSizeEtaSquared" : false,
+				"effectSizeGeneralEtaSquared" : false,
+				"effectSizeOmegaSquared" : true,
+				"effectSizePartialEtaSquared" : false,
+				"effectSizePartialOmegaSquared" : false,
+				"factorCovariateIndependenceCheck" : false,
+				"fixedFactors" : 
+				{
+					"types" : 
+					[
+						"nominal"
+					],
+					"value" : 
+					[
+						"dz_type3"
+					]
+				},
+				"homogeneityCorrectionBrown" : false,
+				"homogeneityCorrectionNone" : true,
+				"homogeneityCorrectionWelch" : false,
+				"homogeneityTests" : true,
+				"kruskalCiLevel" : 0.94999999999999996,
+				"kruskalEffectSizeEstimates" : false,
+				"kruskalEpsilon" : true,
+				"kruskalEta" : false,
+				"kruskalWallisFactors" : 
+				{
+					"types" : [],
+					"value" : []
+				},
+				"marginalMeanBootstrap" : false,
+				"marginalMeanBootstrapSamples" : 1000,
+				"marginalMeanCiCorrection" : "none",
+				"marginalMeanComparedToZero" : false,
+				"marginalMeanTerms" : 
+				{
+					"optionKey" : "variable",
+					"types" : [],
+					"value" : []
+				},
+				"modelTerms" : 
+				{
+					"optionKey" : "components",
+					"types" : 
+					[
+						"scale",
+						"scale",
+						"scale",
+						"nominal"
+					],
+					"value" : 
+					[
+						{
+							"components" : 
+							[
+								"tiv"
+							]
+						},
+						{
+							"components" : 
+							[
+								"age"
+							]
+						},
+						{
+							"components" : 
+							[
+								"Female"
+							]
+						},
+						{
+							"components" : 
+							[
+								"dz_type3"
+							]
+						}
+					]
+				},
+				"normalizeErrorBarsDescriptives" : true,
+				"plotHeight" : 320,
+				"plotHeightDescriptivesPlotLegend" : 300,
+				"plotHeightDescriptivesPlotNoLegend" : 300,
+				"plotHeightQQPlot" : 300,
+				"plotWidth" : 480,
+				"plotWidthDescriptivesPlotLegend" : 430,
+				"plotWidthDescriptivesPlotNoLegend" : 350,
+				"plotWidthQQPlot" : 300,
+				"postHocCi" : false,
+				"postHocCiLevel" : 0.94999999999999996,
+				"postHocConditionalTable" : false,
+				"postHocCorrectionBonferroni" : true,
+				"postHocCorrectionHolm" : false,
+				"postHocCorrectionScheffe" : false,
+				"postHocCorrectionSidak" : false,
+				"postHocCorrectionTukey" : true,
+				"postHocLetterAlpha" : 0.050000000000000003,
+				"postHocLetterTable" : false,
+				"postHocSignificanceFlag" : false,
+				"postHocTerms" : 
+				{
+					"optionKey" : "variable",
+					"types" : [],
+					"value" : []
+				},
+				"postHocTypeDunn" : false,
+				"postHocTypeDunnet" : true,
+				"postHocTypeGames" : true,
+				"postHocTypeStandard" : true,
+				"postHocTypeStandardBootstrap" : false,
+				"postHocTypeStandardBootstrapSamples" : 1000,
+				"postHocTypeStandardEffectSize" : false,
+				"qqPlot" : true,
+				"rainCloudHorizontalAxis" : 
+				{
+					"types" : [],
+					"value" : ""
+				},
+				"rainCloudHorizontalDisplay" : false,
+				"rainCloudSeparatePlots" : 
+				{
+					"types" : [],
+					"value" : ""
+				},
+				"rainCloudYAxisLabel" : "",
+				"randomFactors" : 
+				{
+					"types" : [],
+					"value" : []
+				},
+				"restrictedAvailableCoefficients" : false,
+				"restrictedBootstrap" : false,
+				"restrictedBootstrapCiLevel" : 0.94999999999999996,
+				"restrictedBootstrapSamples" : 1000,
+				"restrictedHeterogeneityCorrection" : "none",
+				"restrictedInformedHypothesisTestForAllModels" : false,
+				"restrictedInterceptInclusion" : false,
+				"restrictedMarginalMeanForAllModels" : false,
+				"restrictedMarginalMeanTerms" : 
+				{
+					"optionKey" : "variable",
+					"types" : [],
+					"value" : []
+				},
+				"restrictedModelComparison" : "complement",
+				"restrictedModelComparisonCoefficients" : false,
+				"restrictedModelComparisonCoefficientsHighlight" : true,
+				"restrictedModelComparisonMatrix" : false,
+				"restrictedModelComparisonReference" : "Model 1",
+				"restrictedModelComparisonWeights" : true,
+				"restrictedModelSummaryForAllModels" : false,
+				"restrictedModels" : 
+				[
+					{
+						"informedHypothesisTest" : false,
+						"marginalMean" : false,
+						"name" : 
+						[
+							"Model 1"
+						],
+						"summary" : false,
+						"syntax" : ""
+					}
+				],
+				"simpleMainEffectFactor" : 
+				{
+					"types" : [],
+					"value" : ""
+				},
+				"simpleMainEffectModeratorFactorOne" : 
+				{
+					"types" : [],
+					"value" : ""
+				},
+				"simpleMainEffectModeratorFactorTwo" : 
+				{
+					"types" : [],
+					"value" : ""
+				},
+				"sumOfSquares" : "type3",
+				"vovkSellke" : false,
+				"wlsWeights" : 
+				{
+					"types" : [],
+					"value" : ""
+				}
+			},
+			"progress" : null,
+			"rSources" : {},
+			"results" : 
+			{
+				".meta" : 
+				[
+					{
+						"info" : "",
+						"meta" : 
+						[
+							{
+								"info" : "",
+								"name" : "anovaContainer_anovaTable",
+								"title" : "ANCOVA - pineal_volume",
+								"type" : "table"
+							},
+							{
+								"info" : "",
+								"meta" : 
+								[
+									{
+										"info" : "",
+										"meta" : 
+										[
+											{
+												"info" : "",
+												"name" : "anovaContainer_descriptivesContainer_containerBarPlots_",
+												"title" : "",
+												"type" : "image"
+											}
+										],
+										"name" : "anovaContainer_descriptivesContainer_containerBarPlots",
+										"title" : "Bar plots",
+										"type" : "collection"
+									}
+								],
+								"name" : "anovaContainer_descriptivesContainer",
+								"title" : "Descriptives",
+								"type" : "collection"
+							},
+							{
+								"info" : "",
+								"meta" : 
+								[
+									{
+										"info" : "",
+										"name" : "anovaContainer_assumptionsContainer_leveneTable",
+										"title" : "Test for Equality of Variances (Levene's)",
+										"type" : "table"
+									},
+									{
+										"info" : "",
+										"name" : "anovaContainer_assumptionsContainer_qqPlot",
+										"title" : "Q-Q Plot",
+										"type" : "image"
+									}
+								],
+								"name" : "anovaContainer_assumptionsContainer",
+								"title" : "Assumption Checks",
+								"type" : "collection"
+							},
+							{
+								"info" : "",
+								"meta" : 
+								[
+									{
+										"info" : "",
+										"meta" : [],
+										"name" : "anovaContainer_ordinalRestrictions_basicInfoContainer",
+										"title" : "Syntax information",
+										"type" : "collection"
+									}
+								],
+								"name" : "anovaContainer_ordinalRestrictions",
+								"title" : "Order Restricted Hypotheses",
+								"type" : "collection"
+							}
+						],
+						"name" : "anovaContainer",
+						"title" : "",
+						"type" : "collection"
+					}
+				],
+				"anovaContainer" : 
+				{
+					"collection" : 
+					{
+						"anovaContainer_anovaTable" : 
+						{
+							"casesAcrossColumns" : false,
+							"data" : 
+							[
+								{
+									".isNewGroup" : true,
+									"Df" : 1.0,
+									"F value" : 0.28571417123215365,
+									"Mean Sq" : 2646.0773908626288,
+									"Pr(>F)" : 0.59322818124645882,
+									"Sum Sq" : 2646.0773908626288,
+									"cases" : "Female"
+								},
+								{
+									".isNewGroup" : false,
+									"Df" : 2.0,
+									"F value" : 4.4971811867776239,
+									"Mean Sq" : 41649.629801792093,
+									"Pr(>F)" : 0.011614746026169003,
+									"Sum Sq" : 83299.259603584185,
+									"cases" : "dz_type3"
+								},
+								{
+									".isNewGroup" : false,
+									"Df" : 1.0,
+									"F value" : 1.0039822896897925,
+									"Mean Sq" : 9298.1556571656838,
+									"Pr(>F)" : 0.31685472250562702,
+									"Sum Sq" : 9298.1556571656838,
+									"cases" : "tiv"
+								},
+								{
+									".isNewGroup" : false,
+									"Df" : 1.0,
+									"F value" : 1.1503189864770991,
+									"Mean Sq" : 10653.41998708155,
+									"Pr(>F)" : 0.28402243161414337,
+									"Sum Sq" : 10653.41998708155,
+									"cases" : "age"
+								},
+								{
+									".isNewGroup" : true,
+									"Df" : 479.0,
+									"F value" : "",
+									"Mean Sq" : 9261.2745788958091,
+									"Pr(>F)" : "",
+									"Sum Sq" : 4436150.5232910924,
+									"cases" : "Residuals"
+								}
+							],
+							"footnotes" : 
+							[
+								{
+									"cols" : null,
+									"myOrder" : 0,
+									"rows" : null,
+									"symbol" : "<em>Note.</em>",
+									"text" : "Type III Sum of Squares"
+								}
+							],
+							"name" : "anovaContainer_anovaTable",
+							"overTitle" : false,
+							"schema" : 
+							{
+								"fields" : 
+								[
+									{
+										"name" : "cases",
+										"title" : "Cases",
+										"type" : "string"
+									},
+									{
+										"format" : "sf:4;dp:3",
+										"name" : "Sum Sq",
+										"title" : "Sum of Squares",
+										"type" : "number"
+									},
+									{
+										"name" : "Df",
+										"title" : "df",
+										"type" : "integer"
+									},
+									{
+										"format" : "sf:4;dp:3",
+										"name" : "Mean Sq",
+										"title" : "Mean Square",
+										"type" : "number"
+									},
+									{
+										"format" : "sf:4;dp:3",
+										"name" : "F value",
+										"title" : "F",
+										"type" : "number"
+									},
+									{
+										"format" : "dp:3;p:.001",
+										"name" : "Pr(>F)",
+										"title" : "p",
+										"type" : "pvalue"
+									}
+								]
+							},
+							"status" : "complete",
+							"title" : "ANCOVA - pineal_volume"
+						},
+						"anovaContainer_assumptionsContainer" : 
+						{
+							"collection" : 
+							{
+								"anovaContainer_assumptionsContainer_leveneTable" : 
+								{
+									"casesAcrossColumns" : false,
+									"data" : 
+									[
+										{
+											"F" : 8.7284914557543356,
+											"df1" : 2.0,
+											"df2" : 482.0,
+											"p" : 0.00018892815116423948
+										}
+									],
+									"footnotes" : [],
+									"name" : "anovaContainer_assumptionsContainer_leveneTable",
+									"overTitle" : false,
+									"schema" : 
+									{
+										"fields" : 
+										[
+											{
+												"format" : "sf:4;dp:3",
+												"name" : "F",
+												"title" : "F",
+												"type" : "number"
+											},
+											{
+												"format" : "sf:4;dp:3",
+												"name" : "df1",
+												"title" : "df1",
+												"type" : "number"
+											},
+											{
+												"format" : "sf:4;dp:3",
+												"name" : "df2",
+												"title" : "df2",
+												"type" : "number"
+											},
+											{
+												"format" : "dp:3;p:.001",
+												"name" : "p",
+												"title" : "p",
+												"type" : "pvalue"
+											}
+										]
+									},
+									"status" : "complete",
+									"title" : "Test for Equality of Variances (Levene's)"
+								},
+								"anovaContainer_assumptionsContainer_qqPlot" : 
+								{
+									"aspectRatio" : 0.0,
+									"convertible" : true,
+									"data" : "resources/2/_2_t-221157330.png",
+									"editOptions" : 
+									{
+										"error" : "success",
+										"xAxis" : 
+										{
+											"settings" : 
+											{
+												"breaks" : 
+												[
+													-4,
+													-2,
+													0,
+													2,
+													4,
+													6,
+													8,
+													10
+												],
+												"breaksType" : "range",
+												"expand" : 
+												[
+													0.050000000000000003,
+													0,
+													0.050000000000000003,
+													0
+												],
+												"labels" : 
+												[
+													"-4",
+													"-2",
+													"0",
+													"2",
+													"4",
+													"6",
+													"8",
+													"10"
+												],
+												"limits" : 
+												[
+													-4,
+													10
+												],
+												"limitsType" : "manual",
+												"range" : 
+												[
+													-4,
+													10,
+													2
+												],
+												"title" : "Theoretical quantiles",
+												"titleType" : "character"
+											},
+											"type" : "ScaleContinuous"
+										},
+										"yAxis" : 
+										{
+											"settings" : 
+											{
+												"breaks" : 
+												[
+													-4,
+													-2,
+													0,
+													2,
+													4,
+													6,
+													8,
+													10
+												],
+												"breaksType" : "range",
+												"expand" : 
+												[
+													0.050000000000000003,
+													0,
+													0.050000000000000003,
+													0
+												],
+												"labels" : 
+												[
+													"-4",
+													"-2",
+													"0",
+													"2",
+													"4",
+													"6",
+													"8",
+													"10"
+												],
+												"limits" : 
+												[
+													-4,
+													10
+												],
+												"limitsType" : "manual",
+												"range" : 
+												[
+													-4,
+													10,
+													2
+												],
+												"title" : "Standardized residuals",
+												"titleType" : "character"
+											},
+											"type" : "ScaleContinuous"
+										}
+									},
+									"editable" : false,
+									"errorType" : "fatalError",
+									"height" : 300,
+									"name" : "anovaContainer_assumptionsContainer_qqPlot",
+									"reasonNotEditable" : "unknown reason",
+									"revision" : 0,
+									"status" : "complete",
+									"title" : "Q-Q Plot",
+									"width" : 300
+								}
+							},
+							"initCollapsed" : false,
+							"name" : "anovaContainer_assumptionsContainer",
+							"title" : "Assumption Checks"
+						},
+						"anovaContainer_descriptivesContainer" : 
+						{
+							"collection" : 
+							{
+								"anovaContainer_descriptivesContainer_containerBarPlots" : 
+								{
+									"collection" : 
+									{
+										"anovaContainer_descriptivesContainer_containerBarPlots_" : 
+										{
+											"aspectRatio" : 0.0,
+											"convertible" : true,
+											"data" : "resources/2/_0_t-217033619.png",
+											"editOptions" : 
+											{
+												"error" : "success",
+												"xAxis" : 
+												{
+													"settings" : 
+													{
+														"labels" : 
+														[
+															"MS",
+															"NIND",
+															"OIND"
+														],
+														"title" : "dz_type3",
+														"titleType" : "character"
+													},
+													"type" : "ScaleDiscrete"
+												},
+												"yAxis" : 
+												{
+													"settings" : 
+													{
+														"breaks" : 
+														[
+															0,
+															50,
+															100,
+															150,
+															200,
+															250,
+															300,
+															350
+														],
+														"breaksType" : "range",
+														"expand" : 
+														[
+															0.050000000000000003,
+															0,
+															0.050000000000000003,
+															0
+														],
+														"labels" : 
+														[
+															"0",
+															"50",
+															"100",
+															"150",
+															"200",
+															"250",
+															"300",
+															"350"
+														],
+														"limits" : 
+														[
+															0,
+															350
+														],
+														"limitsType" : "breaks",
+														"range" : 
+														[
+															0,
+															350,
+															50
+														],
+														"title" : "pineal_volume",
+														"titleType" : "character"
+													},
+													"type" : "ScaleContinuous"
+												}
+											},
+											"editable" : false,
+											"errorType" : "fatalError",
+											"height" : 500,
+											"name" : "anovaContainer_descriptivesContainer_containerBarPlots_",
+											"reasonNotEditable" : "unknown reason",
+											"revision" : 0,
+											"status" : "complete",
+											"title" : "",
+											"width" : 500
+										}
+									},
+									"initCollapsed" : false,
+									"name" : "anovaContainer_descriptivesContainer_containerBarPlots",
+									"title" : "Bar plots"
+								}
+							},
+							"initCollapsed" : false,
+							"name" : "anovaContainer_descriptivesContainer",
+							"title" : "Descriptives"
+						},
+						"anovaContainer_ordinalRestrictions" : 
+						{
+							"collection" : 
+							{
+								"anovaContainer_ordinalRestrictions_basicInfoContainer" : 
+								{
+									"collection" : {},
+									"initCollapsed" : false,
+									"name" : "anovaContainer_ordinalRestrictions_basicInfoContainer",
+									"title" : "Syntax information"
+								}
+							},
+							"initCollapsed" : false,
+							"name" : "anovaContainer_ordinalRestrictions",
+							"title" : "Order Restricted Hypotheses"
+						}
+					},
+					"initCollapsed" : false,
+					"name" : "anovaContainer",
+					"title" : ""
+				},
+				"citation" : 
+				[
+					"JASP Team (2025). JASP (Version 0.19.3) [Computer software]."
+				],
+				"name" : ""
+			},
+			"rfile" : "",
+			"status" : "complete",
+			"title" : "Pineal Volume",
+			"titleDef" : "ANCOVA",
+			"userdata" : null
+		},
+		{
+			"dynamicModule" : 
+			{
+				"analysisEntry" : "Ancova",
+				"moduleMaintainer" : "JASP Team <info@jasp-stats.org>",
+				"moduleName" : "jaspAnova",
+				"moduleVersion" : "0.19.2",
+				"moduleWebsite" : "jasp-stats.org"
+			},
+			"hasReport" : false,
+			"id" : 4,
+			"name" : "Ancova",
+			"options" : 
+			{
+				".meta" : 
+				{
+					"barPlotHorizontalAxis" : 
+					{
+						"shouldEncode" : true
+					},
+					"barPlotSeparatePlots" : 
+					{
+						"shouldEncode" : true
+					},
+					"contrasts" : 
+					{
+						"shouldEncode" : true
+					},
+					"covariates" : 
+					{
+						"shouldEncode" : true
+					},
+					"customContrasts" : 
+					{
+						"shouldEncode" : true
+					},
+					"dependent" : 
+					{
+						"shouldEncode" : true
+					},
+					"descriptivePlotHorizontalAxis" : 
+					{
+						"shouldEncode" : true
+					},
+					"descriptivePlotSeparateLines" : 
+					{
+						"shouldEncode" : true
+					},
+					"descriptivePlotSeparatePlot" : 
+					{
+						"shouldEncode" : true
+					},
+					"fixedFactors" : 
+					{
+						"shouldEncode" : true
+					},
+					"kruskalWallisFactors" : 
+					{
+						"shouldEncode" : true
+					},
+					"marginalMeanTerms" : 
+					{
+						"shouldEncode" : true
+					},
+					"modelTerms" : 
+					{
+						"shouldEncode" : true
+					},
+					"postHocTerms" : 
+					{
+						"shouldEncode" : true
+					},
+					"rainCloudHorizontalAxis" : 
+					{
+						"shouldEncode" : true
+					},
+					"rainCloudSeparatePlots" : 
+					{
+						"shouldEncode" : true
+					},
+					"restrictedMarginalMeanTerms" : 
+					{
+						"shouldEncode" : true
+					},
+					"simpleMainEffectFactor" : 
+					{
+						"shouldEncode" : true
+					},
+					"simpleMainEffectModeratorFactorOne" : 
+					{
+						"shouldEncode" : true
+					},
+					"simpleMainEffectModeratorFactorTwo" : 
+					{
+						"shouldEncode" : true
+					},
+					"wlsWeights" : 
+					{
+						"shouldEncode" : true
+					}
+				},
+				"barPlotCiInterval" : 0.94999999999999996,
+				"barPlotErrorBarType" : "ci",
+				"barPlotErrorBars" : true,
+				"barPlotHorizontalAxis" : 
+				{
+					"types" : 
+					[
+						"nominal"
+					],
+					"value" : "dz_type5"
+				},
+				"barPlotHorizontalZeroFix" : true,
+				"barPlotSeparatePlots" : 
+				{
+					"types" : [],
+					"value" : ""
+				},
+				"contrastCi" : false,
+				"contrastCiLevel" : 0.94999999999999996,
+				"contrastEffectSize" : false,
+				"contrasts" : 
+				{
+					"optionKey" : "variable",
+					"types" : 
+					[
+						"nominal"
+					],
+					"value" : 
+					[
+						{
+							"contrast" : "none",
+							"variable" : 
+							[
+								"dz_type5"
+							]
+						}
+					]
+				},
+				"covariates" : 
+				{
+					"types" : 
+					[
+						"scale",
+						"scale",
+						"scale"
+					],
+					"value" : 
+					[
+						"tiv",
+						"age",
+						"Female"
+					]
+				},
+				"customContrasts" : [],
+				"dependent" : 
+				{
+					"types" : 
+					[
+						"scale"
+					],
+					"value" : "pituitary_volume"
+				},
+				"descriptivePlotCiLevel" : 0.94999999999999996,
+				"descriptivePlotErrorBar" : false,
+				"descriptivePlotErrorBarType" : "ci",
+				"descriptivePlotHorizontalAxis" : 
+				{
+					"types" : [],
+					"value" : ""
+				},
+				"descriptivePlotSeparateLines" : 
+				{
+					"types" : [],
+					"value" : ""
+				},
+				"descriptivePlotSeparatePlot" : 
+				{
+					"types" : [],
+					"value" : ""
+				},
+				"descriptives" : false,
+				"effectSizeCi" : false,
+				"effectSizeCiLevel" : 0.94999999999999996,
+				"effectSizeEstimates" : false,
+				"effectSizeEtaSquared" : false,
+				"effectSizeGeneralEtaSquared" : false,
+				"effectSizeOmegaSquared" : true,
+				"effectSizePartialEtaSquared" : false,
+				"effectSizePartialOmegaSquared" : false,
+				"factorCovariateIndependenceCheck" : false,
+				"fixedFactors" : 
+				{
+					"types" : 
+					[
+						"nominal"
+					],
+					"value" : 
+					[
+						"dz_type5"
+					]
+				},
+				"homogeneityCorrectionBrown" : false,
+				"homogeneityCorrectionNone" : true,
+				"homogeneityCorrectionWelch" : false,
+				"homogeneityTests" : true,
+				"kruskalCiLevel" : 0.94999999999999996,
+				"kruskalEffectSizeEstimates" : false,
+				"kruskalEpsilon" : true,
+				"kruskalEta" : false,
+				"kruskalWallisFactors" : 
+				{
+					"types" : [],
+					"value" : []
+				},
+				"marginalMeanBootstrap" : false,
+				"marginalMeanBootstrapSamples" : 1000,
+				"marginalMeanCiCorrection" : "none",
+				"marginalMeanComparedToZero" : false,
+				"marginalMeanTerms" : 
+				{
+					"optionKey" : "variable",
+					"types" : [],
+					"value" : []
+				},
+				"modelTerms" : 
+				{
+					"optionKey" : "components",
+					"types" : 
+					[
+						"nominal",
+						"scale",
+						"scale",
+						"scale"
+					],
+					"value" : 
+					[
+						{
+							"components" : 
+							[
+								"dz_type5"
+							]
+						},
+						{
+							"components" : 
+							[
+								"tiv"
+							]
+						},
+						{
+							"components" : 
+							[
+								"age"
+							]
+						},
+						{
+							"components" : 
+							[
+								"Female"
+							]
+						}
+					]
+				},
+				"normalizeErrorBarsDescriptives" : true,
+				"plotHeight" : 320,
+				"plotHeightDescriptivesPlotLegend" : 300,
+				"plotHeightDescriptivesPlotNoLegend" : 300,
+				"plotHeightQQPlot" : 300,
+				"plotWidth" : 480,
+				"plotWidthDescriptivesPlotLegend" : 430,
+				"plotWidthDescriptivesPlotNoLegend" : 350,
+				"plotWidthQQPlot" : 300,
+				"postHocCi" : false,
+				"postHocCiLevel" : 0.94999999999999996,
+				"postHocConditionalTable" : false,
+				"postHocCorrectionBonferroni" : false,
+				"postHocCorrectionHolm" : false,
+				"postHocCorrectionScheffe" : false,
+				"postHocCorrectionSidak" : false,
+				"postHocCorrectionTukey" : true,
+				"postHocLetterAlpha" : 0.050000000000000003,
+				"postHocLetterTable" : false,
+				"postHocSignificanceFlag" : false,
+				"postHocTerms" : 
+				{
+					"optionKey" : "variable",
+					"types" : [],
+					"value" : []
+				},
+				"postHocTypeDunn" : false,
+				"postHocTypeDunnet" : false,
+				"postHocTypeGames" : false,
+				"postHocTypeStandard" : true,
+				"postHocTypeStandardBootstrap" : false,
+				"postHocTypeStandardBootstrapSamples" : 1000,
+				"postHocTypeStandardEffectSize" : false,
+				"qqPlot" : true,
+				"rainCloudHorizontalAxis" : 
+				{
+					"types" : [],
+					"value" : ""
+				},
+				"rainCloudHorizontalDisplay" : false,
+				"rainCloudSeparatePlots" : 
+				{
+					"types" : [],
+					"value" : ""
+				},
+				"rainCloudYAxisLabel" : "",
+				"randomFactors" : 
+				{
+					"types" : [],
+					"value" : []
+				},
+				"restrictedAvailableCoefficients" : false,
+				"restrictedBootstrap" : false,
+				"restrictedBootstrapCiLevel" : 0.94999999999999996,
+				"restrictedBootstrapSamples" : 1000,
+				"restrictedHeterogeneityCorrection" : "none",
+				"restrictedInformedHypothesisTestForAllModels" : false,
+				"restrictedInterceptInclusion" : false,
+				"restrictedMarginalMeanForAllModels" : false,
+				"restrictedMarginalMeanTerms" : 
+				{
+					"optionKey" : "variable",
+					"types" : [],
+					"value" : []
+				},
+				"restrictedModelComparison" : "complement",
+				"restrictedModelComparisonCoefficients" : false,
+				"restrictedModelComparisonCoefficientsHighlight" : true,
+				"restrictedModelComparisonMatrix" : false,
+				"restrictedModelComparisonReference" : "Model 1",
+				"restrictedModelComparisonWeights" : true,
+				"restrictedModelSummaryForAllModels" : false,
+				"restrictedModels" : 
+				[
+					{
+						"informedHypothesisTest" : false,
+						"marginalMean" : false,
+						"name" : 
+						[
+							"Model 1"
+						],
+						"summary" : false,
+						"syntax" : ""
+					}
+				],
+				"simpleMainEffectFactor" : 
+				{
+					"types" : [],
+					"value" : ""
+				},
+				"simpleMainEffectModeratorFactorOne" : 
+				{
+					"types" : [],
+					"value" : ""
+				},
+				"simpleMainEffectModeratorFactorTwo" : 
+				{
+					"types" : [],
+					"value" : ""
+				},
+				"sumOfSquares" : "type3",
+				"vovkSellke" : false,
+				"wlsWeights" : 
+				{
+					"types" : [],
+					"value" : ""
+				}
+			},
+			"progress" : null,
+			"rSources" : {},
+			"results" : 
+			{
+				".meta" : 
+				[
+					{
+						"info" : "",
+						"meta" : 
+						[
+							{
+								"info" : "",
+								"name" : "anovaContainer_anovaTable",
+								"title" : "ANCOVA - pituitary_volume",
+								"type" : "table"
+							},
+							{
+								"info" : "",
+								"meta" : 
+								[
+									{
+										"info" : "",
+										"meta" : 
+										[
+											{
+												"info" : "",
+												"name" : "anovaContainer_descriptivesContainer_containerBarPlots_",
+												"title" : "",
+												"type" : "image"
+											}
+										],
+										"name" : "anovaContainer_descriptivesContainer_containerBarPlots",
+										"title" : "Bar plots",
+										"type" : "collection"
+									}
+								],
+								"name" : "anovaContainer_descriptivesContainer",
+								"title" : "Descriptives",
+								"type" : "collection"
+							},
+							{
+								"info" : "",
+								"meta" : 
+								[
+									{
+										"info" : "",
+										"name" : "anovaContainer_assumptionsContainer_leveneTable",
+										"title" : "Test for Equality of Variances (Levene's)",
+										"type" : "table"
+									},
+									{
+										"info" : "",
+										"name" : "anovaContainer_assumptionsContainer_qqPlot",
+										"title" : "Q-Q Plot",
+										"type" : "image"
+									}
+								],
+								"name" : "anovaContainer_assumptionsContainer",
+								"title" : "Assumption Checks",
+								"type" : "collection"
+							},
+							{
+								"info" : "",
+								"meta" : 
+								[
+									{
+										"info" : "",
+										"meta" : [],
+										"name" : "anovaContainer_ordinalRestrictions_basicInfoContainer",
+										"title" : "Syntax information",
+										"type" : "collection"
+									}
+								],
+								"name" : "anovaContainer_ordinalRestrictions",
+								"title" : "Order Restricted Hypotheses",
+								"type" : "collection"
+							}
+						],
+						"name" : "anovaContainer",
+						"title" : "",
+						"type" : "collection"
+					}
+				],
+				"anovaContainer" : 
+				{
+					"collection" : 
+					{
+						"anovaContainer_anovaTable" : 
+						{
+							"casesAcrossColumns" : false,
+							"data" : 
+							[
+								{
+									".isNewGroup" : true,
+									"Df" : 3.0,
+									"F value" : 0.57208628379621662,
+									"Mean Sq" : 9109.258311016174,
+									"Pr(>F)" : 0.63360965129713553,
+									"Sum Sq" : 27327.774933048524,
+									"cases" : "dz_type5"
+								},
+								{
+									".isNewGroup" : false,
+									"Df" : 1.0,
+									"F value" : 4.1349102803940925,
+									"Mean Sq" : 65839.658988228999,
+									"Pr(>F)" : 0.042559163889531688,
+									"Sum Sq" : 65839.658988228999,
+									"cases" : "tiv"
+								},
+								{
+									".isNewGroup" : false,
+									"Df" : 1.0,
+									"F value" : 6.200199824486524,
+									"Mean Sq" : 98725.005966553465,
+									"Pr(>F)" : 0.013112272664393932,
+									"Sum Sq" : 98725.005966553465,
+									"cases" : "age"
+								},
+								{
+									".isNewGroup" : false,
+									"Df" : 1.0,
+									"F value" : 20.147035836557567,
+									"Mean Sq" : 320798.73060175683,
+									"Pr(>F)" : 8.9965647822826243e-06,
+									"Sum Sq" : 320798.73060175683,
+									"cases" : "Female"
+								},
+								{
+									".isNewGroup" : true,
+									"Df" : 478.0,
+									"F value" : "",
+									"Mean Sq" : 15922.874868751425,
+									"Pr(>F)" : "",
+									"Sum Sq" : 7611134.1872631814,
+									"cases" : "Residuals"
+								}
+							],
+							"footnotes" : 
+							[
+								{
+									"cols" : null,
+									"myOrder" : 0,
+									"rows" : null,
+									"symbol" : "<em>Note.</em>",
+									"text" : "Type III Sum of Squares"
+								}
+							],
+							"name" : "anovaContainer_anovaTable",
+							"overTitle" : false,
+							"schema" : 
+							{
+								"fields" : 
+								[
+									{
+										"name" : "cases",
+										"title" : "Cases",
+										"type" : "string"
+									},
+									{
+										"format" : "sf:4;dp:3",
+										"name" : "Sum Sq",
+										"title" : "Sum of Squares",
+										"type" : "number"
+									},
+									{
+										"name" : "Df",
+										"title" : "df",
+										"type" : "integer"
+									},
+									{
+										"format" : "sf:4;dp:3",
+										"name" : "Mean Sq",
+										"title" : "Mean Square",
+										"type" : "number"
+									},
+									{
+										"format" : "sf:4;dp:3",
+										"name" : "F value",
+										"title" : "F",
+										"type" : "number"
+									},
+									{
+										"format" : "dp:3;p:.001",
+										"name" : "Pr(>F)",
+										"title" : "p",
+										"type" : "pvalue"
+									}
+								]
+							},
+							"status" : "complete",
+							"title" : "ANCOVA - pituitary_volume"
+						},
+						"anovaContainer_assumptionsContainer" : 
+						{
+							"collection" : 
+							{
+								"anovaContainer_assumptionsContainer_leveneTable" : 
+								{
+									"casesAcrossColumns" : false,
+									"data" : 
+									[
+										{
+											"F" : 3.0666344369466292,
+											"df1" : 3.0,
+											"df2" : 481.0,
+											"p" : 0.02770603078113372
+										}
+									],
+									"footnotes" : [],
+									"name" : "anovaContainer_assumptionsContainer_leveneTable",
+									"overTitle" : false,
+									"schema" : 
+									{
+										"fields" : 
+										[
+											{
+												"format" : "sf:4;dp:3",
+												"name" : "F",
+												"title" : "F",
+												"type" : "number"
+											},
+											{
+												"format" : "sf:4;dp:3",
+												"name" : "df1",
+												"title" : "df1",
+												"type" : "number"
+											},
+											{
+												"format" : "sf:4;dp:3",
+												"name" : "df2",
+												"title" : "df2",
+												"type" : "number"
+											},
+											{
+												"format" : "dp:3;p:.001",
+												"name" : "p",
+												"title" : "p",
+												"type" : "pvalue"
+											}
+										]
+									},
+									"status" : "complete",
+									"title" : "Test for Equality of Variances (Levene's)"
+								},
+								"anovaContainer_assumptionsContainer_qqPlot" : 
+								{
+									"aspectRatio" : 0.0,
+									"convertible" : true,
+									"data" : "resources/4/_10_t-1199741135.png",
+									"editOptions" : 
+									{
+										"error" : "success",
+										"xAxis" : 
+										{
+											"settings" : 
+											{
+												"breaks" : 
+												[
+													-6,
+													-4,
+													-2,
+													0,
+													2,
+													4,
+													6
+												],
+												"breaksType" : "range",
+												"expand" : 
+												[
+													0.050000000000000003,
+													0,
+													0.050000000000000003,
+													0
+												],
+												"labels" : 
+												[
+													"-6",
+													"-4",
+													"-2",
+													"0",
+													"2",
+													"4",
+													"6"
+												],
+												"limits" : 
+												[
+													-6,
+													6
+												],
+												"limitsType" : "manual",
+												"range" : 
+												[
+													-6,
+													6,
+													2
+												],
+												"title" : "Theoretical quantiles",
+												"titleType" : "character"
+											},
+											"type" : "ScaleContinuous"
+										},
+										"yAxis" : 
+										{
+											"settings" : 
+											{
+												"breaks" : 
+												[
+													-6,
+													-4,
+													-2,
+													0,
+													2,
+													4,
+													6
+												],
+												"breaksType" : "range",
+												"expand" : 
+												[
+													0.050000000000000003,
+													0,
+													0.050000000000000003,
+													0
+												],
+												"labels" : 
+												[
+													"-6",
+													"-4",
+													"-2",
+													"0",
+													"2",
+													"4",
+													"6"
+												],
+												"limits" : 
+												[
+													-6,
+													6
+												],
+												"limitsType" : "manual",
+												"range" : 
+												[
+													-6,
+													6,
+													2
+												],
+												"title" : "Standardized residuals",
+												"titleType" : "character"
+											},
+											"type" : "ScaleContinuous"
+										}
+									},
+									"editable" : false,
+									"errorType" : "fatalError",
+									"height" : 300,
+									"name" : "anovaContainer_assumptionsContainer_qqPlot",
+									"reasonNotEditable" : "unknown reason",
+									"revision" : 0,
+									"status" : "complete",
+									"title" : "Q-Q Plot",
+									"width" : 300
+								}
+							},
+							"initCollapsed" : false,
+							"name" : "anovaContainer_assumptionsContainer",
+							"title" : "Assumption Checks"
+						},
+						"anovaContainer_descriptivesContainer" : 
+						{
+							"collection" : 
+							{
+								"anovaContainer_descriptivesContainer_containerBarPlots" : 
+								{
+									"collection" : 
+									{
+										"anovaContainer_descriptivesContainer_containerBarPlots_" : 
+										{
+											"aspectRatio" : 0.0,
+											"convertible" : true,
+											"data" : "resources/4/_1_t-318078325.png",
+											"editOptions" : 
+											{
+												"error" : "success",
+												"xAxis" : 
+												{
+													"settings" : 
+													{
+														"labels" : 
+														[
+															"NIND",
+															"OIND",
+															"PMS",
+															"RMS"
+														],
+														"title" : "dz_type5",
+														"titleType" : "character"
+													},
+													"type" : "ScaleDiscrete"
+												},
+												"yAxis" : 
+												{
+													"settings" : 
+													{
+														"breaks" : 
+														[
+															0,
+															200,
+															400,
+															600,
+															800
+														],
+														"breaksType" : "range",
+														"expand" : 
+														[
+															0.050000000000000003,
+															0,
+															0.050000000000000003,
+															0
+														],
+														"labels" : 
+														[
+															"0",
+															"200",
+															"400",
+															"600",
+															"800"
+														],
+														"limits" : 
+														[
+															0,
+															800
+														],
+														"limitsType" : "breaks",
+														"range" : 
+														[
+															0,
+															800,
+															200
+														],
+														"title" : "pituitary_volume",
+														"titleType" : "character"
+													},
+													"type" : "ScaleContinuous"
+												}
+											},
+											"editable" : false,
+											"errorType" : "fatalError",
+											"height" : 500,
+											"name" : "anovaContainer_descriptivesContainer_containerBarPlots_",
+											"reasonNotEditable" : "unknown reason",
+											"revision" : 0,
+											"status" : "complete",
+											"title" : "",
+											"width" : 500
+										}
+									},
+									"initCollapsed" : false,
+									"name" : "anovaContainer_descriptivesContainer_containerBarPlots",
+									"title" : "Bar plots"
+								}
+							},
+							"initCollapsed" : false,
+							"name" : "anovaContainer_descriptivesContainer",
+							"title" : "Descriptives"
+						},
+						"anovaContainer_ordinalRestrictions" : 
+						{
+							"collection" : 
+							{
+								"anovaContainer_ordinalRestrictions_basicInfoContainer" : 
+								{
+									"collection" : {},
+									"initCollapsed" : false,
+									"name" : "anovaContainer_ordinalRestrictions_basicInfoContainer",
+									"title" : "Syntax information"
+								}
+							},
+							"initCollapsed" : false,
+							"name" : "anovaContainer_ordinalRestrictions",
+							"title" : "Order Restricted Hypotheses"
+						}
+					},
+					"initCollapsed" : false,
+					"name" : "anovaContainer",
+					"title" : ""
+				},
+				"citation" : 
+				[
+					"JASP Team (2025). JASP (Version 0.19.3) [Computer software]."
+				],
+				"name" : ""
+			},
+			"rfile" : "",
+			"status" : "complete",
+			"title" : "Pituitary Volume",
+			"titleDef" : "ANCOVA",
+			"userdata" : 
+			{
+				"lastNote" : 
+				{
+					"delta" : 
+					{
+						"ops" : 
+						[
+							{
+								"insert" : "\n"
+							}
+						]
+					},
+					"deltaAvailable" : true,
+					"format" : "html",
+					"text" : "<p><br></p>",
+					"visible" : true
+				}
+			}
+		},
+		{
+			"dynamicModule" : 
+			{
+				"analysisEntry" : "RegressionLinear",
+				"moduleMaintainer" : "JASP Team <info@jasp-stats.org>",
+				"moduleName" : "jaspRegression",
+				"moduleVersion" : "0.19.2",
+				"moduleWebsite" : "jasp-stats.org"
+			},
+			"hasReport" : false,
+			"id" : 10,
+			"name" : "RegressionLinear",
+			"options" : 
+			{
+				".meta" : 
+				{
+					"covariates" : 
+					{
+						"shouldEncode" : true
+					},
+					"dependent" : 
+					{
+						"shouldEncode" : true
+					},
+					"factors" : 
+					{
+						"shouldEncode" : true
+					},
+					"modelTerms" : 
+					{
+						"shouldEncode" : true
+					},
+					"residualsSavedToDataColumn" : 
+					{
+						"shouldEncode" : true
+					},
+					"weights" : 
+					{
+						"shouldEncode" : true
+					}
+				},
+				"coefficientBootstrap" : false,
+				"coefficientBootstrapSamples" : 5000,
+				"coefficientCi" : false,
+				"coefficientCiLevel" : 0.94999999999999996,
+				"coefficientEstimate" : true,
+				"collinearityDiagnostic" : false,
+				"collinearityStatistic" : false,
+				"covarianceMatrix" : false,
+				"covarianceRatio" : false,
+				"covariates" : 
+				{
+					"types" : 
+					[
+						"scale",
+						"scale"
+					],
+					"value" : 
+					[
+						"age",
+						"tiv"
+					]
+				},
+				"dependent" : 
+				{
+					"types" : 
+					[
+						"scale"
+					],
+					"value" : "pituitary_volume"
+				},
+				"descriptives" : false,
+				"dfbetas" : false,
+				"dffits" : false,
+				"fChange" : false,
+				"factors" : 
+				{
+					"types" : 
+					[
+						"nominal"
+					],
+					"value" : 
+					[
+						"sex"
+					]
+				},
+				"interceptTerm" : true,
+				"leverage" : false,
+				"mahalanobis" : false,
+				"marginalPlot" : false,
+				"marginalPlotCi" : false,
+				"marginalPlotCiLevel" : 0.94999999999999996,
+				"marginalPlotPredictionInterval" : false,
+				"marginalPlotPredictionIntervalLevel" : 0.94999999999999996,
+				"method" : "enter",
+				"modelAICBIC" : false,
+				"modelFit" : true,
+				"modelTerms" : 
+				[
+					{
+						"components" : [],
+						"name" : "model0",
+						"title" : "Model 0"
+					},
+					{
+						"components" : 
+						[
+							[
+								"age"
+							],
+							[
+								"sex"
+							],
+							[
+								"tiv"
+							]
+						],
+						"name" : "model1",
+						"title" : "Model 1"
+					}
+				],
+				"naAction" : "listwise",
+				"nested" : true,
+				"partAndPartialCorrelation" : false,
+				"partialResidualPlot" : false,
+				"partialResidualPlotCi" : false,
+				"partialResidualPlotCiLevel" : 0.94999999999999996,
+				"partialResidualPlotPredictionInterval" : false,
+				"partialResidualPlotPredictionIntervalLevel" : 0.94999999999999996,
+				"plotHeight" : 320,
+				"plotWidth" : 480,
+				"rSquaredChange" : false,
+				"residualCasewiseDiagnostic" : false,
+				"residualCasewiseDiagnosticCooksDistanceThreshold" : 1.0,
+				"residualCasewiseDiagnosticType" : "outliersOutside",
+				"residualCasewiseDiagnosticZThreshold" : 3.0,
+				"residualDurbinWatson" : false,
+				"residualHistogramPlot" : false,
+				"residualHistogramStandardizedPlot" : true,
+				"residualQqPlot" : false,
+				"residualStatistic" : false,
+				"residualVsCovariatePlot" : false,
+				"residualVsDependentPlot" : false,
+				"residualVsFittedPlot" : false,
+				"residualsSavedToData" : false,
+				"residualsSavedToDataColumn" : "",
+				"steppingMethodCriteriaFEntry" : 3.8399999999999999,
+				"steppingMethodCriteriaFRemoval" : 2.71,
+				"steppingMethodCriteriaPEntry" : 0.050000000000000003,
+				"steppingMethodCriteriaPRemoval" : 0.10000000000000001,
+				"steppingMethodCriteriaType" : "pValue",
+				"vovkSellke" : false,
+				"weights" : 
+				{
+					"types" : [],
+					"value" : ""
+				}
+			},
+			"progress" : null,
+			"rSources" : {},
+			"results" : 
+			{
+				".meta" : 
+				[
+					{
+						"info" : "",
+						"meta" : 
+						[
+							{
+								"info" : "",
+								"name" : "modelContainer_summaryTable",
+								"title" : "Model Summary - pituitary_volume",
+								"type" : "table"
+							},
+							{
+								"info" : "",
+								"name" : "modelContainer_anovaTable",
+								"title" : "ANOVA",
+								"type" : "table"
+							},
+							{
+								"info" : "",
+								"name" : "modelContainer_coeffTable",
+								"title" : "Coefficients",
+								"type" : "table"
+							}
+						],
+						"name" : "modelContainer",
+						"title" : "",
+						"type" : "collection"
+					}
+				],
+				"citation" : 
+				[
+					"JASP Team (2025). JASP (Version 0.19.3) [Computer software]."
+				],
+				"modelContainer" : 
+				{
+					"collection" : 
+					{
+						"modelContainer_anovaTable" : 
+						{
+							"casesAcrossColumns" : false,
+							"data" : 
+							[
+								{
+									".isNewGroup" : true,
+									"F" : 12.069036697816459,
+									"MS" : 191660.86847530448,
+									"SS" : 574982.60542591347,
+									"cases" : "Regression",
+									"df" : 3.0,
+									"model" : "M\u2081",
+									"p" : 1.2511911241767066e-07
+								},
+								{
+									".isNewGroup" : false,
+									"F" : null,
+									"MS" : 15880.378299784268,
+									"SS" : 7638461.9621962328,
+									"cases" : "Residual",
+									"df" : 481.0,
+									"model" : "M\u2081",
+									"p" : null
+								},
+								{
+									".isNewGroup" : false,
+									"F" : null,
+									"MS" : null,
+									"SS" : 8213444.5676221466,
+									"cases" : "Total",
+									"df" : 484.0,
+									"model" : "M\u2081",
+									"p" : null
+								}
+							],
+							"footnotes" : 
+							[
+								{
+									"cols" : null,
+									"myOrder" : 0,
+									"rows" : null,
+									"symbol" : "<em>Note.</em>",
+									"text" : "M\u2081 includes age, sex, tiv"
+								},
+								{
+									"cols" : null,
+									"myOrder" : 0,
+									"rows" : null,
+									"symbol" : "<em>Note.</em>",
+									"text" : "The intercept model is omitted, as no meaningful information can be shown."
+								}
+							],
+							"name" : "modelContainer_anovaTable",
+							"overTitle" : false,
+							"schema" : 
+							{
+								"fields" : 
+								[
+									{
+										"combine" : true,
+										"name" : "model",
+										"title" : "Model",
+										"type" : "string"
+									},
+									{
+										"name" : "cases",
+										"title" : "",
+										"type" : "string"
+									},
+									{
+										"format" : "sf:4;dp:3",
+										"name" : "SS",
+										"title" : "Sum of Squares",
+										"type" : "number"
+									},
+									{
+										"name" : "df",
+										"title" : "df",
+										"type" : "integer"
+									},
+									{
+										"format" : "sf:4;dp:3",
+										"name" : "MS",
+										"title" : "Mean Square",
+										"type" : "number"
+									},
+									{
+										"format" : "sf:4;dp:3",
+										"name" : "F",
+										"title" : "F",
+										"type" : "number"
+									},
+									{
+										"format" : "dp:3;p:.001",
+										"name" : "p",
+										"title" : "p",
+										"type" : "pvalue"
+									}
+								]
+							},
+							"status" : "complete",
+							"title" : "ANOVA"
+						},
+						"modelContainer_coeffTable" : 
+						{
+							"casesAcrossColumns" : false,
+							"data" : 
+							[
+								{
+									".isNewGroup" : false,
+									"SE" : 5.9151956669727053,
+									"model" : "M\u2080",
+									"name" : "(Intercept)",
+									"p" : 0.0,
+									"standCoeff" : null,
+									"t" : 115.93043765491426,
+									"unstandCoeff" : 685.75122248659818
+								},
+								{
+									".isNewGroup" : true,
+									"SE" : 82.10410633642239,
+									"model" : "M\u2081",
+									"name" : "(Intercept)",
+									"p" : 6.4670698716538147e-13,
+									"standCoeff" : null,
+									"t" : 7.3918753467815455,
+									"unstandCoeff" : 606.9033194977311
+								},
+								{
+									".isNewGroup" : false,
+									"SE" : 0.46315681667662312,
+									"model" : "M\u2081",
+									"name" : "age",
+									"p" : 0.0043222027074284733,
+									"standCoeff" : -0.12824063895560936,
+									"t" : -2.8672569543152067,
+									"unstandCoeff" : -1.3279896035545409
+								},
+								{
+									".isNewGroup" : false,
+									"SE" : 16.737689770631135,
+									"model" : "M\u2081",
+									"name" : "sex (Male)",
+									"p" : 4.3083761998373605e-06,
+									"standCoeff" : null,
+									"t" : -4.6493040314181284,
+									"unstandCoeff" : -77.818608527221301
+								},
+								{
+									".isNewGroup" : false,
+									"SE" : 5.220219472189477e-05,
+									"model" : "M\u2081",
+									"name" : "tiv",
+									"p" : 0.041614937325843183,
+									"standCoeff" : 0.10907245692627679,
+									"t" : 2.042818980396147,
+									"unstandCoeff" : 0.0001066396341962222
+								}
+							],
+							"footnotes" : 
+							[
+								{
+									"cols" : 
+									[
+										"standCoeff"
+									],
+									"myOrder" : 30,
+									"rows" : null,
+									"symbol" : 0,
+									"text" : "Standardized coefficients can only be computed for continuous predictors."
+								}
+							],
+							"name" : "modelContainer_coeffTable",
+							"overTitle" : false,
+							"schema" : 
+							{
+								"fields" : 
+								[
+									{
+										"combine" : true,
+										"name" : "model",
+										"title" : "Model",
+										"type" : "string"
+									},
+									{
+										"name" : "name",
+										"title" : "",
+										"type" : "string"
+									},
+									{
+										"format" : "sf:4;dp:3",
+										"name" : "unstandCoeff",
+										"title" : "Unstandardized",
+										"type" : "number"
+									},
+									{
+										"format" : "sf:4;dp:3",
+										"name" : "SE",
+										"title" : "Standard Error",
+										"type" : "number"
+									},
+									{
+										".footnotes" : 
+										[
+											0
+										],
+										"format" : "sf:4;dp:3",
+										"name" : "standCoeff",
+										"title" : "Standardized",
+										"type" : "number"
+									},
+									{
+										"format" : "sf:4;dp:3",
+										"name" : "t",
+										"title" : "t",
+										"type" : "number"
+									},
+									{
+										"format" : "dp:3;p:.001",
+										"name" : "p",
+										"title" : "p",
+										"type" : "pvalue"
+									}
+								]
+							},
+							"status" : "complete",
+							"title" : "Coefficients"
+						},
+						"modelContainer_summaryTable" : 
+						{
+							"casesAcrossColumns" : false,
+							"data" : 
+							[
+								{
+									"R" : 0.0,
+									"R2" : 0.0,
+									"RMSE" : 130.26867156998162,
+									"adjR2" : 0.0,
+									"model" : "M\u2080"
+								},
+								{
+									"R" : 0.26458467633128968,
+									"R2" : 0.070005050949333333,
+									"RMSE" : 126.01737300778916,
+									"adjR2" : 0.064204666651719977,
+									"model" : "M\u2081"
+								}
+							],
+							"footnotes" : 
+							[
+								{
+									"cols" : null,
+									"myOrder" : 0,
+									"rows" : null,
+									"symbol" : "<em>Note.</em>",
+									"text" : "M\u2081 includes age, sex, tiv"
+								}
+							],
+							"name" : "modelContainer_summaryTable",
+							"overTitle" : false,
+							"schema" : 
+							{
+								"fields" : 
+								[
+									{
+										"name" : "model",
+										"title" : "Model",
+										"type" : "string"
+									},
+									{
+										"format" : "dp:3",
+										"name" : "R",
+										"title" : "R",
+										"type" : "number"
+									},
+									{
+										"format" : "dp:3",
+										"name" : "R2",
+										"title" : "R\u00b2",
+										"type" : "number"
+									},
+									{
+										"format" : "dp:3",
+										"name" : "adjR2",
+										"title" : "Adjusted R\u00b2",
+										"type" : "number"
+									},
+									{
+										"format" : "sf:4;dp:3",
+										"name" : "RMSE",
+										"title" : "RMSE",
+										"type" : "number"
+									}
+								]
+							},
+							"status" : "complete",
+							"title" : "Model Summary - pituitary_volume"
+						}
+					},
+					"initCollapsed" : false,
+					"name" : "modelContainer",
+					"title" : ""
+				},
+				"name" : "",
+				"title" : "Pituitary Volume Linear Regression"
+			},
+			"rfile" : "",
+			"status" : "complete",
+			"title" : "Pituitary Volume Linear Regression",
+			"titleDef" : "Linear Regression",
+			"userdata" : 
+			{
+				"firstNote" : 
+				{
+					"delta" : 
+					{
+						"ops" : 
+						[
+							{
+								"insert" : "To get coefficient and direction for age and sex\n"
+							}
+						]
+					},
+					"deltaAvailable" : true,
+					"format" : "html",
+					"text" : "<p>To get coefficient and direction for age and sex</p>",
+					"visible" : true
+				},
+				"lastNote" : 
+				{
+					"delta" : 
+					{
+						"ops" : 
+						[
+							{
+								"insert" : "\n"
+							}
+						]
+					},
+					"deltaAvailable" : true,
+					"format" : "html",
+					"text" : "<p><br></p>",
+					"visible" : true
+				}
+			}
+		}
+	],
+	"meta" : null
+}

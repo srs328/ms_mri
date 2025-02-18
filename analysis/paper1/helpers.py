@@ -1,7 +1,10 @@
 import pandas as pd
 from mri_data import file_manager as fm
+import matplotlib.ticker as ticker
+import matplotlib.pyplot as plt
 from pathlib import Path
 import re
+import statsmodels.api as sm
 
 msmri_home = Path("/home/srs-9/Projects/ms_mri")
 msmri_datadir = msmri_home / "data"
@@ -42,12 +45,20 @@ def fix_edss(df):
     return df
 
 
+# ['MS', '!MS', 'UNK', 'RIS']
+def set_dz_type2(df):
+    df.loc[:, "dz_type2"] = df["ms_type"]
+    df.loc[df["ms_type"].isin(["NIND", "OIND", "HC"]), "dz_type2"] = "!MS"
+    ms_subtypes = ["PPMS", "SPMS", "RPMS", "PRMS", "CIS", "RRMS"]
+    df.loc[df["ms_type"].isin(ms_subtypes), "dz_type2"] = "MS"
+    return df
+
+
 # ['MS', 'NIND', 'UNK', 'HC', 'OIND', 'RIS']
 def set_dz_type3(df):
     df.loc[:, "dz_type3"] = df["ms_type"]
     ms_subtypes = ["PPMS", "SPMS", "RPMS", "PRMS", "RRMS", "CIS"]
     df.loc[df["ms_type"].isin(ms_subtypes), "dz_type3"] = "MS"
-    df["dz_type3"].unique()
     return df
 
 
@@ -71,6 +82,7 @@ def clean_df(df):
         int(val) if val != "#VALUE!" and val is not None else None for val in df["PRL"]
     ]
     df.loc[df["dzdur"] == "#VALUE!", "dzdur"] = None
+    df.loc[:, "dzdur"] = df["dzdur"].astype("float")
 
     return df
 
@@ -130,3 +142,23 @@ def get_armss(edsss, ages):
         armsss.loc[ind] = ranks.loc[ind] / (len(a_edss) + 1) * 10
 
     return armsss
+
+
+def plot_partial_regress(res, var):
+    fig = sm.graphics.plot_partregress_grid(res, exog_idx=[var])
+    ax = fig.get_axes()[0]
+    lines1 = ax.lines[0]
+    lines2 = ax.lines[1]
+    plt.close()
+    # fig = plt.figure(figsize=(9, 6))
+    fig, ax = plt.subplots()
+    ax.scatter(lines1.get_xdata(), lines1.get_ydata(), color=[.2, .2, .2])
+    ax.plot(lines2.get_xdata(), lines2.get_ydata(), color=[0, 0, 0])
+    # ax = fig.get_axes()[0]
+    ax.set_facecolor([.9, .9, .9])
+    # ax.set_alpha(0)
+    fig.patch.set_alpha(0)
+    ax.set_xlabel(f"e({var} | others)", fontsize=14)
+    ax.set_ylabel("")
+
+    return fig, ax
