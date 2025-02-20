@@ -3,13 +3,14 @@ from loguru import logger
 import os
 from pathlib import Path
 
-from . import utils, data_file_manager
+from mri_data import file_manager, utils
 
-# In https://loguru.readthedocs.io/en/stable/resources/recipes.html, the section titled 
+# In https://loguru.readthedocs.io/en/stable/resources/recipes.html, the section titled
 # "Logging entry and exit of functions with a decorator" doesn't make sense
 
 current_dir = Path(__file__).absolute().parent
-logger.add(current_dir / "new_files.log", serialize=True, level='DEBUG')
+logger.add(current_dir / "new_files.log", serialize=True, level="DEBUG")
+
 
 class FileLogger:
     def __init__(self):
@@ -24,10 +25,11 @@ class FileLogger:
 def cli():
     pass
 
+
 @cli.command()
 @click.option("-d", "--dataroot", type=str)
 def scan_dataroot(dataroot):
-    dataset = data_file_manager.scan_3Tpioneer_bids(dataroot)
+    dataset = file_manager.scan_3Tpioneer_bids(dataroot)
     logger.info(dataset.dataroot)
 
 
@@ -39,7 +41,7 @@ def get_dice_score(labels, directory=None):
         paths = [os.path.join(directory, lab) for lab in labels]
     else:
         paths = labels
-        
+
     img_data = [utils.load_nifti(p) for p in paths]
     dice_score = utils.dice_score(img_data[0], img_data[1])
     print(dice_score)
@@ -52,11 +54,17 @@ def get_dice_score(labels, directory=None):
 @click.option("-o", "--out", "dst", type=str, required=True)
 @click.option("-f", "--script-file", type=str)
 @click.option("--run-script/--no-run-script", default=False)
-@click.option("--to-raise/--not-to-raise", default=True)
+@click.option("--to-raise/--dont-raise", default=True)
 def rename(dataroot, src, dst, script_file, run_script, to_raise):
-    dataset = data_file_manager.scan_3Tpioneer_bids(dataroot)
-    kwargs = {'script_file': script_file, 
-              'run_script': run_script, 
-              'to_raise': to_raise}
-    
-    utils.rename(dataset, src, dst, **kwargs)
+    dataset = file_manager.scan_3Tpioneer_bids(dataroot)
+    kwargs = {
+        "script_file": script_file,
+        "run_script": run_script,
+        "to_raise": to_raise,
+    }
+
+    file_manager.rename(dataset, src, dst, **kwargs)
+
+
+if __name__ == "__main__":
+    cli()

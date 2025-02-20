@@ -1,0 +1,1 @@
+python scripts/combine_inference_labels.py "3Tpioneer_bids_predictions"
