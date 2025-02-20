@@ -30,3 +30,4 @@
 ## Stats Questions
 
 - If a ttest is essentially the same as a linear regression with one categorical predictor, why is it okay to have non-normal predictors in regressions?
+- Ask about mediation analysis on CrossValidated

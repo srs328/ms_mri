@@ -5,6 +5,8 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 import re
 import statsmodels.api as sm
+import numpy as np
+from scipy import stats
 
 msmri_home = Path("/home/srs-9/Projects/ms_mri")
 msmri_datadir = msmri_home / "data"
@@ -162,3 +164,91 @@ def plot_partial_regress(res, var):
     ax.set_ylabel("")
 
     return fig, ax
+
+
+def prepare_data(data_file):
+    df = pd.read_csv(data_file)
+    df = df.set_index("subid")
+
+    df = set_dz_type5(df)
+    df = set_dz_type3(df)
+    df = set_dz_type2(df)
+    df = fix_edss(df)
+    df = clean_df(df)
+
+    keep_cols = [
+        "subject",
+        "age",
+        "sex",
+        "ms_type",
+        "dz_type2",
+        "dz_type3",
+        "dz_type5",
+        "dzdur",
+        "EDSS",
+        "MSSS",
+        "gMSSS",
+        "ARMSS",
+        "DMT_score",
+        "DMT_hx_all",
+        "flair_contrast",
+        "lesion_count",
+        "lesion_vol_cubic",
+        "PRL",
+        "tiv",
+        "choroid_volume",
+        "pineal_volume", 
+        "pituitary_volume"
+    ]
+
+    df = df.loc[:, keep_cols]
+    df = pd.concat((df, pd.get_dummies(df["sex"])), axis=1)
+
+    df.loc[:, "lesion_vol_logtrans"] = np.log(df["lesion_vol_cubic"])
+    df.loc[:, "edss_sqrt"] = np.sqrt(df["EDSS"].astype("float"))
+    df.loc[:, "msss_sqrt"] = np.sqrt(df["MSSS"])
+    df.loc[:, "armss_sqrt"] = np.sqrt(df["ARMSS"])
+    df.loc[:, "gmsss_sqrt"] = np.sqrt(df["gMSSS"])
+
+    vars = [
+        "age",
+        "Female",
+        "dzdur",
+        "EDSS",
+        "MSSS",
+        "gMSSS",
+        "ARMSS",
+        "edss_sqrt",
+        "msss_sqrt",
+        "armss_sqrt",
+        "gmsss_sqrt",
+        "DMT_score",
+        "DMT_hx_all",
+        "lesion_count",
+        "lesion_vol_cubic",
+        "lesion_vol_logtrans",
+        "PRL",
+        "tiv",
+        "choroid_volume",
+    ]
+
+    for var in vars:
+        df[var] = pd.to_numeric(df[var])
+
+    vars_to_center = ["edss_sqrt", "lesion_vol_logtrans", "lesion_vol_cubic", "dzdur", "choroid_volume"]
+
+    for var in vars_to_center:
+        df[f"{var}_cent"] = df[var] - df[var].mean()
+
+    centered_vars = [f"{var}_cent" for var in vars_to_center]
+    vars.extend(centered_vars)
+
+    df_z = df[vars].astype("float")
+    df_z[df.columns[~df.columns.isin(vars)]] = df[df.columns[~df.columns.isin(vars)]]
+    df_z = df_z[df.columns]
+    df_z[vars] = df_z[vars].apply(stats.zscore, nan_policy="omit")
+
+    data = df[vars].astype("float")
+    data_z = data[vars].apply(stats.zscore, nan_policy="omit")
+
+    return df, df_z, data, data_z
