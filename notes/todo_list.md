@@ -19,6 +19,7 @@
 
 ## File Management
 
+- [ ] Make a leaner library for dealing with MRI data and paths (without monai and all that)
 - [ ] Would it make sense to subclass Path for working with nifti files, then override methods/properties like
   `stem`, `with_stem`, `with_name`, etc so that they handle `.nii.gz`?
 - [ ] Inferred labels should be named in such a way that indicates which training

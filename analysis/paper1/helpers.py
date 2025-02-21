@@ -252,3 +252,8 @@ def prepare_data(data_file):
     data_z = data[vars].apply(stats.zscore, nan_policy="omit")
 
     return df, df_z, data, data_z
+
+
+def load_radiomics_data(path):
+    df = pd.read_csv(path)
+    
