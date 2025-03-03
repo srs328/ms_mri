@@ -39,6 +39,12 @@ def set_prl_levels(df):
     return df
 
 
+def set_has_prl(df):
+    df.loc[df["PRL"] > 0, "HAS_PRL"] = 1
+    df.loc[df["PRL"] == 0, "HAS_PRL"] = 0
+    return df
+
+
 def fix_edss(df):
     df.loc[:, "extracted_EDSS"] = [
         float(val) if val != "." else None for val in df["extracted_EDSS"]
@@ -139,7 +145,7 @@ def load_data(modality):
 def get_armss(edsss, ages):
     armsss = edsss
     for ind, edss, age in zip(edsss.index, edsss, ages):
-        a_edss = edsss[(ages >= age-2) & (ages <= age+2)]
+        a_edss = edsss[(ages >= age - 2) & (ages <= age + 2)]
         ranks = a_edss.rank()
         armsss.loc[ind] = ranks.loc[ind] / (len(a_edss) + 1) * 10
 
@@ -154,10 +160,10 @@ def plot_partial_regress(res, var):
     plt.close()
     # fig = plt.figure(figsize=(9, 6))
     fig, ax = plt.subplots()
-    ax.scatter(lines1.get_xdata(), lines1.get_ydata(), color=[.2, .2, .2])
+    ax.scatter(lines1.get_xdata(), lines1.get_ydata(), color=[0.2, 0.2, 0.2])
     ax.plot(lines2.get_xdata(), lines2.get_ydata(), color=[0, 0, 0])
     # ax = fig.get_axes()[0]
-    ax.set_facecolor([.9, .9, .9])
+    ax.set_facecolor([0.9, 0.9, 0.9])
     # ax.set_alpha(0)
     fig.patch.set_alpha(0)
     ax.set_xlabel(f"e({var} | others)", fontsize=14)
@@ -197,8 +203,8 @@ def prepare_data(data_file):
         "PRL",
         "tiv",
         "choroid_volume",
-        "pineal_volume", 
-        "pituitary_volume"
+        "pineal_volume",
+        "pituitary_volume",
     ]
 
     df = df.loc[:, keep_cols]
@@ -235,7 +241,13 @@ def prepare_data(data_file):
     for var in vars:
         df[var] = pd.to_numeric(df[var])
 
-    vars_to_center = ["edss_sqrt", "lesion_vol_logtrans", "lesion_vol_cubic", "dzdur", "choroid_volume"]
+    vars_to_center = [
+        "edss_sqrt",
+        "lesion_vol_logtrans",
+        "lesion_vol_cubic",
+        "dzdur",
+        "choroid_volume",
+    ]
 
     for var in vars_to_center:
         df[f"{var}_cent"] = df[var] - df[var].mean()
@@ -256,4 +268,3 @@ def prepare_data(data_file):
 
 def load_radiomics_data(path):
     df = pd.read_csv(path)
-    

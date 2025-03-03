@@ -28,7 +28,7 @@ msmri_home = Path("/home/srs-9/Projects/ms_mri")
 inference_root = drive_root / "srs-9" / "3Tpioneer_bids_predictions"
 dataroot = drive_root / "3Tpioneer_bids"
 clinical_data_root = drive_root / "Secure_Data" / "Large"
-data_file_folder = Path(__file__).parent.resolve() / "data"
+data_file_folder = Path("/home/srs-9/Projects/ms_mri/analysis/paper1/data0")
 inf_label = config[mod]
 
 
@@ -82,12 +82,14 @@ inference_dataset = inference_dataset_proc.dataset
 segs = {}
 for scan in dataset:
     segs[scan.subid] = scan.label_path
-    df.loc[int(scan.subid), ("scan_folder",)] = scan.relative_path
+    df.loc[int(scan.subid), ("sub-ses",)] = scan.relative_path
+    df.loc[int(scan.subid), ("label_folder",)] = scan.label_path.relative_to(drive_root)
     df.loc[int(scan.subid), ("label",)] = scan.label
 
 for scan in inference_dataset:
     segs[scan.subid] = scan.label_path
-    df.loc[int(scan.subid), ("scan_folder",)] = scan.relative_path
+    df.loc[int(scan.subid), ("sub-ses",)] = scan.relative_path
+    df.loc[int(scan.subid), ("label_folder",)] = scan.label_path.relative_to(drive_root)
     df.loc[int(scan.subid), ("label",)] = scan.label
 
 
@@ -169,4 +171,4 @@ for subid, _ in tqdm(df.iterrows(), total=len(df)):
 
     df.loc[subid, "flair_contrast"] = is_contrast
 
-df.to_csv(data_file_folder / f"{mod}_data_full.csv")
+df.to_csv(f"{mod}_data_full.csv")

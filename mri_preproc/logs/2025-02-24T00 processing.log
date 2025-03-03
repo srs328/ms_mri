@@ -1,0 +1,239 @@
+2025-02-24 00:56:08,935 - __main__ - INFO - /home/srs-9/Projects/ms_mri/mri_preproc/register_scans.sh /mnt/h/3Tpioneer_bids/sub-ms1001/ses-20170215 t1 1
+2025-02-24 00:56:27,742 - __main__ - INFO - /home/srs-9/Projects/ms_mri/scripts/register_scans.sh /mnt/h/3Tpioneer_bids/sub-ms1001/ses-20170215 t1 1
+2025-02-24 00:57:21,806 - __main__ - INFO - /home/srs-9/Projects/ms_mri/analysis/paper1/scripts/register_scans.sh /mnt/h/3Tpioneer_bids/sub-ms1001/ses-20170215 t1 1
+2025-02-24 00:57:31,792 - __main__ - INFO - /home/srs-9/Projects/ms_mri/analysis/paper1/scripts/register_t1.sh /mnt/h/3Tpioneer_bids/sub-ms1001/ses-20170215 t1 1
+2025-02-24 00:57:58,871 - __main__ - INFO - /home/srs-9/Projects/ms_mri/scripts/register_scans.sh /mnt/h/3Tpioneer_bids/sub-ms1001/ses-20170215 t1 1
+2025-02-24 00:58:13,279 - __main__ - INFO - /home/srs-9/Projects/ms_mri/scripts/register_scans.sh /mnt/h/3Tpioneer_bids/sub-ms1001/ses-20170215 t1 1
+2025-02-24 00:59:14,390 - __main__ - DEBUG - IN=/mnt/h/3Tpioneer_bids/sub-ms1001/ses-20170215/t1
+OUT=/mnt/h/3Tpioneer_bids/sub-ms1001/ses-20170215/proc/t1-brain
+bet2opts= -m -v
+verbose=1
+debug=0
+variation=0
+min 0 thresh2 0 thresh 0.144828 thresh98 1.44828 max 1.6666
+c-of-g 83.2909 98.6132 112.656 mm
+radius 92.7164 mm
+median within-brain intensity 0.74
+self-intersection total 5005.37 (threshold=4000.0) 
+thus will rerun with higher smoothness constraint
+self-intersection total 5514.46 (threshold=4000.0) 
+thus will rerun with higher smoothness constraint
+self-intersection total 4528.54 (threshold=4000.0) 
+thus will rerun with higher smoothness constraint
+self-intersection total 229.933 (threshold=4000.0) 
+The output image will use the sform from the reference image
+The output image will use the transformed sform from the input image
+Init Matrix = 
+1.000000 0.000000 0.000000 0.000000 
+0.000000 1.000000 0.000000 0.000000 
+0.000000 0.000000 1.000000 0.000000 
+0.000000 0.000000 0.000000 1.000000 
+
+ >> # 8mm scale
+ >> setscale 8
+ >> setoption smoothing 8
+ >> clear S
+ >> clear P
+ >> search
+ >> # 4mm scale
+ >> setscale 4
+ >> setoption smoothing 4
+ >> clear U
+ >> clear UA 
+ >> clear UB
+ >> clear US
+ >> clear UP
+ >> # remeasure costs at this scale
+ >> measurecost 7 S 0 0 0 0 0 0 rel
+ >> copy U US
+ >> clear U
+ >> measurecost 7 P 0 0 0 0 0 0 rel
+ >> copy U UP
+ >> dualsort US UP
+ >> # optimise best 3 candidates (pre and post 8mm optimisations)
+ >> clear U
+ >> optimise 7 US:1-3  0.0   0.0   0.0   0.0   0.0   0.0   0.0  rel 4
+ >> optimise 7 UP:1-3  0.0   0.0   0.0   0.0   0.0   0.0   0.0  rel 4
+ >> # also try the identity transform as a starting point at this resolution
+ >> clear UQ
+ >> setrow UQ  1 0 0 0  0 1 0 0  0 0 1 0  0 0 0 1
+ >> optimise 7 UQ  0.0   0.0   0.0   0.0   0.0   0.0   0.0  rel 4
+ >> sort U
+ >> copy U UA
+ >> # select best 4 optimised solutions and try perturbations of these
+ >> clear U
+ >> copy UA:1-4 U
+ >> optimise 7 UA:1-4  1.0   0.0   0.0   0.0   0.0   0.0   0.0  rel 4
+ >> optimise 7 UA:1-4 -1.0   0.0   0.0   0.0   0.0   0.0   0.0  rel 4
+ >> optimise 7 UA:1-4  0.0   1.0   0.0   0.0   0.0   0.0   0.0  rel 4
+ >> optimise 7 UA:1-4  0.0  -1.0   0.0   0.0   0.0   0.0   0.0  rel 4
+ >> optimise 7 UA:1-4  0.0   0.0   1.0   0.0   0.0   0.0   0.0  rel 4
+ >> optimise 7 UA:1-4  0.0   0.0  -1.0   0.0   0.0   0.0   0.0  rel 4
+ >> optimise 7 UA:1-4  0.0   0.0   0.0   0.0   0.0   0.0   0.1  abs 4
+ >> optimise 7 UA:1-4  0.0   0.0   0.0   0.0   0.0   0.0  -0.1  abs 4
+ >> optimise 7 UA:1-4  0.0   0.0   0.0   0.0   0.0   0.0   0.2  abs 4
+ >> optimise 7 UA:1-4  0.0   0.0   0.0   0.0   0.0   0.0  -0.2  abs 4
+ >> sort U
+ >> copy U UB
+ >> # 2mm scale
+ >> setscale 2
+ >> setoption smoothing 2
+ >> clear U
+ >> clear UC
+ >> clear UD
+ >> clear UE
+ >> clear UF
+ >> # remeasure costs at this scale
+ >> measurecost 7 UB 0 0 0 0 0 0 rel
+ >> sort U
+ >> copy U UC
+ >> clear U
+ >> optimise 7  UC:1  0.0   0.0   0.0   0.0   0.0   0.0   0.0  rel 4
+ >> copy U UD
+ >> setoption boundguess 1
+ >> if MAXDOF > 7
+ >>  clear U
+ >> if MAXDOF > 7
+ >>  optimise 9  UD:1  0.0   0.0   0.0   0.0   0.0   0.0   0.0  rel 1
+ >> copy U UE
+ >> if MAXDOF > 9
+ >>  clear U
+ >> if MAXDOF > 9
+ >>  optimise 12 UE:1  0.0   0.0   0.0   0.0   0.0   0.0   0.0  rel 2
+ >> sort U
+ >> copy U UF
+ >> # 1mm scale
+ >> setscale 1
+ >> setoption smoothing 1
+ >> setoption boundguess 1
+ >> clear U
+ >> # also try the qsform as a starting point at this resolution
+ >> setrowqsform UF
+ >> optimise 12 UF:1-2  0.0   0.0   0.0   0.0   0.0   0.0   0.0  rel 1
+ >> # in addition, try qsform as the final transformation, not just an initialisation
+ >> clear UG
+ >> setrowqsform UG
+ >> measurecost 12 UG:1  0.0   0.0   0.0   0.0   0.0   0.0   0.0  rel 1
+ >> sort U
+The output image will use the sform from the reference image
+Init Matrix = 
+0.999757 0.016853 -0.014243 5.618758 
+0.009405 0.258440 0.965981 -27.825802 
+0.019961 -0.965880 0.258219 153.543088 
+0.000000 0.000000 0.000000 1.000000 
+
+
+2025-02-24 00:59:14,391 - __main__ - INFO - /home/srs-9/Projects/ms_mri/scripts/register_scans.sh /mnt/h/3Tpioneer_bids/sub-ms1002/ses-20200521 t1 1
+2025-02-24 01:00:14,353 - __main__ - DEBUG - IN=/mnt/h/3Tpioneer_bids/sub-ms1002/ses-20200521/t1
+OUT=/mnt/h/3Tpioneer_bids/sub-ms1002/ses-20200521/proc/t1-brain
+bet2opts= -m -v
+verbose=1
+debug=0
+variation=0
+min 0 thresh2 0 thresh 0.145678 thresh98 1.45678 max 1.6592
+c-of-g 96.2183 107.433 101.369 mm
+radius 94.6758 mm
+median within-brain intensity 0.7723
+self-intersection total 3040.32 (threshold=4000.0) 
+The output image will use the sform from the reference image
+The output image will use the transformed sform from the input image
+Init Matrix = 
+1.000000 0.000000 0.000000 0.000000 
+0.000000 1.000000 0.000000 0.000000 
+0.000000 0.000000 1.000000 0.000000 
+0.000000 0.000000 0.000000 1.000000 
+
+ >> # 8mm scale
+ >> setscale 8
+ >> setoption smoothing 8
+ >> clear S
+ >> clear P
+ >> search
+ >> # 4mm scale
+ >> setscale 4
+ >> setoption smoothing 4
+ >> clear U
+ >> clear UA 
+ >> clear UB
+ >> clear US
+ >> clear UP
+ >> # remeasure costs at this scale
+ >> measurecost 7 S 0 0 0 0 0 0 rel
+ >> copy U US
+ >> clear U
+ >> measurecost 7 P 0 0 0 0 0 0 rel
+ >> copy U UP
+ >> dualsort US UP
+ >> # optimise best 3 candidates (pre and post 8mm optimisations)
+ >> clear U
+ >> optimise 7 US:1-3  0.0   0.0   0.0   0.0   0.0   0.0   0.0  rel 4
+ >> optimise 7 UP:1-3  0.0   0.0   0.0   0.0   0.0   0.0   0.0  rel 4
+ >> # also try the identity transform as a starting point at this resolution
+ >> clear UQ
+ >> setrow UQ  1 0 0 0  0 1 0 0  0 0 1 0  0 0 0 1
+ >> optimise 7 UQ  0.0   0.0   0.0   0.0   0.0   0.0   0.0  rel 4
+ >> sort U
+ >> copy U UA
+ >> # select best 4 optimised solutions and try perturbations of these
+ >> clear U
+ >> copy UA:1-4 U
+ >> optimise 7 UA:1-4  1.0   0.0   0.0   0.0   0.0   0.0   0.0  rel 4
+ >> optimise 7 UA:1-4 -1.0   0.0   0.0   0.0   0.0   0.0   0.0  rel 4
+ >> optimise 7 UA:1-4  0.0   1.0   0.0   0.0   0.0   0.0   0.0  rel 4
+ >> optimise 7 UA:1-4  0.0  -1.0   0.0   0.0   0.0   0.0   0.0  rel 4
+ >> optimise 7 UA:1-4  0.0   0.0   1.0   0.0   0.0   0.0   0.0  rel 4
+ >> optimise 7 UA:1-4  0.0   0.0  -1.0   0.0   0.0   0.0   0.0  rel 4
+ >> optimise 7 UA:1-4  0.0   0.0   0.0   0.0   0.0   0.0   0.1  abs 4
+ >> optimise 7 UA:1-4  0.0   0.0   0.0   0.0   0.0   0.0  -0.1  abs 4
+ >> optimise 7 UA:1-4  0.0   0.0   0.0   0.0   0.0   0.0   0.2  abs 4
+ >> optimise 7 UA:1-4  0.0   0.0   0.0   0.0   0.0   0.0  -0.2  abs 4
+ >> sort U
+ >> copy U UB
+ >> # 2mm scale
+ >> setscale 2
+ >> setoption smoothing 2
+ >> clear U
+ >> clear UC
+ >> clear UD
+ >> clear UE
+ >> clear UF
+ >> # remeasure costs at this scale
+ >> measurecost 7 UB 0 0 0 0 0 0 rel
+ >> sort U
+ >> copy U UC
+ >> clear U
+ >> optimise 7  UC:1  0.0   0.0   0.0   0.0   0.0   0.0   0.0  rel 4
+ >> copy U UD
+ >> setoption boundguess 1
+ >> if MAXDOF > 7
+ >>  clear U
+ >> if MAXDOF > 7
+ >>  optimise 9  UD:1  0.0   0.0   0.0   0.0   0.0   0.0   0.0  rel 1
+ >> copy U UE
+ >> if MAXDOF > 9
+ >>  clear U
+ >> if MAXDOF > 9
+ >>  optimise 12 UE:1  0.0   0.0   0.0   0.0   0.0   0.0   0.0  rel 2
+ >> sort U
+ >> copy U UF
+ >> # 1mm scale
+ >> setscale 1
+ >> setoption smoothing 1
+ >> setoption boundguess 1
+ >> clear U
+ >> # also try the qsform as a starting point at this resolution
+ >> setrowqsform UF
+ >> optimise 12 UF:1-2  0.0   0.0   0.0   0.0   0.0   0.0   0.0  rel 1
+ >> # in addition, try qsform as the final transformation, not just an initialisation
+ >> clear UG
+ >> setrowqsform UG
+ >> measurecost 12 UG:1  0.0   0.0   0.0   0.0   0.0   0.0   0.0  rel 1
+ >> sort U
+The output image will use the sform from the reference image
+Init Matrix = 
+0.998795 0.044689 0.020286 -12.646414 
+-0.049020 0.928432 0.368254 -29.358554 
+-0.002377 -0.368805 0.929504 -3.918388 
+0.000000 0.000000 0.000000 1.000000 
+
+
