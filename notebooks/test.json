@@ -1,0 +1,11 @@
+{
+    "name": "test",
+    "task": "infer",
+    "modality": "MRI",
+    "datalist": [
+        {
+            "image": "/mnt/h/3Tpioneer_bids/sub-ms1002/ses-20200521/t1_gd.nii.gz"
+        }
+    ],
+    "dataroot": "/mnt/h/3Tpioneer_bids"
+}

@@ -31,6 +31,7 @@ It'd take too long to do an omnibus test for the mediation analysis on ordinal E
 - [ ] Get the difference between T1 and FLAIR segmentations
 - [ ] Coregister all the subjects, see where those differences are
   - [ ] Produce a heatmap with FreeSurfer
+- [ ] Could have someone segment the ChP on \~10 CE T1 images as "gold standards" to compare the predictions to
 
 ## Questions
 

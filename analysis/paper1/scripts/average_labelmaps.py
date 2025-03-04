@@ -40,8 +40,9 @@ w_cont_labels = [
     labelroot / row["sub-ses"] / "t1_flair_diff-choroid-std.nii.gz"
     for i, row in w_contrast.iterrows()
 ]
+print(len(w_cont_labels))
 
-out = labelroot / "with_contrast_test.nii.gz"
+out = labelroot / "with_contrast.nii.gz"
 average_labelmaps(w_cont_labels, out)
 
 
@@ -49,6 +50,7 @@ wo_cont_labels = [
     labelroot / row["sub-ses"] / "t1_flair_diff-choroid-std.nii.gz"
     for i, row in wo_contrast.iterrows()
 ]
+print(len(wo_cont_labels))
 
-out = labelroot / "wo_contrast_test.nii.gz"
+out = labelroot / "wo_contrast.nii.gz"
 average_labelmaps(wo_cont_labels, out)

@@ -86,10 +86,10 @@ def fix_label(label, out, idx):
 
 
 for i, row in tqdm(df.iterrows(), total=len(df)):
-    label_t1 = drive_root / row.label_folder / t1_label
+    label_t1 = drive_root / str(row.label_folder) / t1_label
     if not label_t1.is_file():
         continue
-    label_flair = drive_root / row.label_folder / flair_label
+    label_flair = drive_root / str(row.label_folder) / flair_label
     if not label_flair.is_file():
         continue
 
