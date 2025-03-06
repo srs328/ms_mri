@@ -1,5 +1,9 @@
 # Notes
 
+## Preprocessing of MRI data
+
+All of these scans are preprocessed with bias correction and noise reduction, in addition to upscaling to a higher isotropic resolution and reslicing (with interpolation)
+
 ## Deciding which model
 
 - Bland-Altman plots
@@ -28,10 +32,12 @@ It'd take too long to do an omnibus test for the mediation analysis on ordinal E
 ### Segmentation
 
 - [ ] Resegment all the pineals. Start with my flair segmentation and erase around what I can see in T1
+  - Do we train the T1 model and FLAIR model on same segmentations, or their respective segmentations? The problem with the latter is that there is then no "ground truth" 
 - [ ] Get the difference between T1 and FLAIR segmentations
 - [ ] Coregister all the subjects, see where those differences are
   - [ ] Produce a heatmap with FreeSurfer
-- [ ] Could have someone segment the ChP on \~10 CE T1 images as "gold standards" to compare the predictions to
+- [ ] Could have someone segment the ChP on \~10 CE T1 images as "gold standards" to compare the predictions to (e.g. Visani et. al 2024)
+- [ ] Test retest reliability: find patients with longitudinal scans somewhat close to eachother and compare the volumes (Eisma paper picks 10 participants with scans within 2 months of another)
 
 ## Questions
 

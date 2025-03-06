@@ -234,12 +234,14 @@ def open_itksnap_workspace_cmd(images: list[str], labels: list[str] = None, win=
     images = [str(p) for p in images]
     labels = [str(p) for p in labels]
     command = ["itksnap"]
-    command.extend(["-g", images[0], "-o"])
+    command.extend(["-g", images[0]])
     # command.extend(" ".join(["-o {}".format(im) for im in images[1:]]).split(" "))
-    command.extend(" -o ".join(images[1:]).split(" "))
+    if len(images) > 1:
+        command.append("-o")
+        command.extend(images[1:])
     if len(labels) > 0:
         command.append("-s")
-        command.extend(" ".join(labels).split(" "))
+        command.extend(labels)
     return " ".join(command)
 
 def fsleyes_cmd(images: list[str], 

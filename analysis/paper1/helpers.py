@@ -172,6 +172,53 @@ def plot_partial_regress(res, var):
     return fig, ax
 
 
+def moderation_y(data, coef, x_name, m_name):
+    reg = re.compile(r"(\w+)\:(\w+)")
+    regression_data = {}
+    for name in coef.index:
+        if name == "Intercept":
+            continue
+        mat = reg.match(name)
+        if mat is None:
+            regression_data[name] = data[name]
+        else:
+            regression_data[name] = data[mat[1]] * data[mat[2]]
+            inter_name = name
+    regression_data = pd.DataFrame(regression_data)
+
+    other_vars = coef.index[~coef.index.isin([x_name, m_name, inter_name, "Intercept"])]
+    other_terms = np.sum(coef[other_vars] * regression_data.loc[:, other_vars].mean())
+
+    m_vals = [
+        data[m_name].mean() - data[m_name].std(),
+        data[m_name].mean(),
+        data[m_name].mean() + data[m_name].std(),
+    ]
+    print(m_vals[0])
+
+    y_lvls = []
+    for m_val in m_vals:
+        y = (
+            data[x_name] * coef[x_name]
+            + m_val * coef[m_name]
+            + coef[inter_name] * m_val * data[x_name]
+            + other_terms
+            + coef["Intercept"]
+        )
+        y_lvls.append(y)
+
+    return y_lvls
+
+
+def plot_moderation(x_data, y_data, y_lvls):
+    plt.scatter(x_data, y_data, s=5)
+    plt.plot(x_data, y_lvls[0], label="m-sd", linestyle="--")
+    plt.plot(x_data, y_lvls[1], label="m", linestyle="-")
+    plt.plot(x_data, y_lvls[2], label="m+sd", linestyle=":")
+
+    plt.legend()
+
+
 def prepare_data(data_file):
     df = pd.read_csv(data_file)
     df = df.set_index("subid")
