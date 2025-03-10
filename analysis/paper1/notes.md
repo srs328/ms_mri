@@ -32,12 +32,22 @@ It'd take too long to do an omnibus test for the mediation analysis on ordinal E
 ### Segmentation
 
 - [ ] Resegment all the pineals. Start with my flair segmentation and erase around what I can see in T1
-  - Do we train the T1 model and FLAIR model on same segmentations, or their respective segmentations? The problem with the latter is that there is then no "ground truth" 
+  - Do we train the T1 model and FLAIR model on same segmentations, or their respective segmentations? The problem with the latter is that there is then no "ground truth"
 - [ ] Get the difference between T1 and FLAIR segmentations
 - [ ] Coregister all the subjects, see where those differences are
   - [ ] Produce a heatmap with FreeSurfer
 - [ ] Could have someone segment the ChP on \~10 CE T1 images as "gold standards" to compare the predictions to (e.g. Visani et. al 2024)
 - [ ] Test retest reliability: find patients with longitudinal scans somewhat close to eachother and compare the volumes (Eisma paper picks 10 participants with scans within 2 months of another)
+
+### Choroid Analysis
+
+- Based on Fleischer et al 2021 (which looks at patients starting much earlier in their disease course), our patients choroid volumes have likely peaked
+  - Their chp volume hist is positively skewed whereas ours is normal
+  - Their chp volumes have a much greater correlation with edss
+  - Their edss's are lower
+  - Their disease duration is around 2 years. They have many patients who started getting tracked as soon as they were diagnosed
+- Check choroid_analysis.ipynb moderation section for choroid_volume*leson_volume
+  - Chris mentioned two types of inflammation, and ChP volume reflected one and T2LV reflected the other
 
 ## Questions
 
@@ -48,3 +58,4 @@ It'd take too long to do an omnibus test for the mediation analysis on ordinal E
 
 - If a ttest is essentially the same as a linear regression with one categorical predictor, why is it okay to have non-normal predictors in regressions?
 - Ask about mediation analysis on CrossValidated
+- Read [this](https://stats.stackexchange.com/questions/445578/how-do-dags-help-to-reduce-bias-in-causal-inference/445606#445606) for detailed intuition about causal inference, mediation, moderation

@@ -172,7 +172,93 @@ def plot_partial_regress(res, var):
     return fig, ax
 
 
-def moderation_y(data, coef, x_name, m_name):
+def get_regression_y(data, res, x, outcome):
+    coef = res.params
+
+    other_vars = coef.index[~coef.index.isin([x, "Intercept"])]
+    other_terms = np.sum(coef[other_vars] * data[other_vars].mean())
+    conf_int = res.conf_int()
+
+    x_data = np.linspace(data[x].min(), data[x].max(), 100)
+    y_pred = x_data * coef[x] + other_terms + coef["Intercept"]
+
+    y_upper = x_data * conf_int.loc[x, 1] + other_terms + coef["Intercept"]
+
+    y_lower = x_data * conf_int.loc[x, 0] + other_terms + coef["Intercept"]
+    # upper_error = y_upper - y
+    # lower_error = y - y_lower
+
+    # fig, ax = plt.subplots()
+    # ax.scatter(data[x], data[outcome])
+    # ax.plot(x_data, y_pred)
+    # ax.fill_between(x_data, y_lower, y_upper, alpha=0.2)
+
+    return x_data, y_pred, (y_lower, y_upper)
+
+
+# check https://matplotlib.org/stable/gallery/lines_bars_and_markers/scatter_hist.html
+def scatter_hist(
+    x, y, ax, ax_histx, ax_histy, nbins=10, light_color=None, dark_color=None
+):
+    if light_color is None:
+        light_color = "#1f77b4"
+    if dark_color is None:
+        dark_color = "#1f77b4"
+
+    # make axes look nice
+    ax_histx.set_axis_off()
+    ax_histy.set_axis_off()
+    ax.xaxis.set_ticks_position("both")
+    ax.yaxis.set_ticks_position("both")
+
+    # the scatter plot:
+    ax.scatter(x, y, color=dark_color)
+
+    # the histograms
+    xbins = np.linspace(np.min(x), np.max(x), nbins)
+    ybins = np.linspace(np.min(y), np.max(y), nbins)
+    ax_histx.hist(x, bins=xbins, color=light_color, density=True)
+    ax_histy.hist(
+        y, bins=ybins, orientation="horizontal", color=light_color, density=True
+    )
+
+    # kde to plot on histograms
+    densityx = stats.gaussian_kde(x.dropna())
+    densityy = stats.gaussian_kde(y.dropna())
+    xx = np.linspace(np.min(x), np.max(x), 50)
+    xy = np.linspace(np.min(y), np.max(y), 50)
+    ax_histx.plot(xx, densityx(xx), color=dark_color)
+    ax_histy.plot(densityy(xy), xy, color=dark_color)
+
+
+def plot_reg_var2(data, res, x, outcome):
+    coef = res.params
+
+    other_vars = coef.index[~coef.index.isin([x, "Intercept"])]
+    other_terms = np.sum(coef[other_vars] * data[other_vars].mean())
+    conf_int = res.conf_int()
+
+    x_data = np.linspace(data[x].min(), data[x].max(), 100)
+    y_pred = x_data * coef[x] + other_terms + coef["Intercept"]
+
+    y_upper = x_data * conf_int.loc[x, 1] + other_terms + coef["Intercept"]
+
+    y_lower = x_data * conf_int.loc[x, 0] + other_terms + coef["Intercept"]
+    # upper_error = y_upper - y
+    # lower_error = y - y_lower
+
+    fig, ax = plt.subplots()
+    ax.scatter(data[x], data[outcome])
+    ax.plot(x_data, y_pred)
+    ax.fill_between(x_data, y_lower, y_upper, alpha=0.2)
+
+    return fig
+
+
+def moderation_y(data, res, x_name, m_name):
+    coef = res.params
+    conf_int = res.conf_int()
+
     reg = re.compile(r"(\w+)\:(\w+)")
     regression_data = {}
     for name in coef.index:
@@ -194,27 +280,89 @@ def moderation_y(data, coef, x_name, m_name):
         data[m_name].mean(),
         data[m_name].mean() + data[m_name].std(),
     ]
-    print(m_vals[0])
 
+    x_rng = np.linspace(data[x_name].min(), data[x_name].max(), 100)
     y_lvls = []
     for m_val in m_vals:
         y = (
-            data[x_name] * coef[x_name]
+            x_rng * coef[x_name]
             + m_val * coef[m_name]
-            + coef[inter_name] * m_val * data[x_name]
+            + coef[inter_name] * m_val * x_rng
             + other_terms
             + coef["Intercept"]
         )
-        y_lvls.append(y)
+        y_lower = (
+            x_rng * conf_int.loc[x_name, 0]
+            + m_val * coef[m_name]
+            + coef[inter_name] * m_val * x_rng
+            + other_terms
+            + coef["Intercept"]
+        )
+        y_upper = (
+            x_rng * conf_int.loc[x_name, 1]
+            + m_val * coef[m_name]
+            + coef[inter_name] * m_val * x_rng
+            + other_terms
+            + coef["Intercept"]
+        )
+        y_lvls.append((y, y_lower, y_upper))
 
-    return y_lvls
+    return x_rng, y_lvls
 
 
-def plot_moderation(x_data, y_data, y_lvls):
+def moderation_y_test(data, res, x_name, m_name):
+    coef = res.params
+    conf_int = res.conf_int()
+
+    regression_data = {}
+    for name in coef.index:
+        if name == "Intercept":
+            continue
+        regression_data[name] = data[name]
+        
+    regression_data = pd.DataFrame(regression_data)
+
+    other_vars = coef.index[~coef.index.isin([x_name, m_name, "Intercept"])]
+    other_terms = np.sum(coef[other_vars] * regression_data.loc[:, other_vars].mean())
+
+    m_vals = [
+        data[m_name].mean() - data[m_name].std(),
+        data[m_name].mean(),
+        data[m_name].mean() + data[m_name].std(),
+    ]
+
+    x_rng = np.linspace(data[x_name].min(), data[x_name].max(), 100)
+    y_lvls = []
+    for m_val in m_vals:
+        y = (
+            x_rng * coef[x_name]
+            + m_val * coef[m_name]
+            + other_terms
+            + coef["Intercept"]
+        )
+        y_lower = (
+            x_rng * conf_int.loc[x_name, 0]
+            + m_val * coef[m_name]
+            + other_terms
+            + coef["Intercept"]
+        )
+        y_upper = (
+            x_rng * conf_int.loc[x_name, 1]
+            + m_val * coef[m_name]
+            + other_terms
+            + coef["Intercept"]
+        )
+        y_lvls.append((y, y_lower, y_upper))
+
+    return x_rng, y_lvls
+
+
+
+def plot_moderation(x_data, y_data, x_rng, y_lvls):
     plt.scatter(x_data, y_data, s=5)
-    plt.plot(x_data, y_lvls[0], label="m-sd", linestyle="--")
-    plt.plot(x_data, y_lvls[1], label="m", linestyle="-")
-    plt.plot(x_data, y_lvls[2], label="m+sd", linestyle=":")
+    plt.plot(x_rng, y_lvls[0], label="m-sd", linestyle="--")
+    plt.plot(x_rng, y_lvls[1], label="m", linestyle="-")
+    plt.plot(x_rng, y_lvls[2], label="m+sd", linestyle=":")
 
     plt.legend()
 
@@ -315,3 +463,13 @@ def prepare_data(data_file):
 
 def load_radiomics_data(path):
     df = pd.read_csv(path)
+
+
+def get_colors():
+    colors = {
+        "dark red1": "#eb3131",
+        "light red1": "#eb7171",
+        "dark blue1": "#1f4294",
+        "light blue1": "#7a9df0",
+    }
+    return colors

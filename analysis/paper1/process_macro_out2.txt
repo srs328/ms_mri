@@ -1,0 +1,65 @@
+
+***************************** OUTCOME MODELS ****************************
+
+Outcome = edss_sqrt 
+OLS Regression Summary
+
+     R²  Adj. R²    MSE       F  df1  df2  p-value
+ 0.2825   0.2677 0.7323 21.8795    7  389   0.0000
+
+Coefficients
+
+                                  coeff     se       t      p    LLCI    ULCI
+Cons                            -0.0470 0.0458 -1.0271 0.3050 -0.1367  0.0427
+lesion_vol_cubic                 0.0584 0.0497  1.1747 0.2408 -0.0390  0.1558
+choroid_volume                  -0.0507 0.0564 -0.8993 0.3690 -0.1612  0.0598
+lesion_vol_cubic*choroid_volume  0.0903 0.0443  2.0386 0.0422  0.0035  0.1771
+age                              0.3524 0.0511  6.8985 0.0000  0.2523  0.4525
+Female                          -0.0496 0.0532 -0.9331 0.3514 -0.1538  0.0546
+tiv                             -0.0582 0.0519 -1.1219 0.2626 -0.1600  0.0435
+thalamus                        -0.2355 0.0625 -3.7656 0.0002 -0.3580 -0.1129
+
+-------------------------------------------------------------------------
+
+Outcome = thalamus 
+OLS Regression Summary
+
+     R²  Adj. R²    MSE       F  df1  df2  p-value
+ 0.5249   0.5164 0.4803 71.8234    6  390   0.0000
+
+Coefficients
+
+                                  coeff     se       t      p    LLCI    ULCI
+Cons                             0.0374 0.0370  1.0108 0.3127 -0.0351  0.1100
+lesion_vol_cubic                -0.2751 0.0378 -7.2859 0.0000 -0.3491 -0.2011
+choroid_volume                  -0.3481 0.0421 -8.2649 0.0000 -0.4306 -0.2655
+lesion_vol_cubic*choroid_volume -0.1176 0.0354 -3.3257 0.0010 -0.1869 -0.0483
+age                             -0.2620 0.0392 -6.6859 0.0000 -0.3388 -0.1852
+Female                           0.1130 0.0427  2.6487 0.0084  0.0294  0.1967
+tiv                              0.0134 0.0420  0.3198 0.7493 -0.0689  0.0958
+
+-------------------------------------------------------------------------
+
+
+********************** DIRECT AND INDIRECT EFFECTS **********************
+
+Conditional direct effect(s) of lesion_vol_cubic on edss_sqrt at values of the moderator(s):
+
+  choroid_volume  Effect     SE       t      p    LLCI   ULCI
+         -0.9933 -0.0313 0.0691 -0.4528 0.6509 -0.1668 0.1042
+          0.0096  0.0592 0.0497  1.1929 0.2336 -0.0381 0.1566
+          1.0126  0.1498 0.0640  2.3394 0.0198  0.0243 0.2753
+
+Conditional indirect effect(s) of lesion_vol_cubic on edss_sqrt at values of the moderator(s):
+
+  Mediator  choroid_volume  Effect  Boot SE  BootLLCI  BootULCI
+  thalamus         -0.9933  0.0373   0.0238    0.0042    0.1000
+  thalamus          0.0096  0.0650   0.0230    0.0272    0.1196
+  thalamus          1.0126  0.0928   0.0328    0.0387    0.1692
+
+**************** INDEX OF MODERATED MEDIATION ******************
+
+       Moderator  Mediator  Index  Boot SE   LLCI   ULCI
+  choroid_volume  thalamus 0.0277   0.0170 0.0011 0.0689
+
+
