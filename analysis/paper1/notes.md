@@ -39,6 +39,10 @@ It'd take too long to do an omnibus test for the mediation analysis on ordinal E
 - [ ] Could have someone segment the ChP on \~10 CE T1 images as "gold standards" to compare the predictions to (e.g. Visani et. al 2024)
 - [ ] Test retest reliability: find patients with longitudinal scans somewhat close to eachother and compare the volumes (Eisma paper picks 10 participants with scans within 2 months of another)
 
+#### Pineal Resegmentation
+
+New segmentation fails at 2144 and 2146. 2144 is a strange case where the pineal is a giant hole (cyst?) on T1, and the original segmentation didn't do well either, but still better
+
 ## Questions
 
 - EDSS "." issue

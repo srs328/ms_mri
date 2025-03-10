@@ -1,0 +1,407 @@
+{
+    "info": {
+        "dataroot": "/media/smbshare/3Tpioneer_bids"
+    },
+    "data": [
+        {
+            "subid": "1272",
+            "sesid": "20211105",
+            "image": null,
+            "label": null,
+            "cond": "tr",
+            "id": 25708525560,
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1272/ses-20211105",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
+        },
+        {
+            "subid": "1119",
+            "sesid": "20161010",
+            "image": null,
+            "label": null,
+            "cond": "tr",
+            "id": 22560170190,
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1119/ses-20161010",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
+        },
+        {
+            "subid": "1498",
+            "sesid": "20210602",
+            "image": null,
+            "label": null,
+            "cond": "tr",
+            "id": 30275481796,
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1498/ses-20210602",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
+        },
+        {
+            "subid": "1437",
+            "sesid": "20210503",
+            "image": null,
+            "label": null,
+            "cond": "tr",
+            "id": 29042492811,
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1437/ses-20210503",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
+        },
+        {
+            "subid": "1188",
+            "sesid": "20200720",
+            "image": null,
+            "label": null,
+            "cond": "tr",
+            "id": 23998455360,
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1188/ses-20200720",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
+        },
+        {
+            "subid": "1518",
+            "sesid": "20220216",
+            "image": null,
+            "label": null,
+            "cond": "tr",
+            "id": 30694287888,
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1518/ses-20220216",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
+        },
+        {
+            "subid": "1033",
+            "sesid": "20171117",
+            "image": null,
+            "label": null,
+            "cond": "tr",
+            "id": 20836763861,
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1033/ses-20171117",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
+        },
+        {
+            "subid": "1547",
+            "sesid": "20220321",
+            "image": null,
+            "label": null,
+            "cond": "tr",
+            "id": 31280836587,
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1547/ses-20220321",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
+        },
+        {
+            "subid": "1087",
+            "sesid": "20200717",
+            "image": null,
+            "label": null,
+            "cond": "tr",
+            "id": 21958179379,
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1087/ses-20200717",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
+        },
+        {
+            "subid": "2081",
+            "sesid": "20170204",
+            "image": null,
+            "label": null,
+            "cond": "tr",
+            "id": 41974194524,
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms2081/ses-20170204",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
+        },
+        {
+            "subid": "2146",
+            "sesid": "20191017",
+            "image": null,
+            "label": null,
+            "cond": "tr",
+            "id": 43329922482,
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms2146/ses-20191017",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
+        },
+        {
+            "subid": "1010",
+            "sesid": "20180208",
+            "image": null,
+            "label": null,
+            "cond": "tr",
+            "id": 20382010080,
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1010/ses-20180208",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
+        },
+        {
+            "subid": "1038",
+            "sesid": "20161031",
+            "image": null,
+            "label": null,
+            "cond": "tr",
+            "id": 20927150178,
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1038/ses-20161031",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
+        },
+        {
+            "subid": "2083",
+            "sesid": "20170502",
+            "image": null,
+            "label": null,
+            "cond": "tr",
+            "id": 42015155666,
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms2083/ses-20170502",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
+        },
+        {
+            "subid": "1152",
+            "sesid": "20170529",
+            "image": null,
+            "label": null,
+            "cond": "tr",
+            "id": 23236449408,
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1152/ses-20170529",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
+        },
+        {
+            "subid": "1234",
+            "sesid": "20180214",
+            "image": null,
+            "label": null,
+            "cond": "tr",
+            "id": 24902384076,
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1234/ses-20180214",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
+        },
+        {
+            "subid": "2126",
+            "sesid": "20181224",
+            "image": null,
+            "label": null,
+            "cond": "tr",
+            "id": 42905282224,
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms2126/ses-20181224",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
+        },
+        {
+            "subid": "1548",
+            "sesid": "20210628",
+            "image": null,
+            "label": null,
+            "cond": "tr",
+            "id": 31286052144,
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1548/ses-20210628",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
+        },
+        {
+            "subid": "1259",
+            "sesid": "20200803",
+            "image": null,
+            "label": null,
+            "cond": "tr",
+            "id": 25432810977,
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1259/ses-20200803",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
+        },
+        {
+            "subid": "1265",
+            "sesid": "20180127",
+            "image": null,
+            "label": null,
+            "cond": "tr",
+            "id": 25527860655,
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1265/ses-20180127",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
+        },
+        {
+            "subid": "1321",
+            "sesid": "20201020",
+            "image": null,
+            "label": null,
+            "cond": "tr",
+            "id": 26685547420,
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1321/ses-20201020",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
+        },
+        {
+            "subid": "1540",
+            "sesid": "20201222",
+            "image": null,
+            "label": null,
+            "cond": "tr",
+            "id": 31109881880,
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1540/ses-20201222",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
+        },
+        {
+            "subid": "1080",
+            "sesid": "20180416",
+            "image": null,
+            "label": null,
+            "cond": "tr",
+            "id": 21794849280,
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1080/ses-20180416",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
+        },
+        {
+            "subid": "1037",
+            "sesid": "20210508",
+            "image": null,
+            "label": null,
+            "cond": "tr",
+            "id": 20958296796,
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1037/ses-20210508",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
+        },
+        {
+            "subid": "1280",
+            "sesid": "20220317",
+            "image": null,
+            "label": null,
+            "cond": "tr",
+            "id": 25882005760,
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1280/ses-20220317",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
+        },
+        {
+            "subid": "1163",
+            "sesid": "20180907",
+            "image": null,
+            "label": null,
+            "cond": "tr",
+            "id": 23470394841,
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1163/ses-20180907",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
+        },
+        {
+            "subid": "2187",
+            "sesid": "20200731",
+            "image": null,
+            "label": null,
+            "cond": "tr",
+            "id": 44178998697,
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms2187/ses-20200731",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
+        },
+        {
+            "subid": "2132",
+            "sesid": "20190825",
+            "image": null,
+            "label": null,
+            "cond": "tr",
+            "id": 43046838900,
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms2132/ses-20190825",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
+        },
+        {
+            "subid": "1355",
+            "sesid": "20210104",
+            "image": null,
+            "label": null,
+            "cond": "tr",
+            "id": 27384690920,
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1355/ses-20210104",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
+        },
+        {
+            "subid": "1029",
+            "sesid": "20170816",
+            "image": null,
+            "label": null,
+            "cond": "tr",
+            "id": 20755769664,
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1029/ses-20170816",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
+        },
+        {
+            "subid": "2097",
+            "sesid": "20171223",
+            "image": null,
+            "label": null,
+            "cond": "ts",
+            "id": 42299054631,
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms2097/ses-20171223",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
+        },
+        {
+            "subid": "1085",
+            "sesid": "20220228",
+            "image": null,
+            "label": null,
+            "cond": "ts",
+            "id": 21938947380,
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1085/ses-20220228",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
+        },
+        {
+            "subid": "1109",
+            "sesid": "20180303",
+            "image": null,
+            "label": null,
+            "cond": "ts",
+            "id": 22379956027,
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1109/ses-20180303",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
+        },
+        {
+            "subid": "2164",
+            "sesid": "20200113",
+            "image": null,
+            "label": null,
+            "cond": "ts",
+            "id": 43713044532,
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms2164/ses-20200113",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
+        },
+        {
+            "subid": "2144",
+            "sesid": "20190422",
+            "image": null,
+            "label": null,
+            "cond": "ts",
+            "id": 43288264768,
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms2144/ses-20190422",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
+        },
+        {
+            "subid": "1089",
+            "sesid": "20210612",
+            "image": null,
+            "label": null,
+            "cond": "ts",
+            "id": 22009356468,
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1089/ses-20210612",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
+        },
+        {
+            "subid": "1191",
+            "sesid": "20190124",
+            "image": null,
+            "label": null,
+            "cond": "ts",
+            "id": 24046437684,
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1191/ses-20190124",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
+        },
+        {
+            "subid": "1293",
+            "sesid": "20161129",
+            "image": null,
+            "label": null,
+            "cond": "ts",
+            "id": 26068339797,
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1293/ses-20161129",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
+        },
+        {
+            "subid": "1011",
+            "sesid": "20180911",
+            "image": null,
+            "label": null,
+            "cond": "ts",
+            "id": 20402901021,
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1011/ses-20180911",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
+        },
+        {
+            "subid": "1019",
+            "sesid": "20190608",
+            "image": null,
+            "label": null,
+            "cond": "ts",
+            "id": 20574229552,
+            "root": "/media/smbshare/3Tpioneer_bids/sub-ms1019/ses-20190608",
+            "dataroot": "/media/smbshare/3Tpioneer_bids"
+        }
+    ]
+}
