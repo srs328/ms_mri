@@ -43,10 +43,6 @@ It'd take too long to do an omnibus test for the mediation analysis on ordinal E
 
 New segmentation fails at 2144 and 2146. 2144 is a strange case where the pineal is a giant hole (cyst?) on T1, and the original segmentation didn't do well either, but still better
 
-#### Pineal Resegmentation
-
-New segmentation fails at 2144 and 2146. 2144 is a strange case where the pineal is a giant hole (cyst?) on T1, and the original segmentation didn't do well either, but still better
-
 ### Choroid Analysis
 
 - Based on Fleischer et al 2021 (which looks at patients starting much earlier in their disease course), our patients choroid volumes have likely peaked
