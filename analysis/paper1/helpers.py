@@ -8,6 +8,8 @@ import statsmodels.api as sm
 import numpy as np
 from scipy import stats
 
+pd.options.mode.copy_on_write = True
+
 msmri_home = Path("/home/srs-9/Projects/ms_mri")
 msmri_datadir = msmri_home / "data"
 monai_analysis_dir = msmri_home / "monai_analysis"
@@ -16,6 +18,74 @@ analysis_folders = {
     "t1": "choroid_pineal_pituitary_T1-1",
     "flair": "choroid_pineal_pituitary_FLAIR-1",
 }
+
+keep_cols = [
+    "subject",
+    "age",
+    "sex",
+    "ms_type",
+    "dzdur",
+    "extracted_EDSS",
+    "MSSS",
+    "gMSSS",
+    "ARMSS",
+    "DMT_score",
+    "DMT_hx_all",
+    "TER",
+    "DMF",
+    "NAT",
+    "INF",
+    "flair_contrast",
+    "thalamus",
+    "brain",
+    "white",
+    "grey",
+    "cortical_thickness",
+    "lesion_count",
+    "lesion_vol_cubic",
+    "PRL",
+    "tiv",
+    "choroid_volume",
+    "pineal_volume", 
+    "pituitary_volume"
+]
+
+
+numeric_vars = [
+    "age",
+    "dzdur",
+    "EDSS", "EDSS_sqrt",
+    "MSSS", "MSSS_sqrt",
+    "gMSSS", "gMSSS_sqrt",
+    "ARMSS", "ARMSS_sqrt",
+    "DMT_score",
+    "DMT_hx_all",
+    "TER",
+    "DMF",
+    "NAT",
+    "INF",
+    "thalamus",
+    "brain",
+    "white",
+    "grey",
+    "cortical_thickness",
+    "lesion_count",
+    "lesion_vol",
+    "t2lv", "t2lv_logtrans",
+    "PRL",
+    "tiv",
+    "choroid_volume",
+    "pineal_volume",
+    "pituitary_volume"
+]
+
+vars_to_center = [
+        "edss_sqrt",
+        "lesion_vol_logtrans",
+        "lesion_vol_cubic",
+        "dzdur",
+        "choroid_volume",
+    ]
 
 
 def subject_to_subid(subject):
@@ -40,6 +110,7 @@ def set_prl_levels(df):
 
 
 def set_has_prl(df):
+    df = df.copy()
     df.loc[df["PRL"] > 0, "HAS_PRL"] = 1
     df.loc[df["PRL"] == 0, "HAS_PRL"] = 0
     return df
@@ -49,7 +120,30 @@ def fix_edss(df):
     df.loc[:, "extracted_EDSS"] = [
         float(val) if val != "." else None for val in df["extracted_EDSS"]
     ]  #! figure out what to do with "."
-    df = df.rename(columns={"extracted_EDSS": "EDSS"})
+    df['extracted_EDSS'] = df['extracted_EDSS'].astype("float")
+    return df
+
+
+def do_sqrt_transform(df, vars):
+    for var in vars:
+        df[f"{var}_sqrt"] = np.sqrt(df[var])
+    return df
+
+def do_log_transform(df, vars):
+    for var in vars:
+        df[f"{var}_logtrans"] = np.log(df[var])
+    return df
+
+
+def do_center(df, vars):
+    for var in vars:
+        df[f"{var}_cent"] = df[var] - df[var].mean()
+    return df
+
+
+def do_scale(df, vars):
+    for var in vars:
+        df[f"{var}_scale"] = df[var] / df[var].mean()
     return df
 
 
@@ -77,7 +171,7 @@ def set_dz_type5(df):
     return df
 
 
-def clean_df(df):
+def clean_df(df: pd.DataFrame):
     not_nas = (
         ~df["pineal_volume"].isna()
         & ~df["choroid_volume"].isna()
@@ -91,6 +185,9 @@ def clean_df(df):
     ]
     df.loc[df["dzdur"] == "#VALUE!", "dzdur"] = None
     df.loc[:, "dzdur"] = df["dzdur"].astype("float")
+    df = pd.concat((df, pd.get_dummies(df["sex"], dtype="int")), axis=1)
+
+    
 
     return df
 
@@ -371,38 +468,13 @@ def prepare_data(data_file):
     df = pd.read_csv(data_file)
     df = df.set_index("subid")
 
+    df = df.loc[:, keep_cols]
     df = set_dz_type5(df)
     df = set_dz_type3(df)
     df = set_dz_type2(df)
     df = fix_edss(df)
     df = clean_df(df)
 
-    keep_cols = [
-        "subject",
-        "age",
-        "sex",
-        "ms_type",
-        "dz_type2",
-        "dz_type3",
-        "dz_type5",
-        "dzdur",
-        "EDSS",
-        "MSSS",
-        "gMSSS",
-        "ARMSS",
-        "DMT_score",
-        "DMT_hx_all",
-        "flair_contrast",
-        "lesion_count",
-        "lesion_vol_cubic",
-        "PRL",
-        "tiv",
-        "choroid_volume",
-        "pineal_volume",
-        "pituitary_volume",
-    ]
-
-    df = df.loc[:, keep_cols]
     df = pd.concat((df, pd.get_dummies(df["sex"])), axis=1)
 
     df.loc[:, "lesion_vol_logtrans"] = np.log(df["lesion_vol_cubic"])
@@ -411,38 +483,10 @@ def prepare_data(data_file):
     df.loc[:, "armss_sqrt"] = np.sqrt(df["ARMSS"])
     df.loc[:, "gmsss_sqrt"] = np.sqrt(df["gMSSS"])
 
-    vars = [
-        "age",
-        "Female",
-        "dzdur",
-        "EDSS",
-        "MSSS",
-        "gMSSS",
-        "ARMSS",
-        "edss_sqrt",
-        "msss_sqrt",
-        "armss_sqrt",
-        "gmsss_sqrt",
-        "DMT_score",
-        "DMT_hx_all",
-        "lesion_count",
-        "lesion_vol_cubic",
-        "lesion_vol_logtrans",
-        "PRL",
-        "tiv",
-        "choroid_volume",
-    ]
 
     for var in vars:
         df[var] = pd.to_numeric(df[var])
 
-    vars_to_center = [
-        "edss_sqrt",
-        "lesion_vol_logtrans",
-        "lesion_vol_cubic",
-        "dzdur",
-        "choroid_volume",
-    ]
 
     for var in vars_to_center:
         df[f"{var}_cent"] = df[var] - df[var].mean()
@@ -473,3 +517,4 @@ def get_colors():
         "light blue1": "#7a9df0",
     }
     return colors
+
