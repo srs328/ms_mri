@@ -20,7 +20,11 @@ mod = sys.argv[1]
 config = {
     "t1": "t1_choroid_pineal_pituitary_T1-1_pred",
     "flair": "flair_choroid_pineal_pituitary_FLAIR-1_pred",
-    "t1_2": "t1_choroid_pineal2_pituitary_T1-1_pred"
+    "t1_2": "t1_choroid_pineal2_pituitary_T1-1_pred",
+    "t1_3": "t1_choroid_pineal2_pituitary_T1-2_pred",
+    "t1_4": "t1_choroid_pineal2_pituitary_T1-3_pred",
+    "t1_5": "t1_choroid_pineal2_pituitary_T1-4_pred",
+    "t1_flair": "flair.t1_choroid_pineal_pituitary3_pred"
 }
 
 
