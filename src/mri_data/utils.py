@@ -225,7 +225,7 @@ def create_itksnap_workspace_cmd(label_scan, image_scan, save_dir):
 
 def open_itksnap_workspace_cmd(images: list[str], labels: list[str] = None, win=False):
     if images is None:
-        images = []
+        raise Exception("No images")
     if labels is None:
         labels = []
     if win:
