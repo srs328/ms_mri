@@ -46,18 +46,22 @@ keep_cols = [
     "PRL",
     "tiv",
     "choroid_volume",
-    "pineal_volume", 
-    "pituitary_volume"
+    "pineal_volume",
+    "pituitary_volume",
 ]
 
 
 numeric_vars = [
     "age",
     "dzdur",
-    "EDSS", "EDSS_sqrt",
-    "MSSS", "MSSS_sqrt",
-    "gMSSS", "gMSSS_sqrt",
-    "ARMSS", "ARMSS_sqrt",
+    "EDSS",
+    "EDSS_sqrt",
+    "MSSS",
+    "MSSS_sqrt",
+    "gMSSS",
+    "gMSSS_sqrt",
+    "ARMSS",
+    "ARMSS_sqrt",
     "DMT_score",
     "DMT_hx_all",
     "TER",
@@ -71,21 +75,22 @@ numeric_vars = [
     "cortical_thickness",
     "lesion_count",
     "lesion_vol",
-    "t2lv", "t2lv_logtrans",
+    "t2lv",
+    "t2lv_logtrans",
     "PRL",
     "tiv",
     "choroid_volume",
     "pineal_volume",
-    "pituitary_volume"
+    "pituitary_volume",
 ]
 
 vars_to_center = [
-        "edss_sqrt",
-        "lesion_vol_logtrans",
-        "lesion_vol_cubic",
-        "dzdur",
-        "choroid_volume",
-    ]
+    "edss_sqrt",
+    "lesion_vol_logtrans",
+    "lesion_vol_cubic",
+    "dzdur",
+    "choroid_volume",
+]
 
 
 def subject_to_subid(subject):
@@ -120,7 +125,7 @@ def fix_edss(df):
     df.loc[:, "extracted_EDSS"] = [
         float(val) if val != "." else None for val in df["extracted_EDSS"]
     ]  #! figure out what to do with "."
-    df['extracted_EDSS'] = df['extracted_EDSS'].astype("float")
+    df["extracted_EDSS"] = df["extracted_EDSS"].astype("float")
     return df
 
 
@@ -128,6 +133,7 @@ def do_sqrt_transform(df, vars):
     for var in vars:
         df[f"{var}_sqrt"] = np.sqrt(df[var])
     return df
+
 
 def do_log_transform(df, vars):
     for var in vars:
@@ -171,6 +177,12 @@ def set_dz_type5(df):
     return df
 
 
+def clean_dz_type(df, col="dz_type5", keeps=None):
+    if keeps is None:
+        keeps = ["RMS", "PMS", "NIND", "OIND"]
+    return df[df[col].isin(keeps)]
+
+
 def clean_df(df: pd.DataFrame):
     not_nas = (
         ~df["pineal_volume"].isna()
@@ -186,8 +198,6 @@ def clean_df(df: pd.DataFrame):
     df.loc[df["dzdur"] == "#VALUE!", "dzdur"] = None
     df.loc[:, "dzdur"] = df["dzdur"].astype("float")
     df = pd.concat((df, pd.get_dummies(df["sex"], dtype="int")), axis=1)
-
-    
 
     return df
 
@@ -416,7 +426,7 @@ def moderation_y_test(data, res, x_name, m_name):
         if name == "Intercept":
             continue
         regression_data[name] = data[name]
-        
+
     regression_data = pd.DataFrame(regression_data)
 
     other_vars = coef.index[~coef.index.isin([x_name, m_name, "Intercept"])]
@@ -454,7 +464,6 @@ def moderation_y_test(data, res, x_name, m_name):
     return x_rng, y_lvls
 
 
-
 def plot_moderation(x_data, y_data, x_rng, y_lvls):
     plt.scatter(x_data, y_data, s=5)
     plt.plot(x_rng, y_lvls[0], label="m-sd", linestyle="--")
@@ -483,10 +492,8 @@ def prepare_data(data_file):
     df.loc[:, "armss_sqrt"] = np.sqrt(df["ARMSS"])
     df.loc[:, "gmsss_sqrt"] = np.sqrt(df["gMSSS"])
 
-
     for var in vars:
         df[var] = pd.to_numeric(df[var])
-
 
     for var in vars_to_center:
         df[f"{var}_cent"] = df[var] - df[var].mean()
@@ -517,4 +524,3 @@ def get_colors():
         "light blue1": "#7a9df0",
     }
     return colors
-
