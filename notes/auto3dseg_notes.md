@@ -18,3 +18,11 @@
 ## Ensemble Predictions
 
 [Documentation](https://docs.monai.io/en/0.8.1/_modules/monai/handlers/segmentation_saver.html) about saving predictions (i.e. `pred = ensemble( pred_param={...} )`)
+
+## Event File
+
+### Notes on choroid_pineal_pituitary_T1-1
+
+- Steps is (num epochs)*(some variable [12 in the case of choroid_pineal_pituitary])
+  - Is that variable 2*val_files?
+- Every 5 epochs it's computing the Dice (evaluation metric) for each class
