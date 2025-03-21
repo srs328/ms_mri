@@ -3,23 +3,43 @@ from pathlib import Path
 import os
 import shutil
 
-dataroot = Path("/mnt/h/3Tpioneer_bids")
-ascho_dataroot = Path("/mnt/h/srs-9/aschoplex/test1")
+dataroot = Path("/media/smbshare/3Tpioneer_bids")
+ascho_dataroot = Path("/media/smbshare/srs-9/aschoplex/test2")
 curr_dir = os.path.abspath(__file__)
 subjects_file = "/home/srs-9/Projects/ms_mri/analysis/paper1/data0/manual_labels.csv"
 df = pd.read_csv(subjects_file, index_col="subid")
 
 ft_subs = [
-    1010,
+    1011,
     1019,
-    2146,
-    2097,
-    1498,
-    1355,
+    1029,
+    1037,
     1038,
+    1080,
+    1085,
+    1087,
+    1089,
+    1109,
     1152,
+    1163,
     1188,
-    1259,
+    1191,
+    1234,
+    1265,
+    1272,
+    1280,
+    1293,
+    1321,
+    1355,
+    1498,
+    1518,
+    1540,
+    1548,
+    2083,
+    2097,
+    2132,
+    2144,
+    2164
 ]
 
 pred_subs = df.loc[~(df.index.isin(ft_subs)), :].index.tolist()
@@ -59,4 +79,4 @@ for sub in pred_subs:
         shutil.copyfile(image, image_svpath)
 
 
-#python $ASCHOPLEXDIR/launching_tool.py --dataroot /mnt/h/srs-9/aschoplex/test1 --work_dir /mnt/h/srs-9/aschoplex/test1/work_dir/ --finetune yes --predict yes
+#python $ASCHOPLEXDIR/launching_tool.py --dataroot /media/smbshare/srs-9/aschoplex/test1 --work_dir /media/smbshare/srs-9/aschoplex/test1/work_dir/ --finetune yes --predict yes
