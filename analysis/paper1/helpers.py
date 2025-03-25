@@ -7,6 +7,9 @@ import re
 import statsmodels.api as sm
 import numpy as np
 from scipy import stats
+import datetime
+from datetime import timedelta
+from datetime import datetime
 
 pd.options.mode.copy_on_write = True
 
@@ -184,14 +187,15 @@ def clean_dz_type(df, col="dz_type5", keeps=None):
 
 
 def clean_df(df: pd.DataFrame):
-    not_nas = (
-        ~df["pineal_volume"].isna()
-        & ~df["choroid_volume"].isna()
-        & ~df["pituitary_volume"].isna()
-    )
-    df = df.loc[not_nas, :]
+    # not_nas = (
+    #     ~df["pineal_volume"].isna()
+    #     & ~df["choroid_volume"].isna()
+    #     & ~df["pituitary_volume"].isna()
+    # )
+    # df = df.loc[not_nas, :]
 
     df.loc[df["PRL"] == "#VALUE!", "PRL"] = None
+    df.loc[df["PRL"].isna(), "PRL"] = None
     df.loc[:, "PRL"] = [
         int(val) if val != "#VALUE!" and val is not None else None for val in df["PRL"]
     ]
@@ -199,6 +203,30 @@ def clean_df(df: pd.DataFrame):
     df.loc[:, "dzdur"] = df["dzdur"].astype("float")
     df = pd.concat((df, pd.get_dummies(df["sex"], dtype="int")), axis=1)
 
+    return df
+
+
+def get_mri_edss_delta(df):
+    date_str = "%m/%d/%Y"
+    for i, row in df.iterrows():
+        try:
+            edss_date = datetime.strptime(row["edss_date_closest"], date_str)
+        except (ValueError, TypeError):
+            edss_date = pd.NA
+        try:
+            mri_date = datetime.strptime(row["mri_date_closest"], date_str)
+        except (ValueError, TypeError):
+            mri_date = pd.NA
+        delta = edss_date - mri_date
+        if isinstance(delta, timedelta):
+            df.loc[i, "edss_mri_delta"] = delta.days
+        else:
+            df.loc[i, "edss_mri_delta"] = None
+    return df
+
+
+def norm_volumes(df):
+    df["norm_choroid_volume"] = df["choroid_volume"] / df["tiv"] * 1000
     return df
 
 
