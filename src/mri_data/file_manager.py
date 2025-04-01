@@ -385,6 +385,9 @@ def scan_3Tpioneer_bids(dataroot, image=None, label=None, subdir=None) -> DataSe
     return dataset
 
 
+# def scan_aschoplex(dataroot, )
+
+
 def scan_lesjak(dataroot, image=None, label=None, subdir=None) -> DataSet:
     dataroot = Path(dataroot)
 
