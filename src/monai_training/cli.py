@@ -5,7 +5,7 @@ from pathlib import Path
 from subprocess import run
 import sys
 
-from monai_training import preprocess, training
+from monai_training import preprocess, training, inference
 from monai_training.preprocess import DataSetProcesser
 from mri_data import file_manager as fm
 from mri_data.file_manager import scan_3Tpioneer_bids, Scan
@@ -109,6 +109,12 @@ def count_inference_labels(dataroot, inference_root, label_filename):
     )
 
 
+@cli.command("infer")
+@click.argument("config", type=click.Path(exists=True, resolve_path=True, dir_okay=False))
+def infer(config):
+    inference.infer(config)
+
+
 # FIXME there are many conditional here, and I'm not sure what cases are unaccounted for
 # TODO Find the itksnap install directory on the Ubuntu desktop
 @cli.command("open-itksnap")
@@ -122,7 +128,7 @@ def count_inference_labels(dataroot, inference_root, label_filename):
 @click.option("-s", "--seg", "labels", type=click.STRING, required=True, multiple=True)
 @click.option("--inference/--not-inference", default=False)
 @click.option("--win/--not-win", default=False)
-@click.option("-o", "--save-dir", click.STRING)
+@click.option("-o", "--save-dir", type=click.STRING)
 def open_itksnap_workspace(
     subid, sesid, dataroot, labelroot, images, labels, inference, win, save_dir
 ):
