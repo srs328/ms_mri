@@ -45,9 +45,15 @@ def infer(config_file):
     with open(config_file, 'r') as f:
         config = json.load(f)
     
-    save_dir = Path(config['save_dir'])
-    dataroot = Path(config['dataroot'])
-    network_bundle_path = Path(config['network_bundle_path'])
+    save_dir = config['save_dir']
+    dataroot = config['dataroot']
+
+    if save_dir == "pwd":
+        save_dir = os.getcwd()
+    if dataroot == "pwd":
+        dataroot = os.getcwd()
+
+    network_bundle_path = config['network_bundle_path']
     task_name = config['task_name']
 
     save_params = {
@@ -57,24 +63,27 @@ def infer(config_file):
     }
     save_params.update(config['save_params'])
 
+    # change this so there's an option for relative paths where whatever is in the 
+    # filelist is just appended to dataroot
     files = config['files']
     if isinstance(files, list):
-        for i, file in enumerate(files):
-            if file.split("/") == file:
-                files[i] = dataroot / file
-        images = image_list(files)
+        image_files = files
     elif files == "scan":
-        images = get_files_from_dataroot(dataroot)
+        image_files = get_files_from_dataroot(dataroot)
     elif files.split(".")[-1] == "txt":
-        images = read_filelist(files)
+        image_files = read_filelist(files)
     else:
         raise ValueError("files attribute should be a list of filepaths, 'scan', or path to txt file")
     
+    images = image_list(image_files, dataroot)
+
+    print(images[0]['image'])
+
     print(f"Will run inference on {len(images)} scans")
 
     datalist = {"testing": images}
 
-    datalist_file = save_dir / "datalist.json"
+    datalist_file = os.path.join(save_dir, "datalist.json")
     with open(datalist_file, "w") as f:
         json.dump(datalist, f, indent=4)
 
@@ -82,11 +91,11 @@ def infer(config_file):
         "name": task_name,
         "task": "segmentation",
         "modality": "MRI",
-        "datalist": str(datalist_file),
-        "dataroot": str(dataroot),
+        "datalist": datalist_file,
+        "dataroot": dataroot,
     }
 
-    task_file = save_dir / "inference-task.json"
+    task_file = os.path.join(save_dir, "inference-task.json")
     with open(task_file, "w") as f:
         json.dump(task, f, indent=4)
 
@@ -102,20 +111,19 @@ def infer(config_file):
     ensemble(pred_param={"image_save_func": save_params})
     
 
-def image_list(image_files: list) -> list[dict]:
+def image_list(image_files: list, dataroot: str) -> list[dict]:
     images = []
     for im in image_files:
-        images.append({"image": im})
-    
+        images.append({"image": os.path.join(dataroot, im)})
     return images
 
 
-def get_files_from_dataroot(dataroot) -> list[dict]:
+def get_files_from_dataroot(dataroot) -> list[str]:
     image_files = [file.name for file in os.scandir(dataroot) if file.is_file()]
-    return image_list(image_files)
+    return image_files
     
 
-
-def read_filelist(filelist) -> list[dict]:
-    # return list[dict] like in get_files_from_dataroot
-    pass
+def read_filelist(filelist) -> list[str]:
+    with open(filelist, 'r') as f:
+        image_files = [line.rstrip() for line in f.readlines()]
+    return image_files
