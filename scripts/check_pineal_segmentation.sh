@@ -8,6 +8,7 @@ default_app=itksnap
 # -------------------------------------
 
 usage() {
+    echo "Opens the manual pineal segmentation (either pineal-SRS_T1 or pineal-SRS)"
     echo "Usage: [-a] [-h] <subid>"
     echo "  -a          Which app to use (default: $default_app)"
     echo "                  options: fsleyes, itksnap"
