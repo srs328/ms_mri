@@ -48,7 +48,7 @@ for scan in tqdm(dataset[2:]):
             shutil.copyfile(scan.root / "t1.nii.gz", subject_folder / "t1.nii.gz")
 
         print(scan.subid)
-        cmd = ["bash", "/home/srs-9/Projects/ms_mri/scripts/crop_thalamus.sh", str(subject_folder)]
+        cmd = ["bash", "/home/srs-9/Projects/ms_mri/scripts/hips_thomas.sh", str(subject_folder)]
         subprocess.run(cmd)
     except Exception:
         continue
