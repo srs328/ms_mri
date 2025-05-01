@@ -15,4 +15,5 @@ docker run --gpus all -v $subj_folder:/data \
                       --t1 /data/t1.nii.gz \
                       --sid $subid --sd /output \
                       --3T \
-                      --threads 4
+                      --threads 4 \
+                      --seg_only
