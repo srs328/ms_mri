@@ -1,7 +1,7 @@
 #!/bin/bash
 
 scan=$1
-viewport=$2
+viewport=$2 # "sagittal", "coronal", "axial"
 save_path=$3
 x=$4
 y=$5
