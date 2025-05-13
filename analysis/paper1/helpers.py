@@ -156,26 +156,26 @@ def do_scale(df, vars):
     return df
 
 
-# ['MS', '!MS', 'UNK', 'RIS']
+# ['MS', '!MS', 'UNK']
 def set_dz_type2(df):
     df.loc[:, "dz_type2"] = df["ms_type"]
     df.loc[df["ms_type"].isin(["NIND", "OIND", "HC"]), "dz_type2"] = "!MS"
-    ms_subtypes = ["PPMS", "SPMS", "RPMS", "PRMS", "CIS", "RRMS"]
+    ms_subtypes = ["PPMS", "SPMS", "RPMS", "PRMS", "CIS", "RRMS", "RIS"]
     df.loc[df["ms_type"].isin(ms_subtypes), "dz_type2"] = "MS"
     return df
 
 
-# ['MS', 'NIND', 'UNK', 'HC', 'OIND', 'RIS']
+# ['MS', 'NIND', 'UNK', 'HC', 'OIND']
 def set_dz_type3(df):
     df.loc[:, "dz_type3"] = df["ms_type"]
-    ms_subtypes = ["PPMS", "SPMS", "RPMS", "PRMS", "RRMS", "CIS"]
+    ms_subtypes = ["PPMS", "SPMS", "RPMS", "PRMS", "RRMS", "CIS", "RIS"]
     df.loc[df["ms_type"].isin(ms_subtypes), "dz_type3"] = "MS"
     return df
 
 
 def set_dz_type5(df):
     df.loc[:, "dz_type5"] = df["ms_type"]
-    df.loc[df["ms_type"].isin(["CIS", "RRMS"]), "dz_type5"] = "RMS"
+    df.loc[df["ms_type"].isin(["CIS", "RIS", "RRMS"]), "dz_type5"] = "RMS"
     df.loc[df["ms_type"].isin(["PPMS", "SPMS", "RPMS", "PRMS"]), "dz_type5"] = "PMS"
     return df
 
