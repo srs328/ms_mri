@@ -1,0 +1,36 @@
+
+--------------------------------------------------------------------------------------
+ Creating template 1125_template0.nii.gz from a population average image from the inputs.
+   t1_20160919.nii.gz t1_20191030.nii.gz t1_20210409.nii.gz
+--------------------------------------------------------------------------------------
+ bigimage 5 maxSize [240, 300, 300]
+ Setting physical space of output average image based on largest image 
+ Averaging 3 images with dim = 3 vector components 1
+ reading t1_20160919.nii.gz
+ reading t1_20191030.nii.gz
+ reading t1_20210409.nii.gz
+ writing output 
+Sharpening method none
+Using double precision for computations.
+Input scalar image: t1_20160919.nii.gz
+Reference image: 1125_template0.nii.gz
+=============================================================================
+The composite transform comprises the following transforms (in order): 
+  1. ./initialCOM0_0_t1_20160919.mat (type = Euler3DTransform)
+=============================================================================
+Default pixel value: 0
+Interpolation type: LinearInterpolateImageFunction
+Output warped image: ./initialCOM0_0_t1_20160919.nii.gz
+Using double precision for computations.
+Input scalar image: t1_20191030.nii.gz
+Reference image: 1125_template0.nii.gz
+=============================================================================
+The composite transform comprises the following transforms (in order): 
+  1. ./initialCOM0_1_t1_20191030.mat (type = Euler3DTransform)
+=============================================================================
+Default pixel value: 0
+Interpolation type: LinearInterpolateImageFunction
+Output warped image: ./initialCOM0_1_t1_20191030.nii.gz
+Using double precision for computations.
+Input scalar image: t1_20210409.nii.gz
+Reference image: 1125_template0.nii.gz
