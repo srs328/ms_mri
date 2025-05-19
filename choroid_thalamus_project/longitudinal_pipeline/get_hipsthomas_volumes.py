@@ -7,13 +7,13 @@ import csv
 import pandas as pd
 import subprocess
 
-# subid = sys.argv[1]
-# dataroot = Path(sys.argv[2])
-# work_home = Path(sys.argv[3])
+subid = sys.argv[1]
+dataroot = Path(sys.argv[2])
+work_home = Path(sys.argv[3])
 
-subid = '1001'
-dataroot = Path("/mnt/h/3Tpioneer_bids")
-work_home = Path("/mnt/h/srs-9/longitudinal")
+# subid = '1001'
+# dataroot = Path("/mnt/h/3Tpioneer_bids")
+# work_home = Path("/mnt/h/srs-9/longitudinal")
 work_dir = work_home / f"sub{subid}"
 
 with open(dataroot / "subject-sessions-longit.json", 'r') as f:
