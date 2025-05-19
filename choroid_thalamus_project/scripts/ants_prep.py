@@ -3,13 +3,13 @@ import os
 import json
 import shutil
 
-work_home = Path("/media/smbshare/srs-9/longitudinal")
-dataroot = Path("/media/smbshare/3Tpioneer_bids")
+work_home = Path("/home/srs-9/data_tmp/longitudinal")
+dataroot = Path("/mnt/h/3Tpioneer_bids")
 
 with open(dataroot / "subject-sessions-longit.json", 'r') as f:
     subject_sessions = json.load(f)
 
-subjects = ['1125', '2178', '1218', '1198']
+subjects = ['1161', '1107', '1326', '1527']
 
 for subid in subjects:
     work_dir = (work_home / f"sub{subid}")

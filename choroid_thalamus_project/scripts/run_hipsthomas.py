@@ -14,8 +14,8 @@ with open(file, 'r') as f:
     subject_sessions = json.load(f)
 
 subjects = ['1161', '1107', '1326', '1527']
-script_path = "/home/srs-9/Projects/ms_mri/choroid_thalamus_project/scripts/constructTemplate.sh"
-logfile = "ants.log"
+script_path = "/home/srs-9/Projects/ms_mri/choroid_thalamus_project/scripts/runHipsThomas.sh"
+logfile = "hipsthomas.log"
 
 for subid in subjects:
     with open(logfile, 'a') as f:
