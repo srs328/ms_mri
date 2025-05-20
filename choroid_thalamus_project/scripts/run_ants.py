@@ -4,8 +4,8 @@ import json
 import shutil
 import subprocess
 
-work_home = Path("/home/srs-9/data_tmp/longitudinal")
-dataroot = Path("/mnt/h/3Tpioneer_bids")
+work_home = Path("/media/smbshare/srs-9/longitudinal")
+dataroot = Path("/media/smbshare/3Tpioneer_bids")
 
 file = "/home/srs-9/Projects/ms_mri/data/subject-sessions-longit.json"
 
@@ -13,7 +13,7 @@ file = "/home/srs-9/Projects/ms_mri/data/subject-sessions-longit.json"
 with open(file, 'r') as f:
     subject_sessions = json.load(f)
 
-subjects = ['1161', '1107', '1326', '1527']
+subjects = ['1225', '1376', '2075', '1023', '1038', '1098']
 script_path = "/home/srs-9/Projects/ms_mri/choroid_thalamus_project/scripts/constructTemplate.sh"
 logfile = "ants.log"
 

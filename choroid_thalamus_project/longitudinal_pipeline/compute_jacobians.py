@@ -9,6 +9,9 @@ def main(subid, dataroot, work_home):
     with open(dataroot / "subject-sessions-longit.json", 'r') as f:
         subjects = json.load(f)
     sessions = sorted(subjects[subid])
+    # just copy first and last to speed things up
+    sessions = sorted(sessions)
+    sessions = [sessions[0], sessions[-1]]
 
     script_path = "/home/srs-9/Projects/ms_mri/choroid_thalamus_project/longitudinal_pipeline/computeJacobian.sh"
     for i, sesid in enumerate(sessions):

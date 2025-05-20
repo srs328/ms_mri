@@ -9,6 +9,9 @@ def main(subid, dataroot, work_home):
     with open(dataroot / "subject-sessions-longit.json", 'r') as f:
         subjects = json.load(f)
     sessions = sorted(subjects[subid])
+    # just copy first and last to speed things up
+    sessions = sorted(sessions)
+    sessions = [sessions[0], sessions[-1]]
 
     for sesid in sessions:
         jacobian = work_dir / f"jacobianinv-t1_{sesid}.nii.gz"

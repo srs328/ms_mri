@@ -10,7 +10,7 @@ dataroot = Path("/media/smbshare/3Tpioneer_bids")
 with open(dataroot / "subject-sessions-longit.json", 'r') as f:
     subject_sessions = json.load(f)
 
-subjects = ['1125', '1218', '1198']
+subjects = ['2195']
 script_path = "/home/srs-9/Projects/ms_mri/choroid_thalamus_project/scripts/runHipsThomas.sh"
 logfile = "hipsthomas.log"
 

@@ -13,6 +13,9 @@ def main(subid, dataroot, work_home):
     with open(dataroot / "subject-sessions-longit.json", 'r') as f:
         subjects = json.load(f)
     sessions = sorted(subjects[subid])
+    # just copy first and last to speed things up
+    sessions = sorted(sessions)
+    sessions = [sessions[0], sessions[-1]]
 
     thomas_inds = [2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 26, 27, 28, 29, 30, 31, 32]
 
