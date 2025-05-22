@@ -6,8 +6,8 @@ from mri_data import file_manager as fm
 drive_root = fm.get_drive_root()
 dataroot = drive_root / "3Tpioneer_bids"
 work_home = drive_root / "srs-9/longitudinal"
-subids = ['2075', '1023', '1038', '1098']
-
+# subids = ['2075', '1023', '1038', '1098']
+subids = ['1326']
 
 for subid in subids:
     compute_jacobians.main(subid, dataroot, work_home)

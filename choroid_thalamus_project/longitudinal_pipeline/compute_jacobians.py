@@ -15,8 +15,8 @@ def main(subid, dataroot, work_home):
 
     script_path = "/home/srs-9/Projects/ms_mri/choroid_thalamus_project/longitudinal_pipeline/computeJacobian.sh"
     for i, sesid in enumerate(sessions):
-        forward_warp = work_dir / f"sub{subid}_input000{i}-t1_{sesid}-1Warp.nii.gz"
-        inv_warp = work_dir / f"sub{subid}_input000{i}-t1_{sesid}-1InverseWarp.nii.gz"
+        forward_warp = work_dir / f"sub{subid}_input000{i}-t1_{sesid}_mniWarped-1Warp.nii.gz"
+        inv_warp = work_dir / f"sub{subid}_input000{i}-t1_{sesid}_mniWarped-1InverseWarp.nii.gz"
         jacobian = work_dir / f"jacobian-t1_{sesid}.nii.gz"
         jacobian_inv = work_dir / f"jacobianinv-t1_{sesid}.nii.gz"
         
