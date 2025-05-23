@@ -17,7 +17,7 @@ fastsurfer_script = "/home/srs-9/Projects/ms_mri/scripts/fastsurfer/fastsurfer.s
 
 logfile = "fastsurfer.log"
 
-for subid in subjects:
+for subid in subject_sessions:
     with open(logfile, 'a') as f:
         f.write(f"{subid}\n")
 
@@ -30,6 +30,8 @@ for subid in subjects:
         output_folder = (work_home / f"sub{subid}-{sesid}")
         if not output_folder.exists():
             os.makedirs(output_folder)
+        else:
+            continue
 
         cmd = ["bash", fastsurfer_script, str(subid), subj_folder, output_folder]
         cmd_str = " ".join([str(item) for item in cmd])

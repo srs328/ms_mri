@@ -14,11 +14,15 @@ hipsthomas_root = Path("/media/smbshare/srs-9/hipsthomas")
 dataproc_root = Path("/media/smbshare/srs-9/thalamus_project/data")
 data_file_dir = Path("/home/srs-9/Projects/ms_mri/analysis/thalamus/data0")
 
-subject_sessions = pd.read_csv(data_file_dir / "subject-sessions.csv", names=["sub", "ses"], header=None)
+subject_sessions = pd.read_csv(data_file_dir / "subject-sessions.csv")
 
 # %%
 def load_choroid_sdt(root, sub, ses):
     file = os.path.join(root, f"sub{sub}-{ses}", "choroid-sdt.nii.gz")
+    return nib.load(file).get_fdata()
+
+def load_ventricle_sdt(root, sub, ses):
+    file = os.path.join(root, f"sub{sub}-{ses}", "aseg-ventricles-sdt.nii.gz")
     return nib.load(file).get_fdata()
 
 def load_thomas(root, sub, ses):
@@ -30,7 +34,7 @@ def load_thomas(root, sub, ses):
     return thomL_img, thomR_img
 
 # %% [markdown]
-# Centroid-SDT metric
+## Centroid-SDT metric
 
 # %%
 all_dists = []
@@ -65,3 +69,43 @@ for i, row in tqdm(subject_sessions.iterrows(), total=len(subject_sessions)):
 
 df = pd.DataFrame(all_dists, index=all_subjects)
 df.to_csv(data_file_dir / "centroid-SDT.csv")
+
+
+# %% [markdown]
+## Ventricle-SDT metric
+# %%
+
+# subject_sessions.set_index("sub", inplace=True)
+# 1326
+subjects = [1326, 2195, 1076, 1042, 1508, 1071, 1241, 1003, 1301, 1001, 1107, 1125, 1161, 1198, 1218, 1527, 1376, 2075, 1023, 1038, 1098]
+all_dists = []
+all_subjects = []
+for sub in subjects:
+    ses = subject_sessions.loc[sub, 'ses']
+    try:
+        ventricle_sdt = load_ventricle_sdt(hipsthomas_root, sub, ses)
+        thomL_img, _ = load_thomas(hipsthomas_root, sub, ses)
+        thom = thomL_img.get_fdata()
+        thom_inds = np.unique(thom)
+        thom_inds = thom_inds[thom_inds > 0]
+        dists = {}
+        for ind in thom_inds:
+            struct_pts = thom.copy()
+            struct_pts[thom!=ind] = 0
+            struct_pts[thom==ind] = 1
+            centroid = ndimage.center_of_mass(struct_pts)
+            centroid_round = [int(cent) for cent in centroid]
+            dists[int(ind)] = ventricle_sdt[*centroid_round]
+        
+        all_dists.append(dists)
+        all_subjects.append(sub)
+    
+    except Exception as e:
+        print(e)
+        continue
+
+# %%
+
+df = pd.DataFrame(all_dists, index=all_subjects)
+df.index.name="subid"
+df.to_csv(data_file_dir / "ventricle-SDT.csv")
