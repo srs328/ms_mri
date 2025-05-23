@@ -1,0 +1,31 @@
+from pathlib import Path
+import json
+import os
+import shutil
+import subprocess
+
+fastsurfer_home = Path("/media/smbshare/srs-9/fastsurfer")
+hipsthomas_home = Path("/media/smbshare/srs-9/hipsthomas")
+dataroot = Path("/media/smbshare/3Tpioneer_bids")
+
+with open(dataroot / "subject-sessions-longit.json", 'r') as f:
+    subject_sessions = json.load(f)
+
+# subjects = [1326, 2195, 1076, 1042, 1508, 1071, 1241, 1003, 1301, 1001, 1107, 1125, 1161, 1198, 1218, 1527, 1376, 2075, 1023, 1038, 1098]
+subjects = [2195, 1076, 1042, 1508, 1071, 1241, 1003, 1301, 1001, 1107, 1125, 1161, 1198, 1218, 1527, 1376, 2075, 1023, 1038, 1098]
+subjects = [str(subid) for subid in subjects]
+
+script = "/home/srs-9/Projects/ms_mri/choroid_thalamus_project/scripts/processAseg.sh"
+
+for subid in subjects:
+    sessions = sorted(subject_sessions[subid])
+    sesid = sessions[0]
+
+    fastsurfer_dir = fastsurfer_home / f"sub{subid}-{sesid}" / subid
+    assert (fastsurfer_dir / "mri").exists()
+
+    hipsthomas_dir = hipsthomas_home / f"sub{subid}-{sesid}"
+
+    cmd = ["bash", script, fastsurfer_dir, hipsthomas_dir]
+    print(" ".join([str(item) for item in cmd]))
+    subprocess.run(cmd)
