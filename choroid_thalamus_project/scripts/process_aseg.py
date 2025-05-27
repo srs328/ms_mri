@@ -5,9 +5,13 @@ import shutil
 import subprocess
 from tqdm import tqdm
 
-fastsurfer_home = Path("/media/smbshare/srs-9/fastsurfer")
-hipsthomas_home = Path("/media/smbshare/srs-9/thalamus_project/data")
-dataroot = Path("/media/smbshare/3Tpioneer_bids")
+fastsurfer_home = Path("/mnt/h/srs-9/fastsurfer")
+work_home = Path("/mnt/h/srs-9/thalamus_project/data")
+dataroot = Path("/mnt/h/3Tpioneer_bids")
+
+# fastsurfer_home = Path("/media/smbshare/srs-9/fastsurfer")
+# work_home = Path("/media/smbshare/srs-9/thalamus_project/data")
+# dataroot = Path("/media/smbshare/3Tpioneer_bids")
 
 with open(dataroot / "subject-sessions-longit.json", 'r') as f:
     subject_sessions = json.load(f)
@@ -19,8 +23,9 @@ subjects = [str(subid) for subid in subjects]
 fastsurfer_to_subject_space = "/home/srs-9/Projects/ms_mri/scripts/fastsurfer/fastsurfer_to_subject_space.sh"
 script = "/home/srs-9/Projects/ms_mri/choroid_thalamus_project/scripts/processAseg.sh"
 
-# for subid in subjects:
-for subid in tqdm(subject_sessions, total=len(subject_sessions)):
+subjects = ['1002']
+for subid in subjects:
+# for subid in tqdm(subject_sessions, total=len(subject_sessions)):
     sessions = sorted(subject_sessions[subid])
     sesid = sessions[0]
 
@@ -33,8 +38,9 @@ for subid in tqdm(subject_sessions, total=len(subject_sessions)):
         cmd = ["bash", fastsurfer_to_subject_space, fastsurfer_dir.parent, str(subid)]
         subprocess.run(cmd)
 
-    hipsthomas_dir = hipsthomas_home / f"sub{subid}-{sesid}"
-
-    cmd = ["bash", script, fastsurfer_dir, hipsthomas_dir]
-    print(" ".join([str(item) for item in cmd]))
-    subprocess.run(cmd)
+    work_dir = work_home / f"sub{subid}-{sesid}"
+    
+    if not (work_dir / "aseg-ventricles-sdt.nii.gz").exists():
+        cmd = ["bash", script, fastsurfer_dir, work_dir]
+        print(" ".join([str(item) for item in cmd]))
+        subprocess.run(cmd)
