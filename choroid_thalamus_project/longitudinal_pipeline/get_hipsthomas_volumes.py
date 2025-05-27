@@ -1,9 +1,7 @@
 # %%
-from nipype.interfaces import fsl
 import sys
 from pathlib import Path
 import json
-import csv
 import pandas as pd
 import subprocess
 
@@ -25,6 +23,10 @@ def main(subid, dataroot, work_home):
                 folder = work_dir / "left"
             else:
                 folder = work_dir / "right"
+
+            csv_savename = folder / f"hipsthomas_vols_jacobians-{sesid}.csv"
+            if csv_savename.exists():
+                continue
 
             jacobian = folder / f"thomasfull_{side}-jac{sesid}.nii.gz"
             index_mask = folder / f"thomasfull_{side}.nii.gz"
