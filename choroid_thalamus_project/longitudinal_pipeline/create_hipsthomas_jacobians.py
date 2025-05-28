@@ -23,13 +23,14 @@ def main(subid, dataroot, work_home):
             
             label_mask = folder / f"thomasfull_{side}.nii.gz"
             jacobian_mask = folder / f"thomasfull_{side}-jac{sesid}.nii.gz"
-            cmd = ["fslmaths",
-                jacobian,
-                "-mas",
-                label_mask,
-                jacobian_mask]
-            print(" ".join([str(elem) for elem in cmd]))
-            subprocess.run(cmd)
+            if not jacobian_mask.exists():
+                cmd = ["fslmaths",
+                    jacobian,
+                    "-mas",
+                    label_mask,
+                    jacobian_mask]
+                print(" ".join([str(elem) for elem in cmd]))
+                subprocess.run(cmd)
 
 
 if __name__ == "__main__":
