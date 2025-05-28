@@ -21,6 +21,11 @@ for folder in work_home.glob("sub*"):
 # subids = [str(subid) for subid in subjects]
 
 for subid in subids:
+    if subid in ['1196', '1182', '2119', '2152', '1341', '1441', '1546', '2039']:
+        continue
     compute_jacobians.main(subid, dataroot, work_home)
     create_hipsthomas_jacobians.main(subid, dataroot, work_home)
-    get_hipsthomas_volumes.main(subid, dataroot, work_home)
+    try:
+        get_hipsthomas_volumes.main(subid, dataroot, work_home)
+    except Exception:
+        continue
