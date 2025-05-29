@@ -1,9 +1,7 @@
 # %%
-from nipype.interfaces import fsl
 import sys
 from pathlib import Path
 import json
-import csv
 import pandas as pd
 import subprocess
 
@@ -26,7 +24,11 @@ def main(subid, dataroot, work_home):
             else:
                 folder = work_dir / "right"
 
-            jacobian = folder / f"thomasfull_{side}-jac{sesid}.nii.gz"
+            csv_savename = folder / f"hipsthomas_vols_jacobians-{sesid}_fwd.csv"
+            if csv_savename.exists():
+                continue
+
+            jacobian = folder / f"thomasfull_{side}-jac{sesid}_fwd.nii.gz"
             index_mask = folder / f"thomasfull_{side}.nii.gz"
 
             cmd = ["fslstats", "-K", index_mask, jacobian, "-M"]
@@ -48,7 +50,7 @@ def main(subid, dataroot, work_home):
             data = {'volumes': v_vals, 'jac_det': m_vals}
             df = pd.DataFrame(data, index=thomas_inds)
             df.index.name = "struct"
-            df.to_csv(folder / f"hipsthomas_vols_jacobians-{sesid}.csv")
+            df.to_csv(folder / f"hipsthomas_vols_jacobians-{sesid}_fwd.csv")
 
 
 if __name__ == "__main__":
