@@ -42,7 +42,7 @@ for subid in subjects:
     # just copy first and last to speed things up
     sessions = [sessions[0], sessions[-1]] 
     
-    # # copy t1 files to work_dir
+    # copy t1 files to work_dir
     # for sesid in sessions:
     #     t1_path = dataroot / f"sub-ms{subid}" / f"ses-{sesid}" / "t1.nii.gz"
     #     save_path = work_dir / f"t1_{sesid}.nii.gz"

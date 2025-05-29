@@ -19,7 +19,7 @@ for folder in work_home.glob("sub*"):
 # subids = ['1326']
 # subjects = [2195, 1076, 1042, 1508, 1071, 1241, 1003, 1301]
 # subids = [str(subid) for subid in subjects]
-
+subids = ['1042']
 for subid in subids:
     if subid in ['1196', '1182', '2119', '2152', '1341', '1441', '1546', '2039']:
         continue

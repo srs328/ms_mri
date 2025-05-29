@@ -14,7 +14,8 @@ def main(subid, dataroot, work_home):
     sessions = [sessions[0], sessions[-1]]
 
     for sesid in sessions:
-        jacobian = work_dir / f"jacobianinv-t1_{sesid}.nii.gz"
+        # jacobian = work_dir / f"jacobianinv-t1_{sesid}.nii.gz"
+        jacobian = work_dir / f"jacobian-t1_{sesid}.nii.gz"
         for side in ["L", "R"]:
             if side == "L":
                 folder = work_dir / "left"
@@ -22,7 +23,7 @@ def main(subid, dataroot, work_home):
                 folder = work_dir / "right"
             
             label_mask = folder / f"thomasfull_{side}.nii.gz"
-            jacobian_mask = folder / f"thomasfull_{side}-jac{sesid}.nii.gz"
+            jacobian_mask = folder / f"thomasfull_{side}-jac{sesid}_fwd.nii.gz"
             if not jacobian_mask.exists():
                 cmd = ["fslmaths",
                     jacobian,
