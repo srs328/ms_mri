@@ -14,8 +14,8 @@ def main(subid, dataroot, work_home):
     sessions = [sessions[0], sessions[-1]]
 
     for sesid in sessions:
-        # jacobian = work_dir / f"jacobianinv-t1_{sesid}.nii.gz"
-        jacobian = work_dir / f"jacobian-t1_{sesid}.nii.gz"
+        jacobian = work_dir / f"jacobianinv-t1_{sesid}.nii.gz"
+        # jacobian = work_dir / f"jacobian-t1_{sesid}.nii.gz"
         for side in ["L", "R"]:
             if side == "L":
                 folder = work_dir / "left"

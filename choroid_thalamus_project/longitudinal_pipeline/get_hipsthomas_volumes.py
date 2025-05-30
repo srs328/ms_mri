@@ -28,7 +28,7 @@ def main(subid, dataroot, work_home):
             if csv_savename.exists():
                 continue
 
-            jacobian = folder / f"thomasfull_{side}-jac{sesid}_fwd.nii.gz"
+            jacobian = work_dir / f"jacobianinv-t1_{sesid}.nii.gz"
             index_mask = folder / f"thomasfull_{side}.nii.gz"
 
             cmd = ["fslstats", "-K", index_mask, jacobian, "-M"]
