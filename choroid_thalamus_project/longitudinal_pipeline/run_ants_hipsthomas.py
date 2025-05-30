@@ -26,10 +26,15 @@ hipsthomas_script = "/home/srs-9/Projects/ms_mri/choroid_thalamus_project/longit
 
 logfile = "ants.log"
 
+print(f"Processing {len(subjects)} subjects")
+
+with open(logfile, 'w') as f:
+    f.write(f"Processing {len(subjects)} subjects\n")
+
 for subid in subjects:
     with open(logfile, 'a') as f:
-        f.write(f"{subid}\n")
-    
+        f.write(subid+"\n")
+
     # create work_dir if it doesn't exist
     work_dir = (work_home / f"sub{subid}")
     if not work_dir.exists():
@@ -60,7 +65,12 @@ for subid in subjects:
         except Exception as e:
             print(f"sub{subid} failed, continuing")
             print(e)
+            with open(logfile, 'a') as f:
+                f.write("Failed antsMultivariateTemplateConstruction2\n")
             continue
+        else:
+            with open(logfile, 'a') as f:
+                f.write("Completed antsMultivariateTemplateConstruction2 successfully\n")
 
         # run HIPS-THOMAS on the subject template
         cmd = ["bash", hipsthomas_script, subid, str(work_dir)]
@@ -69,8 +79,15 @@ for subid in subjects:
         except Exception as e:
             print(f"sub{subid} failed, continuing")
             print(e)
+            with open(logfile, 'a') as f:
+                f.write("Failed HIPS-THOMAS\n")
             continue
+        else:
+            with open(logfile, 'a') as f:
+                f.write("Completed HIPS-THOMAS successfully\n")
     
     except Exception as e:
+        with open(logfile, 'a') as f:
+            f.write("Failed\n")
         print(f"sub{subid} failed, continuing")
         print(e)
