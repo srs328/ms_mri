@@ -27,6 +27,9 @@ hipsthomas_script = "/home/srs-9/Projects/ms_mri/choroid_thalamus_project/longit
 
 logfile = "ants.log"
 
+subjects = [1001, 1107, 1125, 1161, 1198, 1218, 1326, 1527, 2195, 1376, 2075, 1023, 1038, 1098]
+subjects = [str(subid) for subid in subjects]
+subjects = subjects + ['1182', '2119', '2152', '1341', '1441', '1546', '2039']
 for subid in subjects:
     with open(logfile, 'a') as f:
         f.write(f"{subid}\n")
