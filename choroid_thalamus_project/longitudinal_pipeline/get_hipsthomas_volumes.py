@@ -24,7 +24,7 @@ def main(subid, dataroot, work_home):
             else:
                 folder = work_dir / "right"
 
-            csv_savename = folder / f"hipsthomas_vols_jacobians-{sesid}_fwd.csv"
+            csv_savename = folder / f"hipsthomas_vols_jacobianinv-{sesid}.csv"
             if csv_savename.exists():
                 continue
 
@@ -44,13 +44,19 @@ def main(subid, dataroot, work_home):
             v_vals = []
 
             for i in thomas_inds:
-                m_vals.append(float(m_lines[i-1]))
-                v_vals.append(float(v_lines[i-1].split(" ")[1]))
+                try:
+                    m_vals.append(float(m_lines[i-1]))
+                except ValueError:
+                    m_vals.append(1)
+                try:
+                    v_vals.append(float(v_lines[i-1].split(" ")[1]))
+                except ValueError:
+                    v_vals.append(0)
 
             data = {'volumes': v_vals, 'jac_det': m_vals}
             df = pd.DataFrame(data, index=thomas_inds)
             df.index.name = "struct"
-            df.to_csv(folder / f"hipsthomas_vols_jacobians-{sesid}_fwd.csv")
+            df.to_csv(csv_savename)
 
 
 if __name__ == "__main__":
