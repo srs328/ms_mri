@@ -46,10 +46,10 @@ for subid in subjects:
     sessions = [sessions[0], sessions[-1]] 
     
     # copy t1 files to work_dir
-    for sesid in sessions:
-        t1_path = dataroot / f"sub-ms{subid}" / f"ses-{sesid}" / "t1.nii.gz"
-        save_path = work_dir / f"t1_{sesid}.nii.gz"
-        shutil.copyfile(t1_path, save_path)
+    # for sesid in sessions:
+    #     t1_path = dataroot / f"sub-ms{subid}" / f"ses-{sesid}" / "t1.nii.gz"
+    #     save_path = work_dir / f"t1_{sesid}.nii.gz"
+    #     shutil.copyfile(t1_path, save_path)
 
     # run antsRegistrationSyNQuick to bring all scans into MNI space
     for sesid in sessions:
