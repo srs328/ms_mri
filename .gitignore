@@ -4,6 +4,7 @@
 tutorials/
 figures/
 screenshots/
+images/
 *.nii*
 
 *.code-workspace
