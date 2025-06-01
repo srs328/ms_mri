@@ -5,8 +5,6 @@ import json
 import pandas as pd
 import subprocess
 
-#! Update this to use the individual files hips thomas creates instead of how it is now 
-
 
 def main(subid, dataroot, work_home):
     work_dir = work_home / f"sub{subid}"
@@ -18,8 +16,6 @@ def main(subid, dataroot, work_home):
     sessions = sorted(sessions)
     sessions = [sessions[0], sessions[-1]]
 
-    thomas_inds = [2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 26, 27, 28, 29, 30, 31, 32]
-
     for sesid in sessions:
         for side in ["L", "R"]:
             if side == "L":
@@ -27,13 +23,14 @@ def main(subid, dataroot, work_home):
             else:
                 folder = work_dir / "right"
 
-            csv_savename = folder / f"hipsthomas_vols_jacobianinv-{sesid}.csv"
+            csv_orig = folder / f"hipsthomas_vols_jacobians-{sesid}_fwd.csv"
+            csv_savename = folder / f"hipsthomas_vols_jacobians-{sesid}_updated.csv"
             if csv_savename.exists():
                 continue
 
+            data = pd.read_csv(csv_orig, index_col="struct")
             jacobian = work_dir / f"jacobianinv-t1_{sesid}.nii.gz"
-            index_mask = folder / f"thomasfull_{side}.nii.gz"
-
+            index_mask = folder / "1-THALAMUS.nii.gz"
             cmd = ["fslstats", "-K", index_mask, jacobian, "-M"]
             m_result = subprocess.run(cmd, capture_output=True, text=True)
 
@@ -41,25 +38,14 @@ def main(subid, dataroot, work_home):
             print(" ".join([str(elem) for elem in cmd]))
             v_result = subprocess.run(cmd, capture_output=True, text=True)
 
-            m_lines = m_result.stdout.split("\n")
-            v_lines = v_result.stdout.split("\n")
-            m_vals = []
-            v_vals = []
+            m_val = float(m_result.stdout)
+            v_val = float(v_result.stdout.split(" ")[1])
+            print(m_val, v_val)
+            data.loc[1, "jac_det"] = m_val
+            data.loc[1, "volumes"] = v_val
 
-            for i in thomas_inds:
-                try:
-                    m_vals.append(float(m_lines[i - 1]))
-                except ValueError:
-                    m_vals.append(1)
-                try:
-                    v_vals.append(float(v_lines[i - 1].split(" ")[1]))
-                except ValueError:
-                    v_vals.append(0)
-
-            data = {"volumes": v_vals, "jac_det": m_vals}
-            df = pd.DataFrame(data, index=thomas_inds)
-            df.index.name = "struct"
-            df.to_csv(csv_savename)
+            print(csv_savename)
+            data.to_csv(csv_savename)
 
 
 if __name__ == "__main__":
@@ -67,5 +53,3 @@ if __name__ == "__main__":
     dataroot = Path(sys.argv[2])
     work_home = Path(sys.argv[3])
     main(subid, dataroot, work_home)
-
-# %%
