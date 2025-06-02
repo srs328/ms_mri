@@ -269,15 +269,3 @@ def fsleyes_cmd(images: list[str],
     return " ".join(command)
 
 
-def parse_hipsthomas_vols(file):
-    with open(file, 'r') as f:
-        reader = csv.reader(f, delimiter=" ")
-        vols = {row[0]: float(row[1]) for row in reader}
-    return vols
-
-
-def get_hipsthomas_vols(loc):
-    left_vols = parse_hipsthomas_vols(os.path.join(loc, "left", "nucleiVols.txt"))
-    right_vols = parse_hipsthomas_vols(os.path.join(loc, "right", "nucleiVols.txt"))
-    vols = {key: left_vols[key] + right_vols[key] for key in left_vols}
-    return vols
