@@ -20,16 +20,16 @@ def main(subid, dataroot, work_home):
         jacobian = work_dir / f"jacobian-t1_{sesid}.nii.gz"
         jacobian_inv = work_dir / f"jacobianinv-t1_{sesid}.nii.gz"
         
-        if not jacobian.exists():
-            # cmd = ["bash", "CreateJacobianDeterminantImage", "3", forward_warp, jacobian]
-            cmd = ["bash", script_path, forward_warp, jacobian]
-            print(" ".join([str(part) for part in cmd]))
-            subprocess.run(cmd)
+        # if not jacobian.exists():
+        #     # cmd = ["bash", "CreateJacobianDeterminantImage", "3", forward_warp, jacobian]
+        #     cmd = ["bash", script_path, forward_warp, jacobian]
+        #     # print(" ".join([str(part) for part in cmd]))
+        #     subprocess.run(cmd)
 
         if not jacobian_inv.exists():
             # cmd = ["bash", "CreateJacobianDeterminantImage", "3", inv_warp, jacobian_inv]
             cmd = ["bash", script_path, inv_warp, jacobian_inv]
-            print(" ".join([str(part) for part in cmd]))
+            # print(" ".join([str(part) for part in cmd]))
             subprocess.run(cmd)
 
 if __name__ == "__main__":
