@@ -1,0 +1,61 @@
+
+***************************** OUTCOME MODELS ****************************
+
+Outcome = EDSS_sqrt 
+OLS Regression Summary
+
+     R²  Adj. R²    MSE       F  df1  df2  p-value
+ 0.2813   0.2716 0.7427 34.9843    5  447   0.0000
+
+Coefficients
+
+                coeff     se       t      p    LLCI    ULCI
+Cons          -0.0214 0.0409 -0.5228 0.6014 -0.1016  0.0588
+t2lv_logtrans  0.0062 0.0512  0.1201 0.9045 -0.0942  0.1065
+age            0.3551 0.0442  8.0382 0.0000  0.2685  0.4416
+Female        -0.0458 0.0483 -0.9481 0.3436 -0.1404  0.0488
+tiv            0.0388 0.0573  0.6779 0.4982 -0.0735  0.1512
+THALAMUS_1    -0.2913 0.0560 -5.2006 0.0000 -0.4011 -0.1815
+
+-------------------------------------------------------------------------
+
+Outcome = THALAMUS_1 
+OLS Regression Summary
+
+     R²  Adj. R²    MSE       F  df1  df2  p-value
+ 0.5531   0.5460 0.4649 91.9810    6  446   0.0000
+
+Coefficients
+
+                               coeff     se        t      p    LLCI    ULCI
+Cons                          0.0046 0.0348   0.1322 0.8949 -0.0636  0.0728
+t2lv_logtrans                -0.3825 0.0367 -10.4219 0.0000 -0.4545 -0.3106
+choroid_volume               -0.2892 0.0381  -7.5865 0.0000 -0.3639 -0.2145
+t2lv_logtrans*choroid_volume -0.0826 0.0321  -2.5714 0.0105 -0.1456 -0.0196
+age                          -0.1027 0.0357  -2.8790 0.0042 -0.1726 -0.0328
+Female                        0.0988 0.0384   2.5744 0.0104  0.0236  0.1740
+tiv                           0.5247 0.0390  13.4412 0.0000  0.4482  0.6012
+
+-------------------------------------------------------------------------
+
+
+********************** DIRECT AND INDIRECT EFFECTS **********************
+
+Direct effect of t2lv_logtrans on EDSS_sqrt:
+
+  Effect     SE      t      p    LLCI   ULCI
+  0.0062 0.0512 0.1201 0.9045 -0.0942 0.1065
+
+Conditional indirect effect(s) of t2lv_logtrans on EDSS_sqrt at values of the moderator(s):
+
+    Mediator  choroid_volume  Effect  Boot SE  BootLLCI  BootULCI
+  THALAMUS_1         -0.9714  0.0881   0.0243    0.0511    0.1493
+  THALAMUS_1          0.0339  0.1123   0.0275    0.0650    0.1747
+  THALAMUS_1          1.0392  0.1364   0.0390    0.0686    0.2209
+
+**************** INDEX OF MODERATED MEDIATION ******************
+
+       Moderator    Mediator  Index  Boot SE    LLCI   ULCI
+  choroid_volume  THALAMUS_1 0.0241   0.0172 -0.0060 0.0606
+
+

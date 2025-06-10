@@ -1,0 +1,83 @@
+
+****************************** SPECIFICATION ****************************
+
+Model = 7
+
+Variables:
+    Cons = Cons
+    x = t2lv_logtrans
+    y = EDSS_sqrt
+    w = choroid_volume
+    m1 = THALAMUS_1
+Statistical Controls:
+ age, Female, tiv, PRL
+
+
+
+Sample size:
+468
+
+Bootstrapping information for indirect effects:
+Final number of bootstrap samples: 5000
+Number of samples discarded due to convergence issues: 0
+
+***************************** OUTCOME MODELS ****************************
+
+Outcome = EDSS_sqrt 
+OLS Regression Summary
+
+     R²  Adj. R²    MSE       F  df1  df2  p-value
+ 0.2681   0.2570 0.7333 28.1473    6  461   0.0000
+
+Coefficients
+
+                coeff     se       t      p    LLCI    ULCI
+Cons          -0.0090 0.0400 -0.2263 0.8211 -0.0874  0.0693
+t2lv_logtrans  0.0040 0.0502  0.0787 0.9373 -0.0944  0.1023
+age            0.3425 0.0464  7.3859 0.0000  0.2516  0.4334
+Female        -0.0494 0.0476 -1.0366 0.3005 -0.1428  0.0440
+tiv            0.0188 0.0570  0.3294 0.7420 -0.0929  0.1304
+PRL            0.0164 0.0408  0.4024 0.6876 -0.0635  0.0964
+THALAMUS_1    -0.2706 0.0570 -4.7494 0.0000 -0.3823 -0.1589
+
+-------------------------------------------------------------------------
+
+Outcome = THALAMUS_1 
+OLS Regression Summary
+
+     R²  Adj. R²    MSE       F  df1  df2  p-value
+ 0.5826   0.5753 0.4313 91.7103    7  460   0.0000
+
+Coefficients
+
+                               coeff     se       t      p    LLCI    ULCI
+Cons                          0.0193 0.0329  0.5872 0.5573 -0.0452  0.0839
+t2lv_logtrans                -0.3422 0.0353 -9.6970 0.0000 -0.4113 -0.2730
+choroid_volume               -0.2707 0.0363 -7.4545 0.0000 -0.3418 -0.1995
+t2lv_logtrans*choroid_volume -0.0951 0.0307 -3.0993 0.0021 -0.1552 -0.0350
+age                          -0.1756 0.0358 -4.8999 0.0000 -0.2459 -0.1054
+Female                        0.0887 0.0367  2.4138 0.0162  0.0167  0.1607
+tiv                           0.5260 0.0371 14.1601 0.0000  0.4532  0.5989
+PRL                          -0.1639 0.0306 -5.3640 0.0000 -0.2238 -0.1040
+
+-------------------------------------------------------------------------
+
+
+********************** DIRECT AND INDIRECT EFFECTS **********************
+
+Direct effect of t2lv_logtrans on EDSS_sqrt:
+
+  Effect     SE      t      p    LLCI   ULCI
+  0.0040 0.0502 0.0787 0.9373 -0.0944 0.1023
+
+Conditional indirect effect(s) of t2lv_logtrans on EDSS_sqrt at values of the moderator(s):
+
+    Mediator  choroid_volume  Effect  Boot SE  BootLLCI  BootULCI
+  THALAMUS_1         -0.9802  0.0674   0.0206    0.0354    0.1215
+  THALAMUS_1          0.0260  0.0933   0.0249    0.0501    0.1474
+  THALAMUS_1          1.0322  0.1192   0.0362    0.0576    0.1960
+
+**************** INDEX OF MODERATED MEDIATION ******************
+
+       Moderator    Mediator  Index  Boot SE    LLCI   ULCI
+  choroid_volume  THALAMUS_1 0.0257   0.0157 -0.0005 0.0600
