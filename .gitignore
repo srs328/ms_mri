@@ -6,7 +6,7 @@ figures/
 screenshots/
 images/
 *.nii*
-
+*:Zone.Identifier
 *.code-workspace
 training_work_dirs/
 scratch.py
