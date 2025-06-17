@@ -13,8 +13,8 @@ import pandas as pd
 #! Pre steps that I did in terminal:
 #   Created left and right hemisphere mask with instructions (https://www.jiscmail.ac.uk/cgi-bin/webadmin?A2=fsl;e4c252f3.1406) to split choroid into left and right
 
-# work_dir = Path("/media/smbshare/srs-9/hipsthomas/MNI152_T1_1mm")
-work_dir = Path("/mnt/h/srs-9/hips-thomas/MNI152_T1_1mm")
+work_dir = Path("/media/smbshare/srs-9/hipsthomas/MNI152_T1_1mm")
+# work_dir = Path("/mnt/h/srs-9/hips-thomas/MNI152_T1_1mm")
 
 file_items = [item.name for item in os.scandir(work_dir/"left") if item.is_file()]
 file_names = []
@@ -47,7 +47,7 @@ for item in tqdm(file_names, total=len(file_names)):
     struct_stem = item.split(".")[0]
     for side in ["left", "right"]:
         mask_file = work_dir / side / f"{struct_stem}.nii.gz"
-        sdt_file = work_dir / f"ventricle_{side}_sdt.nii.gz"
+        sdt_file = work_dir / f"choroid_{side}_sdt.nii.gz"
 
         stats1 = fsl.ImageStats()
         stats1.inputs.index_mask_file = mask_file
@@ -57,7 +57,7 @@ for item in tqdm(file_names, total=len(file_names)):
         result1 = stats1.run()
         num1 = result1.outputs.out_stat
 
-        mask_file = work_dir / f"ventricle_{side}.nii.gz"
+        mask_file = work_dir / f"choroid_{side}.nii.gz"
         sdt_file = work_dir / side / f"{struct_stem}_sdt.nii.gz"
 
         stats2 = fsl.ImageStats()
@@ -68,7 +68,8 @@ for item in tqdm(file_names, total=len(file_names)):
         result2 = stats2.run()
         num2 = result2.outputs.out_stat
 
-        exposure = num1*num2
+        # exposure = num1*num2
+        exposure = num2
         if side == "left":
             left_exposures.append(exposure)
         else:
@@ -85,4 +86,4 @@ for item in file_names:
 
 df = pd.DataFrame({"index": index, "struct_name": struct_names, "left_exposure": left_exposures, "right_exposure": right_exposures})
 df.set_index("index", inplace=True)
-df.to_csv("/home/srs-9/Projects/ms_mri/data/mni_ventricle_exposures2.csv")
+df.to_csv("/home/srs-9/Projects/ms_mri/data/mni_choroid_exposures2.csv")
