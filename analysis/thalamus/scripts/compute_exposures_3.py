@@ -10,8 +10,10 @@ from scipy import ndimage
 from scipy.spatial import distance
 
 # %%
-hipsthomas_root = Path("/mnt/h/srs-9/hips-thomas")
-dataproc_root = Path("/mnt/h/srs-9/thalamus_project/data")
+# hipsthomas_root = Path("/mnt/h/srs-9/hips-thomas")
+# dataproc_root = Path("/mnt/h/srs-9/thalamus_project/data")
+hipsthomas_root = Path("/media/smbshare/srs-9/hipsthomas")
+dataproc_root = Path("/media/smbshare/srs-9/thalamus_project/data")
 data_file_dir = Path("/home/srs-9/Projects/ms_mri/data")
 
 subject_sessions = pd.read_csv(data_file_dir / "subject-sessions.csv")
@@ -50,7 +52,7 @@ def load_file(root, sub, ses , file):
     return thom_img
 
 distance_metrics = {'choroid': load_choroid, 'ventricle': load_ventricle_sdt}
-save_names = {'choroid': "centroid-choroid_SDT.csv", 'ventricle': "centroid-ventricle_SDT.csv"}
+save_names = {'choroid': "centroid-choroid_centroid.csv", 'ventricle': "centroid-ventricle_centroid.csv"}
 load_function = distance_metrics[which_distance]
 save_name = save_names[which_distance]
 
