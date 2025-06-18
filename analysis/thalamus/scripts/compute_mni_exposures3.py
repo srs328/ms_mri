@@ -18,13 +18,16 @@ thomL_img = nib.load(hipsthomas_root / "left/thomasfull_L.nii.gz").get_fdata()
 thomR_img = nib.load(hipsthomas_root / "right/thomasfull_R.nii.gz").get_fdata()
 
 choroidL = nib.load(hipsthomas_root / "choroid_left.nii.gz").get_fdata()
+choroidL_centroid = ndimage.center_of_mass(choroidL)
+
 choroidR = nib.load(hipsthomas_root / "choroid_right.nii.gz").get_fdata()
+choroidR_centroid = ndimage.center_of_mass(choroidR)
+
 
 # %% Left side
 
 thom_inds = np.unique(thomL_img)
 thom_inds = thom_inds[thom_inds > 0]
-centroid = ndimage.center_of_mass(choroidL)
 left_dists = []
 all_dists = []
 all_subjects = []
@@ -32,17 +35,14 @@ for ind in thom_inds:
     struct_pts = thomL_img.copy()
     struct_pts[thomL_img!=ind] = 0
     struct_pts[thomL_img==ind] = 1
-    struct_coords = np.argwhere(struct_pts==1)
-    dist_sum = 0
-    for pt in struct_coords:
-        dist_sum += distance.euclidean(pt, centroid)
-    left_dists.append(dist_sum / len(struct_coords))
+    centroid = ndimage.center_of_mass(struct_pts)
+    left_dists.append(distance.euclidean(centroid, choroidL_centroid))
+
 
 #%% Right side 
 
 thom_inds = np.unique(thomR_img)
 thom_inds = thom_inds[thom_inds > 0]
-centroid = ndimage.center_of_mass(choroidR)
 right_dists = []
 all_dists = []
 all_subjects = []
@@ -50,15 +50,13 @@ for ind in thom_inds:
     struct_pts = thomR_img.copy()
     struct_pts[thomR_img!=ind] = 0
     struct_pts[thomR_img==ind] = 1
-    struct_coords = np.argwhere(struct_pts==1)
-    dist_sum = 0
-    for pt in struct_coords:
-        dist_sum += distance.euclidean(pt, centroid)
-    right_dists.append(dist_sum / len(struct_coords))
+    centroid = ndimage.center_of_mass(struct_pts)
+    right_dists.append(distance.euclidean(centroid, choroidR_centroid))
 
 # %%
-df = pd.DataFrame({"left_exposure": left_dists, "right_exposures": right_dists}, index=thom_inds)
-df.to_csv(data_file_dir / "mni_choroid_centroid_dists.csv")
+df = pd.DataFrame({"left_exposure": left_dists, "right_exposures": right_dists}, index=[int(ind) for ind in thom_inds])
+df.index.name = "index"
+df.to_csv(data_file_dir / "mni_centroid_centroid_dists.csv")
 
 #     dists["ind"].append(ind)
 #     dists["dist"].append(sdt[*centroid_round])
