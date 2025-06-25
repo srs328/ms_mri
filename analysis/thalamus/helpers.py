@@ -550,5 +550,9 @@ def get_colors():
         "light red1": "#eb7171",
         "dark blue1": "#1f4294",
         "light blue1": "#7a9df0",
+        "dark green1": "#2e6023",
+        "light green1": "#6dba5c",
+        "dark purple1": "#8C1FA7",
+        "light purple1": "#BD49DA",
     }
     return colors
