@@ -1,15 +1,11 @@
 #!/bin/bash
 
-work_dir=$1
-t1_name=$2
+subid=$1
+work_dir=$2
+cd $work_dir
 
-cd $work_dir || exit
+t1_name="sub${subid}_template0.nii.gz"
 
 docker run -it --rm --name sthomas -v ${PWD}:/data -w /data --user ${UID}:$(id -g) anagrammarian/sthomas hipsthomas.sh -t1 -i "$t1_name"
-
-if [ ! $? -eq 0 ]; then
-    docker stop $(docker ps -a -q)
-    exit 1
-fi
 
 docker stop $(docker ps -a -q)
