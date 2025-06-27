@@ -7,12 +7,9 @@ require(pracma)
 
 
 setwd("/home/srs-9/Projects/ms_mri/analysis/thalamus/R_data")
-df = read.csv("melted_data_for_R_MS_thalamus_z.csv")
-
-
-model <- lmer(value ~ choroid_dist + age + Female +
-                (1 | subid) + (choroid_dist | variable), data = df)
-
+df = read.csv("melted_data_for_R_NIND_thalamus_z.csv")
+model <- lmer(value ~ choroid_dist + age + Female + tiv +
+                (1 | subid), data = df)
 summary(model)
 confint(model)
 
