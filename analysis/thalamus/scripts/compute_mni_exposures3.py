@@ -65,3 +65,9 @@ df.to_csv(data_file_dir / "mni_centroid_centroid_dists.csv")
 # df = df.set_index("ind")
 # df.index.name = "struct"
 # df.to_csv("mni-centroid-choroid_SDT.csv")
+
+
+# medial_centroid = ndimage.center_of_mass(medial)
+# ventral_centroid = ndimage.center_of_mass(ventral)
+# posterior_centroid = ndimage.center_of_mass(posterior)
+# anterior_centroid = ndimage.center_of_mass(anterior)
