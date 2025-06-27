@@ -5,18 +5,18 @@ require(stats); require(graphics)
 require(nlme)
 require(pracma)
 
-check =Loblolly
 
-fm1 <- nlme(height ~ SSasymp(age, Asym, R0, lrc),
-            data = Loblolly,
-            fixed = Asym + R0 + lrc ~ 1,
-            random = Asym ~ 1,
-            start = c(Asym = 103, R0 = -8.5, lrc = -3.3))
-summary(fm1)
+setwd("/home/srs-9/Projects/ms_mri/analysis/thalamus/R_data")
+df = read.csv("melted_data_for_R_MS_thalamus_z.csv")
 
 
-setwd("C:/Users/srs-9/Dev/ms_mri/analysis/thalamus")
-df = read.csv("melted_data_for_R_NIND_z.csv")
+model <- lmer(value ~ choroid_dist + age + Female +
+                (1 | subid) + (choroid_dist | variable), data = df)
+
+summary(model)
+confint(model)
+
+
 # df$dz_type3 <- factor(df$dz_type3, levels = c("NIND", "MS"))
 # 
 # df <- df %>%
@@ -31,13 +31,6 @@ df <- df %>%
 df <- df %>%
   group_by(variable) %>%
   mutate(choroid_dist_scaled = scale(choroid_dist))
-
-model <- lmer(value ~ choroid_dist + age + Female + scale(THALAMUS_1) +
-                (choroid_dist | subid) + (choroid_dist | variable), data = df)
-
-summary(model)
-confint(model)
-
 
 filtered_data <- df %>%
   filter(variable == "VLP_6")

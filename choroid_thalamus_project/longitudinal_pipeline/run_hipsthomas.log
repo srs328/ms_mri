@@ -92,3 +92,1741 @@
 2025-06-27 12:47:34.846 | INFO     | __main__:<module>:72 - Starting session 20210824 for subject 1442
 2025-06-27 13:01:17.655 | INFO     | __main__:<module>:54 - Starting session 20161018 for subject 1479
 2025-06-27 13:13:05.182 | INFO     | __main__:<module>:72 - Starting session 20210829 for subject 1479
+2025-06-27 13:25:20.329 | INFO     | __main__:<module>:54 - Starting session 20170719 for subject 1508
+2025-06-27 13:41:34.097 | INFO     | __main__:<module>:72 - Starting session 20210910 for subject 1508
+2025-06-27 13:58:16.244 | INFO     | __main__:<module>:54 - Starting session 20170915 for subject 1527
+2025-06-27 14:14:10.235 | INFO     | __main__:<module>:72 - Starting session 20210806 for subject 1527
+2025-06-27 14:29:55.618 | INFO     | __main__:<module>:54 - Starting session 20170119 for subject 1529
+2025-06-27 14:47:17.750 | INFO     | __main__:<module>:72 - Starting session 20220117 for subject 1529
+2025-06-27 15:01:25.309 | INFO     | __main__:<module>:54 - Starting session 20170323 for subject 1536
+2025-06-27 15:18:04.793 | INFO     | __main__:<module>:72 - Starting session 20210606 for subject 1536
+2025-06-27 15:34:57.853 | INFO     | __main__:<module>:54 - Starting session 20160927 for subject 1544
+2025-06-27 15:35:17.404 | ERROR    | __main__:<module>:58 - Failed session 20160927 for subject 1544
+2025-06-27 15:35:17.404 | ERROR    | __main__:<module>:59 - Input is standard T1; doing HIPS synthesis.
+Running THOMAS on '/data/t1.nii.gz', outputs to '/data', with arguments -c        
+CDed to /data
+Making /data/temp
+Running with 24 processes.
+(run_thomas): args=Namespace(input_image='t1.nii.gz', roi_names=['ALL'], algorithm='v2', contrastsynth=True, cropOnly=False, debug=False, denoisemask=False, forcereg=False, mvOnly=False, oldt1=False, processes=None, right=False, smallCrop=False, useMask=False, verbose=True, fixedImageMask=None, movingImageMask=None, warp=None, antsfusion=False, mask=None, output_path=None, tempdir='/data/temp', template=None), cmd=functools.partial(<function command at 0x78ffee9dede0>, debug=False, suppress=True, verbose=True), temp_path=/data/temp, e_opts={'debug': False, 'suppress': True, 'verbose': True}
+Algorithm is v2
+All_Command_lines_OK
+Using double precision for computations.
+=============================================================================
+The composite transform comprises the following transforms (in order): 
+  1. Center of mass alignment using fixed image: /thomas/resources/origtemplate.nii.gz and moving image: t1.nii.gz (type = Euler3DTransform)
+=============================================================================
+  number of levels = 4
+  number of levels = 4
+  fixed image: /thomas/resources/origtemplate.nii.gz
+  moving image: t1.nii.gz
+  fixed image: /thomas/resources/origtemplate.nii.gz
+  moving image: t1.nii.gz
+Dimension = 3
+Number of stages = 2
+Use histogram matching = false
+Winsorize image intensities = true
+  Lower quantile = 0.005
+  Upper quantile = 0.995
+
+
+Stage 1 State
+   Image metric = MattesMI
+     Fixed image = Image (0x5a293cd14760)
+  RTTI typeinfo:   itk::Image<double, 3u>
+  Reference Count: 2
+  Modified Time: 1697
+  Debug: Off
+  Object Name: 
+  Observers: 
+    none
+  Source: (none)
+  Source output name: (none)
+  Release Data: Off
+  Data Released: False
+  Global Release Data: Off
+  PipelineMTime: 0
+  UpdateMTime: 1482
+  RealTimeStamp: 0 seconds 
+  LargestPossibleRegion: 
+    Dimension: 3
+    Index: [0, 0, 0]
+    Size: [256, 440, 256]
+  BufferedRegion: 
+    Dimension: 3
+    Index: [0, 0, 0]
+    Size: [256, 440, 256]
+  RequestedRegion: 
+    Dimension: 3
+    Index: [0, 0, 0]
+    Size: [256, 440, 256]
+  Spacing: [0.7031, 0.5, 0.7031]
+  Origin: [83.5844, 59.822, -106.951]
+  Direction: 
+-1 0 0
+0 -1 0
+0 0 1
+
+  IndexToPointMatrix: 
+-0.7031 0 0
+0 -0.5 0
+0 0 0.7031
+
+  PointToIndexMatrix: 
+-1.42227 0 0
+0 -2 0
+0 0 1.42227
+
+  Inverse Direction: 
+-1 0 0
+0 -1 0
+0 0 1
+
+  PixelContainer: 
+    ImportImageContainer (0x5a293cd14a20)
+      RTTI typeinfo:   itk::ImportImageContainer<unsigned long, double>
+      Reference Count: 1
+      Modified Time: 1479
+      Debug: Off
+      Object Name: 
+      Observers: 
+        none
+      Pointer: 0x7c341a458010
+      Container manages memory: true
+      Size: 28835840
+      Capacity: 28835840
+
+     Moving image = Image (0x5a293cd204a0)
+  RTTI typeinfo:   itk::Image<double, 3u>
+  Reference Count: 2
+  Modified Time: 1698
+  Debug: Off
+  Object Name: 
+  Observers: 
+    none
+  Source: (none)
+  Source output name: (none)
+  Release Data: Off
+  Data Released: False
+  Global Release Data: Off
+  PipelineMTime: 0
+  UpdateMTime: 1695
+  RealTimeStamp: 0 seconds 
+  LargestPossibleRegion: 
+    Dimension: 3
+    Index: [0, 0, 0]
+    Size: [182, 218, 182]
+  BufferedRegion: 
+    Dimension: 3
+    Index: [0, 0, 0]
+    Size: [182, 218, 182]
+  RequestedRegion: 
+    Dimension: 3
+    Index: [0, 0, 0]
+    Size: [182, 218, 182]
+  Spacing: [1, 1, 1]
+  Origin: [-90, 126, -72]
+  Direction: 
+1 0 0
+0 -1 0
+0 0 1
+
+  IndexToPointMatrix: 
+1 0 0
+0 -1 0
+0 0 1
+
+  PointToIndexMatrix: 
+1 0 0
+0 -1 0
+0 0 1
+
+  Inverse Direction: 
+1 0 0
+0 -1 0
+0 0 1
+
+  PixelContainer: 
+    ImportImageContainer (0x5a293cd1fff0)
+      RTTI typeinfo:   itk::ImportImageContainer<unsigned long, double>
+      Reference Count: 1
+      Modified Time: 1692
+      Debug: Off
+      Object Name: 
+      Observers: 
+        none
+      Pointer: 0x7c3416d40010
+      Container manages memory: true
+      Size: 7221032
+      Capacity: 7221032
+
+     Weighting = 1
+     Sampling strategy = regular
+     Number of bins = 32
+     Radius = 4
+     Sampling percentage  = 0.25
+   Transform = Rigid
+     Gradient step = 0.1
+     Update field sigma (voxel space) = 0
+     Total field sigma (voxel space) = 0
+     Update field time sigma = 0
+     Total field time sigma  = 0
+     Number of time indices = 0
+     Number of time point samples = 0
+Stage 2 State
+   Image metric = MattesMI
+     Fixed image = Image (0x5a293cd2e130)
+  RTTI typeinfo:   itk::Image<double, 3u>
+  Reference Count: 2
+  Modified Time: 2127
+  Debug: Off
+  Object Name: 
+  Observers: 
+    none
+  Source: (none)
+  Source output name: (none)
+  Release Data: Off
+  Data Released: False
+  Global Release Data: Off
+  PipelineMTime: 0
+  UpdateMTime: 1912
+  RealTimeStamp: 0 seconds 
+  LargestPossibleRegion: 
+    Dimension: 3
+    Index: [0, 0, 0]
+    Size: [256, 440, 256]
+  BufferedRegion: 
+    Dimension: 3
+    Index: [0, 0, 0]
+    Size: [256, 440, 256]
+  RequestedRegion: 
+    Dimension: 3
+    Index: [0, 0, 0]
+    Size: [256, 440, 256]
+  Spacing: [0.7031, 0.5, 0.7031]
+  Origin: [83.5844, 59.822, -106.951]
+  Direction: 
+-1 0 0
+0 -1 0
+0 0 1
+
+  IndexToPointMatrix: 
+-0.7031 0 0
+0 -0.5 0
+0 0 0.7031
+
+  PointToIndexMatrix: 
+-1.42227 0 0
+0 -2 0
+0 0 1.42227
+
+  Inverse Direction: 
+-1 0 0
+0 -1 0
+0 0 1
+
+  PixelContainer: 
+    ImportImageContainer (0x5a293cd1ddd0)
+      RTTI typeinfo:   itk::ImportImageContainer<unsigned long, double>
+      Reference Count: 1
+      Modified Time: 1909
+      Debug: Off
+      Object Name: 
+      Observers: 
+        none
+      Pointer: 0x7c340913f010
+      Container manages memory: true
+      Size: 28835840
+      Capacity: 28835840
+
+     Moving image = Image (0x5a293cd31180)
+  RTTI typeinfo:   itk::Image<double, 3u>
+  Reference Count: 2
+  Modified Time: 2128
+  Debug: Off
+  Object Name: 
+  Observers: 
+    none
+  Source: (none)
+  Source output name: (none)
+  Release Data: Off
+  Data Released: False
+  Global Release Data: Off
+  PipelineMTime: 0
+  UpdateMTime: 2125
+  RealTimeStamp: 0 seconds 
+  LargestPossibleRegion: 
+    Dimension: 3
+    Index: [0, 0, 0]
+    Size: [182, 218, 182]
+  BufferedRegion: 
+    Dimension: 3
+    Index: [0, 0, 0]
+    Size: [182, 218, 182]
+  RequestedRegion: 
+    Dimension: 3
+    Index: [0, 0, 0]
+    Size: [182, 218, 182]
+  Spacing: [1, 1, 1]
+  Origin: [-90, 126, -72]
+  Direction: 
+1 0 0
+0 -1 0
+0 0 1
+
+  IndexToPointMatrix: 
+1 0 0
+0 -1 0
+0 0 1
+
+  PointToIndexMatrix: 
+1 0 0
+0 -1 0
+0 0 1
+
+  Inverse Direction: 
+1 0 0
+0 -1 0
+0 0 1
+
+  PixelContainer: 
+    ImportImageContainer (0x5a293cd0fe20)
+      RTTI typeinfo:   itk::ImportImageContainer<unsigned long, double>
+      Reference Count: 1
+      Modified Time: 2122
+      Debug: Off
+      Object Name: 
+      Observers: 
+        none
+      Pointer: 0x7c3405a27010
+      Container manages memory: true
+      Size: 7221032
+      Capacity: 7221032
+
+     Weighting = 1
+     Sampling strategy = regular
+     Number of bins = 32
+     Radius = 4
+     Sampling percentage  = 0.25
+   Transform = Affine
+     Gradient step = 0.1
+     Update field sigma (voxel space) = 0
+     Total field sigma (voxel space) = 0
+     Update field time sigma = 0
+     Total field time sigma  = 0
+     Number of time indices = 0
+     Number of time point samples = 0
+Registration using 2 total stages.
+
+Stage 0
+  iterations = 1000x500x250x100
+  convergence threshold = 7e-07
+  convergence window size = 10
+  number of levels = 4
+  using the Mattes MI metric (number of bins = 32, weight = 1, use gradient filter = 0)
+  preprocessing:  winsorizing the image intensities
+  Shrink factors (level 1 out of 4): [9, 12, 9]
+  Shrink factors (level 2 out of 4): [6, 8, 6]
+  Shrink factors (level 3 out of 4): [3, 4, 3]
+  Shrink factors (level 4 out of 4): [1, 2, 1]
+  smoothing sigmas per level: [4, 3, 2, 1]
+  regular sampling (percentage = 0.25)
+
+*** Running Euler3DTransform registration ***
+
+DIAGNOSTIC,Iteration,metricValue,convergenceValue,ITERATION_TIME_INDEX,SINCE_LAST
+ 2DIAGNOSTIC,     1, -4.646479710717e-01, 1.797693134862e+308, 1.2471e-01, 1.2471e-01, 
+ 2DIAGNOSTIC,     2, -4.664080011844e-01, 1.797693134862e+308, 1.2660e-01, 1.8852e-03, 
+ 2DIAGNOSTIC,     3, -4.687317739104e-01, 1.797693134862e+308, 1.2823e-01, 1.6348e-03, 
+ 2DIAGNOSTIC,     4, -4.730627304239e-01, 1.797693134862e+308, 1.3001e-01, 1.7760e-03, 
+ 2DIAGNOSTIC,     5, -4.805571603797e-01, 1.797693134862e+308, 1.3195e-01, 1.9450e-03, 
+ 2DIAGNOSTIC,     6, -4.936382880902e-01, 1.797693134862e+308, 1.3370e-01, 1.7521e-03, 
+ 2DIAGNOSTIC,     7, -5.101640101979e-01, 1.797693134862e+308, 1.3556e-01, 1.8539e-03, 
+ 2DIAGNOSTIC,     8, -5.722377649237e-01, 1.797693134862e+308, 1.3758e-01, 2.0208e-03, 
+ 2DIAGNOSTIC,     9, -6.281708782944e-01, 1.797693134862e+308, 1.4030e-01, 2.7239e-03, 
+ 2DIAGNOSTIC,    10, -6.296258837635e-01, 2.183432430002e-02, 1.4219e-01, 1.8871e-03, 
+ 2DIAGNOSTIC,    11, -6.303414336847e-01, 2.242330387961e-02, 1.4409e-01, 1.9000e-03, 
+ 2DIAGNOSTIC,    12, -6.307022152114e-01, 2.103085046973e-02, 1.4618e-01, 2.0912e-03, 
+ 2DIAGNOSTIC,    13, -6.324856005122e-01, 1.812836985938e-02, 1.4817e-01, 1.9891e-03, 
+ 2DIAGNOSTIC,    14, -6.340545001859e-01, 1.425178948069e-02, 1.5071e-01, 2.5389e-03, 
+ 2DIAGNOSTIC,    15, -6.336748490023e-01, 9.938532334338e-03, 1.5273e-01, 2.0220e-03, 
+ 2DIAGNOSTIC,    16, -6.337860885822e-01, 5.786693744730e-03, 1.5482e-01, 2.0850e-03, 
+ 2DIAGNOSTIC,    17, -6.337890570698e-01, 2.110230085410e-03, 1.5681e-01, 1.9910e-03, 
+ 2DIAGNOSTIC,    18, -6.342441582066e-01, 3.839219145875e-04, 1.5893e-01, 2.1222e-03, 
+ 2DIAGNOSTIC,    19, -6.339103229930e-01, 2.735630555140e-04, 1.6129e-01, 2.3589e-03, 
+ 2DIAGNOSTIC,    20, -6.334012784730e-01, 1.742795009047e-04, 1.6333e-01, 2.0430e-03, 
+ 2DIAGNOSTIC,    21, -6.334108710280e-01, 8.758002117135e-05, 1.6546e-01, 2.1310e-03, 
+ 2DIAGNOSTIC,    22, -6.333395141170e-01, 6.751871146335e-06, 1.6729e-01, 1.8280e-03, 
+DIAGNOSTIC,Iteration,metricValue,convergenceValue,ITERATION_TIME_INDEX,SINCE_LAST
+ 2DIAGNOSTIC,     1, -5.746189203200e-01, 1.797693134862e+308, 3.1520e-01, 1.4791e-01, 
+ 2DIAGNOSTIC,     2, -5.755816760609e-01, 1.797693134862e+308, 3.1852e-01, 3.3259e-03, 
+ 2DIAGNOSTIC,     3, -5.766254250113e-01, 1.797693134862e+308, 3.2181e-01, 3.2921e-03, 
+ 2DIAGNOSTIC,     4, -5.779431985550e-01, 1.797693134862e+308, 3.2512e-01, 3.3069e-03, 
+ 2DIAGNOSTIC,     5, -5.792546093108e-01, 1.797693134862e+308, 3.2855e-01, 3.4308e-03, 
+ 2DIAGNOSTIC,     6, -5.803614380341e-01, 1.797693134862e+308, 3.3167e-01, 3.1209e-03, 
+ 2DIAGNOSTIC,     7, -5.814691849277e-01, 1.797693134862e+308, 3.3461e-01, 2.9340e-03, 
+ 2DIAGNOSTIC,     8, -5.829540136012e-01, 1.797693134862e+308, 3.3901e-01, 4.4050e-03, 
+ 2DIAGNOSTIC,     9, -5.831691114792e-01, 1.797693134862e+308, 3.4295e-01, 3.9418e-03, 
+ 2DIAGNOSTIC,    10, -5.832972352393e-01, 1.061464746668e-03, 3.4666e-01, 3.7100e-03, 
+ 2DIAGNOSTIC,    11, -5.831069682370e-01, 8.465224770864e-04, 3.5090e-01, 4.2422e-03, 
+ 2DIAGNOSTIC,    12, -5.831591104971e-01, 6.329782562568e-04, 3.5408e-01, 3.1750e-03, 
+ 2DIAGNOSTIC,    13, -5.830013497844e-01, 4.275986567811e-04, 3.5714e-01, 3.0589e-03, 
+ 2DIAGNOSTIC,    14, -5.833435945750e-01, 2.706337648350e-04, 3.6042e-01, 3.2799e-03, 
+ 2DIAGNOSTIC,    15, -5.840252132865e-01, 1.749726100452e-04, 3.6371e-01, 3.2959e-03, 
+ 2DIAGNOSTIC,    16, -5.853989248816e-01, 1.505142620086e-04, 3.6773e-01, 4.0200e-03, 
+ 2DIAGNOSTIC,    17, -5.875253592230e-01, 2.064388123694e-04, 3.7142e-01, 3.6829e-03, 
+ 2DIAGNOSTIC,    18, -5.897194974436e-01, 3.358957008407e-04, 3.7719e-01, 5.7728e-03, 
+ 2DIAGNOSTIC,    19, -5.901201767279e-01, 4.357054911895e-04, 3.8071e-01, 3.5179e-03, 
+ 2DIAGNOSTIC,    20, -5.910590392213e-01, 5.119392507544e-04, 3.8426e-01, 3.5560e-03, 
+ 2DIAGNOSTIC,    21, -5.913127579722e-01, 5.343534478295e-04, 3.8802e-01, 3.7541e-03, 
+ 2DIAGNOSTIC,    22, -5.913003874084e-01, 5.054471671084e-04, 3.9271e-01, 4.6878e-03, 
+ 2DIAGNOSTIC,    23, -5.911841224006e-01, 4.260164467152e-04, 3.9614e-01, 3.4292e-03, 
+ 2DIAGNOSTIC,    24, -5.911545628667e-01, 3.202553697972e-04, 3.9950e-01, 3.3681e-03, 
+ 2DIAGNOSTIC,    25, -5.911583167594e-01, 2.065081445274e-04, 4.0286e-01, 3.3560e-03, 
+ 2DIAGNOSTIC,    26, -5.911289529602e-01, 1.067331012002e-04, 4.0659e-01, 3.7289e-03, 
+ 2DIAGNOSTIC,    27, -5.911167435967e-01, 4.177051556754e-05, 4.0992e-01, 3.3281e-03, 
+ 2DIAGNOSTIC,    28, -5.911473547060e-01, 1.636501996595e-05, 4.1321e-01, 3.2959e-03, 
+DIAGNOSTIC,Iteration,metricValue,convergenceValue,ITERATION_TIME_INDEX,SINCE_LAST
+ 2DIAGNOSTIC,     1, -5.396130532245e-01, 1.797693134862e+308, 6.1754e-01, 2.0433e-01, 
+ 2DIAGNOSTIC,     2, -5.398824013982e-01, 1.797693134862e+308, 6.5020e-01, 3.2653e-02, 
+ 2DIAGNOSTIC,     3, -5.398493527223e-01, 1.797693134862e+308, 6.7574e-01, 2.5544e-02, 
+ 2DIAGNOSTIC,     4, -5.397362082096e-01, 1.797693134862e+308, 7.1014e-01, 3.4404e-02, 
+ 2DIAGNOSTIC,     5, -5.397591265915e-01, 1.797693134862e+308, 7.4030e-01, 3.0151e-02, 
+ 2DIAGNOSTIC,     6, -5.397212969093e-01, 1.797693134862e+308, 7.8315e-01, 4.2859e-02, 
+ 2DIAGNOSTIC,     7, -5.397195795219e-01, 1.797693134862e+308, 8.1451e-01, 3.1358e-02, 
+ 2DIAGNOSTIC,     8, -5.397067794992e-01, 1.797693134862e+308, 8.4150e-01, 2.6988e-02, 
+ 2DIAGNOSTIC,     9, -5.396940067826e-01, 1.797693134862e+308, 8.7245e-01, 3.0950e-02, 
+DIAGNOSTIC,Iteration,metricValue,convergenceValue,ITERATION_TIME_INDEX,SINCE_LAST
+ 2DIAGNOSTIC,     1, -4.799684615865e-01, 1.797693134862e+308, 1.6639e+00, 7.9148e-01, 
+ 2DIAGNOSTIC,     2, -4.800455965259e-01, 1.797693134862e+308, 1.9555e+00, 2.9156e-01, 
+ 2DIAGNOSTIC,     3, -4.800478366825e-01, 1.797693134862e+308, 2.2166e+00, 2.6108e-01, 
+ 2DIAGNOSTIC,     4, -4.800385995396e-01, 1.797693134862e+308, 2.5638e+00, 3.4723e-01, 
+ 2DIAGNOSTIC,     5, -4.800359515145e-01, 1.797693134862e+308, 2.8259e+00, 2.6207e-01, 
+ 2DIAGNOSTIC,     6, -4.800327749491e-01, 1.797693134862e+308, 3.0792e+00, 2.5338e-01, 
+ 2DIAGNOSTIC,     7, -4.800329983509e-01, 1.797693134862e+308, 3.3325e+00, 2.5328e-01, 
+ 2DIAGNOSTIC,     8, -4.800327470103e-01, 1.797693134862e+308, 3.5883e+00, 2.5578e-01, 
+ 2DIAGNOSTIC,     9, -4.800324237632e-01, 1.797693134862e+308, 3.8491e+00, 2.6077e-01, 
+ 2DIAGNOSTIC,    10, -4.800297173495e-01, 5.313223835166e-06, 4.1390e+00, 2.8994e-01, 
+ 2DIAGNOSTIC,    11, -4.800294442834e-01, 8.585934827970e-07, 4.4009e+00, 2.6193e-01, 
+ 2DIAGNOSTIC,    12, -4.800292283587e-01, 1.111990950445e-06, 4.6600e+00, 2.5905e-01, 
+ 2DIAGNOSTIC,    13, -4.800286096008e-01, 1.545777753978e-06, 4.9266e+00, 2.6658e-01, 
+ 2DIAGNOSTIC,    14, -4.800285427079e-01, 1.608868568009e-06, 5.2187e+00, 2.9214e-01, 
+ 2DIAGNOSTIC,    15, -4.800284553384e-01, 1.621203394628e-06, 5.4716e+00, 2.5283e-01, 
+ 2DIAGNOSTIC,    16, -4.800283888353e-01, 1.557512089398e-06, 5.7033e+00, 2.3174e-01, 
+ 2DIAGNOSTIC,    17, -4.800278978102e-01, 1.530449349516e-06, 5.9313e+00, 2.2802e-01, 
+ 2DIAGNOSTIC,    18, -4.800279531709e-01, 1.531275006954e-06, 6.1521e+00, 2.2075e-01, 
+ 2DIAGNOSTIC,    19, -4.800290961597e-01, 1.581477185382e-06, 6.3979e+00, 2.4584e-01, 
+ 2DIAGNOSTIC,    20, -4.800298536227e-01, 1.576308652836e-06, 6.6517e+00, 2.5378e-01, 
+ 2DIAGNOSTIC,    21, -4.800290197833e-01, 1.541576657660e-06, 6.8980e+00, 2.4634e-01, 
+ 2DIAGNOSTIC,    22, -4.800281667400e-01, 1.480760933342e-06, 7.1531e+00, 2.5513e-01, 
+ 2DIAGNOSTIC,    23, -4.800279944626e-01, 1.402203744241e-06, 7.4008e+00, 2.4768e-01, 
+ 2DIAGNOSTIC,    24, -4.800289526075e-01, 1.349208279593e-06, 7.6493e+00, 2.4846e-01, 
+ 2DIAGNOSTIC,    25, -4.800275963664e-01, 1.262599873250e-06, 7.9009e+00, 2.5164e-01, 
+ 2DIAGNOSTIC,    26, -4.800275812734e-01, 1.183887749674e-06, 8.1220e+00, 2.2105e-01, 
+ 2DIAGNOSTIC,    27, -4.800262583587e-01, 1.075888050574e-06, 8.3490e+00, 2.2702e-01, 
+ 2DIAGNOSTIC,    28, -4.800264285678e-01, 9.896108194712e-07, 8.5982e+00, 2.4922e-01, 
+ 2DIAGNOSTIC,    29, -4.800274828114e-01, 9.663983546737e-07, 8.8422e+00, 2.4400e-01, 
+ 2DIAGNOSTIC,    30, -4.800266527884e-01, 9.552555585712e-07, 9.0967e+00, 2.5449e-01, 
+ 2DIAGNOSTIC,    31, -4.800260728906e-01, 9.294495514900e-07, 9.3776e+00, 2.8089e-01, 
+ 2DIAGNOSTIC,    32, -4.800259370664e-01, 8.968584876076e-07, 9.6442e+00, 2.6663e-01, 
+ 2DIAGNOSTIC,    33, -4.800259296054e-01, 8.711143817675e-07, 9.9055e+00, 2.6129e-01, 
+ 2DIAGNOSTIC,    34, -4.800252888476e-01, 8.610668554114e-07, 1.0130e+01, 2.2457e-01, 
+ 2DIAGNOSTIC,    35, -4.800239144227e-01, 8.127442477600e-07, 1.0412e+01, 2.8154e-01, 
+ 2DIAGNOSTIC,    36, -4.800240808529e-01, 7.804130353929e-07, 1.0704e+01, 2.9198e-01, 
+ 2DIAGNOSTIC,    37, -4.800244792976e-01, 7.443290692827e-07, 1.0946e+01, 2.4256e-01, 
+ 2DIAGNOSTIC,    38, -4.800235729366e-01, 7.084429143496e-07, 1.1211e+01, 2.6457e-01, 
+ 2DIAGNOSTIC,    39, -4.800233527725e-01, 7.002934495522e-07, 1.1498e+01, 2.8687e-01, 
+  Elapsed time (stage 0): 1.1703e+01
+
+
+Stage 1
+  iterations = 1000x500x250x100
+  convergence threshold = 4.0000e-07
+  convergence window size = 10
+  number of levels = 4
+  using the Mattes MI metric (number of bins = 32, weight = 1.0000e+00, use gradient filter = 0)
+  preprocessing:  winsorizing the image intensities
+  Shrink factors (level 1 out of 4): [9, 12, 9]
+  Shrink factors (level 2 out of 4): [6, 8, 6]
+  Shrink factors (level 3 out of 4): [3, 4, 3]
+  Shrink factors (level 4 out of 4): [1, 2, 1]
+  smoothing sigmas per level: [4, 3, 2, 1]
+  regular sampling (percentage = 2.5000e-01)
+
+*** Running AffineTransform registration ***
+
+DIAGNOSTIC,Iteration,metricValue,convergenceValue,ITERATION_TIME_INDEX,SINCE_LAST
+ 2DIAGNOSTIC,     1, -6.332268487503e-01, 1.797693134862e+308, 1.2791e-01, 1.2791e-01, 
+ 2DIAGNOSTIC,     2, -6.343986142473e-01, 1.797693134862e+308, 1.3020e-01, 2.2871e-03, 
+ 2DIAGNOSTIC,     3, -6.361916846947e-01, 1.797693134862e+308, 1.3250e-01, 2.3041e-03, 
+ 2DIAGNOSTIC,     4, -6.395689069465e-01, 1.797693134862e+308, 1.3470e-01, 2.1951e-03, 
+ 2DIAGNOSTIC,     5, -6.441681467582e-01, 1.797693134862e+308, 1.3711e-01, 2.4111e-03, 
+ 2DIAGNOSTIC,     6, -6.637379064740e-01, 1.797693134862e+308, 1.3988e-01, 2.7711e-03, 
+ 2DIAGNOSTIC,     7, -6.678519667253e-01, 1.797693134862e+308, 1.4210e-01, 2.2202e-03, 
+ 2DIAGNOSTIC,     8, -6.696666296671e-01, 1.797693134862e+308, 1.4581e-01, 3.7081e-03, 
+ 2DIAGNOSTIC,     9, -6.694680190336e-01, 1.797693134862e+308, 1.4860e-01, 2.7931e-03, 
+ 2DIAGNOSTIC,    10, -6.695614466577e-01, 4.657970174558e-03, 1.5125e-01, 2.6479e-03, 
+ 2DIAGNOSTIC,    11, -6.694404142646e-01, 3.863678245654e-03, 1.5352e-01, 2.2740e-03, 
+ 2DIAGNOSTIC,    12, -6.693383062761e-01, 2.894712527710e-03, 1.5626e-01, 2.7411e-03, 
+ 2DIAGNOSTIC,    13, -6.692920136072e-01, 1.883017635945e-03, 1.5873e-01, 2.4710e-03, 
+ 2DIAGNOSTIC,    14, -6.691557264212e-01, 9.530566841675e-04, 1.6130e-01, 2.5630e-03, 
+ 2DIAGNOSTIC,    15, -6.693134313136e-01, 1.855223649897e-04, 1.6379e-01, 2.4920e-03, 
+ 2DIAGNOSTIC,    16, -6.694226799375e-01, 2.628554573703e-05, 1.6711e-01, 3.3202e-03, 
+DIAGNOSTIC,Iteration,metricValue,convergenceValue,ITERATION_TIME_INDEX,SINCE_LAST
+ 2DIAGNOSTIC,     1, -6.025041316937e-01, 1.797693134862e+308, 3.2688e-01, 1.5978e-01, 
+ 2DIAGNOSTIC,     2, -6.035639960277e-01, 1.797693134862e+308, 3.3107e-01, 4.1850e-03, 
+ 2DIAGNOSTIC,     3, -6.051619713403e-01, 1.797693134862e+308, 3.3509e-01, 4.0259e-03, 
+ 2DIAGNOSTIC,     4, -6.068900894310e-01, 1.797693134862e+308, 3.3907e-01, 3.9780e-03, 
+ 2DIAGNOSTIC,     5, -6.083292474637e-01, 1.797693134862e+308, 3.4323e-01, 4.1559e-03, 
+ 2DIAGNOSTIC,     6, -6.094544222432e-01, 1.797693134862e+308, 3.4679e-01, 3.5601e-03, 
+ 2DIAGNOSTIC,     7, -6.105133007960e-01, 1.797693134862e+308, 3.5075e-01, 3.9570e-03, 
+ 2DIAGNOSTIC,     8, -6.113894055584e-01, 1.797693134862e+308, 3.5564e-01, 4.8962e-03, 
+ 2DIAGNOSTIC,     9, -6.113916961333e-01, 1.797693134862e+308, 3.5971e-01, 4.0660e-03, 
+ 2DIAGNOSTIC,    10, -6.114468450239e-01, 1.032909359555e-03, 3.6387e-01, 4.1649e-03, 
+ 2DIAGNOSTIC,    11, -6.115954927070e-01, 7.794850163402e-04, 3.6807e-01, 4.1940e-03, 
+ 2DIAGNOSTIC,    12, -6.116702500051e-01, 5.418618572981e-04, 3.7313e-01, 5.0678e-03, 
+ 2DIAGNOSTIC,    13, -6.120019614412e-01, 3.604154114490e-04, 3.7743e-01, 4.2970e-03, 
+ 2DIAGNOSTIC,    14, -6.120576082175e-01, 2.312857535487e-04, 3.8159e-01, 4.1609e-03, 
+ 2DIAGNOSTIC,    15, -6.123513632860e-01, 1.523341485634e-04, 3.8615e-01, 4.5602e-03, 
+ 2DIAGNOSTIC,    16, -6.130629435118e-01, 1.223127059650e-04, 3.9147e-01, 5.3160e-03, 
+ 2DIAGNOSTIC,    17, -6.136760217353e-01, 1.294164689922e-04, 3.9504e-01, 3.5739e-03, 
+ 2DIAGNOSTIC,    18, -6.141839843383e-01, 1.595766142910e-04, 3.9895e-01, 3.9048e-03, 
+ 2DIAGNOSTIC,    19, -6.144285176669e-01, 1.780334578638e-04, 4.0325e-01, 4.3070e-03, 
+ 2DIAGNOSTIC,    20, -6.148137454535e-01, 1.885726317841e-04, 4.0748e-01, 4.2260e-03, 
+ 2DIAGNOSTIC,    21, -6.149773482885e-01, 1.873305907628e-04, 4.1268e-01, 5.2001e-03, 
+ 2DIAGNOSTIC,    22, -6.150905429723e-01, 1.725141102790e-04, 4.1639e-01, 3.7050e-03, 
+ 2DIAGNOSTIC,    23, -6.151640789243e-01, 1.513247879691e-04, 4.2045e-01, 4.0691e-03, 
+ 2DIAGNOSTIC,    24, -6.152142623030e-01, 1.200004504871e-04, 4.2473e-01, 4.2739e-03, 
+ 2DIAGNOSTIC,    25, -6.152517333609e-01, 8.600218236771e-05, 4.2936e-01, 4.6291e-03, 
+ 2DIAGNOSTIC,    26, -6.152391320473e-01, 5.895817259853e-05, 4.3393e-01, 4.5760e-03, 
+ 2DIAGNOSTIC,    27, -6.152429409430e-01, 3.899571432495e-05, 4.3783e-01, 3.9001e-03, 
+ 2DIAGNOSTIC,    28, -6.152160455981e-01, 2.486215182720e-05, 4.4179e-01, 3.9582e-03, 
+ 2DIAGNOSTIC,    29, -6.152099782683e-01, 1.316142126326e-05, 4.4561e-01, 3.8199e-03, 
+ 2DIAGNOSTIC,    30, -6.152034909767e-01, 6.920586011337e-06, 4.4900e-01, 3.3898e-03, 
+ 2DIAGNOSTIC,    31, -6.151997036617e-01, 2.896573925298e-06, 4.5286e-01, 3.8600e-03, 
+ 2DIAGNOSTIC,    32, -6.152107231022e-01, 7.376475684231e-07, 4.5671e-01, 3.8471e-03, 
+DIAGNOSTIC,Iteration,metricValue,convergenceValue,ITERATION_TIME_INDEX,SINCE_LAST
+ 2DIAGNOSTIC,     1, -5.541313861153e-01, 1.797693134862e+308, 6.6926e-01, 2.1255e-01, 
+ 2DIAGNOSTIC,     2, -5.543041435254e-01, 1.797693134862e+308, 7.0105e-01, 3.1789e-02, 
+ 2DIAGNOSTIC,     3, -5.546338084369e-01, 1.797693134862e+308, 7.3007e-01, 2.9016e-02, 
+ 2DIAGNOSTIC,     4, -5.551452209880e-01, 1.797693134862e+308, 7.5936e-01, 2.9291e-02, 
+ 2DIAGNOSTIC,     5, -5.558265051054e-01, 1.797693134862e+308, 7.9030e-01, 3.0948e-02, 
+ 2DIAGNOSTIC,     6, -5.570546749926e-01, 1.797693134862e+308, 8.3465e-01, 4.4350e-02, 
+ 2DIAGNOSTIC,     7, -5.577036768965e-01, 1.797693134862e+308, 8.6738e-01, 3.2722e-02, 
+ 2DIAGNOSTIC,     8, -5.580595215992e-01, 1.797693134862e+308, 9.0059e-01, 3.3214e-02, 
+ 2DIAGNOSTIC,     9, -5.584138871064e-01, 1.797693134862e+308, 9.3371e-01, 3.3121e-02, 
+ 2DIAGNOSTIC,    10, -5.586046519704e-01, 6.093195225869e-04, 9.6617e-01, 3.2459e-02, 
+ 2DIAGNOSTIC,    11, -5.587928066113e-01, 5.321804913568e-04, 1.0213e+00, 5.5167e-02, 
+ 2DIAGNOSTIC,    12, -5.589692101825e-01, 4.350713614859e-04, 1.0587e+00, 3.7355e-02, 
+ 2DIAGNOSTIC,    13, -5.589686035362e-01, 3.270031595789e-04, 1.1005e+00, 4.1783e-02, 
+ 2DIAGNOSTIC,    14, -5.589647800913e-01, 2.235608141426e-04, 1.1309e+00, 3.0440e-02, 
+ 2DIAGNOSTIC,    15, -5.589672400556e-01, 1.361934185292e-04, 1.1639e+00, 3.3007e-02, 
+ 2DIAGNOSTIC,    16, -5.589844064481e-01, 8.675556930757e-05, 1.1995e+00, 3.5575e-02, 
+ 2DIAGNOSTIC,    17, -5.589818613064e-01, 5.452536309221e-05, 1.2378e+00, 3.8268e-02, 
+ 2DIAGNOSTIC,    18, -5.589816367927e-01, 3.094915683464e-05, 1.2760e+00, 3.8268e-02, 
+ 2DIAGNOSTIC,    19, -5.589794663146e-01, 1.660515807613e-05, 1.3105e+00, 3.4446e-02, 
+ 2DIAGNOSTIC,    20, -5.589801700196e-01, 7.105556630596e-06, 1.3458e+00, 3.5317e-02, 
+ 2DIAGNOSTIC,    21, -5.589791762249e-01, 2.408242869081e-06, 1.3768e+00, 3.0979e-02, 
+ 2DIAGNOSTIC,    22, -5.589798582417e-01, 2.156955779979e-06, 1.4075e+00, 3.0707e-02, 
+ 2DIAGNOSTIC,    23, -5.589915642633e-01, 2.116506804768e-06, 1.4432e+00, 3.5712e-02, 
+ 2DIAGNOSTIC,    24, -5.590081564991e-01, 2.277449360037e-06, 1.4789e+00, 3.5748e-02, 
+ 2DIAGNOSTIC,    25, -5.590087306666e-01, 2.380868838851e-06, 1.5096e+00, 3.0698e-02, 
+ 2DIAGNOSTIC,    26, -5.590103257652e-01, 2.748088597404e-06, 1.5450e+00, 3.5342e-02, 
+ 2DIAGNOSTIC,    27, -5.590295236615e-01, 3.262023891178e-06, 1.5804e+00, 3.5450e-02, 
+ 2DIAGNOSTIC,    28, -5.590279764636e-01, 3.497369362546e-06, 1.6156e+00, 3.5175e-02, 
+ 2DIAGNOSTIC,    29, -5.590321458404e-01, 3.527947314487e-06, 1.6554e+00, 3.9753e-02, 
+ 2DIAGNOSTIC,    30, -5.590119125404e-01, 3.000830236639e-06, 1.6900e+00, 3.4656e-02, 
+ 2DIAGNOSTIC,    31, -5.590115179023e-01, 2.316143782238e-06, 1.7208e+00, 3.0828e-02, 
+ 2DIAGNOSTIC,    32, -5.590115468558e-01, 1.553764680952e-06, 1.7556e+00, 3.4799e-02, 
+ 2DIAGNOSTIC,    33, -5.590114559488e-01, 9.509608994013e-07, 1.7919e+00, 3.6240e-02, 
+ 2DIAGNOSTIC,    34, -5.590127629038e-01, 6.579172567890e-07, 1.8229e+00, 3.0967e-02, 
+DIAGNOSTIC,Iteration,metricValue,convergenceValue,ITERATION_TIME_INDEX,SINCE_LAST
+ 2DIAGNOSTIC,     1, -4.967568059431e-01, 1.797693134862e+308, 2.6494e+00, 8.2654e-01, 
+ 2DIAGNOSTIC,     2, -4.968503895507e-01, 1.797693134862e+308, 2.9031e+00, 2.5368e-01, 
+ 2DIAGNOSTIC,     3, -4.968966473295e-01, 1.797693134862e+308, 3.1595e+00, 2.5645e-01, 
+ 2DIAGNOSTIC,     4, -4.969236629867e-01, 1.797693134862e+308, 3.4101e+00, 2.5056e-01, 
+ 2DIAGNOSTIC,     5, -4.969734110371e-01, 1.797693134862e+308, 3.6635e+00, 2.5346e-01, 
+ 2DIAGNOSTIC,     6, -4.971816218812e-01, 1.797693134862e+308, 3.9493e+00, 2.8578e-01, 
+ 2DIAGNOSTIC,     7, -4.977304986807e-01, 1.797693134862e+308, 4.2142e+00, 2.6487e-01, 
+ 2DIAGNOSTIC,     8, -4.984848197519e-01, 1.797693134862e+308, 4.6085e+00, 3.9433e-01, 
+^CProcess ForkPoolWorker-23:
+Process ForkPoolWorker-21:
+Process ForkPoolWorker-22:
+Process ForkPoolWorker-14:
+Process ForkPoolWorker-19:
+Process ForkPoolWorker-4:
+Process ForkPoolWorker-17:
+Process ForkPoolWorker-18:
+Process ForkPoolWorker-12:
+Process ForkPoolWorker-9:
+Process ForkPoolWorker-8:
+Process ForkPoolWorker-5:
+Process ForkPoolWorker-24:
+Process ForkPoolWorker-2:
+Process ForkPoolWorker-16:
+Process ForkPoolWorker-10:
+Process ForkPoolWorker-20:
+Process ForkPoolWorker-6:
+Process ForkPoolWorker-13:
+Process ForkPoolWorker-15:
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Process ForkPoolWorker-11:
+Traceback (most recent call last):
+Traceback (most recent call last):
+Process ForkPoolWorker-7:
+Process ForkPoolWorker-3:
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+KeyboardInterrupt
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+KeyboardInterrupt
+KeyboardInterrupt
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+Process ForkPoolWorker-1:
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 387, in get
+    res = self._reader.recv_bytes()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/connection.py", line 216, in recv_bytes
+    buf = self._recv_bytes(maxlength)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/connection.py", line 430, in _recv_bytes
+    buf = self._recv(4)
+          ^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/connection.py", line 395, in _recv
+    chunk = read(handle, remaining)
+            ^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/thomas/src/THOMAS.py", line 90, in <module>
+    main()
+  File "/thomas/src/THOMAS.py", line 76, in main
+    run_thomas(args, do_command, temp_path, pool, **exec_options)
+  File "/thomas/src/libraries/run_thomas.py", line 296, in run_thomas
+    ants_new_rigid_registration(ORIG_TEMPLATE, orig_input_image)
+  File "/thomas/src/libraries/ants_tools.py", line 85, in ants_new_rigid_registration
+    command(cmd, **exec_options)
+  File "/thomas/src/libraries/parallel.py", line 79, in command
+    return subprocess.call(cmd, shell=True, env=env)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/subprocess.py", line 391, in call
+    return p.wait(timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/subprocess.py", line 1264, in wait
+    return self._wait(timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/subprocess.py", line 2053, in _wait
+    (pid, sts) = self._try_wait(0)
+                 ^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/subprocess.py", line 2011, in _try_wait
+    (pid, sts) = os.waitpid(self.pid, wait_flags)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+8f8a4d85839e
+
+2025-06-27 15:35:18.307 | INFO     | __main__:<module>:72 - Starting session 20220706 for subject 1544
+2025-06-27 15:35:20.332 | ERROR    | __main__:<module>:76 - 
+2025-06-27 15:35:20.332 | ERROR    | __main__:<module>:77 - Failed session 20220706 for subject 1544
+2025-06-27 15:35:20.332 | ERROR    | __main__:<module>:78 - Input is standard T1; doing HIPS synthesis.
+Running THOMAS on '/data/t1.nii.gz', outputs to '/data', with arguments -c        
+CDed to /data
+Making /data/temp
+Running with 24 processes.
+(run_thomas): args=Namespace(input_image='t1.nii.gz', roi_names=['ALL'], algorithm='v2', contrastsynth=True, cropOnly=False, debug=False, denoisemask=False, forcereg=False, mvOnly=False, oldt1=False, processes=None, right=False, smallCrop=False, useMask=False, verbose=True, fixedImageMask=None, movingImageMask=None, warp=None, antsfusion=False, mask=None, output_path=None, tempdir='/data/temp', template=None), cmd=functools.partial(<function command at 0x73c96833ade0>, debug=False, suppress=True, verbose=True), temp_path=/data/temp, e_opts={'debug': False, 'suppress': True, 'verbose': True}
+Algorithm is v2
+All_Command_lines_OK
+Using double precision for computations.
+=============================================================================
+The composite transform comprises the following transforms (in order): 
+  1. Center of mass alignment using fixed image: /thomas/resources/origtemplate.nii.gz and moving image: t1.nii.gz (type = Euler3DTransform)
+=============================================================================
+  number of levels = 4
+  number of levels = 4
+  fixed image: /thomas/resources/origtemplate.nii.gz
+  moving image: t1.nii.gz
+^CProcess ForkPoolWorker-16:
+Process ForkPoolWorker-9:
+Process ForkPoolWorker-20:
+Process ForkPoolWorker-13:
+Process ForkPoolWorker-12:
+Process ForkPoolWorker-8:
+Process ForkPoolWorker-23:
+Process ForkPoolWorker-24:
+Process ForkPoolWorker-17:
+Process ForkPoolWorker-4:
+Process ForkPoolWorker-11:
+Process ForkPoolWorker-18:
+Process ForkPoolWorker-3:
+Process ForkPoolWorker-2:
+Process ForkPoolWorker-10:
+Process ForkPoolWorker-21:
+Process ForkPoolWorker-22:
+Process ForkPoolWorker-19:
+Process ForkPoolWorker-15:
+Process ForkPoolWorker-7:
+Process ForkPoolWorker-6:
+Process ForkPoolWorker-1:
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+Traceback (most recent call last):
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+Traceback (most recent call last):
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+KeyboardInterrupt
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+Traceback (most recent call last):
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+KeyboardInterrupt
+KeyboardInterrupt
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+KeyboardInterrupt
+KeyboardInterrupt
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+Process ForkPoolWorker-14:
+Process ForkPoolWorker-5:
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 387, in get
+    res = self._reader.recv_bytes()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/connection.py", line 216, in recv_bytes
+    buf = self._recv_bytes(maxlength)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/connection.py", line 430, in _recv_bytes
+    buf = self._recv(4)
+          ^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/connection.py", line 395, in _recv
+    chunk = read(handle, remaining)
+            ^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/thomas/src/THOMAS.py", line 90, in <module>
+    main()
+  File "/thomas/src/THOMAS.py", line 76, in main
+    run_thomas(args, do_command, temp_path, pool, **exec_options)
+  File "/thomas/src/libraries/run_thomas.py", line 296, in run_thomas
+    ants_new_rigid_registration(ORIG_TEMPLATE, orig_input_image)
+  File "/thomas/src/libraries/ants_tools.py", line 85, in ants_new_rigid_registration
+    command(cmd, **exec_options)
+  File "/thomas/src/libraries/parallel.py", line 79, in command
+    return subprocess.call(cmd, shell=True, env=env)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/subprocess.py", line 391, in call
+    return p.wait(timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/subprocess.py", line 1264, in wait
+    return self._wait(timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/subprocess.py", line 2053, in _wait
+    (pid, sts) = self._try_wait(0)
+                 ^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/subprocess.py", line 2011, in _try_wait
+    (pid, sts) = os.waitpid(self.pid, wait_flags)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+Exception ignored in atexit callback: <function _exit_function at 0x73c9681f7920>
+Process ForkPoolWorker-41:
+^CProcess ForkPoolWorker-30:
+Traceback (most recent call last):
+Process ForkPoolWorker-37:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/util.py", line 337, in _exit_function
+Process ForkPoolWorker-48:
+Process ForkPoolWorker-33:
+Process ForkPoolWorker-26:
+Process ForkPoolWorker-31:
+Process ForkPoolWorker-32:
+Process ForkPoolWorker-34:
+Process ForkPoolWorker-27:
+Process ForkPoolWorker-28:
+Process ForkPoolWorker-38:
+Process ForkPoolWorker-46:
+Process ForkPoolWorker-42:
+Process ForkPoolWorker-43:
+Process ForkPoolWorker-40:
+Process ForkPoolWorker-44:
+Process ForkPoolWorker-47:
+Process ForkPoolWorker-39:
+Process ForkPoolWorker-45:
+Process ForkPoolWorker-36:
+Process ForkPoolWorker-29:
+Process ForkPoolWorker-25:
+Process ForkPoolWorker-35:
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+Traceback (most recent call last):
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+Traceback (most recent call last):
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+Traceback (most recent call last):
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+Traceback (most recent call last):
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+    _run_finalizers(0)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+KeyboardInterrupt
+KeyboardInterrupt
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/util.py", line 303, in _run_finalizers
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+KeyboardInterrupt
+KeyboardInterrupt
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+Traceback (most recent call last):
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    finalizer()
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+KeyboardInterrupt
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/util.py", line 227, in __call__
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    res = self._callback(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+KeyboardInterrupt
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 695, in _terminate_pool
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+Traceback (most recent call last):
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+Traceback (most recent call last):
+KeyboardInterrupt
+    cls._help_stuff_finish(inqueue, task_handler, len(pool))
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 675, in _help_stuff_finish
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+    inqueue._rlock.acquire()
+KeyboardInterrupt: 
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+8f8a4d85839e
+
