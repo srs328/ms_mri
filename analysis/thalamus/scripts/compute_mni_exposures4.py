@@ -5,6 +5,7 @@ import os
 import nibabel as nib
 import numpy as np
 from tqdm import tqdm
+import re
 
 from scipy import ndimage
 from scipy.spatial import distance
@@ -18,10 +19,15 @@ thomL_img = nib.load(hipsthomas_root / "left/thomasfull_L.nii.gz").get_fdata()
 thomR_img = nib.load(hipsthomas_root / "right/thomasfull_R.nii.gz").get_fdata()
 
 choroidL = nib.load(hipsthomas_root / "choroid_left.nii.gz").get_fdata()
-choroidL_centroid = ndimage.center_of_mass(choroidL)
-
+choroidL_pts = np.argwhere(choroidL == 1)
 choroidR = nib.load(hipsthomas_root / "choroid_right.nii.gz").get_fdata()
-choroidR_centroid = ndimage.center_of_mass(choroidR)
+choroidR_pts = np.argwhere(choroidR == 1)
+
+file_items = [item.name for item in os.scandir(hipsthomas_root/"left") if item.is_file()]
+file_names = []
+for item in file_items:
+    if re.match(r"\d+-.+(?<!_sdt)\.nii\.gz", item):
+        file_names.append(item)
 
 
 # %% Left side
@@ -36,9 +42,16 @@ for ind in thom_inds:
     struct_pts[thomL_img!=ind] = 0
     struct_pts[thomL_img==ind] = 1
     centroid = ndimage.center_of_mass(struct_pts)
-    left_dists.append(distance.euclidean(centroid, choroidL_centroid))
+    dist_sum = 0
+    for pt in choroidL_pts:
+        dist_sum += distance.euclidean(pt, centroid)
+    left_dists.append(dist_sum / len(choroidL_pts))
 
 
+
+#%%
+
+print(left_dists)
 #%% Right side 
 
 thom_inds = np.unique(thomR_img)
@@ -51,12 +64,14 @@ for ind in thom_inds:
     struct_pts[thomR_img!=ind] = 0
     struct_pts[thomR_img==ind] = 1
     centroid = ndimage.center_of_mass(struct_pts)
-    right_dists.append(distance.euclidean(centroid, choroidR_centroid))
+    dist_sum = 0
+    for pt in choroidR_pts:
+        dist_sum += distance.euclidean(pt, centroid)
+    right_dists.append(dist_sum / len(choroidR_pts))
 
 # %%
-df = pd.DataFrame({"left_exposure": left_dists, "right_exposures": right_dists}, index=[int(ind) for ind in thom_inds])
-df.index.name = "index"
-df.to_csv(data_file_dir / "mni_centroid_centroid_dists.csv")
+df = pd.DataFrame({"left_exposure": left_dists, "right_exposures": right_dists}, index=thom_inds)
+df.to_csv(data_file_dir / "mni_struct_centroid_dists.csv")
 
 #     dists["ind"].append(ind)
 #     dists["dist"].append(sdt[*centroid_round])
@@ -65,9 +80,3 @@ df.to_csv(data_file_dir / "mni_centroid_centroid_dists.csv")
 # df = df.set_index("ind")
 # df.index.name = "struct"
 # df.to_csv("mni-centroid-choroid_SDT.csv")
-
-
-# medial_centroid = ndimage.center_of_mass(medial)
-# ventral_centroid = ndimage.center_of_mass(ventral)
-# posterior_centroid = ndimage.center_of_mass(posterior)
-# anterior_centroid = ndimage.center_of_mass(anterior)
