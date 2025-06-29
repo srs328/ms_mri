@@ -5,6 +5,7 @@ import os
 import nibabel as nib
 import numpy as np
 from tqdm import tqdm
+import subprocess
 
 from scipy import ndimage
 from scipy.spatial import distance
@@ -41,7 +42,7 @@ def load_thomas0(root, sub, ses):
 
 def load_thomas(root, sub, ses):
     thomas_dir = root / f"sub{sub}-{ses}"
-    thomL_file = thomas_dir / "thomasfull_R.nii.gz"
+    thomL_file = thomas_dir / "thomasfull_L.nii.gz"
     thomL_img = nib.load(thomL_file)
     thomR_file = thomas_dir / "thomasfull_R.nii.gz"
     # thomR_img = nib.load(thomR_file)
@@ -63,6 +64,8 @@ save_names = {
 load_function = distance_metrics[which_distance]
 save_name = save_names[which_distance]
 
+thom_inds = [2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 26, 27, 28, 29, 30, 31, 32]
+
 # %% [markdown]
 ## Centroid-SDT metric
 
@@ -73,19 +76,26 @@ for i, row in tqdm(subject_sessions.iterrows(), total=len(subject_sessions)):
     sub = row["sub"]
     ses = row["ses"]
     try:
-        sdt = load_function(dataproc_root, sub, ses)
-        thomL_img, _ = load_thomas(dataproc_root, sub, ses)
-        thom = thomL_img.get_fdata()
-        thom_inds = np.unique(thom)
-        thom_inds = thom_inds[thom_inds > 0]
-        dists = {}
+        subject_root = dataproc_root / f"sub{sub}-{ses}"
+        file = subject_root / "thomasfull_L.nii.gz"
         for ind in thom_inds:
-            struct_pts = thom.copy()
-            struct_pts[thom != ind] = 0
-            struct_pts[thom == ind] = 1
-            centroid = ndimage.center_of_mass(struct_pts)
-            centroid_round = [int(cent) for cent in centroid]
-            dists[int(ind)] = sdt[*centroid_round]
+            out = subject_root / f"{ind}.nii.gz"
+            cmd = ["fslmaths", file, "-thr", str(ind), "-uthr", str(ind), out]
+            try:
+                subprocess.run(cmd, check=True, text=True, capture_output=True)
+            except subprocess.CalledProcessError as e:
+                print(e.sdtout)
+                print(e.stderr)
+                continue
+
+            out_sdt = subject_root / f"{ind}-sdt.nii.gz"
+            cmd = ["c3d", out, "-sdt", "-o", out_sdt]
+            try:
+                subprocess.run(cmd, check=True, text=True, capture_output=True)
+            except subprocess.CalledProcessError as e:
+                print(e.sdtout)
+                print(e.stderr)
+                continue
 
         # for ind, file in [
         #     (1, "1-THALAMUS.nii.gz"),
@@ -98,9 +108,6 @@ for i, row in tqdm(subject_sessions.iterrows(), total=len(subject_sessions)):
         #     centroid_round = [int(cent) for cent in centroid]
         #     dists[int(ind)] = sdt[*centroid_round]
 
-        all_dists.append(dists)
-        all_subjects.append(sub)
-
     except Exception as e:
         print(e)
         continue
@@ -108,8 +115,8 @@ for i, row in tqdm(subject_sessions.iterrows(), total=len(subject_sessions)):
 
 # %%
 
-df = pd.DataFrame(all_dists, index=all_subjects)
-df.to_csv(data_file_dir / save_name)
+# df = pd.DataFrame(all_dists, index=all_subjects)
+# df.to_csv(data_file_dir / save_name)
 
 # %%
 
