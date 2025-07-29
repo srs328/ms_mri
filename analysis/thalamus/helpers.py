@@ -307,7 +307,7 @@ def plot_partial_regress(res, var):
     return fig, ax
 
 
-def get_regression_y(data, res, x, outcome):
+def get_regression_y0(data, res, x, outcome):
     coef = res.params
 
     other_vars = coef.index[~coef.index.isin([x, "Intercept"])]
@@ -320,6 +320,34 @@ def get_regression_y(data, res, x, outcome):
     y_upper = x_data * conf_int.loc[x, 1] + other_terms + coef["Intercept"]
 
     y_lower = x_data * conf_int.loc[x, 0] + other_terms + coef["Intercept"]
+    # upper_error = y_upper - y
+    # lower_error = y - y_lower
+
+    # fig, ax = plt.subplots()
+    # ax.scatter(data[x], data[outcome])
+    # ax.plot(x_data, y_pred)
+    # ax.fill_between(x_data, y_lower, y_upper, alpha=0.2)
+
+    return x_data, y_pred, (y_lower, y_upper)
+
+
+def get_regression_y(data, res, x, outcome):
+    other_vars = set(res.model.exog_names) - set(["Intercept", x])
+    d = {var: [data[var].mean()] for var in other_vars}
+    d[x] = np.linspace(data[x].min(), data[x].max())
+    test_data = (
+        pd.MultiIndex.from_product(d.values(), names=d.keys())
+        .to_frame()
+        .reset_index(drop=True)
+    )
+    pred = res.get_prediction(test_data).summary_frame(alpha=0.05)
+    y_pred, y_upper, y_lower = (
+        pred["mean"],
+        pred["mean_ci_upper"],
+        pred["mean_ci_lower"],
+    )
+
+    x_data = test_data[x]
     # upper_error = y_upper - y
     # lower_error = y - y_lower
 

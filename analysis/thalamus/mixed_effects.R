@@ -6,12 +6,17 @@ require(nlme)
 require(pracma)
 
 
-setwd("/home/srs-9/Projects/ms_mri/analysis/thalamus/R_data")
-df = read.csv("melted_data_for_R_RMS_z.csv")
-model <- lmer(value ~ ventricle_dist + choroid_dist + age + Female + tiv +
+setwd("//wsl.localhost/Ubuntu/home/srs-9/Projects/ms_mri/analysis/thalamus/R_data")
+df = read.csv("melted_data_for_R_NIND_thalamus_z.csv")
+ggplot(df, aes(x=choroid_dist, y=value, color=variable)) + geom_point()
+
+model <- lmer(value ~ choroid_dist + choroid_volume + age + Female + tiv + 
                 (1 | subid), data = df)
 summary(model)
 confint(model)
+
+min(df$choroid_dist, na.rm=TRUE)
+
 
 
 # df$dz_type3 <- factor(df$dz_type3, levels = c("NIND", "MS"))
@@ -33,7 +38,7 @@ filtered_data <- df %>%
   filter(variable == "VLP_6")
 model = lm(value ~ choroid_dist + age + Female + THALAMUS_1, data=filtered_data)
 summary(model)
-ggplot(filtered_data, aes(x=choroid_dist, y=value)) + geom_point()
+ggplot(filtered_data, aes(x=ventricle_dist_sdt, y=value)) + geom_point()
 
 
 
