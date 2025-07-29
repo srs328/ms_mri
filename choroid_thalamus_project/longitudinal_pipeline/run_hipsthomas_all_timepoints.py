@@ -57,8 +57,6 @@ for subid in tqdm(subids, total=len(subids)):
         except subprocess.CalledProcessError as e:
             logger.error(f"Failed session {ses1} for subject {subid}")
             logger.error(e.stdout)
-    else:
-        logger.info(f"Already finished session {ses1} for {subject}")
 
 
     ses2 = sessions[-1]
@@ -78,7 +76,5 @@ for subid in tqdm(subids, total=len(subids)):
             logger.error(e.stderr)
             logger.error(f"Failed session {ses2} for subject {subid}")
             logger.error(e.stdout)
-    else:
-        logger.info(f"Already finished session {ses2} for {subject}")
 
 # %%
