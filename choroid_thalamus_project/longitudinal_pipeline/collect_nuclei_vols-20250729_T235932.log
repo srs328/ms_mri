@@ -1,0 +1,6 @@
+2025-07-29 23:59:59.011 | WARNING  | __main__:<module>:60 - Missing something for sub1341 in session 20220220
+2025-07-29 23:59:59.011 | ERROR    | __main__:<module>:61 - list index out of range
+2025-07-29 23:59:59.663 | WARNING  | __main__:<module>:67 - Issue with sub1423 in session 20170302, left side
+2025-07-29 23:59:59.663 | ERROR    | __main__:<module>:68 - 
+2025-07-30 00:00:00.482 | WARNING  | __main__:<module>:60 - Missing something for sub2015 in session 20170118
+2025-07-30 00:00:00.482 | ERROR    | __main__:<module>:61 - list index out of range

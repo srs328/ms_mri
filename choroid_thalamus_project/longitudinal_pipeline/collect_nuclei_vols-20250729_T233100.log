@@ -1,0 +1,36 @@
+2025-07-29 23:31:09.134 | WARNING  | __main__:<module>:32 - Missing something for sub1341 in session 20220220
+2025-07-29 23:31:09.135 | ERROR    | __main__:<module>:33 - list index out of range
+2025-07-29 23:42:07.402 | WARNING  | __main__:<module>:59 - Missing something for sub1341 in session 20220220
+2025-07-29 23:42:07.402 | ERROR    | __main__:<module>:60 - list index out of range
+2025-07-29 23:42:08.196 | WARNING  | __main__:<module>:66 - Issue with sub1423 in session 20170302, left side
+2025-07-29 23:42:08.196 | ERROR    | __main__:<module>:67 - 
+2025-07-29 23:42:09.500 | WARNING  | __main__:<module>:59 - Missing something for sub2015 in session 20170118
+2025-07-29 23:42:09.500 | ERROR    | __main__:<module>:60 - list index out of range
+2025-07-29 23:43:30.609 | WARNING  | __main__:<module>:60 - Missing something for sub1341 in session 20220220
+2025-07-29 23:43:30.609 | ERROR    | __main__:<module>:61 - list index out of range
+2025-07-29 23:43:31.118 | WARNING  | __main__:<module>:67 - Issue with sub1423 in session 20170302, left side
+2025-07-29 23:43:31.118 | ERROR    | __main__:<module>:68 - 
+2025-07-29 23:43:31.745 | WARNING  | __main__:<module>:60 - Missing something for sub2015 in session 20170118
+2025-07-29 23:43:31.745 | ERROR    | __main__:<module>:61 - list index out of range
+2025-07-29 23:48:18.487 | WARNING  | __main__:<module>:68 - Issue with sub1423 in session 20170302, left side
+2025-07-29 23:48:18.488 | ERROR    | __main__:<module>:69 - 
+2025-07-29 23:48:18.836 | WARNING  | __main__:<module>:61 - Missing something for sub2015 in session 20170118
+2025-07-29 23:48:18.837 | ERROR    | __main__:<module>:62 - list index out of range
+2025-07-29 23:49:15.503 | WARNING  | __main__:<module>:60 - Missing something for sub1341 in session 20220220
+2025-07-29 23:49:15.504 | ERROR    | __main__:<module>:61 - list index out of range
+2025-07-29 23:49:16.019 | WARNING  | __main__:<module>:67 - Issue with sub1423 in session 20170302, left side
+2025-07-29 23:49:16.019 | ERROR    | __main__:<module>:68 - 
+2025-07-29 23:49:16.647 | WARNING  | __main__:<module>:60 - Missing something for sub2015 in session 20170118
+2025-07-29 23:49:16.648 | ERROR    | __main__:<module>:61 - list index out of range
+2025-07-29 23:53:10.058 | WARNING  | __main__:<module>:22 - Missing something for sub1064 in session 20220216
+2025-07-29 23:53:10.058 | ERROR    | __main__:<module>:23 - [Errno 2] No such file or directory: '/media/smbshare/srs-9/longitudinal/sub1064/20220216/left/nucleiVols.txt'
+2025-07-29 23:54:34.108 | WARNING  | __main__:<module>:68 - Issue with sub1423 in session 20170302, left side
+2025-07-29 23:54:34.108 | ERROR    | __main__:<module>:69 - 
+2025-07-29 23:54:34.453 | WARNING  | __main__:<module>:61 - Missing something for sub2015 in session 20170118
+2025-07-29 23:54:34.453 | ERROR    | __main__:<module>:62 - list index out of range
+2025-07-29 23:56:29.613 | WARNING  | __main__:<module>:60 - Missing something for sub1341 in session 20220220
+2025-07-29 23:56:29.614 | ERROR    | __main__:<module>:61 - list index out of range
+2025-07-29 23:56:30.168 | WARNING  | __main__:<module>:67 - Issue with sub1423 in session 20170302, left side
+2025-07-29 23:56:30.168 | ERROR    | __main__:<module>:68 - 
+2025-07-29 23:56:30.832 | WARNING  | __main__:<module>:60 - Missing something for sub2015 in session 20170118
+2025-07-29 23:56:30.832 | ERROR    | __main__:<module>:61 - list index out of range
