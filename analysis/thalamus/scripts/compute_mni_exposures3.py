@@ -31,6 +31,7 @@ thom_inds = thom_inds[thom_inds > 0]
 left_dists = []
 all_dists = []
 all_subjects = []
+
 for ind in thom_inds:
     struct_pts = thomL_img.copy()
     struct_pts[thomL_img!=ind] = 0
@@ -38,6 +39,17 @@ for ind in thom_inds:
     centroid = ndimage.center_of_mass(struct_pts)
     left_dists.append(distance.euclidean(centroid, choroidL_centroid))
 
+# THALAMUS_1
+thalamus1 = nib.load(hipsthomas_root / "left/1-THALAMUS.nii.gz").get_fdata()
+centroid = ndimage.center_of_mass(thalamus1)
+left_dists.append(distance.euclidean(centroid, choroidL_centroid))
+thom_inds = np.append(thom_inds, 1)
+
+# GP_33
+gp33 = nib.load(hipsthomas_root / "left/33-GP.nii.gz").get_fdata()
+centroid = ndimage.center_of_mass(gp33)
+left_dists.append(distance.euclidean(centroid, choroidL_centroid))
+thom_inds = np.append(thom_inds, 33)
 
 #%% Right side 
 
@@ -52,6 +64,18 @@ for ind in thom_inds:
     struct_pts[thomR_img==ind] = 1
     centroid = ndimage.center_of_mass(struct_pts)
     right_dists.append(distance.euclidean(centroid, choroidR_centroid))
+    
+# THALAMUS_1
+thalamus1 = nib.load(hipsthomas_root / "right/1-THALAMUS.nii.gz").get_fdata()
+centroid = ndimage.center_of_mass(thalamus1)
+right_dists.append(distance.euclidean(centroid, choroidR_centroid))
+thom_inds = np.append(thom_inds, 1)
+
+# GP_33
+gp33 = nib.load(hipsthomas_root / "right/33-GP.nii.gz").get_fdata()
+centroid = ndimage.center_of_mass(gp33)
+right_dists.append(distance.euclidean(centroid, choroidR_centroid))
+thom_inds = np.append(thom_inds, 33)
 
 # %%
 df = pd.DataFrame({"left_exposure": left_dists, "right_exposures": right_dists}, index=[int(ind) for ind in thom_inds])
