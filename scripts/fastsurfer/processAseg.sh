@@ -41,6 +41,7 @@ run_if_missing "orig/001.nii.gz" \
 run_if_missing "${out_dir}/aseg.auto_noCCseg.in_subject.nii.gz" \
     flirt -in aseg.auto_noCCseg.nii.gz -ref orig/001.nii.gz -applyxfm -init freesurfer-to-subject.mat -out "${out_dir}/aseg.auto_noCCseg.in_subject.nii.gz"
 
+
 # fslmaths aseg.auto_noCCseg.in_subject.nii.gz -thr 4 -uthr 4 -bin aseg-lv.nii.gz
 # fslmaths aseg.auto_noCCseg.in_subject.nii.gz -thr 43 -uthr 43 -bin aseg-rv.nii.gz
 # fslmaths aseg-lv.nii.gz -add aseg-rv.nii.gz aseg-ventricles.nii.gz

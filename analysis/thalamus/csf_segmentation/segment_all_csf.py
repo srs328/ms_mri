@@ -28,15 +28,16 @@ with open(subses_file, 'r') as f:
 
 for sub, ses in tqdm(subject_sessions):
     subject_root = dataroot / f"sub{sub}-{ses}"
-    if (subject_root / "peripheral_CSF_dilM_sphere2.nii.gz.nii.gz").exists():
+    if (subject_root / "peripheral_CSF_dilM_sphere2.nii.gz").exists():
         logger.debug(f"CSF already segmented for sub{sub}-{ses}, skipping.")
         continue
-    cmd = ["bash", segment_csf_script, str(subject_root)]
-    try:
-        logger.info(" ".join(cmd))
-        result = subprocess.run(cmd, check=True, capture_output=True)
-    except subprocess.CalledProcessError as e:
-        logger.error(e)
-        logger.debug(e.stderr)
-    else:
-        logger.debug(result.stdout)
+    print(sub)
+    # cmd = ["bash", segment_csf_script, str(subject_root)]
+    # try:
+    #     logger.info(" ".join(cmd))
+    #     result = subprocess.run(cmd, check=True, capture_output=True)
+    # except subprocess.CalledProcessError as e:
+    #     logger.error(e)
+    #     logger.debug(e.stderr)
+    # else:
+    #     logger.debug(result.stdout)

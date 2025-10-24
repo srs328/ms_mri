@@ -41,4 +41,3 @@ for subid in tqdm(subject_sessions, total=len(subject_sessions)):
     except subprocess.CalledProcessError as e:
         logger.error(e)
         logger.debug(e.stderr)
-    subprocess.run(cmd)
