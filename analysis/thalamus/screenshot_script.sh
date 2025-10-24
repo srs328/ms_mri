@@ -14,3 +14,5 @@ freeview -v $t1 -v $overlay:colormap=heat:heatscale=0,-0.15,-0.31 \
     -colorscale -slice 181 168 $z \
     --viewport axial --layout 1 --viewsize 1920 1080 \
     --ss $savepath
+
+    
