@@ -53,8 +53,8 @@ run_if_missing "$root/all_CSF.nii.gz" \
 
 run_if_missing "$root/peripheral_CSF.nii.gz" \
     fslmaths "$root/all_CSF.nii.gz" \
-        -sub "$root/aseg-lv-fix.nii.gz" \
-        -sub "$root/aseg-rv-fix.nii.gz" \
+        -sub "$root/aseg-lv.nii.gz" \
+        -sub "$root/aseg-rv.nii.gz" \
         -sub "$root/choroid.nii.gz" \
         -thr 0 -bin "$root/peripheral_CSF.nii.gz"
 
@@ -63,14 +63,14 @@ run_if_missing "$root/peripheral_CSF.nii.gz" \
 kernal_shape="sphere"
 kernal_size=2
 out_suffix="_dilM_${kernal_shape}${kernal_size}"
-lv_dilname="aseg-lv-fix${out_suffix}.nii.gz"
-rv_dilname="aseg-rv-fix${out_suffix}.nii.gz"
+lv_dilname="aseg-lv${out_suffix}.nii.gz"
+rv_dilname="aseg-rv${out_suffix}.nii.gz"
 
 run_if_missing "$root/$lv_dilname" \
-    fslmaths "$root/aseg-lv-fix.nii.gz" -kernel $kernal_shape $kernal_size -dilM "$root/$lv_dilname"
+    fslmaths "$root/aseg-lv.nii.gz" -kernel $kernal_shape $kernal_size -dilM "$root/$lv_dilname"
 
 run_if_missing "$root/$rv_dilname" \
-    fslmaths "$root/aseg-rv-fix.nii.gz" -kernel $kernal_shape $kernal_size -dilM "$root/$rv_dilname"
+    fslmaths "$root/aseg-rv.nii.gz" -kernel $kernal_shape $kernal_size -dilM "$root/$rv_dilname"
 
 peripheral_fix_name="peripheral_CSF${out_suffix}.nii.gz"
 run_if_missing "$root/$peripheral_fix_name" \

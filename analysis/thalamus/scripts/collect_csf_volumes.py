@@ -29,10 +29,11 @@ for subid in tqdm(subject_sessions, total=len(subject_sessions)):
     data_dir = dataroot / f"sub{subid}-{sesid}"
     peripheral_csf_file = data_dir / peripheral_fix_name
     all_csf_file = data_dir / all_csf_name
+    third_ventricle_file = data_dir / third_ventricle_name
 
     for csf_type, csf_file in zip(
         ['all', 'peripheral', 'third_ventricle'],
-        [all_csf_file, peripheral_csf_file, third_ventricle_name],
+        [all_csf_file, peripheral_csf_file, third_ventricle_file],
     ):
         try:
             vol_stats = utils.compute_volume(str(csf_file))
@@ -41,8 +42,8 @@ for subid in tqdm(subject_sessions, total=len(subject_sessions)):
             else:
                 print(subid, "error")
                 vol = None
-        except Exception:
-            print(subid)
+        except Exception as e:
+            print(subid, e)
             vol = None
         subject_vols[csf_type].append(vol)
 
