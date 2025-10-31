@@ -1,0 +1,205 @@
+Downloading GitHub repo bcdudek/bcdstats@HEAD
+Skipping 1 packages not available: OpenMx
+Installing 6 packages: qqconf, OpenMx, Rmpfr, qqplotr, MBESS, HH
+Installing packages into ‘/home/srs-9/R/x86_64-pc-linux-gnu-library/4.3’
+(as ‘lib’ is unspecified)
+Warning: dependency ‘OpenMx’ is not available
+trying URL 'https://cloud.r-project.org/src/contrib/qqconf_1.3.2.tar.gz'
+Content type 'application/x-gzip' length 524333 bytes (512 KB)
+==================================================
+downloaded 512 KB
+
+trying URL 'https://cloud.r-project.org/src/contrib/Rmpfr_1.1-2.tar.gz'
+Content type 'application/x-gzip' length 660620 bytes (645 KB)
+==================================================
+downloaded 645 KB
+
+trying URL 'https://cloud.r-project.org/src/contrib/qqplotr_0.0.7.tar.gz'
+Content type 'application/x-gzip' length 963967 bytes (941 KB)
+==================================================
+downloaded 941 KB
+
+trying URL 'https://cloud.r-project.org/src/contrib/MBESS_4.9.41.tar.gz'
+Content type 'application/x-gzip' length 223018 bytes (217 KB)
+==================================================
+downloaded 217 KB
+
+trying URL 'https://cloud.r-project.org/src/contrib/HH_3.1-53.tar.gz'
+Content type 'application/x-gzip' length 696002 bytes (679 KB)
+==================================================
+downloaded 679 KB
+
+* installing *source* package ‘qqconf’ ...
+** package ‘qqconf’ successfully unpacked and MD5 sums checked
+** using staged installation
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking how to run the C preprocessor... gcc -E
+checking for gcc... (cached) gcc
+checking whether we are using the GNU C compiler... (cached) yes
+checking whether gcc accepts -g... (cached) yes
+checking for gcc option to accept ISO C89... (cached) none needed
+checking for pkg-config... yes
+configure: creating ./config.status
+config.status: creating src/Makevars
+
+fftwtools 0.9-10
+================
+
+compiler flags:  
+link argument:  -lfftw3  
+
+** libs
+using C++ compiler: ‘g++ (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0’
+g++ -std=gnu++17 -I"/usr/share/R/include" -DNDEBUG  -I'/home/srs-9/R/x86_64-pc-linux-gnu-library/4.3/Rcpp/include'     -fpic  -g -O2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -ffile-prefix-map=/build/r-base-FPSnzf/r-base-4.3.3=. -fstack-protector-strong -fstack-clash-protection -Wformat -Werror=format-security -fcf-protection -fdebug-prefix-map=/build/r-base-FPSnzf/r-base-4.3.3=/usr/src/r-base-4.3.3-2build2 -Wdate-time -D_FORTIFY_SOURCE=3  -c RcppExports.cpp -o RcppExports.o
+g++ -std=gnu++17 -I"/usr/share/R/include" -DNDEBUG  -I'/home/srs-9/R/x86_64-pc-linux-gnu-library/4.3/Rcpp/include'     -fpic  -g -O2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -ffile-prefix-map=/build/r-base-FPSnzf/r-base-4.3.3=. -fstack-protector-strong -fstack-clash-protection -Wformat -Werror=format-security -fcf-protection -fdebug-prefix-map=/build/r-base-FPSnzf/r-base-4.3.3=/usr/src/r-base-4.3.3-2build2 -Wdate-time -D_FORTIFY_SOURCE=3  -c jointlevel_fft_twosided.cpp -o jointlevel_fft_twosided.o
+g++ -std=gnu++17 -shared -L/usr/lib/R/lib -Wl,-Bsymbolic-functions -flto=auto -ffat-lto-objects -Wl,-z,relro -o qqconf.so RcppExports.o jointlevel_fft_twosided.o -lfftw3 -L/usr/lib/R/lib -lR
+installing to /home/srs-9/R/x86_64-pc-linux-gnu-library/4.3/00LOCK-qqconf/00new/qqconf/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (qqconf)
+* installing *source* package ‘Rmpfr’ ...
+** package ‘Rmpfr’ successfully unpacked and MD5 sums checked
+** using staged installation
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether the compiler supports GNU C... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to enable C11 features... none needed
+checking how to run the C preprocessor... gcc -E
+checking for stdio.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for strings.h... yes
+checking for sys/stat.h... yes
+checking for sys/types.h... yes
+checking for unistd.h... yes
+checking for mpfr.h... yes
+checking for gmp.h... yes
+checking for __gmpz_init in -lgmp... yes
+checking for mpfr_init in -lmpfr... yes
+checking for mpfr_digamma in -lmpfr... yes
+checking size of mp_limb_t... 8
+checking size of mpfr_prec_t... 8
+checking size of mpfr_exp_t... 8
+configure: creating ./config.status
+config.status: creating src/Makevars
+config.status: creating src/config.h
+** libs
+using C compiler: ‘gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0’
+gcc -I"/usr/share/R/include" -DNDEBUG -DHAVE_CONFIG_H      -fpic  -g -O2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -ffile-prefix-map=/build/r-base-FPSnzf/r-base-4.3.3=. -fstack-protector-strong -fstack-clash-protection -Wformat -Werror=format-security -fcf-protection -fdebug-prefix-map=/build/r-base-FPSnzf/r-base-4.3.3=/usr/src/r-base-4.3.3-2build2 -Wdate-time -D_FORTIFY_SOURCE=3  -c Ops.c -o Ops.o
+gcc -I"/usr/share/R/include" -DNDEBUG -DHAVE_CONFIG_H      -fpic  -g -O2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -ffile-prefix-map=/build/r-base-FPSnzf/r-base-4.3.3=. -fstack-protector-strong -fstack-clash-protection -Wformat -Werror=format-security -fcf-protection -fdebug-prefix-map=/build/r-base-FPSnzf/r-base-4.3.3=/usr/src/r-base-4.3.3-2build2 -Wdate-time -D_FORTIFY_SOURCE=3  -c Summary.c -o Summary.o
+gcc -I"/usr/share/R/include" -DNDEBUG -DHAVE_CONFIG_H      -fpic  -g -O2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -ffile-prefix-map=/build/r-base-FPSnzf/r-base-4.3.3=. -fstack-protector-strong -fstack-clash-protection -Wformat -Werror=format-security -fcf-protection -fdebug-prefix-map=/build/r-base-FPSnzf/r-base-4.3.3=/usr/src/r-base-4.3.3-2build2 -Wdate-time -D_FORTIFY_SOURCE=3  -c convert.c -o convert.o
+gcc -I"/usr/share/R/include" -DNDEBUG -DHAVE_CONFIG_H      -fpic  -g -O2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -ffile-prefix-map=/build/r-base-FPSnzf/r-base-4.3.3=. -fstack-protector-strong -fstack-clash-protection -Wformat -Werror=format-security -fcf-protection -fdebug-prefix-map=/build/r-base-FPSnzf/r-base-4.3.3=/usr/src/r-base-4.3.3-2build2 -Wdate-time -D_FORTIFY_SOURCE=3  -c init.c -o init.o
+gcc -I"/usr/share/R/include" -DNDEBUG -DHAVE_CONFIG_H      -fpic  -g -O2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -ffile-prefix-map=/build/r-base-FPSnzf/r-base-4.3.3=. -fstack-protector-strong -fstack-clash-protection -Wformat -Werror=format-security -fcf-protection -fdebug-prefix-map=/build/r-base-FPSnzf/r-base-4.3.3=/usr/src/r-base-4.3.3-2build2 -Wdate-time -D_FORTIFY_SOURCE=3  -c utils.c -o utils.o
+gcc -shared -L/usr/lib/R/lib -Wl,-Bsymbolic-functions -flto=auto -ffat-lto-objects -Wl,-z,relro -o Rmpfr.so Ops.o Summary.o convert.o init.o utils.o -lmpfr -lgmp -L/usr/lib/R/lib -lR
+installing to /home/srs-9/R/x86_64-pc-linux-gnu-library/4.3/00LOCK-Rmpfr/00new/Rmpfr/libs
+** R
+** demo
+** inst
+** byte-compile and prepare package for lazy loading
+Creating a generic function for ‘factorial’ from package ‘base’ in package ‘Rmpfr’
+Creating a generic function for ‘diag’ from package ‘base’ in package ‘Rmpfr’
+Creating a generic function for ‘diag<-’ from package ‘base’ in package ‘Rmpfr’
+Creating a new generic function for ‘cbind’ in package ‘Rmpfr’
+Creating a new generic function for ‘rbind’ in package ‘Rmpfr’
+Creating a generic function for ‘colSums’ from package ‘base’ in package ‘Rmpfr’
+Creating a generic function for ‘colMeans’ from package ‘base’ in package ‘Rmpfr’
+Creating a generic function for ‘rowSums’ from package ‘base’ in package ‘Rmpfr’
+Creating a generic function for ‘rowMeans’ from package ‘base’ in package ‘Rmpfr’
+Creating a generic function for ‘norm’ from package ‘base’ in package ‘Rmpfr’
+in method for ‘show’ with signature ‘"integrateR"’: no definition for class “integrateR”
+Creating a new generic function for ‘pmin’ in package ‘Rmpfr’
+Creating a new generic function for ‘pmax’ in package ‘Rmpfr’
+Creating a generic function for ‘atan2’ from package ‘base’ in package ‘Rmpfr’
+Creating a generic function for ‘beta’ from package ‘base’ in package ‘Rmpfr’
+Creating a generic function for ‘lbeta’ from package ‘base’ in package ‘Rmpfr’
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (Rmpfr)
+ERROR: dependency ‘OpenMx’ is not available for package ‘MBESS’
+* removing ‘/home/srs-9/R/x86_64-pc-linux-gnu-library/4.3/MBESS’
+* installing *source* package ‘qqplotr’ ...
+** package ‘qqplotr’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** data
+*** moving datasets to lazyload DB
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (qqplotr)
+* installing *source* package ‘HH’ ...
+** package ‘HH’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** data
+** demo
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (HH)
+
+The downloaded source packages are in
+        ‘/tmp/RtmpdBbMUb/downloaded_packages’
+Running `R CMD build`...
+* checking for file ‘/tmp/RtmpdBbMUb/remotes267feec27d4/bcdudek-bcdstats-794702a/DESCRIPTION’ ... OK
+* preparing ‘bcdstats’:
+* checking DESCRIPTION meta-information ... OK
+* checking for LF line-endings in source and make files and shell scripts
+* checking for empty or unneeded directories
+* building ‘bcdstats_0.0.0.9009.tar.gz’
+Installing package into ‘/home/srs-9/R/x86_64-pc-linux-gnu-library/4.3’
+(as ‘lib’ is unspecified)
+ERROR: dependency ‘MBESS’ is not available for package ‘bcdstats’
+* removing ‘/home/srs-9/R/x86_64-pc-linux-gnu-library/4.3/bcdstats’
+Warning messages:
+1: package ‘OpenMx’ is not available for this version of R
+‘OpenMx’ version 2.22.9 is in the repositories but depends on R (>= 4.5.0)
+
+A version of this package for your version of R might be available elsewhere,
+see the ideas at
+https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages 
+2: In i.p(...) : installation of package ‘MBESS’ had non-zero exit status
+3: In i.p(...) :
+  installation of package ‘/tmp/RtmpdBbMUb/file267fe63d78b4f/bcdstats_0.0.0.9009.tar.gz’ had non-zero exit status
