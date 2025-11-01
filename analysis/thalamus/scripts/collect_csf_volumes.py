@@ -9,7 +9,7 @@ import sys
 import json
 from mri_data import utils
 
-peripheral_fix_name = "peripheral_CSF_dilM_sphere2.nii.gz"
+peripheral_fix_name = "peripheral_CSF_CHECK.nii.gz"
 all_csf_name = "all_CSF.nii.gz"
 third_ventricle_name = "aseg-third_ventricle.nii.gz"
 
@@ -23,7 +23,7 @@ all_subjects = [int(subid) for subid in list(subject_sessions.keys())]
 subject_vols = {'subid': [], 'peripheral': [], 'all': [], 'third_ventricle': []}
 for subid in tqdm(subject_sessions, total=len(subject_sessions)):
     subject_vols['subid'].append(int(subid))
-    sessions = sorted(subject_sessions[subid])
+    sessions = sorted(subject_sessions[subid])  
     sesid = sessions[0]
 
     data_dir = dataroot / f"sub{subid}-{sesid}"
@@ -54,5 +54,5 @@ df.index.name = "subid"
 
 # %%
 df.to_csv(
-    "/home/srs-9/Projects/ms_mri/analysis/thalamus/data0/csf_volumes.csv"
+    "/home/srs-9/Projects/ms_mri/analysis/thalamus/data0/csf_volumes2.csv"
 )
