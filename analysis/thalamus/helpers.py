@@ -96,6 +96,138 @@ vars_to_center = [
 ]
 
 
+def load_df():
+    choroid_volumes = pd.read_csv(
+        "/home/srs-9/Projects/ms_mri/data/choroid_aschoplex_volumes.csv",
+        index_col="subid",
+    )
+    ventricle_volumes = pd.read_csv(
+        "/home/srs-9/Projects/ms_mri/analysis/paper1/data0/ventricle_volumes.csv",
+        index_col="subid",
+    )
+    csf_volumes = pd.read_csv(
+        "/home/srs-9/Projects/ms_mri/analysis/thalamus/data0/csf_volumes3.csv",
+        index_col="subid",
+    )
+    third_ventricle_width = pd.read_csv(
+        "/home/srs-9/Projects/ms_mri/analysis/thalamus/data0/third_ventricle_width.csv",
+        index_col="subid",
+    )
+
+    tiv = pd.read_csv(
+        "/home/srs-9/Projects/ms_mri/data/tiv_data.csv", index_col="subid"
+    )
+
+    df = pd.read_csv(
+        "/home/srs-9/Projects/ms_mri/data/clinical_data_processed.csv",
+        index_col="subid",
+    )
+    sdmt = pd.read_csv(
+        "/home/srs-9/Projects/ms_mri/analysis/thalamus/SDMT_sheet.csv",
+        index_col="subid",
+    )
+    df = df.join(
+        [
+            choroid_volumes,
+            ventricle_volumes,
+            csf_volumes,
+            third_ventricle_width,
+            tiv,
+            sdmt["SDMT"],
+        ]
+    )
+    df["SDMT"] = pd.to_numeric(df["SDMT"], errors="coerce")
+    rename_columns = {
+        "ventricle_volume": "LV",
+        "choroid_volume": "CP",
+        "peripheral": "periCSF",
+        "all": "allCSF",
+        "third_ventricle": "thirdV",
+        "fourth_ventricle": "fourthV",
+        "aseg_csf": "asegCSF",
+        "third_ventricle_width": "thirdV_width",
+    }
+    df.rename(columns=rename_columns, inplace=True)
+
+    return df
+
+
+def load_hipsthomas(data_dir, side=None):
+    if side is not None:
+        filename = f"hipsthomas_{side}_vols.csv"
+    else:
+        filename = "hipsthomas_vols.csv"
+        
+    df_thomas = pd.read_csv(data_dir / filename, index_col="subid")
+
+    new_colnames = {}
+    for col in df_thomas.columns:
+        new_col = re.sub(r"(\d+)-([\w-]+)", r"\2_\1", col)
+        new_col = re.sub("-", "_", new_col)
+        new_colnames[col] = new_col
+
+    df_thomas = df_thomas.rename(columns=new_colnames)
+
+    nuclei_groupings = {
+        "anterior": ["AV_2"],
+        "ventral": ["VA_4", "VLa_5", "VLP_6", "VPL_7"],
+        "posterior": ["Pul_8", "LGN_9", "MGN_10"],
+        "medial": ["MD_Pf_12", "CM_11"],
+    }
+    def combine_nuclei(df, groupings):
+        df2 = pd.DataFrame()
+        for group, nuclei in groupings.items():
+            df2[group] = sum([df[nucleus] for nucleus in nuclei])
+        return df2
+
+    df_thomas = df_thomas.join(combine_nuclei(df_thomas, nuclei_groupings))
+    
+    return df_thomas 
+
+def normalize_by_tiv(df, variables=None):
+    if variables is None:
+        variables = [
+            "brain",
+            "white",
+            "grey",
+            "csf_all",
+            "csf_peripheral",
+            "ventricle_volume",
+            "choroid_volume",
+        ]
+
+    for var in variables:
+        new_var = f"n-{var}"
+        df[new_var] = df[var] / df["tiv"]
+
+    return df
+
+
+def zscore(df):
+    df_z = df.copy()
+    numeric_cols = df.select_dtypes(include="number").columns
+    df_z[numeric_cols] = df_z[numeric_cols].apply(stats.zscore, nan_policy="omit")
+    return df_z
+
+
+#! will figure something out for boxcox and yeojohnson later if necessary: they both return a 2-tuple
+transforms = {
+    "log": np.log,
+    "log10": np.log10,
+    "log1p": np.log1p,
+    "sqrt": np.sqrt,
+    "boxcox": stats.boxcox,
+    "yeojohnson": stats.yeojohnson,
+}
+
+
+def transform_variables(df: pd.DataFrame, var_list: dict[str, str]):
+    for var, transform in var_list.items():
+        df[f"{var}_{transform}"] = transforms[transform](df[var])
+    
+    return df
+
+
 def subject_to_subid(subject):
     if not isinstance(subject, str):
         return None
