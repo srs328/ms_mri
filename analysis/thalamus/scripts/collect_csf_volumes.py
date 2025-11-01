@@ -12,6 +12,8 @@ from mri_data import utils
 peripheral_fix_name = "peripheral_CSF_CHECK.nii.gz"
 all_csf_name = "all_CSF.nii.gz"
 third_ventricle_name = "aseg-third_ventricle.nii.gz"
+fourth_ventricle_name = "aseg-fourth_ventricle.nii.gz"
+aseg_csf_name = "aseg-CSF.nii.gz"
 
 with open("/home/srs-9/Projects/ms_mri/data/subject-sessions-longit.json", 'r') as f:
     subject_sessions = json.load(f)
@@ -20,20 +22,36 @@ dataroot = Path("/mnt/h/srs-9/thalamus_project/data")
 
 all_subjects = [int(subid) for subid in list(subject_sessions.keys())]
 
-subject_vols = {'subid': [], 'peripheral': [], 'all': [], 'third_ventricle': []}
+subject_vols = {
+    'subid': [],
+    'peripheral': [],
+    'all': [],
+    'third_ventricle': [],
+    'fourth_ventricle': [],
+    'aseg_csf': [],
+}
+
 for subid in tqdm(subject_sessions, total=len(subject_sessions)):
     subject_vols['subid'].append(int(subid))
-    sessions = sorted(subject_sessions[subid])  
+    sessions = sorted(subject_sessions[subid])
     sesid = sessions[0]
 
     data_dir = dataroot / f"sub{subid}-{sesid}"
     peripheral_csf_file = data_dir / peripheral_fix_name
     all_csf_file = data_dir / all_csf_name
     third_ventricle_file = data_dir / third_ventricle_name
+    fourth_ventricle_file = data_dir / fourth_ventricle_name
+    aseg_csf_file = data_dir / aseg_csf_name
 
     for csf_type, csf_file in zip(
-        ['all', 'peripheral', 'third_ventricle'],
-        [all_csf_file, peripheral_csf_file, third_ventricle_file],
+        ['all', 'peripheral', 'third_ventricle', 'fourth_ventricle', 'aseg_csf'],
+        [
+            all_csf_file,
+            peripheral_csf_file,
+            third_ventricle_file,
+            fourth_ventricle_file,
+            aseg_csf_file,
+        ],
     ):
         try:
             vol_stats = utils.compute_volume(str(csf_file))
@@ -53,6 +71,4 @@ df.set_index('subid', inplace=True)
 df.index.name = "subid"
 
 # %%
-df.to_csv(
-    "/home/srs-9/Projects/ms_mri/analysis/thalamus/data0/csf_volumes2.csv"
-)
+df.to_csv("/home/srs-9/Projects/ms_mri/analysis/thalamus/data0/csf_volumes3.csv")
