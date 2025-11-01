@@ -16,3 +16,6 @@ scipy
 pillow
 medpy
 statsmodels
+scikit-learn
+pyperclip
+seaborn

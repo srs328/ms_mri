@@ -35,9 +35,11 @@ run_if_missing() {
 
 t1="$root/t1.nii.gz"
 
+# Skull strip
 run_if_missing "$root/t1.strip_b0.nii.gz" \
     mri_synthstrip -i "$t1" -b 0 -o "$root/t1.strip_b0.nii.gz"
 
+# Run FAST to get initial CSF segmentation
 # fast produces files like <basename>_pveseg.nii.gz — check if any exist
 shopt -s nullglob
 pves=( "$root"/*_pveseg.nii.gz )
@@ -67,7 +69,7 @@ lv_dilname="aseg-lv${out_suffix}.nii.gz"
 rv_dilname="aseg-rv${out_suffix}.nii.gz"
 
 run_if_missing "$root/$lv_dilname" \
-    fslmaths "$root/aseg-lv.nii.gz" -kernel $kernal_shape $kernal_size -dilM "$root/$lv_dilname"
+    fslmaths "$root/aseg-lv.nii.gz" -kernel $kernal_shape $kernal_size -dilM "$root/$lv_dilname" 
 
 run_if_missing "$root/$rv_dilname" \
     fslmaths "$root/aseg-rv.nii.gz" -kernel $kernal_shape $kernal_size -dilM "$root/$rv_dilname"

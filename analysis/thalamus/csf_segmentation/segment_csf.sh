@@ -8,32 +8,13 @@ if [[ -z "$root" || ! -d "$root" ]]; then
     exit 2
 fi
 
-subject=$(basename "${root%/}")
+subject=$(basename "$root")
 
 log="$root/segment_csf.log"
-# tee all output to a per-subject log (keep log in original root)
+# tee all output to a per-subject log
 exec > >(tee -a "$log") 2>&1
 
 info() { printf '%s %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$*" ; }
-
-# scratch dir under home
-scratch_base="${HOME%/}/scratch"
-scratch="${scratch_base}/${subject}"
-
-# ensure cleanup and sync back on exit (success or failure)
-on_exit() {
-    rc=$?
-    info "EXIT (code $rc) — syncing results from $scratch -> $root and removing scratch"
-    if [[ -d "$scratch" ]]; then
-        # copy everything back except the input t1 to avoid overwriting if undesired
-        rsync -a --delete --exclude 't1.nii.gz' --exclude 'segment_csf.log' "$scratch/" "$root/" || info "WARN: rsync back failed"
-        rm -rf "$scratch" || info "WARN: failed to remove $scratch"
-    else
-        info "No scratch dir to sync"
-    fi
-    exit "$rc"
-}
-trap on_exit EXIT
 
 run_if_missing() {
     out="$1"; shift
@@ -51,45 +32,99 @@ run_if_missing() {
     fi
 }
 
-# prepare scratch
-mkdir -p "$scratch"
-info "Created scratch dir $scratch"
 
-# copy the input t1 into scratch
-if [[ -e "$root/t1.nii.gz" && -s "$root/t1.nii.gz" ]]; then
-    rsync -a "$root/t1.nii.gz" "$scratch/" || { info "ERROR: copying t1 to scratch failed"; exit 1; }
-else
-    info "ERROR: input $root/t1.nii.gz missing or empty"; exit 2
-fi
+t1="$root/t1.nii.gz"
 
-# run pipeline from scratch
-cd "$scratch"
+# Skull strip
+run_if_missing "$root/t1.strip_b0.nii.gz" \
+    mri_synthstrip -i "$t1" -b 0 -o "$root/t1.strip_b0.nii.gz"
 
-t1="$scratch/t1.nii.gz"
-
-run_if_missing "$scratch/t1.strip_b0.nii.gz" \
-    mri_synthstrip -i "$t1" -b 0 -o "$scratch/t1.strip_b0.nii.gz"
-
-# fast produces files like <basename>_pveseg.nii.gz — check if any exist in scratch
+# Run FAST to get initial CSF segmentation
+# fast produces files like <basename>_pveseg.nii.gz — check if any exist
 shopt -s nullglob
-pves=( "$scratch"/*_pveseg.nii.gz )
+pves=( "$root"/*_pveseg.nii.gz )
 if [[ ${#pves[@]} -gt 0 ]]; then
-    info "SKIP: pveseg outputs exist in scratch (${#pves[@]})"
+    info "SKIP: pveseg outputs exist (${#pves[@]})"
 else
-    info "RUN: fast -N $scratch/t1.strip_b0.nii.gz"
-    fast -N "$scratch/t1.strip_b0.nii.gz"
+    info "RUN: fast -N $root/t1.strip_b0.nii.gz"
+    fast -N "$root/t1.strip_b0.nii.gz"
 fi
 
-run_if_missing "$scratch/all_CSF.nii.gz" \
-    c3d "$scratch"/*_pveseg.nii.gz -retain-labels 1 -o "$scratch/all_CSF.nii.gz"
+run_if_missing "$root/all_CSF.nii.gz" \
+    c3d "$root"/*_pveseg.nii.gz -retain-labels 1 -o "$root/all_CSF.nii.gz"
 
-# subtract ventricular/choriod masks that live in original root
-run_if_missing "$scratch/peripheral_CSF.nii.gz" \
-    fslmaths "$scratch/all_CSF.nii.gz" \
-        -sub "$root/aseg-lv-fix.nii.gz" \
-        -sub "$root/aseg-rv-fix.nii.gz" \
-        -sub "$root/choroid.nii.gz" \
-        -thr 0 -bin "$scratch/peripheral_CSF.nii.gz"
 
-info "DONE for $root (results in $scratch — will be synced back on exit)"
+
+
+# Dilate ventricle mask for subtraction from peripheral CSF
+kernal_shape="sphere"
+kernal_size=2
+out_suffix="_dilM_${kernal_shape}${kernal_size}"
+
+prefix="aseg-lv-fix"
+initial="${prefix}.nii.gz"
+dilname="${prefix}${out_suffix}.nii.gz"
+run_if_missing "$root/$dilname" \
+    fslmaths "$root/$initial" -kernel $kernal_shape $kernal_size -dilM "$root/$dilname" 
+lv_dilname=$dilname
+
+prefix="aseg-rv-fix"
+initial="${prefix}.nii.gz"
+dilname="${prefix}${out_suffix}.nii.gz"
+run_if_missing "$root/$dilname" \
+    fslmaths "$root/aseg-rv-fix.nii.gz" -kernel $kernal_shape $kernal_size -dilM "$root/$dilname"
+rv_dilname=$dilname
+
+# Third Ventricle
+kernal_shape="sphere"
+kernal_size=2
+out_suffix="_dilM_${kernal_shape}${kernal_size}"
+
+prefix="aseg-third_ventricle"
+initial="${prefix}.nii.gz"
+dilname="${prefix}${out_suffix}.nii.gz"
+# run_if_missing "$root/$dilname" \
+#     fslmaths "$root/$initial" -kernel $kernal_shape $kernal_size -dilM "$root/$dilname" 
+# thirdV_dilname=$dilname
+thirdV_dilname=$initial
+
+# CSF from aseg
+kernal_shape="sphere"
+kernal_size=2.2
+out_suffix="_dilM_${kernal_shape}${kernal_size}"
+
+prefix="aseg-CSF"
+initial="${prefix}.nii.gz"
+dilname="${prefix}${out_suffix}.nii.gz"
+# run_if_missing "$root/$dilname" \
+#     fslmaths "$root/$initial" -kernel $kernal_shape $kernal_size -dilM "$root/$dilname" 
+# fsCSF_dilname=$dilname
+fsCSF_dilname=$initial
+
+# fourth ventricle
+kernal_shape="sphere"
+kernal_size=2
+out_suffix="_dilM_${kernal_shape}${kernal_size}"
+
+prefix="aseg-fourth_ventricle"
+initial="${prefix}.nii.gz"
+dilname="${prefix}${out_suffix}.nii.gz"
+# run_if_missing "$root/$dilname" \
+#     fslmaths "$root/$initial" -kernel $kernal_shape $kernal_size -dilM "$root/$dilname" 
+# fourthV_dilname=$dilname
+fourthV_dilname=$initial
+
+
+run_if_missing "$root/peripheral_CSF_CHECK.nii.gz" \
+fslmaths "$root/all_CSF.nii.gz" \
+		-sub "$root/$lv_dilname" \
+		-sub "$root/$rv_dilname" \
+		-sub "$root/$thirdV_dilname" \
+		-sub "$root/$fourthV_dilname" \
+		-sub "$root/$fsCSF_dilname" \
+		-sub "$root/choroid.nii.gz" \
+		-thr 0 -bin "$root/peripheral_CSF_CHECK.nii.gz"
+
+
+info "DONE for $root"
 # ...existing code...

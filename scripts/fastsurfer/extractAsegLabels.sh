@@ -6,7 +6,7 @@ work_dir=$1
 
 log="$work_dir/extract_aseg.log"
 # tee all output to a per-subject log
-exec > >(tee -a "$log") 2>&1
+exec > >(tee "$log") 2>&1
 
 info() { printf '%s %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$*" ; }
 
@@ -45,10 +45,24 @@ run_if_missing() {
 
 cd "$work_dir"
 
-# if [[ -e "$out" && -s "$out" ]];
+# # if [[ -e "$out" && -s "$out" ]];
 
-run_if_missing "aseg-third_ventricle.nii.gz" "
-	mri_extract_label "aseg.auto_noCCseg.in_subject.nii.gz" 14 "aseg-third_ventricle_tmp.nii.gz" &&
-	c3d "aseg-third_ventricle_tmp.nii.gz" -connected-components -threshold 1 1 1 0 -o "aseg-third_ventricle.nii.gz" &&
-	rm "aseg-third_ventricle_tmp.nii.gz"
+# run_if_missing "aseg-third_ventricle.nii.gz" "
+# 	mri_extract_label "aseg.auto_noCCseg.in_subject.nii.gz" 14 "aseg-third_ventricle_tmp.nii.gz" &&
+# 	c3d "aseg-third_ventricle_tmp.nii.gz" -connected-components -threshold 1 1 1 0 -o "aseg-third_ventricle.nii.gz" &&
+# 	rm "aseg-third_ventricle_tmp.nii.gz"
+# "
+
+
+# run_if_missing "aseg-fourth_ventricle.nii.gz" "
+# 	mri_extract_label "aseg.auto_noCCseg.in_subject.nii.gz" 15 "aseg-fourth_ventricle_tmp.nii.gz" &&
+# 	c3d "aseg-fourth_ventricle_tmp.nii.gz" -connected-components -threshold 1 1 1 0 -o "aseg-fourth_ventricle.nii.gz" &&
+# 	rm "aseg-fourth_ventricle_tmp.nii.gz"
+# "
+
+
+run_if_missing "aseg-CSF.nii.gz" "
+	mri_extract_label "aseg.auto_noCCseg.in_subject.nii.gz" 24 "aseg-CSF_tmp.nii.gz" &&
+	c3d "aseg-CSF_tmp.nii.gz" -connected-components -threshold 1 1 1 0 -o "aseg-CSF.nii.gz" &&
+	rm "aseg-CSF_tmp.nii.gz"
 "
