@@ -96,6 +96,56 @@ vars_to_center = [
 ]
 
 
+def load_df():
+    choroid_volumes = pd.read_csv(
+    "/home/srs-9/Projects/ms_mri/data/choroid_aschoplex_volumes.csv", index_col="subid"
+    )
+    ventricle_volumes = pd.read_csv(
+        "/home/srs-9/Projects/ms_mri/analysis/paper1/data0/ventricle_volumes.csv",
+        index_col="subid",
+    )
+    csf_volumes = pd.read_csv(
+        "/home/srs-9/Projects/ms_mri/analysis/thalamus/data0/csf_volumes2.csv",
+        index_col="subid",
+    )
+    third_ventricle_width = pd.read_csv(
+        "/home/srs-9/Projects/ms_mri/analysis/thalamus/data0/third_ventricle_width.csv",
+        index_col="subid",
+    )
+
+    tiv = pd.read_csv("/home/srs-9/Projects/ms_mri/data/tiv_data.csv", index_col="subid")
+
+    df = pd.read_csv(
+        "/home/srs-9/Projects/ms_mri/data/clinical_data_processed.csv", index_col="subid"
+    )
+    sdmt = pd.read_csv(
+        "/home/srs-9/Projects/ms_mri/analysis/thalamus/SDMT_sheet.csv", index_col="subid"
+    )
+    df = df.join(
+        [
+            choroid_volumes,
+            ventricle_volumes,
+            csf_volumes,
+            third_ventricle_width,
+            tiv,
+            sdmt["SDMT"],
+        ]
+    )
+    rename_columns = {
+        "ventricle_volume": "LV",
+        "choroid_volume": "CP",
+        "peripheral": "periCSF",
+        "all": "allCSF",
+        "third_ventricle": "thirdV",
+        "fourth_ventricle": "fourthV",
+        "aseg_csf": "asegCSF",
+        "third_ventricle_width": "thirdV_width"
+    }
+    df.rename(columns=rename_columns, inplace=True)
+
+    return df
+
+
 def subject_to_subid(subject):
     if not isinstance(subject, str):
         return None
