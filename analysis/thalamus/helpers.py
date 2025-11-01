@@ -96,6 +96,40 @@ vars_to_center = [
 ]
 
 
+
+def quick_regression(y, x, data, covariates=None):
+    if covariates is None:
+        covariates = ["age", "Female", "tiv"]
+    exog = [x] + covariates
+    formula = f"{y} ~ {" + ".join(exog)}"
+    res = sm.OLS.from_formula(formula, data=data).fit()
+    return res
+
+
+
+def residualize_structs(model_data, dependent_var, independent_vars):
+    """
+    Residualize a dependent variable by regressing out independent variables.
+
+    Parameters:
+    -----------
+    model_data : pd.DataFrame
+        DataFrame containing the data
+    dependent_var : str
+        The dependent variable to residualize
+    independent_vars : list of str
+        List of independent variables to regress out
+
+    Returns:
+    --------
+    np.ndarray
+        Residuals of the dependent variable after regression
+    """
+    formula = f"{dependent_var} ~ " + " + ".join(independent_vars)
+    model = sm.OLS.from_formula(formula, data=model_data).fit()
+    return model.resid
+
+
 def load_df():
     choroid_volumes = pd.read_csv(
         "/home/srs-9/Projects/ms_mri/data/choroid_aschoplex_volumes.csv",
