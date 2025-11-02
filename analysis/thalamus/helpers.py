@@ -96,18 +96,18 @@ vars_to_center = [
 ]
 
 
-
 def quick_regression(y, x, data, covariates=None):
     if covariates is None:
         covariates = ["age", "Female", "tiv"]
     exog = [x] + covariates
-    formula = f"{y} ~ {" + ".join(exog)}"
+    formula = f"{y} ~ {' + '.join(exog)}"
     res = sm.OLS.from_formula(formula, data=data).fit()
-    return res
+    return res, formula
 
 
-
-def residualize_structs(model_data, dependent_var, independent_vars):
+def residualize_structs(
+    model_data: pd.DataFrame, dependent_var: str, independent_vars: list[str]
+):
     """
     Residualize a dependent variable by regressing out independent variables.
 
@@ -191,7 +191,7 @@ def load_hipsthomas(data_dir, side=None):
         filename = f"hipsthomas_{side}_vols.csv"
     else:
         filename = "hipsthomas_vols.csv"
-        
+
     df_thomas = pd.read_csv(data_dir / filename, index_col="subid")
 
     new_colnames = {}
@@ -208,6 +208,7 @@ def load_hipsthomas(data_dir, side=None):
         "posterior": ["Pul_8", "LGN_9", "MGN_10"],
         "medial": ["MD_Pf_12", "CM_11"],
     }
+
     def combine_nuclei(df, groupings):
         df2 = pd.DataFrame()
         for group, nuclei in groupings.items():
@@ -215,8 +216,20 @@ def load_hipsthomas(data_dir, side=None):
         return df2
 
     df_thomas = df_thomas.join(combine_nuclei(df_thomas, nuclei_groupings))
-    
-    return df_thomas 
+
+    return df_thomas
+
+
+# maybe print a log of what what composited 
+def composite_vars(df):
+    df["CCF0"] = df["LV"] / df["allCSF"]
+    df["CCF"] = df["LV"] / (df["LV"] + df["periCSF"])
+    df["CCR"] = df["LV"] / df["periCSF"]
+
+    df["periCSF_ratio"] = df["periCSF"] / df["LV"]
+    df["periCSF_frac"] = df["periCSF"] / df["allCSF"]
+    return df
+
 
 def normalize_by_tiv(df, variables=None):
     if variables is None:
@@ -237,9 +250,12 @@ def normalize_by_tiv(df, variables=None):
     return df
 
 
-def zscore(df):
+def zscore(df, skip_vars=None):
+    if skip_vars is None:
+        skip_vars = []
     df_z = df.copy()
     numeric_cols = df.select_dtypes(include="number").columns
+    numeric_cols = numeric_cols[~numeric_cols.isin(skip_vars)]
     df_z[numeric_cols] = df_z[numeric_cols].apply(stats.zscore, nan_policy="omit")
     return df_z
 
@@ -250,15 +266,19 @@ transforms = {
     "log10": np.log10,
     "log1p": np.log1p,
     "sqrt": np.sqrt,
+    "square": np.square,
     "boxcox": stats.boxcox,
     "yeojohnson": stats.yeojohnson,
 }
 
 
-def transform_variables(df: pd.DataFrame, var_list: dict[str, str]):
+def transform_variables(df: pd.DataFrame, var_list: dict[str, str], rename=True):
     for var, transform in var_list.items():
-        df[f"{var}_{transform}"] = transforms[transform](df[var])
-    
+        if rename:
+            new_name = f"{var}_{transform}"
+        else:
+            new_name = var
+        df[new_name] = transforms[transform](df[var])
     return df
 
 
