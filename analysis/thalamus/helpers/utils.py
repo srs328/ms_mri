@@ -332,8 +332,11 @@ def get_colors():
     return colors
 
 
+def nifti_name(filename: str) -> str:
+    # for a substitution could use:  s/\.nii(?:\.gz)?$//
+    re_str = re.compile(r"^(.+?)(?:\.nii(?:\.gz)?)?$")
+    return re_str.match(filename)[1]
 
-import subprocess
 
 
 
