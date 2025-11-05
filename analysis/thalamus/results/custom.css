@@ -1,0 +1,18 @@
+body, .jp-Notebook {
+    font-family: 'Source Sans 3', sans-serif !important;
+}
+
+/* Markdown cells */
+.jp-MarkdownCell {
+    font-family: 'Source Sans 3', serif !important;
+}
+
+/* Code output */
+.jp-OutputArea-output {
+    font-family: 'Source Sans 3', monospace !important;
+}
+
+/* Tables */
+table {
+    font-family: 'Source Sans 3', sans-serif !important;
+}

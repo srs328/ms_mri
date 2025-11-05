@@ -21,6 +21,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pyperclip
 import statsmodels.api as sm
+from statsmodels.base.wrapper import ResultsWrapper
+
 from IPython.display import clear_output
 from matplotlib import colormaps
 from scipy import stats
@@ -186,7 +188,7 @@ def run_regressions(
     fdr_method: str = "fdr_bh",
     fdr_alpha: float = 0.05,
     regression_model: str = "OLS",
-):
+) -> tuple[dict[str, pd.DataFrame], dict[str, pd.DataFrame], dict[tuple, ResultsWrapper]]:
     """
     Run OLS for every (struct, predictor).
     Returns (results_by_struct, results_by_predictor)
@@ -236,12 +238,13 @@ def run_regressions(
                 if regression_model == "OLS":
                     res = sm.OLS.from_formula(formula, data=model_data).fit()
                 else:
-                    res = regression_model.from_formula(formula, data=model_data).fit()
+                    res = regression_model.from_formula(formula, data=model_data).fit(disp=0)
                 if robust_cov:
                     rres = res.get_robustcov_results(cov_type=robust_cov)
                 else:
                     rres = res
-                models[struct][pred] = res
+                #* can switch to frozenset if it becomes really helpful to index without worrying about order
+                models[(struct, pred)] = res
                 coef = _get_val_by_name(rres, pred, "params")
                 pval = _get_val_by_name(rres, pred, "pvalues")
                 se = _get_val_by_name(rres, pred, "bse")
@@ -262,7 +265,7 @@ def run_regressions(
 
                 ci_str = f"[{llci:.3}, {ulci:.3}]" if not np.isnan(llci) else ""
                 if regression_model != "OLS":
-                    r2 = None
+                    r2 = ""
                 else:
                     r2 = res.rsquared_adj
 
@@ -305,9 +308,15 @@ def run_regressions(
             row["outcome"] = struct
             rows.append(row)
         df_pred = pd.DataFrame(rows).set_index("outcome")[cols]
+        pvals = df_pred["pval"].fillna(1.0).values
+        _, p_fdr_vals, _, _ = multipletests(pvals, alpha=fdr_alpha, method=fdr_method)
+        df_pred["p_fdr"] = p_fdr_vals
+        df_pred["coef_sig"] = df_struct["coef"].where(
+            df_struct["p_fdr"] < fdr_alpha, 0.0
+        )
         results_by_predictor[pred] = df_pred
 
-    return results_by_struct, results_by_predictor
+    return results_by_struct, results_by_predictor, models
 
 
 def run_regressions2(
@@ -317,28 +326,35 @@ def run_regressions2(
     model_names: list[str] = None,
     covariates: list[str] = None,
     robust_cov: str = "HC3",
+    regression_model: str = "OLS",
     fdr_method: str = "fdr_bh",
     fdr_alpha: float = 0.05,
-):
+) -> tuple[dict[str, pd.DataFrame], dict[str, ResultsWrapper], str]:
     """
-    Run OLS for every (struct, predictor).
-    Returns (results_by_struct, results_by_predictor)
-    - results_by_struct: dict struct -> DataFrame indexed by predictor
-    - results_by_predictor: dict predictor -> DataFrame indexed by struct
+    Run OLS for one outcome on each set of variables in exog_list.
+    Returns (results, models, formulas)
+    - results: dict -> DataFrame indexed by model_names
+    - models: dict  -> ResultsWrapper indexed by model_names
     Each DataFrame columns: coef, pval, se, llci, ulci, ci, R2, p_fdr, coef_sig
     """
     if model_names is None:
         model_names = [i for i, _ in enumerate(exog_list)]
     if covariates is None:
         covariates = []
+    if regression_model != "OLS":
+        robust_cov = False
 
+    results = {}
     models = {}
     formulas = {}
     for exog, model_name in zip(exog_list, model_names):
         independent_vars = exog + covariates
         formula = f"{outcome} ~ {' + '.join(independent_vars)}"
         try:
-            res = sm.OLS.from_formula(formula, data=model_data).fit()
+            if regression_model == "OLS":
+                    res = sm.OLS.from_formula(formula, data=model_data).fit()
+            else:
+                res = regression_model.from_formula(formula, data=model_data).fit(disp=0)
             if robust_cov:
                 rres = res.get_robustcov_results(cov_type=robust_cov)
             else:
@@ -356,8 +372,11 @@ def run_regressions2(
                 f"[{lci:.3}, {uci:.3}]" if not np.isnan(lci) else ""
                 for lci, uci in zip(llci, ulci)
             ]
-
-            r2 = res.rsquared_adj
+            
+            try:
+                r2 = res.rsquared_adj
+            except AttributeError:
+                r2 = ""
             exog_names = list(rres.model.exog_names)
             # confidence interval: conf_int() returns DataFrame when names available
             # ci_str = f"[{llci:.3}, {ulci:.3}]" if not np.isnan(llci) else ""
@@ -379,10 +398,10 @@ def run_regressions2(
             },
             index=exog_names,
         )
-        models[model_name] = res_df
+        results[model_name] = res_df
         formulas[model_name] = formula
 
-    return models, formulas
+    return results, models, formulas
 
 
 def run_regressions3(
@@ -390,9 +409,10 @@ def run_regressions3(
     formula_list: list[str],
     model_names: list[str] = None,
     robust_cov: str = "HC3",
+    regression_model: str = "OLS",
     fdr_method: str = "fdr_bh",
     fdr_alpha: float = 0.05,
-):
+) -> tuple[dict[str, pd.DataFrame], dict[str, ResultsWrapper], str]:
     """
     Run OLS for every (struct, predictor).
     Returns (results_by_struct, results_by_predictor)
@@ -402,12 +422,18 @@ def run_regressions3(
     """
     if model_names is None:
         model_names = [i for i, _ in enumerate(formula_list)]
+    if regression_model != "OLS":
+        robust_cov = False
 
     models = {}
+    results = {}
     formulas = {}
     for formula, model_name in zip(formula_list, model_names):
         try:
-            res = sm.OLS.from_formula(formula, data=model_data).fit()
+            if regression_model == "OLS":
+                    res = sm.OLS.from_formula(formula, data=model_data).fit()
+            else:
+                res = regression_model.from_formula(formula, data=model_data).fit()
             if robust_cov:
                 rres = res.get_robustcov_results(cov_type=robust_cov)
             else:
@@ -448,10 +474,26 @@ def run_regressions3(
             },
             index=exog_names,
         )
-        models[model_name] = res_df
+        results[model_name] = res_df
         formulas[model_name] = formula
 
-    return models, formulas
+    return results, models, formulas
+
+format_opts_ref = {
+    'coef': "{:.4f}",
+    'se': "{:.4f}",
+    'pval': "{:.2}",  # Scientific notation
+    'p_fdr': "{:.2}", 
+    'R2': "{:.2}"
+}
+
+def format_df(df, format_dict):
+    """Apply Styler-like formatting but output to markdown"""
+    df_copy = df.copy()
+    for col, fmt in format_dict.items():
+        if col in df_copy.columns:
+            df_copy[col] = df_copy[col].map(lambda x: fmt.format(x))
+    return df_copy
 
 
 def present_model(
@@ -460,7 +502,9 @@ def present_model(
     inds: list = None,
     rename_index: dict = None,
     rename_cols: dict = None,
+    format_opts: dict = format_opts_ref
 ):
+    
     # cols = ["coef", ("p_fdr", "pval"), "se", "ci", "R2"]
     if inds is None:
         inds = []
@@ -479,12 +523,20 @@ def present_model(
             for option in col:
                 if option in model.columns:
                     present_cols.append(option)
+                    break
 
+    
     present_index = []
     for ind in inds:
         if ind in model.index:
-            present_index.append(ind)
-
+            present_index.append(rename_index[ind])
+    
     model = model.rename(index=rename_index, columns=rename_cols)
-
-    return model[present_index, present_cols]
+    if len(present_index) == 0:
+        present_index = model.index
+        
+    
+        
+    model = format_df(model, format_opts)
+    
+    return model.loc[present_index, present_cols]
