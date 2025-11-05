@@ -57,7 +57,8 @@ deep_grey = [13, 14, 26, 27, 28, 29, 30, 31, 32]
 
 thalamic_nuclei_str = [str(i) for i in thalamic_nuclei]
 
-presentation_cols = ["coef", ("p_fdr", "pval"), "se", "ci", "R2"]
+# presentation_cols = ["coef", ("p_fdr", "pval"), "se", "ci", "R2"]
+presentation_cols = ["coef", "pval", "p_fdr", "se", "ci", "R2"]
 
 
 all_predictors = [
@@ -69,6 +70,7 @@ all_predictors = [
     "fourthV_log",
     "asegCSF",
     "CCF_log",
+    "CCR_log",
     "CCF0_log",
     "periCSF_ratio_log",
     "periCSF_frac_square",
@@ -93,6 +95,7 @@ all_predictorsT = [
     "thirdV",
     "fourthV",
     "asegCSF",
+    "CCR",
     "CCF",
     "CCF0",
     "periCSF_ratio",

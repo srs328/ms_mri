@@ -336,54 +336,6 @@ def get_colors():
 import subprocess
 
 
-def run_R_script(p1, p2, p12, nobs):
-    """
-    Call R script to run Williams-Hotelling test and return p-value.
-
-    Parameters:
-    -----------
-    p1 : float
-        First correlation coefficient
-    p2 : float
-        Second correlation coefficient
-    p12 : float
-        Correlation between the two variables
-    nobs : int
-        Number of observations
-
-    Returns:
-    --------
-    float
-        The p-value from the Williams-Hotelling test
-    """
-    # Path to the R script (adjust this to where your R script is located)
-    r_script_path = "run_williams_hotelling.R"
-
-    # Convert arguments to strings
-    args = [str(p1), str(p2), str(p12), str(nobs)]
-
-    # Call R script
-    try:
-        result = subprocess.run(
-            ["Rscript", r_script_path] + args,
-            capture_output=True,
-            text=True,
-            check=True,
-        )
-
-        # Parse the output (p-value)
-        p_value = float(result.stdout.strip())
-        return p_value
-
-    except subprocess.CalledProcessError as e:
-        print(f"Error running R script: {e}")
-        print(f"stdout: {e.stdout}")
-        print(f"stderr: {e.stderr}")
-        raise
-    except ValueError as e:
-        print(f"Error parsing R output: {e}")
-        print(f"R output was: {result.stdout}")
-        raise
 
 
 def residualize_structs(model_data, dependent_var, independent_vars):
