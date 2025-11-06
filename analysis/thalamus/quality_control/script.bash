@@ -1,0 +1,2 @@
+#!/bin/bash
+fsleyes render --outfile "/home/srs-9/Projects/ms_mri/analysis/thalamus/quality_control/images/hips_thomas/sub1003-anat_t1-seg_hipsthomas-axial[171].png" --size 1920 1080 --scene ortho -xh -yh --voxelLoc 98 157 171 --hideCursor --hideLabels /mnt/h/srs-9/thalamus_project/data/sub1003-20170329/t1.nii.gz -ot volume /mnt/h/srs-9/thalamus_project/data/sub1003-20170329/thomasfull_L.nii.gz -ot label -l freesurfercolorlut -o /mnt/h/srs-9/thalamus_project/data/sub1003-20170329/thomasfull_R.nii.gz -ot label -l freesurfercolorlut -o
