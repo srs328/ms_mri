@@ -1,3 +1,4 @@
+# %%
 from warnings import simplefilter
 
 import pandas as pd
@@ -6,14 +7,16 @@ simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
 import sys
 from pathlib import Path
 
-import helpers
+# import helpers
 from matplotlib import colormaps
 
 sys.path.insert(0, "/home/srs-9/Projects/ms_mri/analysis/thalamus/helpers")
-from helpers import load_df
+from utils import load_df
+import utils
 
 from mri_data import file_manager as fm
 
+#%%
 drive_root = fm.get_drive_root()
 dataroot = drive_root / "3Tpioneer_bids"
 data_dir = Path("/home/srs-9/Projects/ms_mri/data")
@@ -22,7 +25,7 @@ fig_path = Path(
 )
 
 df = load_df()
-df_thomas = helpers.load_hipsthomas(data_dir)
+df_thomas = utils.load_hipsthomas(data_dir)
 
 data = df.join(df_thomas)
 
@@ -30,12 +33,13 @@ data = df.join(df_thomas)
 for struct in ["brain", "white", "grey", "thalamus", "t2lv"]:
     data[struct] = data[struct] * 1000
 
-
+#%%
 # /home/srs-9/Projects/ms_mri/analysis/thalamus/helpers/helpers.py:225: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
 #   df["CCF0"] = df["LV"] / df["allCSF"]
 # /home/srs-9/Projects/ms_mri/analysis/thalamus/helpers/helpers.py:226: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor pe
-data = helpers.composite_vars(data)
+data = utils.composite_vars(data)
 
+#%%
 #! See suggestions from assumption_checks.ipynb
 # TODO It would be helpful if the transformed variable name was general so I
 # TODO     wouldnt have to remember which transform was applied to each
@@ -55,12 +59,12 @@ transformations = {
     "periCSF_ratio": "log",
     "periCSF_frac": "square",
 }
-data = helpers.transform_variables(data, transformations)
-dataT = helpers.transform_variables(data, transformations, rename=False)
+data = utils.transform_variables(data, transformations)
+# dataT = utils.transform_variables(data, transformations, rename=False)
 
 
 viridis = colormaps["viridis"].resampled(20)
-colors = helpers.get_colors()
+colors = utils.get_colors()
 
 MS_patients = data["dz_type2"] == "MS"
 NONMS_patients = data["dz_type2"] == "!MS"
@@ -83,4 +87,4 @@ hips_thomas_invref = pd.read_csv(
 )["index"]
 
 data.to_csv(Path(__file__).parent / "data.csv")
-dataT.to_csv(Path(__file__).parent / "data_transformed.csv")
+# dataT.to_csv(Path(__file__).parent / "data_transformed.csv")

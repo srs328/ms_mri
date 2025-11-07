@@ -32,8 +32,11 @@ from reload_recursive import reload_recursive
 from statsmodels.stats.mediation import Mediation
 from statsmodels.stats.outliers_influence import variance_inflation_factor
 from tqdm.notebook import tqdm
-
+import utils
 from mri_data import file_manager as fm
+
+
+colors = utils.get_colors()
 
 
 def quick_regression(
@@ -415,9 +418,10 @@ def run_regressions3(
 ) -> tuple[dict[str, pd.DataFrame], dict[str, ResultsWrapper], str]:
     """
     Run OLS for every (struct, predictor).
-    Returns (results_by_struct, results_by_predictor)
-    - results_by_struct: dict struct -> DataFrame indexed by predictor
-    - results_by_predictor: dict predictor -> DataFrame indexed by struct
+    Returns (results, models, formulas)
+    - results: 
+    - models:
+    - formulas:
     Each DataFrame columns: coef, pval, se, llci, ulci, ci, R2, p_fdr, coef_sig
     """
     if model_names is None:
@@ -540,3 +544,54 @@ def present_model(
     model = format_df(model, format_opts)
     
     return model.loc[present_index, present_cols]
+
+
+def plot_moderation(model_data, y_name, x_name, w_name, covariates=None,
+                    xlab_name=None, ylab_name=None, wlab_name=None):
+    if xlab_name is None:
+        xlab_name = x_name
+    if ylab_name is None:
+        ylab_name = y_name
+    if wlab_name is None:
+        wlab_name = w_name
+
+    if covariates is not None:
+        plus_covariates = f"+ {" + ".join(covariates)}"
+    else:
+        plus_covariates = ""
+
+    xcent_name = f"{x_name}_cent"
+    wcent_name = f"{y_name}_cent"
+    model_data[xcent_name] = model_data[x_name] - model_data[x_name].mean()
+    model_data[wcent_name] = model_data[w_name] - model_data[w_name].mean()
+
+    formula = f"{y_name} ~ {wcent_name}*{xcent_name} {plus_covariates}"
+    res = sm.OLS.from_formula(formula, data=model_data).fit()
+
+    x_rng, y_lvls = helpers.moderation_y(model_data, res, xcent_name, wcent_name)
+    # fix x_rng since the moderation_y took the centered version
+    x_rng = np.linspace(model_data[x_name].min(), model_data[x_name].max(), 100)
+    # x_rng = np.linspace(0, 20, 100)
+
+
+    cmap = model_data[w_name] / model_data[w_name].max()
+    # helpers.plot_moderation(model_data['dzdur'], model_data['EDSS'], x_rng, y_lvls)
+    # plt.scatter(model_data[x_name], model_data[y_name], s=8, color=viridis(cmap))
+    plt.scatter(model_data[x_name], model_data[y_name], s=8)
+
+    # m-sd line
+    plt.plot(x_rng, y_lvls[0][0], label="m-sd", linestyle="--", color=colors['dark blue1'])
+    # plt.fill_between(x_rng, y_lvls[0][1], y_lvls[0][2], color=colors['light blue1'], alpha=0.1)
+
+    plt.plot(x_rng, y_lvls[1][0], label=f"m ({wlab_name})", linestyle="-", color="black")
+    plt.fill_between(x_rng, y_lvls[1][1], y_lvls[1][2], color='grey', alpha=0.2)
+
+    plt.plot(x_rng, y_lvls[2][0], label="m+sd", linestyle="--", color=colors['dark red1'])
+    # plt.fill_between(x_rng, y_lvls[2][1], y_lvls[2][2], color=colors['light red1'], alpha=0.1)
+
+    plt.legend()
+    plt.xlabel(xlab_name)
+    plt.ylabel(ylab_name)
+    plt.show()
+
+

@@ -23,7 +23,7 @@ for subid in tqdm(subject_sessions, total=len(subject_sessions)):
     sesid = sessions[0]
 
     data_dir = dataroot / f"sub{subid}-{sesid}"
-    seg_file = data_dir / "aseg-ventricles.nii.gz"
+    seg_file = data_dir / "aseg-lateral_ventricles.nii.gz"
 
     try:
         vol_stats = utils.compute_volume(str(seg_file))
@@ -43,4 +43,4 @@ df = pd.DataFrame({"ventricle_volume": vols}, index=index)
 df.index.name = "subid"
 
 # %%
-df.to_csv("/home/srs-9/Projects/ms_mri/analysis/paper1/data0/ventricle_volumes.csv")
+df.to_csv("/home/srs-9/Projects/ms_mri/data/ventricle_volumes.csv")

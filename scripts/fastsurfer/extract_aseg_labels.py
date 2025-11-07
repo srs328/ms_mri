@@ -34,4 +34,6 @@ for subid in tqdm(subject_sessions, total=len(subject_sessions)):
         result = subprocess.run(cmd, check=True, capture_output=True)
     except subprocess.CalledProcessError as e:
         logger.error(e)
-        logger.debug(e.stderr)
+        logger.debug(e.stderr.decode('utf-8'))
+    else:
+        logger.debug(result.stdout.decode('utf-8'))

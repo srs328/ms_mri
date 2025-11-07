@@ -1,59 +1,941 @@
-2025-11-04 04:38:36.285 | INFO     | __main__:<module>:56 - Starting session 20170329 for subject 1003
-2025-11-04 05:11:02.728 | INFO     | __main__:<module>:75 - Starting session 20210918 for subject 1003
-2025-11-04 05:42:52.281 | INFO     | __main__:<module>:56 - Starting session 20160921 for subject 1017
-2025-11-04 06:09:01.813 | INFO     | __main__:<module>:75 - Starting session 20220118 for subject 1017
-2025-11-04 06:36:42.606 | INFO     | __main__:<module>:56 - Starting session 20170813 for subject 1023
-2025-11-04 07:05:54.062 | INFO     | __main__:<module>:75 - Starting session 20211014 for subject 1023
-2025-11-04 07:34:09.121 | INFO     | __main__:<module>:56 - Starting session 20161031 for subject 1038
-2025-11-04 08:02:00.202 | INFO     | __main__:<module>:75 - Starting session 20220208 for subject 1038
-2025-11-04 08:31:48.168 | INFO     | __main__:<module>:56 - Starting session 20161013 for subject 1042
-2025-11-04 09:01:50.405 | INFO     | __main__:<module>:75 - Starting session 20211029 for subject 1042
-2025-11-04 09:29:54.122 | INFO     | __main__:<module>:56 - Starting session 20170127 for subject 1065
-2025-11-04 10:00:01.243 | INFO     | __main__:<module>:75 - Starting session 20210712 for subject 1065
-2025-11-04 10:27:43.601 | INFO     | __main__:<module>:56 - Starting session 20161201 for subject 1071
-2025-11-04 10:58:39.011 | INFO     | __main__:<module>:75 - Starting session 20200309 for subject 1071
-2025-11-04 11:30:38.336 | INFO     | __main__:<module>:56 - Starting session 20170912 for subject 1076
-2025-11-04 11:57:40.616 | INFO     | __main__:<module>:75 - Starting session 20210715 for subject 1076
-2025-11-04 12:32:29.356 | INFO     | __main__:<module>:56 - Starting session 20161218 for subject 1082
-2025-11-04 13:06:20.268 | INFO     | __main__:<module>:75 - Starting session 20220201 for subject 1082
-2025-11-04 13:37:03.560 | INFO     | __main__:<module>:56 - Starting session 20160902 for subject 1094
-2025-11-04 14:09:57.534 | INFO     | __main__:<module>:75 - Starting session 20201013 for subject 1094
-2025-11-04 14:45:40.858 | INFO     | __main__:<module>:56 - Starting session 20171105 for subject 1098
-2025-11-04 15:20:46.610 | INFO     | __main__:<module>:75 - Starting session 20220121 for subject 1098
-2025-11-04 15:55:51.690 | INFO     | __main__:<module>:56 - Starting session 20170502 for subject 1107
-2025-11-04 16:30:06.166 | INFO     | __main__:<module>:75 - Starting session 20190407 for subject 1107
-2025-11-04 17:03:54.668 | INFO     | __main__:<module>:56 - Starting session 20161010 for subject 1119
-2025-11-04 17:40:06.480 | INFO     | __main__:<module>:75 - Starting session 20201222 for subject 1119
-2025-11-04 18:16:42.334 | INFO     | __main__:<module>:56 - Starting session 20160919 for subject 1125
-2025-11-04 18:44:18.133 | INFO     | __main__:<module>:75 - Starting session 20210409 for subject 1125
-2025-11-04 19:11:17.247 | INFO     | __main__:<module>:56 - Starting session 20161209 for subject 1131
-2025-11-04 19:44:35.431 | INFO     | __main__:<module>:75 - Starting session 20211229 for subject 1131
-2025-11-04 20:20:29.939 | INFO     | __main__:<module>:56 - Starting session 20170529 for subject 1152
-2025-11-04 20:57:57.705 | INFO     | __main__:<module>:75 - Starting session 20211006 for subject 1152
-2025-11-04 21:32:49.208 | INFO     | __main__:<module>:56 - Starting session 20180708 for subject 1155
-2025-11-04 22:11:56.130 | INFO     | __main__:<module>:75 - Starting session 20210816 for subject 1155
-2025-11-04 22:51:11.245 | INFO     | __main__:<module>:56 - Starting session 20191028 for subject 1161
-2025-11-04 23:28:44.213 | INFO     | __main__:<module>:75 - Starting session 20211018 for subject 1161
-2025-11-05 00:05:57.461 | INFO     | __main__:<module>:56 - Starting session 20160910 for subject 1165
-2025-11-05 00:41:29.813 | INFO     | __main__:<module>:75 - Starting session 20220207 for subject 1165
-2025-11-05 01:14:32.936 | INFO     | __main__:<module>:56 - Starting session 20170503 for subject 1167
-2025-11-05 01:53:25.358 | INFO     | __main__:<module>:75 - Starting session 20210927 for subject 1167
-2025-11-05 02:27:15.206 | INFO     | __main__:<module>:56 - Starting session 20170131 for subject 1182
-2025-11-05 02:58:54.334 | INFO     | __main__:<module>:75 - Starting session 20220311 for subject 1182
-2025-11-05 03:29:05.960 | INFO     | __main__:<module>:56 - Starting session 20170612 for subject 1198
-2025-11-05 04:07:51.936 | INFO     | __main__:<module>:75 - Starting session 20201114 for subject 1198
-2025-11-05 04:47:43.136 | INFO     | __main__:<module>:56 - Starting session 20170117 for subject 1211
-2025-11-05 05:17:11.928 | INFO     | __main__:<module>:75 - Starting session 20210402 for subject 1211
-2025-11-05 05:47:35.686 | INFO     | __main__:<module>:56 - Starting session 20170821 for subject 1218
-2025-11-05 06:18:10.842 | INFO     | __main__:<module>:75 - Starting session 20210910 for subject 1218
-2025-11-05 06:51:28.214 | INFO     | __main__:<module>:56 - Starting session 20161203 for subject 1225
-2025-11-05 07:30:42.476 | INFO     | __main__:<module>:75 - Starting session 20210526 for subject 1225
-2025-11-05 08:10:51.478 | INFO     | __main__:<module>:56 - Starting session 20161121 for subject 1235
-2025-11-05 08:46:42.358 | INFO     | __main__:<module>:75 - Starting session 20210128 for subject 1235
-2025-11-05 09:23:15.781 | INFO     | __main__:<module>:56 - Starting session 20170113 for subject 1239
-2025-11-05 10:04:02.071 | INFO     | __main__:<module>:75 - Starting session 20220224 for subject 1239
-2025-11-05 10:44:32.638 | INFO     | __main__:<module>:56 - Starting session 20170615 for subject 1240
-2025-11-05 11:23:23.538 | INFO     | __main__:<module>:75 - Starting session 20210905 for subject 1240
-2025-11-05 12:03:18.108 | INFO     | __main__:<module>:56 - Starting session 20161122 for subject 1241
-2025-11-05 12:43:50.188 | INFO     | __main__:<module>:75 - Starting session 20210818 for subject 1241
-2025-11-05 13:23:34.780 | INFO     | __main__:<module>:56 - Starting session 20160922 for subject 1248
+2025-11-06 21:54:08.519 | INFO     | __main__:<module>:77 - Starting session 20220214 for subject 1371
+2025-11-06 22:18:23.954 | INFO     | __main__:<module>:58 - Starting session 20161214 for subject 1376
+2025-11-06 22:52:02.513 | INFO     | __main__:<module>:77 - Starting session 20220323 for subject 1376
+2025-11-06 23:23:12.200 | INFO     | __main__:<module>:58 - Starting session 20170511 for subject 1382
+2025-11-06 23:49:06.199 | INFO     | __main__:<module>:77 - Starting session 20211001 for subject 1382
+2025-11-07 00:14:02.925 | INFO     | __main__:<module>:58 - Starting session 20170126 for subject 1396
+2025-11-07 00:44:27.957 | INFO     | __main__:<module>:77 - Starting session 20220202 for subject 1396
+2025-11-07 01:15:23.881 | INFO     | __main__:<module>:58 - Starting session 20170801 for subject 1401
+2025-11-07 01:39:58.315 | INFO     | __main__:<module>:77 - Starting session 20211028 for subject 1401
+2025-11-07 02:07:26.516 | INFO     | __main__:<module>:58 - Starting session 20170701 for subject 1417
+2025-11-07 02:32:44.230 | INFO     | __main__:<module>:77 - Starting session 20220204 for subject 1417
+2025-11-07 02:58:27.715 | INFO     | __main__:<module>:58 - Starting session 20170519 for subject 1441
+2025-11-07 03:23:42.410 | INFO     | __main__:<module>:77 - Starting session 20201228 for subject 1441
+2025-11-07 03:49:15.336 | INFO     | __main__:<module>:58 - Starting session 20170720 for subject 1442
+2025-11-07 04:13:45.254 | INFO     | __main__:<module>:77 - Starting session 20210824 for subject 1442
+2025-11-07 04:40:05.675 | INFO     | __main__:<module>:58 - Starting session 20161018 for subject 1479
+2025-11-07 05:03:04.105 | INFO     | __main__:<module>:77 - Starting session 20210829 for subject 1479
+2025-11-07 05:25:35.283 | INFO     | __main__:<module>:58 - Starting session 20170719 for subject 1508
+2025-11-07 05:54:16.269 | INFO     | __main__:<module>:77 - Starting session 20210910 for subject 1508
+2025-11-07 06:23:14.418 | INFO     | __main__:<module>:58 - Starting session 20170915 for subject 1527
+2025-11-07 06:53:43.837 | INFO     | __main__:<module>:77 - Starting session 20210806 for subject 1527
+2025-11-07 07:22:15.888 | INFO     | __main__:<module>:58 - Starting session 20170119 for subject 1529
+2025-11-07 07:53:50.540 | INFO     | __main__:<module>:77 - Starting session 20220117 for subject 1529
+2025-11-07 08:22:52.511 | INFO     | __main__:<module>:58 - Starting session 20170323 for subject 1536
+2025-11-07 08:52:41.910 | INFO     | __main__:<module>:77 - Starting session 20210606 for subject 1536
+2025-11-07 09:22:51.251 | INFO     | __main__:<module>:58 - Starting session 20160927 for subject 1544
+2025-11-07 09:50:20.342 | INFO     | __main__:<module>:77 - Starting session 20220706 for subject 1544
+2025-11-07 10:22:17.172 | INFO     | __main__:<module>:58 - Starting session 20180205 for subject 1546
+2025-11-07 10:47:45.064 | INFO     | __main__:<module>:77 - Starting session 20220409 for subject 1546
+2025-11-07 11:11:04.316 | INFO     | __main__:<module>:58 - Starting session 20161222 for subject 2001
+2025-11-07 11:39:52.220 | INFO     | __main__:<module>:77 - Starting session 20220310 for subject 2001
+2025-11-07 12:10:36.425 | INFO     | __main__:<module>:58 - Starting session 20170221 for subject 2003
+2025-11-07 12:35:05.821 | INFO     | __main__:<module>:77 - Starting session 20210408 for subject 2003
+2025-11-07 13:00:58.188 | INFO     | __main__:<module>:58 - Starting session 20170320 for subject 2006
+2025-11-07 13:23:11.217 | INFO     | __main__:<module>:77 - Starting session 20210907 for subject 2006
+2025-11-07 13:47:58.045 | INFO     | __main__:<module>:58 - Starting session 20171221 for subject 2025
+2025-11-07 14:15:13.111 | INFO     | __main__:<module>:77 - Starting session 20220218 for subject 2025
+2025-11-07 14:42:58.674 | INFO     | __main__:<module>:58 - Starting session 20160917 for subject 2026
+2025-11-07 15:11:38.605 | INFO     | __main__:<module>:77 - Starting session 20211012 for subject 2026
+2025-11-07 15:41:19.904 | INFO     | __main__:<module>:58 - Starting session 20170221 for subject 2033
+2025-11-07 16:03:02.434 | INFO     | __main__:<module>:77 - Starting session 20210614 for subject 2033
+2025-11-07 16:27:51.026 | INFO     | __main__:<module>:58 - Starting session 20170118 for subject 2039
+2025-11-07 17:01:00.870 | INFO     | __main__:<module>:77 - Starting session 20220113 for subject 2039
+2025-11-07 17:03:19.574 | ERROR    | __main__:<module>:81 - 
+2025-11-07 17:03:19.575 | ERROR    | __main__:<module>:82 - Failed session 20220113 for subject 2039
+2025-11-07 17:03:19.575 | ERROR    | __main__:<module>:83 - Input is standard T1; doing HIPS synthesis.
+Running THOMAS on '/data/sub2039_input0001-modality0-t1_20220113_mniWarped-WarpedToTemplate.nii.gz', outputs to '/data', with arguments -c        
+CDed to /data
+Making /data/temp
+Running with 20 processes.
+(run_thomas): args=Namespace(input_image='sub2039_input0001-modality0-t1_20220113_mniWarped-WarpedToTemplate.nii.gz', roi_names=['ALL'], algorithm='v2', contrastsynth=True, cropOnly=False, debug=False, denoisemask=False, forcereg=False, mvOnly=False, oldt1=False, processes=None, right=False, smallCrop=False, useMask=False, verbose=True, fixedImageMask=None, movingImageMask=None, warp=None, antsfusion=False, mask=None, output_path=None, tempdir='/data/temp', template=None), cmd=functools.partial(<function command at 0x7f3109696de0>, debug=False, suppress=True, verbose=True), temp_path=/data/temp, e_opts={'debug': False, 'suppress': True, 'verbose': True}
+Algorithm is v2
+All_Command_lines_OK
+Using double precision for computations.
+=============================================================================
+The composite transform comprises the following transforms (in order): 
+  1. Center of mass alignment using fixed image: /thomas/resources/origtemplate.nii.gz and moving image: sub2039_input0001-modality0-t1_20220113_mniWarped-WarpedToTemplate.nii.gz (type = Euler3DTransform)
+=============================================================================
+  number of levels = 4
+  number of levels = 4
+  fixed image: /thomas/resources/origtemplate.nii.gz
+  moving image: sub2039_input0001-modality0-t1_20220113_mniWarped-WarpedToTemplate.nii.gz
+  fixed image: /thomas/resources/origtemplate.nii.gz
+  moving image: sub2039_input0001-modality0-t1_20220113_mniWarped-WarpedToTemplate.nii.gz
+Dimension = 3
+Number of stages = 2
+Use histogram matching = false
+Winsorize image intensities = true
+  Lower quantile = 0.005
+  Upper quantile = 0.995
+
+
+Stage 1 State
+   Image metric = MattesMI
+     Fixed image = Image (0x56199c708500)
+  RTTI typeinfo:   itk::Image<double, 3u>
+  Reference Count: 2
+  Modified Time: 1697
+  Debug: Off
+  Object Name: 
+  Observers: 
+    none
+  Source: (none)
+  Source output name: (none)
+  Release Data: Off
+  Data Released: False
+  Global Release Data: Off
+  PipelineMTime: 0
+  UpdateMTime: 1482
+  RealTimeStamp: 0 seconds 
+  LargestPossibleRegion: 
+    Dimension: 3
+    Index: [0, 0, 0]
+    Size: [256, 440, 256]
+  BufferedRegion: 
+    Dimension: 3
+    Index: [0, 0, 0]
+    Size: [256, 440, 256]
+  RequestedRegion: 
+    Dimension: 3
+    Index: [0, 0, 0]
+    Size: [256, 440, 256]
+  Spacing: [0.7031, 0.5, 0.7031]
+  Origin: [83.5844, 59.822, -106.951]
+  Direction: 
+-1 0 0
+0 -1 0
+0 0 1
+
+  IndexToPointMatrix: 
+-0.7031 0 0
+0 -0.5 0
+0 0 0.7031
+
+  PointToIndexMatrix: 
+-1.42227 0 0
+0 -2 0
+0 0 1.42227
+
+  Inverse Direction: 
+-1 0 0
+0 -1 0
+0 0 1
+
+  PixelContainer: 
+    ImportImageContainer (0x56199c7087c0)
+      RTTI typeinfo:   itk::ImportImageContainer<unsigned long, double>
+      Reference Count: 1
+      Modified Time: 1479
+      Debug: Off
+      Object Name: 
+      Observers: 
+        none
+      Pointer: 0x7ff429065010
+      Container manages memory: true
+      Size: 28835840
+      Capacity: 28835840
+
+     Moving image = Image (0x56199c70b210)
+  RTTI typeinfo:   itk::Image<double, 3u>
+  Reference Count: 2
+  Modified Time: 1698
+  Debug: Off
+  Object Name: 
+  Observers: 
+    none
+  Source: (none)
+  Source output name: (none)
+  Release Data: Off
+  Data Released: False
+  Global Release Data: Off
+  PipelineMTime: 0
+  UpdateMTime: 1695
+  RealTimeStamp: 0 seconds 
+  LargestPossibleRegion: 
+    Dimension: 3
+    Index: [0, 0, 0]
+    Size: [182, 218, 182]
+  BufferedRegion: 
+    Dimension: 3
+    Index: [0, 0, 0]
+    Size: [182, 218, 182]
+  RequestedRegion: 
+    Dimension: 3
+    Index: [0, 0, 0]
+    Size: [182, 218, 182]
+  Spacing: [1, 1, 1]
+  Origin: [-90, 126, -72]
+  Direction: 
+1 0 0
+0 -1 0
+0 0 1
+
+  IndexToPointMatrix: 
+1 0 0
+0 -1 0
+0 0 1
+
+  PointToIndexMatrix: 
+1 0 0
+0 -1 0
+0 0 1
+
+  Inverse Direction: 
+1 0 0
+0 -1 0
+0 0 1
+
+  PixelContainer: 
+    ImportImageContainer (0x56199c708ef0)
+      RTTI typeinfo:   itk::ImportImageContainer<unsigned long, double>
+      Reference Count: 1
+      Modified Time: 1692
+      Debug: Off
+      Object Name: 
+      Observers: 
+        none
+      Pointer: 0x7ff42594d010
+      Container manages memory: true
+      Size: 7221032
+      Capacity: 7221032
+
+     Weighting = 1
+     Sampling strategy = regular
+     Number of bins = 32
+     Radius = 4
+     Sampling percentage  = 0.25
+   Transform = Rigid
+     Gradient step = 0.1
+     Update field sigma (voxel space) = 0
+     Total field sigma (voxel space) = 0
+     Update field time sigma = 0
+     Total field time sigma  = 0
+     Number of time indices = 0
+     Number of time point samples = 0
+Stage 2 State
+   Image metric = MattesMI
+     Fixed image = Image (0x56199c722210)
+  RTTI typeinfo:   itk::Image<double, 3u>
+  Reference Count: 2
+  Modified Time: 2127
+  Debug: Off
+  Object Name: 
+  Observers: 
+    none
+  Source: (none)
+  Source output name: (none)
+  Release Data: Off
+  Data Released: False
+  Global Release Data: Off
+  PipelineMTime: 0
+  UpdateMTime: 1912
+  RealTimeStamp: 0 seconds 
+  LargestPossibleRegion: 
+    Dimension: 3
+    Index: [0, 0, 0]
+    Size: [256, 440, 256]
+  BufferedRegion: 
+    Dimension: 3
+    Index: [0, 0, 0]
+    Size: [256, 440, 256]
+  RequestedRegion: 
+    Dimension: 3
+    Index: [0, 0, 0]
+    Size: [256, 440, 256]
+  Spacing: [0.7031, 0.5, 0.7031]
+  Origin: [83.5844, 59.822, -106.951]
+  Direction: 
+-1 0 0
+0 -1 0
+0 0 1
+
+  IndexToPointMatrix: 
+-0.7031 0 0
+0 -0.5 0
+0 0 0.7031
+
+  PointToIndexMatrix: 
+-1.42227 0 0
+0 -2 0
+0 0 1.42227
+
+  Inverse Direction: 
+-1 0 0
+0 -1 0
+0 0 1
+
+  PixelContainer: 
+    ImportImageContainer (0x56199c713f40)
+      RTTI typeinfo:   itk::ImportImageContainer<unsigned long, double>
+      Reference Count: 1
+      Modified Time: 1909
+      Debug: Off
+      Object Name: 
+      Observers: 
+        none
+      Pointer: 0x7ff417d4c010
+      Container manages memory: true
+      Size: 28835840
+      Capacity: 28835840
+
+     Moving image = Image (0x56199c725750)
+  RTTI typeinfo:   itk::Image<double, 3u>
+  Reference Count: 2
+  Modified Time: 2128
+  Debug: Off
+  Object Name: 
+  Observers: 
+    none
+  Source: (none)
+  Source output name: (none)
+  Release Data: Off
+  Data Released: False
+  Global Release Data: Off
+  PipelineMTime: 0
+  UpdateMTime: 2125
+  RealTimeStamp: 0 seconds 
+  LargestPossibleRegion: 
+    Dimension: 3
+    Index: [0, 0, 0]
+    Size: [182, 218, 182]
+  BufferedRegion: 
+    Dimension: 3
+    Index: [0, 0, 0]
+    Size: [182, 218, 182]
+  RequestedRegion: 
+    Dimension: 3
+    Index: [0, 0, 0]
+    Size: [182, 218, 182]
+  Spacing: [1, 1, 1]
+  Origin: [-90, 126, -72]
+  Direction: 
+1 0 0
+0 -1 0
+0 0 1
+
+  IndexToPointMatrix: 
+1 0 0
+0 -1 0
+0 0 1
+
+  PointToIndexMatrix: 
+1 0 0
+0 -1 0
+0 0 1
+
+  Inverse Direction: 
+1 0 0
+0 -1 0
+0 0 1
+
+  PixelContainer: 
+    ImportImageContainer (0x56199c711d20)
+      RTTI typeinfo:   itk::ImportImageContainer<unsigned long, double>
+      Reference Count: 1
+      Modified Time: 2122
+      Debug: Off
+      Object Name: 
+      Observers: 
+        none
+      Pointer: 0x7ff414634010
+      Container manages memory: true
+      Size: 7221032
+      Capacity: 7221032
+
+     Weighting = 1
+     Sampling strategy = regular
+     Number of bins = 32
+     Radius = 4
+     Sampling percentage  = 0.25
+   Transform = Affine
+     Gradient step = 0.1
+     Update field sigma (voxel space) = 0
+     Total field sigma (voxel space) = 0
+     Update field time sigma = 0
+     Total field time sigma  = 0
+     Number of time indices = 0
+     Number of time point samples = 0
+Registration using 2 total stages.
+
+Stage 0
+  iterations = 1000x500x250x100
+  convergence threshold = 7e-07
+  convergence window size = 10
+  number of levels = 4
+  using the Mattes MI metric (number of bins = 32, weight = 1, use gradient filter = 0)
+  preprocessing:  winsorizing the image intensities
+  Shrink factors (level 1 out of 4): [9, 12, 9]
+  Shrink factors (level 2 out of 4): [6, 8, 6]
+  Shrink factors (level 3 out of 4): [3, 4, 3]
+  Shrink factors (level 4 out of 4): [1, 2, 1]
+  smoothing sigmas per level: [4, 3, 2, 1]
+  regular sampling (percentage = 0.25)
+
+*** Running Euler3DTransform registration ***
+
+DIAGNOSTIC,Iteration,metricValue,convergenceValue,ITERATION_TIME_INDEX,SINCE_LAST
+ 2DIAGNOSTIC,     1, -4.931658574190e-01, 1.797693134862e+308, 3.2099e-01, 3.2099e-01, 
+ 2DIAGNOSTIC,     2, -4.952833045500e-01, 1.797693134862e+308, 3.2665e-01, 5.6548e-03, 
+ 2DIAGNOSTIC,     3, -4.982868802370e-01, 1.797693134862e+308, 3.3238e-01, 5.7330e-03, 
+ 2DIAGNOSTIC,     4, -5.035673028500e-01, 1.797693134862e+308, 3.3831e-01, 5.9280e-03, 
+ 2DIAGNOSTIC,     5, -5.105663640545e-01, 1.797693134862e+308, 3.4405e-01, 5.7390e-03, 
+ 2DIAGNOSTIC,     6, -5.271254389472e-01, 1.797693134862e+308, 3.4994e-01, 5.8959e-03, 
+ 2DIAGNOSTIC,     7, -5.603278369199e-01, 1.797693134862e+308, 3.5631e-01, 6.3722e-03, 
+ 2DIAGNOSTIC,     8, -6.080440916813e-01, 1.797693134862e+308, 3.6449e-01, 8.1730e-03, 
+ 2DIAGNOSTIC,     9, -6.086901909604e-01, 1.797693134862e+308, 3.7065e-01, 6.1581e-03, 
+ 2DIAGNOSTIC,    10, -6.086532525032e-01, 1.684781282886e-02, 3.7855e-01, 7.9048e-03, 
+ 2DIAGNOSTIC,    11, -6.089740497949e-01, 1.580718552458e-02, 3.8486e-01, 6.3109e-03, 
+ 2DIAGNOSTIC,    12, -6.092680245086e-01, 1.362609931862e-02, 3.9109e-01, 6.2308e-03, 
+ 2DIAGNOSTIC,    13, -6.113137663069e-01, 1.075793275851e-02, 3.9822e-01, 7.1321e-03, 
+ 2DIAGNOSTIC,    14, -6.123369045537e-01, 7.604041347093e-03, 4.0487e-01, 6.6490e-03, 
+ 2DIAGNOSTIC,    15, -6.125352259873e-01, 4.481485012546e-03, 4.1090e-01, 6.0251e-03, 
+ 2DIAGNOSTIC,    16, -6.220877262718e-01, 2.176147350127e-03, 4.2404e-01, 1.3147e-02, 
+ 2DIAGNOSTIC,    17, -6.229584919017e-01, 9.164191491496e-04, 4.3030e-01, 6.2530e-03, 
+ 2DIAGNOSTIC,    18, -6.231317907931e-01, 1.042382548888e-03, 4.3782e-01, 7.5259e-03, 
+ 2DIAGNOSTIC,    19, -6.235445077686e-01, 1.089218273922e-03, 4.4613e-01, 8.3020e-03, 
+ 2DIAGNOSTIC,    20, -6.251097550976e-01, 1.067454784501e-03, 4.5357e-01, 7.4451e-03, 
+ 2DIAGNOSTIC,    21, -6.247391830167e-01, 9.439439468001e-04, 4.6430e-01, 1.0734e-02, 
+ 2DIAGNOSTIC,    22, -6.245672287516e-01, 7.461947026162e-04, 4.7080e-01, 6.4940e-03, 
+ 2DIAGNOSTIC,    23, -6.246774436986e-01, 5.459696240654e-04, 4.7730e-01, 6.5050e-03, 
+ 2DIAGNOSTIC,    24, -6.246424949217e-01, 3.345481788886e-04, 4.8554e-01, 8.2388e-03, 
+ 2DIAGNOSTIC,    25, -6.247273611419e-01, 1.097950275266e-04, 4.9183e-01, 6.2900e-03, 
+ 2DIAGNOSTIC,    26, -6.247575488147e-01, 7.050376132620e-05, 4.9927e-01, 7.4351e-03, 
+ 2DIAGNOSTIC,    27, -6.248035115762e-01, 4.462792171673e-05, 5.0572e-01, 6.4490e-03, 
+ 2DIAGNOSTIC,    28, -6.248031778612e-01, 1.958875797851e-05, 5.1167e-01, 5.9500e-03, 
+ 2DIAGNOSTIC,    29, -6.249999895029e-01, 3.855039081520e-06, 5.1918e-01, 7.5161e-03, 
+ 2DIAGNOSTIC,    30, -6.251678689808e-01, 1.665563456138e-05, 5.2609e-01, 6.9051e-03, 
+ 2DIAGNOSTIC,    31, -6.249527447429e-01, 1.813718176651e-05, 5.3332e-01, 7.2279e-03, 
+ 2DIAGNOSTIC,    32, -6.252263904577e-01, 1.954525172898e-05, 5.3940e-01, 6.0821e-03, 
+ 2DIAGNOSTIC,    33, -6.253628923076e-01, 2.258158765299e-05, 5.4523e-01, 5.8360e-03, 
+ 2DIAGNOSTIC,    34, -6.270275054273e-01, 4.602825781356e-05, 5.5343e-01, 8.1959e-03, 
+ 2DIAGNOSTIC,    35, -6.274239175346e-01, 6.971688097511e-05, 5.6321e-01, 9.7799e-03, 
+ 2DIAGNOSTIC,    36, -6.289454851932e-01, 1.061111849451e-04, 5.7004e-01, 6.8259e-03, 
+ 2DIAGNOSTIC,    37, -6.291287712454e-01, 1.332403992920e-04, 5.7599e-01, 5.9519e-03, 
+ 2DIAGNOSTIC,    38, -6.295225153183e-01, 1.512126040829e-04, 5.8285e-01, 6.8591e-03, 
+ 2DIAGNOSTIC,    39, -6.296727959500e-01, 1.579012423612e-04, 5.8975e-01, 6.9058e-03, 
+ 2DIAGNOSTIC,    40, -6.307246758751e-01, 1.636091717703e-04, 5.9852e-01, 8.7719e-03, 
+ 2DIAGNOSTIC,    41, -6.307566892596e-01, 1.510759851537e-04, 6.0629e-01, 7.7620e-03, 
+ 2DIAGNOSTIC,    42, -6.306974466215e-01, 1.275322303958e-04, 6.1192e-01, 5.6341e-03, 
+ 2DIAGNOSTIC,    43, -6.300938641714e-01, 8.785668177440e-05, 6.1910e-01, 7.1800e-03, 
+ 2DIAGNOSTIC,    44, -6.301174792654e-01, 5.996109571257e-05, 6.2483e-01, 5.7280e-03, 
+ 2DIAGNOSTIC,    45, -6.301102654618e-01, 3.110485696477e-05, 6.3243e-01, 7.6020e-03, 
+ 2DIAGNOSTIC,    46, -6.301243819633e-01, 1.617759607739e-05, 6.3830e-01, 5.8680e-03, 
+DIAGNOSTIC,Iteration,metricValue,convergenceValue,ITERATION_TIME_INDEX,SINCE_LAST
+ 2DIAGNOSTIC,     1, -5.832383104447e-01, 1.797693134862e+308, 9.5769e-01, 3.1939e-01, 
+ 2DIAGNOSTIC,     2, -5.844738484163e-01, 1.797693134862e+308, 9.7126e-01, 1.3574e-02, 
+ 2DIAGNOSTIC,     3, -5.861475395934e-01, 1.797693134862e+308, 9.8097e-01, 9.7110e-03, 
+ 2DIAGNOSTIC,     4, -5.878021588589e-01, 1.797693134862e+308, 9.9225e-01, 1.1281e-02, 
+ 2DIAGNOSTIC,     5, -5.888962928549e-01, 1.797693134862e+308, 1.0028e+00, 1.0525e-02, 
+ 2DIAGNOSTIC,     6, -5.891845144871e-01, 1.797693134862e+308, 1.0119e+00, 9.1112e-03, 
+ 2DIAGNOSTIC,     7, -5.895489653144e-01, 1.797693134862e+308, 1.0222e+00, 1.0344e-02, 
+ 2DIAGNOSTIC,     8, -5.903304127755e-01, 1.797693134862e+308, 1.0310e+00, 8.8038e-03, 
+ 2DIAGNOSTIC,     9, -5.913368200014e-01, 1.797693134862e+308, 1.0461e+00, 1.5102e-02, 
+ 2DIAGNOSTIC,    10, -5.920880839131e-01, 9.039330430175e-04, 1.0562e+00, 1.0088e-02, 
+ 2DIAGNOSTIC,    11, -5.920425480545e-01, 7.038579872985e-04, 1.0679e+00, 1.1680e-02, 
+ 2DIAGNOSTIC,    12, -5.919979466428e-01, 5.226394977808e-04, 1.0795e+00, 1.1568e-02, 
+ 2DIAGNOSTIC,    13, -5.919015417210e-01, 3.797429208015e-04, 1.0918e+00, 1.2357e-02, 
+ 2DIAGNOSTIC,    14, -5.915859583639e-01, 2.677380952631e-04, 1.1012e+00, 9.3479e-03, 
+ 2DIAGNOSTIC,    15, -5.915911719762e-01, 1.818193381319e-04, 1.1096e+00, 8.4350e-03, 
+ 2DIAGNOSTIC,    16, -5.915989131770e-01, 9.935889600859e-05, 1.1209e+00, 1.1295e-02, 
+ 2DIAGNOSTIC,    17, -5.916096810420e-01, 2.824808676349e-05, 1.1306e+00, 9.6529e-03, 
+DIAGNOSTIC,Iteration,metricValue,convergenceValue,ITERATION_TIME_INDEX,SINCE_LAST
+ 2DIAGNOSTIC,     1, -5.390028757563e-01, 1.797693134862e+308, 1.4615e+00, 3.3091e-01, 
+ 2DIAGNOSTIC,     2, -5.389706264939e-01, 1.797693134862e+308, 1.5042e+00, 4.2709e-02, 
+ 2DIAGNOSTIC,     3, -5.389581168651e-01, 1.797693134862e+308, 1.5523e+00, 4.8146e-02, 
+ 2DIAGNOSTIC,     4, -5.389490618301e-01, 1.797693134862e+308, 1.6010e+00, 4.8714e-02, 
+ 2DIAGNOSTIC,     5, -5.389338378159e-01, 1.797693134862e+308, 1.6524e+00, 5.1343e-02, 
+ 2DIAGNOSTIC,     6, -5.389337844777e-01, 1.797693134862e+308, 1.6963e+00, 4.3909e-02, 
+ 2DIAGNOSTIC,     7, -5.389141666462e-01, 1.797693134862e+308, 1.7364e+00, 4.0145e-02, 
+ 2DIAGNOSTIC,     8, -5.389184709960e-01, 1.797693134862e+308, 1.7944e+00, 5.7999e-02, 
+ 2DIAGNOSTIC,     9, -5.389189382025e-01, 1.797693134862e+308, 1.8582e+00, 6.3792e-02, 
+DIAGNOSTIC,Iteration,metricValue,convergenceValue,ITERATION_TIME_INDEX,SINCE_LAST
+ 2DIAGNOSTIC,     1, -4.791917083067e-01, 1.797693134862e+308, 3.7704e+00, 1.9122e+00, 
+ 2DIAGNOSTIC,     2, -4.791919923256e-01, 1.797693134862e+308, 4.4791e+00, 7.0874e-01, 
+ 2DIAGNOSTIC,     3, -4.791917545419e-01, 1.797693134862e+308, 4.9456e+00, 4.6643e-01, 
+ 2DIAGNOSTIC,     4, -4.791903092484e-01, 1.797693134862e+308, 5.4477e+00, 5.0217e-01, 
+ 2DIAGNOSTIC,     5, -4.791887462319e-01, 1.797693134862e+308, 5.9197e+00, 4.7194e-01, 
+ 2DIAGNOSTIC,     6, -4.791883869766e-01, 1.797693134862e+308, 6.4154e+00, 4.9571e-01, 
+ 2DIAGNOSTIC,     7, -4.791868027096e-01, 1.797693134862e+308, 6.9003e+00, 4.8492e-01, 
+ 2DIAGNOSTIC,     8, -4.791842547071e-01, 1.797693134862e+308, 7.3913e+00, 4.9100e-01, 
+ 2DIAGNOSTIC,     9, -4.791836860449e-01, 1.797693134862e+308, 7.9373e+00, 5.4599e-01, 
+ 2DIAGNOSTIC,    10, -4.791832421911e-01, 1.835536187697e-06, 8.4458e+00, 5.0849e-01, 
+ 2DIAGNOSTIC,    11, -4.791834963222e-01, 1.654836633905e-06, 8.9375e+00, 4.9176e-01, 
+ 2DIAGNOSTIC,    12, -4.791838360421e-01, 1.644987311103e-06, 9.4801e+00, 5.4258e-01, 
+ 2DIAGNOSTIC,    13, -4.791838063946e-01, 1.717728849812e-06, 9.9394e+00, 4.5923e-01, 
+ 2DIAGNOSTIC,    14, -4.791833604209e-01, 1.768074380987e-06, 1.0748e+01, 8.0817e-01, 
+ 2DIAGNOSTIC,    15, -4.791834297934e-01, 1.797724491701e-06, 1.1287e+01, 5.3917e-01, 
+ 2DIAGNOSTIC,    16, -4.791813713708e-01, 1.763429476692e-06, 1.1770e+01, 4.8283e-01, 
+ 2DIAGNOSTIC,    17, -4.791815516867e-01, 1.708528186622e-06, 1.2245e+01, 4.7548e-01, 
+ 2DIAGNOSTIC,    18, -4.791803213837e-01, 1.549833085153e-06, 1.2717e+01, 4.7200e-01, 
+ 2DIAGNOSTIC,    19, -4.791795741356e-01, 1.387923461674e-06, 1.3202e+01, 4.8462e-01, 
+ 2DIAGNOSTIC,    20, -4.791790172375e-01, 1.239546127858e-06, 1.3675e+01, 4.7321e-01, 
+ 2DIAGNOSTIC,    21, -4.791782525823e-01, 1.123666186813e-06, 1.4092e+01, 4.1711e-01, 
+ 2DIAGNOSTIC,    22, -4.791780450015e-01, 1.058638103839e-06, 1.4499e+01, 4.0740e-01, 
+ 2DIAGNOSTIC,    23, -4.791781173827e-01, 1.036355791885e-06, 1.4908e+01, 4.0849e-01, 
+ 2DIAGNOSTIC,    24, -4.791778630060e-01, 1.030586087608e-06, 1.5415e+01, 5.0766e-01, 
+ 2DIAGNOSTIC,    25, -4.791768139365e-01, 1.031166746907e-06, 1.5935e+01, 5.1987e-01, 
+ 2DIAGNOSTIC,    26, -4.791761556107e-01, 9.926823848275e-07, 1.6433e+01, 4.9772e-01, 
+ 2DIAGNOSTIC,    27, -4.791756023230e-01, 9.711485991562e-07, 1.6924e+01, 4.9068e-01, 
+ 2DIAGNOSTIC,    28, -4.791747411077e-01, 9.262360897155e-07, 1.7364e+01, 4.3997e-01, 
+ 2DIAGNOSTIC,    29, -4.791739364384e-01, 8.728767841790e-07, 1.7921e+01, 5.5730e-01, 
+ 2DIAGNOSTIC,    30, -4.791735254409e-01, 8.260162512111e-07, 1.8426e+01, 5.0487e-01, 
+ 2DIAGNOSTIC,    31, -4.791728947706e-01, 7.778114550563e-07, 1.9002e+01, 5.7568e-01, 
+ 2DIAGNOSTIC,    32, -4.791729229655e-01, 7.526887192064e-07, 1.9427e+01, 4.2578e-01, 
+ 2DIAGNOSTIC,    33, -4.791713070296e-01, 7.240322091526e-07, 1.9861e+01, 4.3331e-01, 
+ 2DIAGNOSTIC,    34, -4.791706514745e-01, 7.051448379682e-07, 2.0303e+01, 4.4201e-01, 
+  Elapsed time (stage 0): 2.0692e+01
+
+
+Stage 1
+  iterations = 1000x500x250x100
+  convergence threshold = 4.0000e-07
+  convergence window size = 10
+  number of levels = 4
+  using the Mattes MI metric (number of bins = 32, weight = 1.0000e+00, use gradient filter = 0)
+  preprocessing:  winsorizing the image intensities
+  Shrink factors (level 1 out of 4): [9, 12, 9]
+  Shrink factors (level 2 out of 4): [6, 8, 6]
+  Shrink factors (level 3 out of 4): [3, 4, 3]
+  Shrink factors (level 4 out of 4): [1, 2, 1]
+  smoothing sigmas per level: [4, 3, 2, 1]
+  regular sampling (percentage = 2.5000e-01)
+
+*** Running AffineTransform registration ***
+
+DIAGNOSTIC,Iteration,metricValue,convergenceValue,ITERATION_TIME_INDEX,SINCE_LAST
+ 2DIAGNOSTIC,     1, -6.275145576982e-01, 1.797693134862e+308, 2.7660e-01, 2.7660e-01, 
+ 2DIAGNOSTIC,     2, -6.286617501155e-01, 1.797693134862e+308, 2.8250e-01, 5.8999e-03, 
+ 2DIAGNOSTIC,     3, -6.305229324798e-01, 1.797693134862e+308, 2.8912e-01, 6.6190e-03, 
+ 2DIAGNOSTIC,     4, -6.333352650354e-01, 1.797693134862e+308, 2.9558e-01, 6.4640e-03, 
+ 2DIAGNOSTIC,     5, -6.384523850468e-01, 1.797693134862e+308, 3.0192e-01, 6.3410e-03, 
+ 2DIAGNOSTIC,     6, -6.427336525571e-01, 1.797693134862e+308, 3.0819e-01, 6.2652e-03, 
+ 2DIAGNOSTIC,     7, -6.494591729002e-01, 1.797693134862e+308, 3.1538e-01, 7.1959e-03, 
+ 2DIAGNOSTIC,     8, -6.516784585268e-01, 1.797693134862e+308, 3.3044e-01, 1.5060e-02, 
+ 2DIAGNOSTIC,     9, -6.519119027849e-01, 1.797693134862e+308, 3.3656e-01, 6.1162e-03, 
+ 2DIAGNOSTIC,    10, -6.531436448569e-01, 3.065057598070e-03, 3.4294e-01, 6.3770e-03, 
+ 2DIAGNOSTIC,    11, -6.542123287746e-01, 2.644764488099e-03, 3.4862e-01, 5.6820e-03, 
+ 2DIAGNOSTIC,    12, -6.542944965791e-01, 2.101342871532e-03, 3.5521e-01, 6.5870e-03, 
+ 2DIAGNOSTIC,    13, -6.544554417159e-01, 1.522884693987e-03, 3.6540e-01, 1.0195e-02, 
+ 2DIAGNOSTIC,    14, -6.546526958014e-01, 9.855059452588e-04, 3.7226e-01, 6.8569e-03, 
+ 2DIAGNOSTIC,    15, -6.546355244008e-01, 5.799061224535e-04, 3.8032e-01, 8.0640e-03, 
+ 2DIAGNOSTIC,    16, -6.543750678460e-01, 2.784007307716e-04, 3.8899e-01, 8.6689e-03, 
+ 2DIAGNOSTIC,    17, -6.543127661080e-01, 1.587839771592e-04, 3.9643e-01, 7.4358e-03, 
+ 2DIAGNOSTIC,    18, -6.541528178246e-01, 8.889322853443e-05, 4.0531e-01, 8.8799e-03, 
+ 2DIAGNOSTIC,    19, -6.540969334097e-01, 2.188878797458e-05, 4.1290e-01, 7.5970e-03, 
+DIAGNOSTIC,Iteration,metricValue,convergenceValue,ITERATION_TIME_INDEX,SINCE_LAST
+ 2DIAGNOSTIC,     1, -5.926473046354e-01, 1.797693134862e+308, 6.9664e-01, 2.8374e-01, 
+ 2DIAGNOSTIC,     2, -5.937434267529e-01, 1.797693134862e+308, 7.0915e-01, 1.2504e-02, 
+ 2DIAGNOSTIC,     3, -5.955748628756e-01, 1.797693134862e+308, 7.1968e-01, 1.0528e-02, 
+ 2DIAGNOSTIC,     4, -5.977817620606e-01, 1.797693134862e+308, 7.2984e-01, 1.0163e-02, 
+ 2DIAGNOSTIC,     5, -5.987697411374e-01, 1.797693134862e+308, 7.4452e-01, 1.4677e-02, 
+ 2DIAGNOSTIC,     6, -5.992513124088e-01, 1.797693134862e+308, 7.5585e-01, 1.1334e-02, 
+ 2DIAGNOSTIC,     7, -5.994464874569e-01, 1.797693134862e+308, 7.6764e-01, 1.1793e-02, 
+ 2DIAGNOSTIC,     8, -5.999377030877e-01, 1.797693134862e+308, 7.8076e-01, 1.3121e-02, 
+ 2DIAGNOSTIC,     9, -5.999759952478e-01, 1.797693134862e+308, 7.9485e-01, 1.4090e-02, 
+ 2DIAGNOSTIC,    10, -6.000725427970e-01, 8.015368242888e-04, 8.0774e-01, 1.2886e-02, 
+ 2DIAGNOSTIC,    11, -5.998629693030e-01, 5.286496796521e-04, 8.2032e-01, 1.2582e-02, 
+ 2DIAGNOSTIC,    12, -5.995872827864e-01, 2.863974855650e-04, 8.3431e-01, 1.3986e-02, 
+ 2DIAGNOSTIC,    13, -5.995941168795e-01, 1.214027647935e-04, 8.4776e-01, 1.3449e-02, 
+ 2DIAGNOSTIC,    14, -5.996034764337e-01, 4.344241241873e-05, 8.6084e-01, 1.3084e-02, 
+ 2DIAGNOSTIC,    15, -5.995554366818e-01, 1.615904978922e-06, 8.7388e-01, 1.3035e-02, 
+DIAGNOSTIC,Iteration,metricValue,convergenceValue,ITERATION_TIME_INDEX,SINCE_LAST
+ 2DIAGNOSTIC,     1, -5.399155160549e-01, 1.797693134862e+308, 1.2324e+00, 3.5849e-01, 
+ 2DIAGNOSTIC,     2, -5.400300076471e-01, 1.797693134862e+308, 1.2761e+00, 4.3704e-02, 
+ 2DIAGNOSTIC,     3, -5.401848502474e-01, 1.797693134862e+308, 1.3215e+00, 4.5459e-02, 
+ 2DIAGNOSTIC,     4, -5.403288422380e-01, 1.797693134862e+308, 1.3768e+00, 5.5304e-02, 
+ 2DIAGNOSTIC,     5, -5.403892913897e-01, 1.797693134862e+308, 1.4347e+00, 5.7816e-02, 
+ 2DIAGNOSTIC,     6, -5.403849623657e-01, 1.797693134862e+308, 1.4865e+00, 5.1877e-02, 
+ 2DIAGNOSTIC,     7, -5.403632698096e-01, 1.797693134862e+308, 1.5422e+00, 5.5648e-02, 
+ 2DIAGNOSTIC,     8, -5.403526508003e-01, 1.797693134862e+308, 1.5994e+00, 5.7271e-02, 
+ 2DIAGNOSTIC,     9, -5.403446772625e-01, 1.797693134862e+308, 1.6847e+00, 8.5205e-02, 
+ 2DIAGNOSTIC,    10, -5.403457350698e-01, 4.728012167200e-05, 1.7348e+00, 5.0118e-02, 
+ 2DIAGNOSTIC,    11, -5.403448155975e-01, 2.421062071380e-05, 1.7782e+00, 4.3393e-02, 
+ 2DIAGNOSTIC,    12, -5.403242573623e-01, 7.132050256986e-06, 1.8268e+00, 4.8658e-02, 
+DIAGNOSTIC,Iteration,metricValue,convergenceValue,ITERATION_TIME_INDEX,SINCE_LAST
+ 2DIAGNOSTIC,     1, -4.815902031536e-01, 1.797693134862e+308, 3.3082e+00, 1.4814e+00, 
+ 2DIAGNOSTIC,     2, -4.815861487318e-01, 1.797693134862e+308, 4.0126e+00, 7.0440e-01, 
+ 2DIAGNOSTIC,     3, -4.815824134518e-01, 1.797693134862e+308, 4.6389e+00, 6.2624e-01, 
+ 2DIAGNOSTIC,     4, -4.815812000035e-01, 1.797693134862e+308, 5.2508e+00, 6.1192e-01, 
+ 2DIAGNOSTIC,     5, -4.815795622381e-01, 1.797693134862e+308, 5.8121e+00, 5.6128e-01, 
+ 2DIAGNOSTIC,     6, -4.815794823543e-01, 1.797693134862e+308, 6.3793e+00, 5.6727e-01, 
+ 2DIAGNOSTIC,     7, -4.815783109985e-01, 1.797693134862e+308, 6.9318e+00, 5.5242e-01, 
+ 2DIAGNOSTIC,     8, -4.815784569614e-01, 1.797693134862e+308, 7.5355e+00, 6.0377e-01, 
+ 2DIAGNOSTIC,     9, -4.815778888487e-01, 1.797693134862e+308, 8.0887e+00, 5.5316e-01, 
+ 2DIAGNOSTIC,    10, -4.815772522324e-01, 1.746530269006e-06, 8.6798e+00, 5.9109e-01, 
+ 2DIAGNOSTIC,    11, -4.815776350013e-01, 2.030322648380e-06, 9.1805e+00, 5.0077e-01, 
+ 2DIAGNOSTIC,    12, -4.815779288978e-01, 2.161939154866e-06, 9.6637e+00, 4.8314e-01, 
+ 2DIAGNOSTIC,    13, -4.815778810576e-01, 2.145871670148e-06, 1.0261e+01, 5.9734e-01, 
+ 2DIAGNOSTIC,    14, -4.815780586534e-01, 2.117861457374e-06, 1.0817e+01, 5.5617e-01, 
+ 2DIAGNOSTIC,    15, -4.815780692339e-01, 2.043692959308e-06, 1.1353e+01, 5.3619e-01, 
+ 2DIAGNOSTIC,    16, -4.815773539483e-01, 1.957334814007e-06, 1.1869e+01, 5.1577e-01, 
+ 2DIAGNOSTIC,    17, -4.815774901093e-01, 1.847887833237e-06, 1.2328e+01, 4.5891e-01, 
+ 2DIAGNOSTIC,    18, -4.815775261266e-01, 1.758769382798e-06, 1.2806e+01, 4.7763e-01, 
+ 2DIAGNOSTIC,    19, -4.815779149201e-01, 1.674671070449e-06, 1.3324e+01, 5.1798e-01, 
+ 2DIAGNOSTIC,    20, -4.815784691978e-01, 1.596070721428e-06, 1.3838e+01, 5.1387e-01, 
+ 2DIAGNOSTIC,    21, -4.815781871954e-01, 1.527122982965e-06, 1.4352e+01, 5.1431e-01, 
+ 2DIAGNOSTIC,    22, -4.815781976589e-01, 1.472124170322e-06, 1.4954e+01, 6.0258e-01, 
+ 2DIAGNOSTIC,    23, -4.815769082441e-01, 1.384786911952e-06, 1.5466e+01, 5.1151e-01, 
+ 2DIAGNOSTIC,    24, -4.815770311010e-01, 1.312367510990e-06, 1.6061e+01, 5.9459e-01, 
+ 2DIAGNOSTIC,    25, -4.815766764543e-01, 1.238705742063e-06, 1.6583e+01, 5.2232e-01, 
+ 2DIAGNOSTIC,    26, -4.815762365453e-01, 1.147569301467e-06, 1.7184e+01, 6.0152e-01, 
+ 2DIAGNOSTIC,    27, -4.815767502708e-01, 1.085164380979e-06, 1.7888e+01, 7.0408e-01, 
+ 2DIAGNOSTIC,    28, -4.815768507520e-01, 1.038576949310e-06, 1.8404e+01, 5.1507e-01, 
+ 2DIAGNOSTIC,    29, -4.815760902509e-01, 9.964616019473e-07, 1.8931e+01, 5.2709e-01, 
+ 2DIAGNOSTIC,    30, -4.815755750087e-01, 9.679235490265e-07, 1.9500e+01, 5.6954e-01, 
+ 2DIAGNOSTIC,    31, -4.815755453483e-01, 9.440436293598e-07, 2.0066e+01, 5.6608e-01, 
+ 2DIAGNOSTIC,    32, -4.815755331095e-01, 9.295400052317e-07, 2.0585e+01, 5.1888e-01, 
+ 2DIAGNOSTIC,    33, -4.815754615908e-01, 8.972643429361e-07, 2.1148e+01, 5.6262e-01, 
+ 2DIAGNOSTIC,    34, -4.815754372628e-01, 8.754309985606e-07, 2.1626e+01, 4.7847e-01, 
+ 2DIAGNOSTIC,    35, -4.815754789738e-01, 8.558193051594e-07, 2.2160e+01, 5.3417e-01, 
+ 2DIAGNOSTIC,    36, -4.815754712705e-01, 8.345745655704e-07, 2.2624e+01, 4.6349e-01, 
+ 2DIAGNOSTIC,    37, -4.815754425006e-01, 8.265679590988e-07, 2.3158e+01, 5.3414e-01, 
+ 2DIAGNOSTIC,    38, -4.815755584204e-01, 8.257787612424e-07, 2.3777e+01, 6.1882e-01, 
+ 2DIAGNOSTIC,    39, -4.815757243253e-01, 8.172769055820e-07, 2.4335e+01, 5.5819e-01, 
+ 2DIAGNOSTIC,    40, -4.815750379317e-01, 7.912431836260e-07, 2.4872e+01, 5.3697e-01, 
+ 2DIAGNOSTIC,    41, -4.815741587395e-01, 7.541060879877e-07, 2.5535e+01, 6.6337e-01, 
+ 2DIAGNOSTIC,    42, -4.815733552465e-01, 7.096620632842e-07, 2.6230e+01, 6.9443e-01, 
+ 2DIAGNOSTIC,    43, -4.815734139833e-01, 6.716654302637e-07, 2.6897e+01, 6.6724e-01, 
+ 2DIAGNOSTIC,    44, -4.815734359233e-01, 6.414963678453e-07, 2.7469e+01, 5.7157e-01, 
+ 2DIAGNOSTIC,    45, -4.815733793703e-01, 6.203031069317e-07, 2.8077e+01, 6.0864e-01, 
+ 2DIAGNOSTIC,    46, -4.815724982708e-01, 5.972751470629e-07, 2.8623e+01, 5.4587e-01, 
+ 2DIAGNOSTIC,    47, -4.815719283793e-01, 5.770960505684e-07, 2.9132e+01, 5.0936e-01, 
+ 2DIAGNOSTIC,    48, -4.815717794350e-01, 5.666471575502e-07, 2.9744e+01, 6.1183e-01, 
+ 2DIAGNOSTIC,    49, -4.815724560838e-01, 5.757186589544e-07, 3.0390e+01, 6.4564e-01, 
+ 2DIAGNOSTIC,    50, -4.815712108755e-01, 5.685550056381e-07, 3.1009e+01, 6.1889e-01, 
+ 2DIAGNOSTIC,    51, -4.815712222931e-01, 5.590731894135e-07, 3.1596e+01, 5.8722e-01, 
+ 2DIAGNOSTIC,    52, -4.815707110427e-01, 5.413141195808e-07, 3.2490e+01, 8.9410e-01, 
+ 2DIAGNOSTIC,    53, -4.815707713913e-01, 5.320954115096e-07, 3.3184e+01, 6.9385e-01, 
+ 2DIAGNOSTIC,    54, -4.815690824758e-01, 5.111855668587e-07, 3.3843e+01, 6.5934e-01, 
+ 2DIAGNOSTIC,    55, -4.815690071417e-01, 4.979057478642e-07, 3.4439e+01, 5.9565e-01, 
+ 2DIAGNOSTIC,    56, -4.815690754448e-01, 4.844188996080e-07, 3.5067e+01, 6.2849e-01, 
+ 2DIAGNOSTIC,    57, -4.815687074649e-01, 4.694197516669e-07, 3.5674e+01, 6.0702e-01, 
+ 2DIAGNOSTIC,    58, -4.815687339464e-01, 4.620412139868e-07, 3.6381e+01, 7.0672e-01, 
+ 2DIAGNOSTIC,    59, -4.815687207113e-01, 4.703764998858e-07, 3.6963e+01, 5.8156e-01, 
+ 2DIAGNOSTIC,    60, -4.815686595856e-01, 4.721651787158e-07, 3.7585e+01, 6.2177e-01, 
+ 2DIAGNOSTIC,    61, -4.815685459936e-01, 4.783932469957e-07, 3.8131e+01, 5.4623e-01, 
+ 2DIAGNOSTIC,    62, -4.815675652082e-01, 4.742191724166e-07, 3.8679e+01, 5.4801e-01, 
+ 2DIAGNOSTIC,    63, -4.815675720763e-01, 4.752513015974e-07, 3.9161e+01, 4.8228e-01, 
+ 2DIAGNOSTIC,    64, -4.815675344123e-01, 4.630332775465e-07, 3.9662e+01, 5.0134e-01, 
+ 2DIAGNOSTIC,    65, -4.815675051375e-01, 4.533398415517e-07, 4.0157e+01, 4.9420e-01, 
+ 2DIAGNOSTIC,    66, -4.815675383360e-01, 4.484711822877e-07, 4.0659e+01, 5.0224e-01, 
+ 2DIAGNOSTIC,    67, -4.815675944673e-01, 4.443433273896e-07, 4.1146e+01, 4.8749e-01, 
+ 2DIAGNOSTIC,    68, -4.815675914854e-01, 4.434715052473e-07, 4.1719e+01, 5.7260e-01, 
+ 2DIAGNOSTIC,    69, -4.815677024612e-01, 4.456885190369e-07, 4.2322e+01, 6.0345e-01, 
+ 2DIAGNOSTIC,    70, -4.815677842554e-01, 4.494070255292e-07, 4.2861e+01, 5.3898e-01, 
+ 2DIAGNOSTIC,    71, -4.815680246491e-01, 4.547734162395e-07, 4.3464e+01, 6.0266e-01, 
+ 2DIAGNOSTIC,    72, -4.815684367951e-01, 4.546268654437e-07, 4.4274e+01, 8.0965e-01, 
+ 2DIAGNOSTIC,    73, -4.815678856157e-01, 4.487909215384e-07, 4.4905e+01, 6.3122e-01, 
+ 2DIAGNOSTIC,    74, -4.815679041578e-01, 4.418979582844e-07, 4.5488e+01, 5.8297e-01, 
+ 2DIAGNOSTIC,    75, -4.815676563962e-01, 4.318195944864e-07, 4.5998e+01, 5.0995e-01, 
+ 2DIAGNOSTIC,    76, -4.815672438500e-01, 4.182605784844e-07, 4.6542e+01, 5.4402e-01, 
+ 2DIAGNOSTIC,    77, -4.815674672611e-01, 4.072705198054e-07, 4.7084e+01, 5.4222e-01, 
+  Elapsed time (stage 1): 4.7533e+01
+
+
+Total elapsed time: 6.8230e+01
+Completed a quick rigid affine registration of input and full template
+Completed transforming the mask from template space to input space
+Executing: fslcpgeom sub2039_input0001-modality0-t1_20220113_mniWarped-WarpedToTemplate.nii.gz mask_inp.nii.gz
+Executing: ExtractRegionFromImageByMask 3 sub2039_input0001-modality0-t1_20220113_mniWarped-WarpedToTemplate.nii.gz crop_sub2039_input0001-modality0-t1_20220113_mniWarped-WarpedToTemplate.nii.gz mask_inp.nii.gz 1 10
+Completed cropping the input. Elapsed: 0:01:16.933046
+--- Reorienting image. --- Elapsed: 0:01:16.933123
+Executing: fslreorient2std crop_sub2039_input0001-modality0-t1_20220113_mniWarped-WarpedToTemplate.nii.gz /data/temp/crop_sub2039_input0001-modality0-t1_20220113_mniWarped-WarpedToTemplate.nii.gz
+--- Correcting bias. --- Elapsed: 0:01:17.486392
+Executing: N4BiasFieldCorrection -d 3 -i /data/temp/crop_sub2039_input0001-modality0-t1_20220113_mniWarped-WarpedToTemplate.nii.gz -o /data/temp/crop_sub2039_input0001-modality0-t1_20220113_mniWarped-WarpedToTemplate.nii.gz -b [200] -s 3 -c [50x50x30x20,1e-6]
+Backing input image
+Contrast adjusting cropped image cubic stretch
+Order:  3
+contrast_stretching
+Rescaling to  4.0
+--- Registering to mean brain template. --- Elapsed: 0:01:21.741252
+Saving output to temporary path.
+temppath /data/temp warppath /data/temp/sub2039_input0001-modality0-t1_20220113_mniWarped-WarpedToTemplate input_image /data/temp/crop_sub2039_input0001-modality0-t1_20220113_mniWarped-WarpedToTemplate.nii.gz
+(ants_new_nonlinear_registration): fixed=None, moving=None
+Executing: antsRegistration -v -d 3  --float 0 --output /data/temp/sub2039_input0001-modality0-t1_20220113_mniWarped-WarpedToTemplate --use-histogram-matching 1 -t Rigid[0.1] --metric Mattes[/thomas/resources/p15_templ_93x187x68.nii.gz,/data/temp/crop_sub2039_input0001-modality0-t1_20220113_mniWarped-WarpedToTemplate.nii.gz,1,32,None] --convergence [500x500x500x500x500,1e-6,10] -f 5x5x5x5x4 -s 1.685x1.4771x1.256x1.0402x0.82235mm -r rigid0GenericAffine.mat -t Affine[0.1] --metric Mattes[/thomas/resources/p15_templ_93x187x68.nii.gz,/data/temp/crop_sub2039_input0001-modality0-t1_20220113_mniWarped-WarpedToTemplate.nii.gz,1,64, None] --convergence [450x150x50,1e-7,10] -f 3x2x1 -s 0.60056x0.3677x0mm -t SyN[0.4,3.0] --metric CC[/thomas/resources/p15_templ_93x187x68.nii.gz,/data/temp/crop_sub2039_input0001-modality0-t1_20220113_mniWarped-WarpedToTemplate.nii.gz,1,5] --convergence [200x200x90x50,1e-10,10] -f 4x3x2x1 -s 0.82x0.6x0.3677x0.0mm
+^CProcess ForkPoolWorker-9:
+Process ForkPoolWorker-8:
+Process ForkPoolWorker-13:
+Process ForkPoolWorker-18:
+Process ForkPoolWorker-17:
+Process ForkPoolWorker-19:
+Process ForkPoolWorker-15:
+Process ForkPoolWorker-16:
+Process ForkPoolWorker-14:
+Process ForkPoolWorker-7:
+Process ForkPoolWorker-11:
+Process ForkPoolWorker-20:
+Process ForkPoolWorker-10:
+Process ForkPoolWorker-6:
+Process ForkPoolWorker-12:
+Traceback (most recent call last):
+Process ForkPoolWorker-5:
+Process ForkPoolWorker-4:
+  File "/thomas/src/THOMAS.py", line 90, in <module>
+Process ForkPoolWorker-3:
+    main()
+  File "/thomas/src/THOMAS.py", line 76, in main
+Process ForkPoolWorker-1:
+    run_thomas(args, do_command, temp_path, pool, **exec_options)
+  File "/thomas/src/libraries/run_thomas.py", line 369, in run_thomas
+Process ForkPoolWorker-2:
+    ants_new_nonlinear_registration(template, input_image, warp_path, args.fixedImageMask, args.movingImageMask, **exec_options)
+  File "/thomas/src/libraries/ants_tools.py", line 33, in ants_new_nonlinear_registration
+    command(cmd, **exec_options)
+  File "/thomas/src/libraries/parallel.py", line 73, in command
+    _, stderr = p.communicate()
+                ^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/subprocess.py", line 1196, in communicate
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+KeyboardInterrupt
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+KeyboardInterrupt
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+KeyboardInterrupt
+KeyboardInterrupt
+KeyboardInterrupt
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 387, in get
+    res = self._reader.recv_bytes()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/connection.py", line 216, in recv_bytes
+    buf = self._recv_bytes(maxlength)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/connection.py", line 430, in _recv_bytes
+    buf = self._recv(4)
+          ^^^^^^^^^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+Traceback (most recent call last):
+    stdout = self.stdout.read()
+             ^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/pool.py", line 114, in worker
+    task = get()
+           ^^^^^
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/queues.py", line 386, in get
+    with self._rlock:
+  File "/thomas/fsl_ants/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+Traceback (most recent call last):
+Traceback (most recent call last):
+9f671f060556
+f4c03c655653
+fc3b1b6efa33
+9c961ea9fe22
+3fbee83f112a
+
+2025-11-07 17:03:20.324 | INFO     | __main__:<module>:58 - Starting session 20170707 for subject 2043

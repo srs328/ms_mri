@@ -142,7 +142,7 @@ def load_df():
         index_col="subid",
     )
     ventricle_volumes = pd.read_csv(
-        "/home/srs-9/Projects/ms_mri/analysis/paper1/data0/ventricle_volumes.csv",
+        "/home/srs-9/Projects/ms_mri/data/ventricle_volumes.csv",
         index_col="subid",
     )
     csf_volumes = pd.read_csv(

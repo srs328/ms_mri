@@ -32,10 +32,12 @@ hipsthomas_script = "/home/srs-9/Projects/ms_mri/choroid_thalamus_project/longit
 logger.remove()
 logger.add("run_hipsthomas.log", mode='w')
 
+start_i = subids.index("1371")
+
 #%%
 
 # for subject in tqdm(subjects, total=len(subjects)):
-for subid in tqdm(subids, total=len(subids)):
+for subid in tqdm(subids[start_i:], total=len(subids)):
     subject = f"sub{subid}"
     work_dir = work_home / subject
 

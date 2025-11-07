@@ -29,8 +29,9 @@ with open(subses_file, 'r') as f:
 for sub, ses in tqdm(subject_sessions):
     subject_root = dataroot / f"sub{sub}-{ses}"
     if (subject_root / "peripheral_CSF_CHECK.nii.gz").exists():
-        logger.debug(f"CSF already segmented for sub{sub}-{ses}, skipping.")
-        continue
+        pass
+        # logger.debug(f"CSF already segmented for sub{sub}-{ses}, skipping.")
+        # continue
     cmd = ["bash", segment_csf_script, str(subject_root)]
     try:
         logger.info(" ".join(cmd))
@@ -39,4 +40,4 @@ for sub, ses in tqdm(subject_sessions):
         logger.error(e)
         logger.debug(e.stderr)
     else:
-        logger.debug(result.stdout)
+        logger.debug(result.stdout.decode('utf-8'))

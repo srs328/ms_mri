@@ -66,3 +66,22 @@ run_if_missing "aseg-CSF.nii.gz" "
 	c3d "aseg-CSF_tmp.nii.gz" -connected-components -threshold 1 1 1 0 -o "aseg-CSF.nii.gz" &&
 	rm "aseg-CSF_tmp.nii.gz"
 "
+
+run_if_missing "aseg-CSF.nii.gz" "
+	mri_extract_label "aseg.auto_noCCseg.in_subject.nii.gz" 24 "aseg-CSF_tmp.nii.gz" &&
+	c3d "aseg-CSF_tmp.nii.gz" -connected-components -threshold 1 1 1 0 -o "aseg-CSF.nii.gz" &&
+	rm "aseg-CSF_tmp.nii.gz"
+"
+
+
+run_if_missing "aseg-left_choroid.nii.gz" "
+	mri_extract_label "aseg.auto_noCCseg.in_subject.nii.gz" 31 "aseg-left_choroid_tmp.nii.gz" &&
+	c3d "aseg-left_choroid_tmp.nii.gz" -connected-components -threshold 1 1 1 0 -o "aseg-left_choroid.nii.gz" &&
+	rm "aseg-left_choroid_tmp.nii.gz"
+"
+
+run_if_missing "aseg-right_choroid.nii.gz" "
+	mri_extract_label "aseg.auto_noCCseg.in_subject.nii.gz" 63 "aseg-right_choroid_tmp.nii.gz" &&
+	c3d "aseg-right_choroid_tmp.nii.gz" -connected-components -threshold 1 1 1 0 -o "aseg-right_choroid.nii.gz" &&
+	rm "aseg-right_choroid_tmp.nii.gz"
+"

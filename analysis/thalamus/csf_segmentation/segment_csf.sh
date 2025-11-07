@@ -75,6 +75,15 @@ run_if_missing "$root/$dilname" \
     fslmaths "$root/aseg-rv-fix.nii.gz" -kernel $kernal_shape $kernal_size -dilM "$root/$dilname"
 rv_dilname=$dilname
 
+run_if_missing $root/aseg-lateral_ventricles.nii.gz \
+	fslmaths $root/aseg-lv-fix.nii.gz -add $root/aseg-rv-fix.nii.gz $root/aseg-lateral_ventricles.nii.gz
+
+run_if_missing $root/aseg-choroid.nii.gz \
+	fslmaths $root/aseg-left_choroid.nii.gz -add $root/aseg-right_choroid.nii.gz $root/aseg-choroid.nii.gz
+
+run_if_missing $root/aseg-lateral_ventricles_choroid.nii.gz \
+	fslmaths $root/aseg-lateral_ventricles.nii.gz -add $root/aseg-choroid.nii.gz $root/aseg-lateral_ventricles_choroid.nii.gz
+
 # Third Ventricle
 kernal_shape="sphere"
 kernal_size=2
