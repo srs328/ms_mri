@@ -513,7 +513,7 @@ def present_model(
     if inds is None:
         inds = []
     if rename_index is None:
-        rename_index = {}
+        rename_index = {k: k for k in model.index}
     if rename_cols is None:
         rename_cols = {}
 
