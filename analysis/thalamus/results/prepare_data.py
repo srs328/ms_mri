@@ -58,6 +58,7 @@ transformations = {
     "CCF0": "log",
     "periCSF_ratio": "log",
     "periCSF_frac": "square",
+    "THALAMUS_1": "log"
 }
 data = utils.transform_variables(data, transformations)
 # dataT = utils.transform_variables(data, transformations, rename=False)
