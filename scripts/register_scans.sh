@@ -41,3 +41,11 @@ flirt -verbose "$verbosity" \
     -out "$proc_dir/${prefix}-brain-mni_reg.nii.gz"
 
 echo "processing successful for $scan_dir/$prefix.nii.gz" > /dev/stderr
+
+
+flirt \
+  -in choroid.nii.gz \
+  -ref "$REF_DIR/MNI152_T1_1mm.nii.gz" \
+  -applyxfm -init "$aff" \
+  -out "$out" \
+  -interp nearestneighbour
