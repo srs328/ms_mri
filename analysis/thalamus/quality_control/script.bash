@@ -1,2 +1,3 @@
 #!/bin/bash
-fsleyes render --outfile "/home/srs-9/Projects/ms_mri/analysis/thalamus/quality_control/images/choroid/sub3028-anat_t1-seg_choroid-axial[178].png" --size 1080 1080 --scene ortho -xh -yh --voxelLoc 107 106 178 --hideCursor --hideLabels /mnt/h/srs-9/thalamus_project/data/sub3028-20210301/t1.nii.gz -ot volume /mnt/h/srs-9/thalamus_project/data/sub3028-20210301/choroid.nii.gz -ot label -l freesurfercolorlut -o
+touch -c /mnt/h/srs-9/thalamus_project/data/sub1033-20171117
+fsleyes render --outfile "/home/srs-9/Projects/ms_mri/analysis/thalamus/quality_control/images/choroid/sub1033-anat_t1-seg_choroid-axial[173].png" --size 1080 1080 --scene ortho -xh -yh --voxelLoc 125 110 173 --hideCursor --hideLabels /mnt/h/srs-9/thalamus_project/data/sub1033-20171117/t1.nii.gz -ot volume /mnt/h/srs-9/thalamus_project/data/sub1033-20171117/choroid.nii.gz -ot label -l freesurfercolorlut -o
