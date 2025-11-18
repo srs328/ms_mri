@@ -37,7 +37,20 @@ for struct in ["brain", "white", "grey", "thalamus", "t2lv"]:
 # /home/srs-9/Projects/ms_mri/analysis/thalamus/helpers/helpers.py:225: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
 #   df["CCF0"] = df["LV"] / df["allCSF"]
 # /home/srs-9/Projects/ms_mri/analysis/thalamus/helpers/helpers.py:226: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor pe
-data = utils.composite_vars(data)
+
+# maybe print a log of what what composited 
+def composite_vars(df):
+    df["CCF0"] = df["LV"] / df["allCSF"]
+    df["CCF"] = df["LV"] / (df["LV"] + df["periCSF"])
+    df["CCR"] = df["LV"] / df["periCSF"]
+    df["CCR2"] = (df["LV"] + df["thirdV"]) / df["periCSF"]
+    df["periCSF_ratio"] = df["periCSF"] / df["LV"]
+    df["periCSF_ratio2"] = df["periCSF"] / (df["LV"] + df["thirdV"])
+    df["periCSF_frac"] = df["periCSF"] / df["allCSF"]
+    df["thirdV_expansion"] = df['thirdV_width'] / df['thirdV']
+    return df
+
+data = composite_vars(data)
 
 #%%
 #! See suggestions from assumption_checks.ipynb
@@ -54,10 +67,12 @@ transformations = {
     "t2lv": "log",
     "PRL": "log1p",
     "CCR": "log",
+    "CCR2": "log",
     "CCF": "log",
     "CCF0": "log",
     "periCSF_ratio": "log",
-    "periCSF_frac": "square",
+    "periCSF_ratio2": "log",
+    "periCSF_frac": "reflect_log",
     "THALAMUS_1": "log"
 }
 data = utils.transform_variables(data, transformations)

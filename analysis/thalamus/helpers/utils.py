@@ -266,12 +266,17 @@ def zscore(df, skip_vars=None):
     return df_z
 
 
+def reflect_log(data):
+    return np.log(data.max() + 1 - data)
+
+
 #! will figure something out for boxcox and yeojohnson later if necessary: they both return a 2-tuple
 transforms = {
     "log": np.log,
     "log10": np.log10,
     "log1p": np.log1p,
     "sqrt": np.sqrt,
+    "reflect_log": reflect_log,
     "square": np.square,
     "boxcox": stats.boxcox,
     "yeojohnson": stats.yeojohnson,
