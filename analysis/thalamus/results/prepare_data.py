@@ -63,7 +63,7 @@ transformations = {
     "allCSF": "log",
     "periCSF": "log",
     "thirdV_width": "log",
-    "asegCSF": "log",
+    "interCSF": "log",
     "t2lv": "log",
     "PRL": "log1p",
     "CCR": "log",

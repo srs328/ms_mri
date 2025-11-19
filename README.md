@@ -2,7 +2,6 @@
 
 ## Analysis
 
-
 Monai [Installation Guide](https://docs.monai.io/en/stable/installation.html).
 
 See [this doc](notes/training_cli.md) for notes about the training command line interface

@@ -1,12 +1,12 @@
-from statsmodels.stats.multitest import multipletests
-
 import pprint
+from collections import defaultdict
+from typing import Optional, Union
 from warnings import simplefilter
 
 import pandas as pd
 from IPython.display import Markdown, display
+from statsmodels.base.wrapper import ResultsWrapper
 from statsmodels.stats.multitest import multipletests
-from collections import defaultdict
 
 simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
 import json
@@ -21,20 +21,19 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pyperclip
 import statsmodels.api as sm
-from statsmodels.base.wrapper import ResultsWrapper
-
+import statsmodels.formula.api as smf
+import utils
 from IPython.display import clear_output
 from matplotlib import colormaps
-from scipy import stats
-from statsmodels.genmod.families import Poisson
-
 from reload_recursive import reload_recursive
+from scipy import stats
+from statsmodels.base.wrapper import ResultsWrapper
+from statsmodels.genmod.families import Poisson
 from statsmodels.stats.mediation import Mediation
 from statsmodels.stats.outliers_influence import variance_inflation_factor
 from tqdm.notebook import tqdm
-import utils
-from mri_data import file_manager as fm
 
+from mri_data import file_manager as fm
 
 colors = utils.get_colors()
 
@@ -181,145 +180,6 @@ def run_regressions0(
     return results
 
 
-# Another type of refactor would be one in which lists of exog are passed
-def run_regressions(
-    model_data: pd.DataFrame,
-    outcomes,
-    predictors,
-    covariates: list = [],
-    robust_cov: str = "HC3",
-    fdr_method: str = "fdr_bh",
-    fdr_alpha: float = 0.05,
-    regression_model: str = "OLS",
-) -> tuple[dict[str, pd.DataFrame], dict[str, pd.DataFrame], dict[tuple, ResultsWrapper]]:
-    """
-    Run OLS for every (struct, predictor).
-    Returns (results_by_struct, results_by_predictor)
-    - results_by_struct: dict struct -> DataFrame indexed by predictor
-    - results_by_predictor: dict predictor -> DataFrame indexed by struct
-    Each DataFrame columns: coef, pval, se, llci, ulci, ci, R2, p_fdr, coef_sig
-    """
-    if covariates is None:
-        covariates = []
-    if isinstance(predictors, set):
-        predictors = list(predictors)
-    if isinstance(outcomes, str):
-        outcomes = [outcomes]
-
-    if regression_model != "OLS":
-        robust_cov = False
-
-    def _get_val_by_name(obj, name, attr):
-        import numpy as np
-
-        vals = getattr(obj, attr)
-        # pandas Series (has .get)
-        if hasattr(vals, "get"):
-            return vals.get(name, np.nan)
-        # numpy array / list-like: map via model exog names
-        try:
-            exog_names = list(obj.model.exog_names)
-        except Exception:
-            exog_names = []
-        if name in exog_names:
-            idx = exog_names.index(name)
-            try:
-                return np.asarray(vals)[idx]
-            except Exception:
-                return np.nan
-        return np.nan
-
-    # container: per-struct dataframes
-    results_by_struct = {}
-    models = defaultdict(dict)
-    for struct in outcomes:
-        rows = []
-        for pred in predictors:
-            exog = [pred] + covariates
-            formula = f"{struct} ~ {' + '.join(exog)}"
-            try:
-                if regression_model == "OLS":
-                    res = sm.OLS.from_formula(formula, data=model_data).fit()
-                else:
-                    res = regression_model.from_formula(formula, data=model_data).fit(disp=0)
-                if robust_cov:
-                    rres = res.get_robustcov_results(cov_type=robust_cov)
-                else:
-                    rres = res
-                #* can switch to frozenset if it becomes really helpful to index without worrying about order
-                models[(struct, pred)] = res
-                coef = _get_val_by_name(rres, pred, "params")
-                pval = _get_val_by_name(rres, pred, "pvalues")
-                se = _get_val_by_name(rres, pred, "bse")
-
-                # confidence interval: conf_int() returns DataFrame when names available
-                ci_df = rres.conf_int()
-                if hasattr(ci_df, "loc") and pred in ci_df.index:
-                    llci, ulci = float(ci_df.loc[pred, 0]), float(ci_df.loc[pred, 1])
-                else:
-                    # fallback via exog_names -> index
-                    try:
-                        exog_names = list(rres.model.exog_names)
-                        idx = exog_names.index(pred)
-                        ci_arr = np.asarray(ci_df)
-                        llci, ulci = float(ci_arr[idx, 0]), float(ci_arr[idx, 1])
-                    except Exception:
-                        llci = ulci = np.nan
-
-                ci_str = f"[{llci:.3}, {ulci:.3}]" if not np.isnan(llci) else ""
-                if regression_model != "OLS":
-                    r2 = ""
-                else:
-                    r2 = res.rsquared_adj
-
-            except Exception as e:
-                print(f"Error occurred while processing {pred} for {struct}: {e}")
-                coef = pval = se = llci = ulci = np.nan
-                ci_str = ""
-                r2 = np.nan
-                raise e
-            rows.append(
-                {
-                    "predictor": pred,
-                    "coef": coef,
-                    "pval": pval,
-                    "se": se,
-                    "llci": llci,
-                    "ulci": ulci,
-                    "ci": ci_str,
-                    "R2": r2,
-                    "formula": formula,
-                }
-            )
-        df_struct = pd.DataFrame(rows).set_index("predictor")
-        # FDR across predictors for this struct
-        pvals = df_struct["pval"].fillna(1.0).values
-        _, p_fdr_vals, _, _ = multipletests(pvals, alpha=fdr_alpha, method=fdr_method)
-        df_struct.insert(2, "p_fdr", p_fdr_vals)
-        df_struct["coef_sig"] = df_struct["coef"].where(
-            df_struct["p_fdr"] < fdr_alpha, 0.0
-        )
-        results_by_struct[struct] = df_struct
-
-    # build results_by_predictor for compatibility
-    results_by_predictor = {}
-    cols = next(iter(results_by_struct.values())).columns
-    for pred in predictors:
-        rows = []
-        for struct in outcomes:
-            row = results_by_struct[struct].loc[pred].to_dict()
-            row["outcome"] = struct
-            rows.append(row)
-        df_pred = pd.DataFrame(rows).set_index("outcome")[cols]
-        pvals = df_pred["pval"].fillna(1.0).values
-        _, p_fdr_vals, _, _ = multipletests(pvals, alpha=fdr_alpha, method=fdr_method)
-        df_pred["p_fdr"] = p_fdr_vals
-        df_pred["coef_sig"] = df_struct["coef"].where(
-            df_struct["p_fdr"] < fdr_alpha, 0.0
-        )
-        results_by_predictor[pred] = df_pred
-
-    return results_by_struct, results_by_predictor, models
 
 
 def run_regressions2(
@@ -330,13 +190,14 @@ def run_regressions2(
     covariates: list[str] = None,
     robust_cov: str = "HC3",
     regression_model: str = "OLS",
+    family=None,
     fdr_method: str = "fdr_bh",
     fdr_alpha: float = 0.05,
 ) -> tuple[dict[str, pd.DataFrame], dict[str, ResultsWrapper], str]:
     """
-    Run OLS for one outcome on each set of variables in exog_list.
+    Run regression for one outcome on each set of variables in exog_list.
     Returns (results, models, formulas)
-    - results: dict -> DataFrame indexed by model_names
+    - results: dict -> pd.DataFrame indexed by model_names
     - models: dict  -> ResultsWrapper indexed by model_names
     Each DataFrame columns: coef, pval, se, llci, ulci, ci, R2, p_fdr, coef_sig
     """
@@ -355,14 +216,18 @@ def run_regressions2(
         formula = f"{outcome} ~ {' + '.join(independent_vars)}"
         try:
             if regression_model == "OLS":
-                    res = sm.OLS.from_formula(formula, data=model_data).fit()
-            else:
-                res = regression_model.from_formula(formula, data=model_data).fit(disp=0)
-            if robust_cov:
-                rres = res.get_robustcov_results(cov_type=robust_cov)
-            else:
-                rres = res
-            models[model_name] = res
+                rres = sm.OLS.from_formula(formula, data=model_data).fit(cov_type=robust_cov)
+                r2 = rres.rsquared_adj
+            elif regression_model == "GLM":
+                if family is None:
+                    family = sm.families.Poisson()
+                rres = smf.glm(formula, data=model_data, family=family).fit(cov_type=robust_cov)
+                r2 = rres.pseudo_rsquared()
+            elif regression_model == "Logit":
+                rres = smf.Logit(formula, data=model_data).fit(cov_type=robust_cov, disp=0)
+                r2 = None
+            
+            models[model_name] = rres
             coef = rres.params
             pval = rres.pvalues
             se = rres.bse
@@ -376,10 +241,6 @@ def run_regressions2(
                 for lci, uci in zip(llci, ulci)
             ]
             
-            try:
-                r2 = res.rsquared_adj
-            except AttributeError:
-                r2 = ""
             exog_names = list(rres.model.exog_names)
             # confidence interval: conf_int() returns DataFrame when names available
             # ci_str = f"[{llci:.3}, {ulci:.3}]" if not np.isnan(llci) else ""
@@ -396,7 +257,7 @@ def run_regressions2(
                 "llci": llci,
                 "ulci": ulci,
                 "ci": ci_str,
-                # "R2": r2,
+                "R2": r2,
                 # "formula": formula,
             },
             index=exog_names,
@@ -407,27 +268,28 @@ def run_regressions2(
     return results, models, formulas
 
 
+#? consider adding fdr correction, although it'd be more complicated in this case
 def run_regressions3(
     model_data: pd.DataFrame,
     formula_list: list[str],
     model_names: list[str] = None,
     robust_cov: str = "HC3",
     regression_model: str = "OLS",
+    family=None,
     fdr_method: str = "fdr_bh",
     fdr_alpha: float = 0.05,
 ) -> tuple[dict[str, pd.DataFrame], dict[str, ResultsWrapper], str]:
     """
-    Run OLS for every (struct, predictor).
+    Takes a list of formulas and returns the collated result and model object for each.
     Returns (results, models, formulas)
-    - results: 
-    - models:
-    - formulas:
+    - results: dict -> pd.DataFrame indexed by model_names
+    - models: dict -> ResultsWrapper indexed by model_names
+    - formulas: dict -> str indexed by model_names
     Each DataFrame columns: coef, pval, se, llci, ulci, ci, R2, p_fdr, coef_sig
     """
+    
     if model_names is None:
         model_names = [i for i, _ in enumerate(formula_list)]
-    if regression_model != "OLS":
-        robust_cov = False
 
     models = {}
     results = {}
@@ -435,14 +297,18 @@ def run_regressions3(
     for formula, model_name in zip(formula_list, model_names):
         try:
             if regression_model == "OLS":
-                    res = sm.OLS.from_formula(formula, data=model_data).fit()
-            else:
-                res = regression_model.from_formula(formula, data=model_data).fit()
-            if robust_cov:
-                rres = res.get_robustcov_results(cov_type=robust_cov)
-            else:
-                rres = res
-            models[model_name] = res
+                rres = sm.OLS.from_formula(formula, data=model_data).fit(cov_type=robust_cov)
+                r2 = rres.rsquared_adj
+            elif regression_model == "GLM":
+                if family is None:
+                    family = sm.families.Poisson()
+                rres = smf.glm(formula, data=model_data, family=family).fit(cov_type=robust_cov)
+                r2 = rres.pseudo_rsquared()
+            elif regression_model == "Logit":
+                rres = smf.Logit(formula, data=model_data).fit(cov_type=robust_cov, disp=0)
+                r2 = None
+            
+            models[model_name] = rres
             coef = rres.params
             pval = rres.pvalues
             se = rres.bse
@@ -456,7 +322,6 @@ def run_regressions3(
                 for lci, uci in zip(llci, ulci)
             ]
 
-            r2 = res.rsquared_adj
             exog_names = list(rres.model.exog_names)
             # confidence interval: conf_int() returns DataFrame when names available
             # ci_str = f"[{llci:.3}, {ulci:.3}]" if not np.isnan(llci) else ""
@@ -473,8 +338,7 @@ def run_regressions3(
                 "llci": llci,
                 "ulci": ulci,
                 "ci": ci_str,
-                # "R2": r2,
-                # "formula": formula,
+                "R2": r2,
             },
             index=exog_names,
         )
@@ -482,6 +346,8 @@ def run_regressions3(
         formulas[model_name] = formula
 
     return results, models, formulas
+
+
 
 format_opts_ref = {
     'coef': "{:.4f}",
@@ -502,16 +368,21 @@ def format_df(df, format_dict):
 
 def present_model(
     model: pd.DataFrame,
-    cols: list,
+    cols: list = None,
     inds: list = None,
+    exclude_inds: list = None,
     rename_index: dict = None,
     rename_cols: dict = None,
     format_opts: dict = format_opts_ref
 ):
     
     # cols = ["coef", ("p_fdr", "pval"), "se", "ci", "R2"]
+    if cols is None:
+        cols = model.columns
     if inds is None:
         inds = []
+    if exclude_inds is None:
+        exclude_inds = []
     if rename_index is None:
         rename_index = {k: k for k in model.index}
     if rename_cols is None:
@@ -537,9 +408,13 @@ def present_model(
     
     model = model.rename(index=rename_index, columns=rename_cols)
     if len(present_index) == 0:
-        present_index = model.index
+        present_index = model.index.to_list()
         
-    
+    for ind in exclude_inds:
+        try:
+            present_index.remove(ind)
+        except ValueError:
+            pass
         
     model = format_df(model, format_opts)
     
@@ -595,3 +470,494 @@ def plot_moderation(model_data, y_name, x_name, w_name, covariates=None,
     plt.show()
 
 
+
+
+def run_regressions(
+    model_data: pd.DataFrame,
+    outcomes: Union[str, list[str]],
+    predictors: Union[list[str], set[str]],
+    covariates: list[str] = None,
+    robust_cov: str = "HC3",
+    regression_model: str = "OLS",
+    family: Optional[sm.families.Family] = None,
+    fdr_method: str = "fdr_bh",
+    fdr_alpha: float = 0.05,
+) -> tuple[dict[str, pd.DataFrame], dict[str, pd.DataFrame], dict[tuple[str, str], ResultsWrapper]]:
+    """
+    Run regressions for all combinations of outcomes and predictors.
+    
+    Fits separate regression models for each (outcome, predictor) pair, controlling
+    for specified covariates. Applies FDR correction across multiple comparisons
+    and returns results organized by outcome and by predictor.
+    
+    Parameters
+    ----------
+    model_data : pd.DataFrame
+        DataFrame containing all variables (outcomes, predictors, covariates).
+    outcomes : str or list of str
+        Outcome variable(s) to model. If string, treated as single outcome.
+    predictors : list of str or set of str
+        Predictor variables of interest. Each is tested separately.
+    covariates : list of str, default=[]
+        Control variables included in all models.
+    robust_cov : str, default="HC3"
+        Covariance estimator type. Valid values:
+        - "HC0", "HC1", "HC2", "HC3": Heteroscedasticity-robust standard errors
+        - "nonrobust": Standard OLS covariance (homoscedasticity assumed)
+        Ignored when regression_model is not "OLS".
+    regression_model : str, default="OLS"
+        Type of regression model to fit. Valid values:
+        - "OLS": Ordinary least squares
+        - "GLM": Generalized linear model (requires `family` parameter)
+        - "Logit": Logistic regression
+    family : sm.families.Family, optional
+        GLM family object (e.g., sm.families.Poisson()). Required when
+        regression_model="GLM", ignored otherwise.
+    fdr_method : str, default="fdr_bh"
+        Method for FDR correction (passed to statsmodels.multipletests).
+    fdr_alpha : float, default=0.05
+        Significance threshold for FDR correction.
+    
+    Returns
+    -------
+    results_by_outcome : dict of {str: pd.DataFrame}
+        Results organized by outcome. Keys are outcome names, values are
+        DataFrames indexed by predictor with columns:
+        - coef: regression coefficient
+        - pval: uncorrected p-value
+        - p_fdr: FDR-corrected p-value
+        - se: standard error
+        - llci, ulci: confidence interval bounds
+        - ci: formatted confidence interval string
+        - R2: adjusted R² (OLS) or pseudo-R² (GLM), None for Logit
+        - coef_sig: coefficient if p_fdr < fdr_alpha, else 0
+        - formula: regression formula used
+    results_by_predictor : dict of {str: pd.DataFrame}
+        Results organized by predictor. Keys are predictor names, values are
+        DataFrames indexed by outcome with same columns as above.
+    models : dict of {tuple[str, str]: ResultsWrapper}
+        Fitted model objects indexed by (outcome, predictor) tuple.
+    
+    Raises
+    ------
+    Exception
+        Re-raises any exception from model fitting with context about which
+        outcome and predictor caused the error.
+    
+    Notes
+    -----
+    - FDR correction is applied separately within each outcome (across predictors)
+      and within each predictor (across outcomes).
+    - For GLM models, family defaults to Poisson if not specified.
+    - Robust covariance is automatically disabled for non-OLS models.
+    
+    Examples
+    --------
+    >>> results_out, results_pred, models = run_regressions(
+    ...     model_data=df,
+    ...     outcomes=['disability_score', 'cognitive_score'],
+    ...     predictors=['choroid_plexus_vol', 'ventricle_vol'],
+    ...     covariates=['age', 'sex'],
+    ...     robust_cov='HC3'
+    ... )
+    >>> results_out['disability_score']  # coefficients for all predictors
+    """
+    
+    if covariates is None:
+        covariates = []
+    if isinstance(predictors, set):
+        predictors = list(predictors)
+    if isinstance(outcomes, str):
+        outcomes = [outcomes]
+
+    # container: per-outcome dataframes
+    results_by_outcome = {}
+    models = defaultdict(dict)
+    for outcome in outcomes:
+        rows = []
+        for pred in predictors:
+            exog = [pred] + covariates
+            formula = f"{outcome} ~ {' + '.join(exog)}"
+            try:
+                if regression_model == "OLS":
+                    rres = sm.OLS.from_formula(formula, data=model_data).fit(cov_type=robust_cov)
+                    r2 = rres.rsquared_adj
+                elif regression_model == "GLM":
+                    if family is None:
+                        family = sm.families.Poisson()
+                    rres = smf.glm(formula, data=model_data, family=family).fit(cov_type=robust_cov)
+                    r2 = rres.pseudo_rsquared()
+                elif regression_model == "Logit":
+                    rres = smf.Logit(formula, data=model_data).fit(cov_type=robust_cov, disp=0)
+                    r2 = None
+                
+                #* can switch to frozenset if it becomes really helpful to index without worrying about order
+                models[(outcome, pred)] = rres
+                coef = rres.params[pred]
+                pval = rres.pvalues[pred]
+                se = rres.bse[pred]
+
+                # confidence interval: conf_int() returns DataFrame when names available
+                ci_df = rres.conf_int()
+                if hasattr(ci_df, "loc") and pred in ci_df.index:
+                    llci, ulci = float(ci_df.loc[pred, 0]), float(ci_df.loc[pred, 1])
+                else:
+                    # fallback via exog_names -> index
+                    try:
+                        exog_names = list(rres.model.exog_names)
+                        idx = exog_names.index(pred)
+                        ci_arr = np.asarray(ci_df)
+                        llci, ulci = float(ci_arr[idx, 0]), float(ci_arr[idx, 1])
+                    except Exception:
+                        llci = ulci = np.nan
+
+                ci_str = f"[{llci:.3}, {ulci:.3}]" if not np.isnan(llci) else ""
+                
+
+            except Exception as e:
+                print(f"Error occurred while processing {pred} for {outcome}: {e}")
+                coef = pval = se = llci = ulci = np.nan
+                ci_str = ""
+                r2 = np.nan
+                raise e
+            rows.append(
+                {
+                    "predictor": pred,
+                    "coef": coef,
+                    "pval": pval,
+                    "se": se,
+                    "llci": llci,
+                    "ulci": ulci,
+                    "ci": ci_str,
+                    "R2": r2,
+                    "formula": formula,
+                }
+            )
+        df_struct = pd.DataFrame(rows).set_index("predictor")
+        # FDR across predictors for this struct
+        pvals = df_struct["pval"].fillna(1.0).values
+        _, p_fdr_vals, _, _ = multipletests(pvals, alpha=fdr_alpha, method=fdr_method)
+        df_struct.insert(2, "p_fdr", p_fdr_vals)
+        df_struct["coef_sig"] = df_struct["coef"].where(
+            df_struct["p_fdr"] < fdr_alpha, 0.0
+        )
+        results_by_outcome[outcome] = df_struct
+
+    # build results_by_predictor for compatibility
+    results_by_predictor = {}
+    cols = next(iter(results_by_outcome.values())).columns
+    for pred in predictors:
+        rows = []
+        for outcome in outcomes:
+            row = results_by_outcome[outcome].loc[pred].to_dict()
+            row["outcome"] = outcome
+            rows.append(row)
+        df_pred = pd.DataFrame(rows).set_index("outcome")[cols]
+        pvals = df_pred["pval"].fillna(1.0).values
+        _, p_fdr_vals, _, _ = multipletests(pvals, alpha=fdr_alpha, method=fdr_method)
+        df_pred["p_fdr"] = p_fdr_vals
+        df_pred["coef_sig"] = df_struct["coef"].where(
+            df_struct["p_fdr"] < fdr_alpha, 0.0
+        )
+        results_by_predictor[pred] = df_pred
+
+    return results_by_outcome, results_by_predictor, models
+
+
+def run_regressions_multimodel(
+    model_data: pd.DataFrame,
+    outcome: str,
+    exog_list: list[list[str]],
+    model_names: Optional[list[str]] = None,
+    covariates: Optional[list[str]] = None,
+    robust_cov: str = "HC3",
+    regression_model: str = "OLS",
+    family: Optional[sm.families.Family] = None,
+    fdr_method: str = "fdr_bh",
+    fdr_alpha: float = 0.05,
+) -> tuple[dict[str, pd.DataFrame], dict[str, ResultsWrapper], dict[str, str]]:
+    """
+    Run multiple regression models for a single outcome with different predictor sets.
+    
+    Fits separate regression models for one outcome variable, each using a different
+    set of predictors. Useful for comparing nested models or testing different 
+    predictor combinations while controlling for the same covariates.
+    
+    Parameters
+    ----------
+    model_data : pd.DataFrame
+        DataFrame containing all variables (outcome, predictors, covariates).
+    outcome : str
+        Outcome variable to model across all specifications.
+    exog_list : list of list of str
+        List of predictor sets. Each inner list contains variable names for one model.
+        Example: [['age'], ['age', 'sex'], ['age', 'sex', 'education']]
+    model_names : list of str, optional
+        Names for each model specification. If None, uses integer indices (0, 1, 2, ...).
+    covariates : list of str, optional
+        Control variables included in ALL models (in addition to each exog set).
+    robust_cov : str, default="HC3"
+        Covariance estimator type. Valid values:
+        - "HC0", "HC1", "HC2", "HC3": Heteroscedasticity-robust standard errors
+        - "nonrobust": Standard OLS covariance (homoscedasticity assumed)
+        Ignored when regression_model is not "OLS".
+    regression_model : str, default="OLS"
+        Type of regression model to fit. Valid values:
+        - "OLS": Ordinary least squares
+        - "GLM": Generalized linear model (requires `family` parameter)
+        - "Logit": Logistic regression
+    family : sm.families.Family, optional
+        GLM family object (e.g., sm.families.Poisson()). Required when
+        regression_model="GLM", ignored otherwise.
+    fdr_method : str, default="fdr_bh"
+        Method for FDR correction (passed to statsmodels.multipletests).
+    fdr_alpha : float, default=0.05
+        Significance threshold for FDR correction.
+    
+    Returns
+    -------
+    results : dict of {str: pd.DataFrame}
+        Regression results indexed by model name. Each DataFrame is indexed by
+        variable names (predictors + covariates + intercept) with columns:
+        - coef: regression coefficient
+        - pval: uncorrected p-value
+        - se: standard error
+        - llci, ulci: confidence interval bounds
+        - ci: formatted confidence interval string
+        - R2: adjusted R² (OLS) or pseudo-R² (GLM), None for Logit
+    models : dict of {str: ResultsWrapper}
+        Fitted model objects indexed by model name.
+    formulas : dict of {str: str}
+        Regression formulas indexed by model name.
+    
+    Raises
+    ------
+    Exception
+        Re-raises any exception from model fitting with context about which
+        model specification caused the error.
+    
+    Notes
+    -----
+    - All models use the same outcome variable but different predictor combinations.
+    - Covariates are automatically added to every model specification.
+    - Robust covariance is automatically disabled for non-OLS models.
+    
+    Examples
+    --------
+    >>> # Test nested models with increasing complexity
+    >>> results, models, formulas = run_regressions_multimodel(
+    ...     model_data=df,
+    ...     outcome='disability_score',
+    ...     exog_list=[
+    ...         ['choroid_plexus_vol'],
+    ...         ['choroid_plexus_vol', 'ventricle_vol'],
+    ...         ['choroid_plexus_vol', 'ventricle_vol', 'thalamus_vol']
+    ...     ],
+    ...     model_names=['Model1', 'Model2', 'Model3'],
+    ...     covariates=['age', 'sex']
+    ... )
+    >>> results['Model1']  # coefficients for simplest model
+    """
+    if model_names is None:
+        model_names = [str(i) for i, _ in enumerate(exog_list)]
+    if covariates is None:
+        covariates = []
+    if regression_model != "OLS":
+        robust_cov = False
+
+    results = {}
+    models = {}
+    formulas = {}
+    for exog, model_name in zip(exog_list, model_names):
+        independent_vars = exog + covariates
+        formula = f"{outcome} ~ {' + '.join(independent_vars)}"
+        try:
+            if regression_model == "OLS":
+                rres = sm.OLS.from_formula(formula, data=model_data).fit(cov_type=robust_cov)
+                r2 = rres.rsquared_adj
+            elif regression_model == "GLM":
+                if family is None:
+                    family = sm.families.Poisson()
+                rres = smf.glm(formula, data=model_data, family=family).fit(cov_type=robust_cov)
+                r2 = rres.pseudo_rsquared()
+            elif regression_model == "Logit":
+                rres = smf.Logit(formula, data=model_data).fit(cov_type=robust_cov, disp=0)
+                r2 = None
+            
+            models[model_name] = rres
+            coef = rres.params
+            pval = rres.pvalues
+            se = rres.bse
+            ci_df = rres.conf_int()
+            if hasattr(ci_df, "loc"):
+                llci, ulci = ci_df.loc[:, 0], ci_df.loc[:, 1]
+            else:
+                llci, ulci = ci_df[:, 0], ci_df[:, 1]
+            ci_str = [
+                f"[{lci:.3}, {uci:.3}]" if not np.isnan(lci) else ""
+                for lci, uci in zip(llci, ulci)
+            ]
+            
+            exog_names = list(rres.model.exog_names)
+        except Exception as e:
+            coef = pval = se = llci = ulci = np.nan
+            ci_str = ""
+            r2 = np.nan
+            raise e
+        res_df = pd.DataFrame(
+            {
+                "coef": coef,
+                "pval": pval,
+                "se": se,
+                "llci": llci,
+                "ulci": ulci,
+                "ci": ci_str,
+                "R2": r2,
+            },
+            index=exog_names,
+        )
+        results[model_name] = res_df
+        formulas[model_name] = formula
+
+    return results, models, formulas
+
+
+def run_regressions_from_formulas(
+    model_data: pd.DataFrame,
+    formula_list: list[str],
+    model_names: list[str] | None = None,
+    robust_cov: str = "HC3",
+    regression_model: str = "OLS",
+    family: Optional[sm.families.Family] = None,
+) -> tuple[dict[str, pd.DataFrame], dict[str, ResultsWrapper], dict[str, str]]:
+    """
+    Run regression models from R-style formula specifications.
+    
+    Fits multiple regression models using patsy/R-style formulas. Provides maximum
+    flexibility for model specification including transformations, interactions,
+    and categorical encoding.
+    
+    Parameters
+    ----------
+    model_data : pd.DataFrame
+        DataFrame containing all variables referenced in formulas.
+    formula_list : list of str
+        List of R-style regression formulas (e.g., 'y ~ x1 + x2 + x1:x2').
+        Each formula represents one model specification.
+    model_names : list of str, optional
+        Names for each model. If None, uses integer indices (0, 1, 2, ...).
+    robust_cov : str, default="HC3"
+        Covariance estimator type. Valid values:
+        - "HC0", "HC1", "HC2", "HC3": Heteroscedasticity-robust standard errors
+        - "nonrobust": Standard OLS covariance (homoscedasticity assumed)
+        Ignored when regression_model is not "OLS".
+    regression_model : str, default="OLS"
+        Type of regression model to fit. Valid values:
+        - "OLS": Ordinary least squares
+        - "GLM": Generalized linear model (requires `family` parameter)
+        - "Logit": Logistic regression
+    family : sm.families.Family, optional
+        GLM family object (e.g., sm.families.Poisson()). Required when
+        regression_model="GLM", ignored otherwise.
+    
+    Returns
+    -------
+    results : dict of {str: pd.DataFrame}
+        Regression results indexed by model name. Each DataFrame is indexed by
+        variable/term names with columns:
+        - coef: regression coefficient
+        - pval: uncorrected p-value
+        - se: standard error
+        - llci, ulci: confidence interval bounds
+        - ci: formatted confidence interval string
+        - R2: adjusted R² (OLS) or pseudo-R² (GLM), None for Logit
+    models : dict of {str: ResultsWrapper}
+        Fitted model objects indexed by model name.
+    formulas : dict of {str: str}
+        Copy of input formulas indexed by model name.
+    
+    Raises
+    ------
+    Exception
+        Re-raises any exception from model fitting with context about which
+        formula caused the error.
+    
+    Notes
+    -----
+    - Formulas support patsy syntax including:
+      * Transformations: 'y ~ np.log(x1) + x2**2'
+      * Interactions: 'y ~ x1 + x2 + x1:x2' or 'y ~ x1 * x2'
+      * Categorical encoding: 'y ~ C(group) + x1'
+    - Robust covariance is automatically disabled for non-OLS models.
+    
+    Examples
+    --------
+    >>> # Compare models with different interaction structures
+    >>> formulas = [
+    ...     'disability ~ choroid_plexus_vol + age + sex',
+    ...     'disability ~ choroid_plexus_vol * ventricle_vol + age + sex',
+    ...     'disability ~ np.log(choroid_plexus_vol) + ventricle_vol + age + sex'
+    ... ]
+    >>> results, models, _ = run_regressions_from_formulas(
+    ...     model_data=df,
+    ...     formula_list=formulas,
+    ...     model_names=['Main_Effects', 'With_Interaction', 'Log_Transform']
+    ... )
+    >>> results['With_Interaction']  # coefficients including interaction term
+    """
+    if model_names is None:
+        model_names = [str(i) for i, _ in enumerate(formula_list)]
+
+    models = {}
+    results = {}
+    formulas = {}
+    for formula, model_name in zip(formula_list, model_names):
+        try:
+            if regression_model == "OLS":
+                rres = sm.OLS.from_formula(formula, data=model_data).fit(cov_type=robust_cov)
+                r2 = rres.rsquared_adj
+            elif regression_model == "GLM":
+                if family is None:
+                    family = sm.families.Poisson()
+                rres = smf.glm(formula, data=model_data, family=family).fit(cov_type=robust_cov)
+                r2 = rres.pseudo_rsquared()
+            elif regression_model == "Logit":
+                rres = smf.Logit(formula, data=model_data).fit(cov_type=robust_cov, disp=0)
+                r2 = None
+            
+            models[model_name] = rres
+            coef = rres.params
+            pval = rres.pvalues
+            se = rres.bse
+            ci_df = rres.conf_int()
+            if hasattr(ci_df, "loc"):
+                llci, ulci = ci_df.loc[:, 0], ci_df.loc[:, 1]
+            else:
+                llci, ulci = ci_df[:, 0], ci_df[:, 1]
+            ci_str = [
+                f"[{lci:.3}, {uci:.3}]" if not np.isnan(lci) else ""
+                for lci, uci in zip(llci, ulci)
+            ]
+
+            exog_names = list(rres.model.exog_names)
+        except Exception as e:
+            coef = pval = se = llci = ulci = np.nan
+            ci_str = ""
+            r2 = np.nan
+            raise e
+        res_df = pd.DataFrame(
+            {
+                "coef": coef,
+                "pval": pval,
+                "se": se,
+                "llci": llci,
+                "ulci": ulci,
+                "ci": ci_str,
+                "R2": r2,
+            },
+            index=exog_names,
+        )
+        results[model_name] = res_df
+        formulas[model_name] = formula
+
+    return results, models, formulas
