@@ -101,6 +101,13 @@ vars_to_center = [
     "choroid_volume",
 ]
 
+def load_data(path: str) -> pd.DataFrame:
+    data = pd.read_csv(path, index_col="subid")
+    data['Female'] = pd.Categorical(data['Female'], categories=[0, 1])
+    data['Male'] = pd.Categorical(data['Male'], categories=[0, 1])
+    return data
+
+
 
 def quick_regression(y, x, data, covariates=None):
     if covariates is None:
@@ -184,7 +191,7 @@ def load_df():
         "all": "allCSF",
         "third_ventricle": "thirdV",
         "fourth_ventricle": "fourthV",
-        "aseg_csf": "asegCSF",
+        "aseg_csf": "interCSF",
         "third_ventricle_width": "thirdV_width",
     }
     df.rename(columns=rename_columns, inplace=True)
