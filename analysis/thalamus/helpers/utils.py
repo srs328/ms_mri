@@ -107,7 +107,8 @@ def load_data(path: str) -> pd.DataFrame:
     data['Male'] = pd.Categorical(data['Male'], categories=[0, 1])
     return data
 
-
+def tmp_test():
+    return "hello"
 
 def quick_regression(y, x, data, covariates=None):
     if covariates is None:

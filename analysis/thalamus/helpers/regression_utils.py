@@ -567,8 +567,11 @@ def run_regressions(
         covariates = []
     if isinstance(predictors, set):
         predictors = list(predictors)
+    
+    single_outcome = False
     if isinstance(outcomes, str):
         outcomes = [outcomes]
+        single_outcome = True
 
     # container: per-outcome dataframes
     results_by_outcome = {}
@@ -660,6 +663,9 @@ def run_regressions(
             df_struct["p_fdr"] < fdr_alpha, 0.0
         )
         results_by_predictor[pred] = df_pred
+
+    if single_outcome:
+        results_by_outcome = results_by_outcome[outcomes[0]]
 
     return results_by_outcome, results_by_predictor, models
 

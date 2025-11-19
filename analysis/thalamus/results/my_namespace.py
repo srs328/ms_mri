@@ -6,19 +6,9 @@ simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
 simplefilter(action="ignore", category=DeprecationWarning)
 simplefilter(action="ignore", category=FutureWarning)
 
-import re
-import textwrap
 from pathlib import Path
-from pyprocessmacro import Process
 
-import numpy as np
-import pyperclip
-import statsmodels.api as sm
 from matplotlib import colormaps
-from scipy import stats
-from IPython.display import Markdown, display
-from io import StringIO
-import matplotlib.pyplot as plt
 
 
 from reload_recursive import reload_recursive
@@ -28,19 +18,8 @@ sys.path.insert(0, "/home/srs-9/Projects/ms_mri/analysis/thalamus/helpers")
 from mri_data import file_manager as fm
 import helpers
 
-import regression_utils
-
-
-reload_recursive(regression_utils)
 reload_recursive(helpers)
 import helpers
-from helpers import load_df, zscore, get_colors
-from regression_utils import (
-    quick_regression,
-    quick_regression2,
-    residualize_vars,
-    run_regressions,
-)
 
 
 drive_root = fm.get_drive_root()
@@ -50,7 +29,22 @@ data_dir = Path("/home/srs-9/Projects/ms_mri/data")
 
 
 viridis = colormaps["viridis"].resampled(20)
-colors = helpers.get_colors()
+colors = {
+    "dark red1": "#eb3131",
+    "light red1": "#eb7171",
+    "dark blue1": "#1f4294",
+    "light blue1": "#7a9df0",
+    "dark green1": "#2e6023",
+    "light green1": "#6dba5c",
+    "dark purple1": "#8C1FA7",
+    "light purple1": "#BD49DA",
+    "grey6": "#707070",
+    "grey5": "#6A6A6A",
+    "grey4": "#5A5A5A",
+    "grey3": "#4A4A4A",
+    "grey2": "#3A3A3A",
+    "grey1": "#333333"
+}
 
 thalamic_nuclei = [2, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 deep_grey = [13, 14, 26, 27, 28, 29, 30, 31, 32]
