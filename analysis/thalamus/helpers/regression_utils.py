@@ -822,6 +822,9 @@ def run_regressions_multimodel(
             },
             index=exog_names,
         )
+        pvals = res_df["pval"].fillna(1.0).values
+        _, p_fdr_vals, _, _ = multipletests(pvals, alpha=fdr_alpha, method=fdr_method)
+        res_df.insert(2, "p_fdr", p_fdr_vals)
         results[model_name] = res_df
         formulas[model_name] = formula
 
