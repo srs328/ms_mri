@@ -832,6 +832,7 @@ def run_regressions_from_formulas(
     model_data: pd.DataFrame,
     formula_list: list[str],
     model_names: list[str] | None = None,
+    covariates: list[str] | None = None,
     robust_cov: str = "HC3",
     regression_model: str = "OLS",
     family: Optional[sm.families.Family] = None,
@@ -913,12 +914,15 @@ def run_regressions_from_formulas(
     """
     if model_names is None:
         model_names = [str(i) for i, _ in enumerate(formula_list)]
+    if covariates is None:
+        covariates = []
 
     models = {}
     results = {}
     formulas = {}
     for formula, model_name in zip(formula_list, model_names):
         try:
+            formula = " + ".join([formula] + (covariates))
             if regression_model == "OLS":
                 rres = sm.OLS.from_formula(formula, data=model_data).fit(cov_type=robust_cov)
                 r2 = rres.rsquared_adj

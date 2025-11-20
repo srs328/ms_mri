@@ -42,12 +42,28 @@ for struct in ["brain", "white", "grey", "thalamus", "t2lv"]:
 def composite_vars(df):
     df["CCF0"] = df["LV"] / df["allCSF"]
     df["CCF"] = df["LV"] / (df["LV"] + df["periCSF"])
+    df["CCF2"] = (df["LV"] + df["thirdV"]) / (df["LV"] + df["thirdV"] + df["periCSF"])
     df["CCR"] = df["LV"] / df["periCSF"]
     df["CCR2"] = (df["LV"] + df["thirdV"]) / df["periCSF"]
     df["periCSF_ratio"] = df["periCSF"] / df["LV"]
     df["periCSF_ratio2"] = df["periCSF"] / (df["LV"] + df["thirdV"])
     df["periCSF_frac"] = df["periCSF"] / df["allCSF"]
     df["thirdV_expansion"] = df['thirdV_width'] / df['thirdV']
+    
+    # Produce central measures from normalized versions
+    LV_norm = df["LV"] / df["LV"].mean()
+    thirdV_norm = df["thirdV"] / df["thirdV"].mean()
+    centralV_norm = (df["LV"] + df["thirdV"]) / (df["LV"] + df["thirdV"]).mean()
+    periCSF_norm = df["periCSF"] / df["periCSF"].mean()
+    
+    df["CCF_norm"] = LV_norm / (LV_norm + periCSF_norm)
+    df["CCF2_norm"] = (LV_norm + thirdV_norm) / (LV_norm + thirdV_norm + periCSF_norm)
+    df["CCR_norm"] = LV_norm / periCSF_norm
+    df["CCR2_norm"] = centralV_norm / periCSF_norm
+    df["CCR2_norm2"] = (LV_norm + thirdV_norm) / periCSF_norm
+    df["periCSF_ratio_norm"] = periCSF_norm / LV_norm
+    df["periCSF_ratio2_norm"] = periCSF_norm / centralV_norm    
+    df["periCSF_ratio2_norm2"] = periCSF_norm / (LV_norm + thirdV_norm)    
     return df
 
 data = composite_vars(data)
@@ -69,11 +85,20 @@ transformations = {
     "CCR": "log",
     "CCR2": "log",
     "CCF": "log",
+    "CCF2": "log",
     "CCF0": "log",
     "periCSF_ratio": "log",
     "periCSF_ratio2": "log",
     "periCSF_frac": "reflect_log",
-    "THALAMUS_1": "log"
+    "THALAMUS_1": "log",
+    "CCR_norm": "log",
+    "CCR2_norm": "log",
+    "CCR2_norm2": "log",
+    "CCF_norm": "log",
+    "CCF2_norm": "log",
+    "periCSF_ratio_norm": "log",
+    "periCSF_ratio2_norm": "log",
+    "periCSF_ratio2_norm2": "log",
 }
 data = utils.transform_variables(data, transformations)
 # dataT = utils.transform_variables(data, transformations, rename=False)
