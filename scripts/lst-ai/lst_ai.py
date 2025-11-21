@@ -54,5 +54,5 @@ for subid in tqdm(subjects, total=len(subjects), desc="Processing subjects", uni
         logger.error(e.stderr)
         continue
     else:
-        logger.debug(result.stdout.decode('utf-8'))
+        logger.debug(result.stdout)
     

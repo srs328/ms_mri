@@ -61,3 +61,63 @@
 2025-11-20 22:41:47.425 | INFO     | __main__:<module>:49 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms2118/ses-20170423
 2025-11-20 23:17:38.645 | INFO     | __main__:<module>:41 - Starting subject 2118
 2025-11-20 23:17:38.646 | INFO     | __main__:<module>:49 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms2118/ses-20170423
+2025-11-20 23:24:58.631 | INFO     | __main__:<module>:41 - Starting subject 2118
+2025-11-20 23:24:58.631 | INFO     | __main__:<module>:49 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms2118/ses-20170423
+2025-11-20 23:24:58.639 | DEBUG    | __main__:<module>:57 - SKIP: /mnt/h/3Tpioneer_bids/sub-ms2118/ses-20170423/lst-ai/space-flair_seg-lst.nii.gz exists
+
+2025-11-20 23:24:58.639 | INFO     | __main__:<module>:41 - Starting subject 2119
+2025-11-20 23:24:58.639 | INFO     | __main__:<module>:49 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms2119/ses-20180903
+2025-11-20 23:26:45.919 | INFO     | __main__:<module>:41 - Starting subject 2119
+2025-11-20 23:26:45.919 | INFO     | __main__:<module>:49 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms2119/ses-20180903
+2025-11-20 23:32:40.252 | DEBUG    | __main__:<module>:57 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms2119/ses-20180903/lst-ai/space-flair_seg-lst.nii.gz
+OK: produced /mnt/h/3Tpioneer_bids/sub-ms2119/ses-20180903/lst-ai/space-flair_seg-lst.nii.gz
+
+2025-11-20 23:32:40.252 | INFO     | __main__:<module>:41 - Starting subject 2120
+2025-11-20 23:32:40.253 | INFO     | __main__:<module>:49 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms2120/ses-20170920
+2025-11-20 23:33:22.818 | DEBUG    | __main__:<module>:57 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms2120/ses-20170920/lst-ai/space-flair_seg-lst.nii.gz
+ERROR: command block failed
+
+2025-11-20 23:33:22.819 | INFO     | __main__:<module>:41 - Starting subject 2124
+2025-11-20 23:33:22.819 | INFO     | __main__:<module>:49 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms2124/ses-20190625
+2025-11-20 23:39:16.233 | DEBUG    | __main__:<module>:57 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms2124/ses-20190625/lst-ai/space-flair_seg-lst.nii.gz
+OK: produced /mnt/h/3Tpioneer_bids/sub-ms2124/ses-20190625/lst-ai/space-flair_seg-lst.nii.gz
+
+2025-11-20 23:39:16.233 | INFO     | __main__:<module>:41 - Starting subject 2133
+2025-11-20 23:39:16.234 | INFO     | __main__:<module>:49 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms2133/ses-20190302
+2025-11-20 23:45:01.556 | DEBUG    | __main__:<module>:57 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms2133/ses-20190302/lst-ai/space-flair_seg-lst.nii.gz
+OK: produced /mnt/h/3Tpioneer_bids/sub-ms2133/ses-20190302/lst-ai/space-flair_seg-lst.nii.gz
+
+2025-11-20 23:45:01.557 | INFO     | __main__:<module>:41 - Starting subject 2136
+2025-11-20 23:45:01.557 | INFO     | __main__:<module>:49 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms2136/ses-20191219
+2025-11-20 23:50:50.822 | DEBUG    | __main__:<module>:57 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms2136/ses-20191219/lst-ai/space-flair_seg-lst.nii.gz
+OK: produced /mnt/h/3Tpioneer_bids/sub-ms2136/ses-20191219/lst-ai/space-flair_seg-lst.nii.gz
+
+2025-11-20 23:50:50.823 | INFO     | __main__:<module>:41 - Starting subject 2137
+2025-11-20 23:50:50.823 | INFO     | __main__:<module>:49 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms2137/ses-20220316
+2025-11-20 23:56:54.269 | DEBUG    | __main__:<module>:57 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms2137/ses-20220316/lst-ai/space-flair_seg-lst.nii.gz
+OK: produced /mnt/h/3Tpioneer_bids/sub-ms2137/ses-20220316/lst-ai/space-flair_seg-lst.nii.gz
+
+2025-11-20 23:56:54.270 | INFO     | __main__:<module>:41 - Starting subject 2140
+2025-11-20 23:56:54.270 | INFO     | __main__:<module>:49 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms2140/ses-20191211
+2025-11-21 00:07:18.843 | INFO     | __main__:<module>:41 - Starting subject 2140
+2025-11-21 00:07:18.844 | INFO     | __main__:<module>:49 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms2140/ses-20191211
+2025-11-21 00:13:11.610 | DEBUG    | __main__:<module>:57 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms2140/ses-20191211/lst-ai/space-flair_seg-lst.nii.gz
+OK: produced /mnt/h/3Tpioneer_bids/sub-ms2140/ses-20191211/lst-ai/space-flair_seg-lst.nii.gz
+
+2025-11-21 00:13:11.610 | INFO     | __main__:<module>:41 - Starting subject 2145
+2025-11-21 00:13:11.611 | INFO     | __main__:<module>:49 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms2145/ses-20190531
+2025-11-21 00:19:45.851 | DEBUG    | __main__:<module>:57 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms2145/ses-20190531/lst-ai/space-flair_seg-lst.nii.gz
+OK: produced /mnt/h/3Tpioneer_bids/sub-ms2145/ses-20190531/lst-ai/space-flair_seg-lst.nii.gz
+
+2025-11-21 00:19:45.851 | INFO     | __main__:<module>:41 - Starting subject 2147
+2025-11-21 00:19:45.851 | INFO     | __main__:<module>:49 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms2147/ses-20190809
+2025-11-21 00:25:43.893 | DEBUG    | __main__:<module>:57 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms2147/ses-20190809/lst-ai/space-flair_seg-lst.nii.gz
+OK: produced /mnt/h/3Tpioneer_bids/sub-ms2147/ses-20190809/lst-ai/space-flair_seg-lst.nii.gz
+
+2025-11-21 00:25:43.894 | INFO     | __main__:<module>:41 - Starting subject 2149
+2025-11-21 00:25:43.894 | INFO     | __main__:<module>:49 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms2149/ses-20210205
+2025-11-21 00:31:27.998 | DEBUG    | __main__:<module>:57 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms2149/ses-20210205/lst-ai/space-flair_seg-lst.nii.gz
+OK: produced /mnt/h/3Tpioneer_bids/sub-ms2149/ses-20210205/lst-ai/space-flair_seg-lst.nii.gz
+
+2025-11-21 00:31:27.998 | INFO     | __main__:<module>:41 - Starting subject 2152
+2025-11-21 00:31:27.999 | INFO     | __main__:<module>:49 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms2152/ses-20161202
