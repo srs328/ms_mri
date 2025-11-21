@@ -24,19 +24,20 @@ logger.add(TqdmLoguruStream(), level="INFO", format="{time:YYYY-MM-DD HH:MM:SS} 
 logger.add(os.path.join(curr_dir, "run_lst_ai.log"), level="DEBUG")
 
 
-work_home = Path("/media/smbshare/srs-9/fastsurfer")
-dataroot = Path("/media/smbshare/3Tpioneer_bids")
+# work_home = Path("/media/smbshare/srs-9/fastsurfer")
+# dataroot = Path("/media/smbshare/3Tpioneer_bids")
+dataroot = Path("/mnt/h/3Tpioneer_bids")
 
 with open(dataroot / "subject-sessions-longit.json", 'r') as f:
     subject_sessions = json.load(f)
 
-with open("/home/srs-9/Projects/ms_mri/scripts/lst-ai/subjects_to_process.txt", 'r') as f:
+with open("/home/srs-9/Projects/ms_mri/scripts/lst-ai/subjects_to_process3.txt", 'r') as f:
     subjects = [line.strip() for line in f.readlines()]
 
 lstai_script = "/home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh"
 
 # for subid in subject_sessions:
-for subid in tqdm(subjects, total=len(subjects), desc="Processing subjects"):
+for subid in tqdm(subjects, total=len(subjects), desc="Processing subjects", unit="subject"):
     logger.info(f"Starting subject {subid}")
     sessions = sorted(subject_sessions[subid])
     sesid = sessions[0]
@@ -47,9 +48,11 @@ for subid in tqdm(subjects, total=len(subjects), desc="Processing subjects"):
     cmd_str = " ".join([str(item) for item in cmd])
     logger.info(cmd_str)
     try:    
-        result = subprocess.run(cmd, text=True, check=True)
+        result = subprocess.run(cmd, text=True, check=True, capture_output=True)
     except subprocess.CalledProcessError as e:
-        logger.error(f"Command failed with exit code {e.returncode}")
-        logger.error(result.stderr)
-        logger.debug(result.stdout)
+        tqdm.write(f"ERROR: {subid} failed")
+        logger.error(e.stderr)
+        continue
+    else:
+        logger.debug(result.stdout.decode('utf-8'))
     

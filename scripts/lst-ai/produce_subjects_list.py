@@ -14,13 +14,16 @@ logger.add(sys.stderr, level="INFO")  # Add a new handler with WARNING level
 logger.add(os.path.join(curr_dir, "run_lst_ai.log"), level="DEBUG")
 
 
-work_home = Path("/media/smbshare/srs-9/fastsurfer")
-dataroot = Path("/media/smbshare/3Tpioneer_bids")
+# work_home = Path("/media/smbshare/srs-9/fastsurfer")
+# dataroot = Path("/media/smbshare/3Tpioneer_bids")
+dataroot = Path("/mnt/h/3Tpioneer_bids")
+
 
 with open(dataroot / "subject-sessions-longit.json", 'r') as f:
     subject_sessions = json.load(f)
 
-with open("/home/srs-9/Projects/ms_mri/scripts/lst-ai/ms_patients.txt", 'r') as f:
+# with open("/home/srs-9/Projects/ms_mri/scripts/lst-ai/ms_patients.txt", 'r') as f:
+with open("/home/srs-9/Projects/ms_mri/scripts/lst-ai/subjects_to_process2.txt", 'r') as f:
     subjects = [line.strip() for line in f.readlines()]
 
 lstai_script = "/home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh"
@@ -39,7 +42,7 @@ for subid in subjects:
     # f.write(cmd_str + "\n")
     # subprocess.run(cmd)
     check_dir = work_dir / "lst-ai"
-    if check_dir.exists():
+    if (check_dir / "annotated_lesion_stats.csv").exists():
         subjects_processed.append(subid)
     else:
         subjects_to_process.append(subid)
@@ -47,6 +50,6 @@ for subid in subjects:
 print("Number of subjects to process: ", len(subjects_to_process))
 print("Number of subjects processed: ", len(subjects_processed))
 
-with open(os.path.join(curr_dir, "subjects_to_process.txt"), 'w') as f:
+with open(os.path.join(curr_dir, "subjects_to_process3.txt"), 'w') as f:
     for subid in subjects_to_process:
         f.write(subid + "\n")
