@@ -7,99 +7,100 @@ simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
 import sys
 from pathlib import Path
 
-# import helpers
-from matplotlib import colormaps
 
 sys.path.insert(0, "/home/srs-9/Projects/ms_mri/analysis/thalamus/helpers")
 import utils
 
-from mri_data import file_manager as fm
 
-#%% 
-def load_df():
-    choroid_volumes = pd.read_csv(
-        "/home/srs-9/Projects/ms_mri/data/choroid_aschoplex_volumes.csv",
-        index_col="subid",
-    )
-    ventricle_volumes = pd.read_csv(
-        "/home/srs-9/Projects/ms_mri/data/ventricle_volumes.csv",
-        index_col="subid",
-    )
-    csf_volumes = pd.read_csv(
-        "/home/srs-9/Projects/ms_mri/analysis/thalamus/data0/csf_volumes3.csv",
-        index_col="subid",
-    )
-    third_ventricle_width = pd.read_csv(
-        "/home/srs-9/Projects/ms_mri/analysis/thalamus/data0/third_ventricle_width.csv",
-        index_col="subid",
-    )
+# %%
 
-    tiv = pd.read_csv(
-        "/home/srs-9/Projects/ms_mri/data/tiv_data.csv", index_col="subid"
-    )
-
-    df = pd.read_csv(
-        "/home/srs-9/Projects/ms_mri/data/clinical_data_processed.csv",
-        index_col="subid",
-    )
-    sdmt = pd.read_csv(
-        "/home/srs-9/Projects/ms_mri/analysis/thalamus/SDMT_sheet.csv",
-        index_col="subid",
-    )
-    df = df.join(
-        [
-            choroid_volumes,
-            ventricle_volumes,
-            csf_volumes,
-            third_ventricle_width,
-            tiv,
-            sdmt["SDMT"],
-        ]
-    )
-    # some values in SDMT are strings like "need to break glass, skip"
-    df["SDMT"] = pd.to_numeric(df["SDMT"], errors="coerce")
-
-    rename_columns = {
-        "ventricle_volume": "LV",
-        "choroid_volume": "CP",
-        "peripheral": "periCSF",
-        "all": "allCSF",
-        "third_ventricle": "thirdV",
-        "fourth_ventricle": "fourthV",
-        "aseg_csf": "interCSF",
-        "third_ventricle_width": "thirdV_width",
-    }
-    df.rename(columns=rename_columns, inplace=True)
-
-    return df
-
-#%%
-drive_root = fm.get_drive_root()
-dataroot = drive_root / "3Tpioneer_bids"
 data_dir = Path("/home/srs-9/Projects/ms_mri/data")
-fig_path = Path(
-    "/home/srs-9/Projects/ms_mri/analysis/thalamus/figures_tables/choroid_associations"
+
+# %% Load and preprocess the main clinical and MRI data
+
+choroid_volumes = pd.read_csv(
+    "/home/srs-9/Projects/ms_mri/data/choroid_aschoplex_volumes.csv",
+    index_col="subid",
+)
+ventricle_volumes = pd.read_csv(
+    "/home/srs-9/Projects/ms_mri/data/ventricle_volumes.csv",
+    index_col="subid",
+)
+csf_volumes = pd.read_csv(
+    "/home/srs-9/Projects/ms_mri/analysis/thalamus/data0/csf_volumes3.csv",
+    index_col="subid",
+)
+third_ventricle_width = pd.read_csv(
+    "/home/srs-9/Projects/ms_mri/analysis/thalamus/data0/third_ventricle_width.csv",
+    index_col="subid",
 )
 
-df = load_df()
-df_thomas = utils.load_hipsthomas(data_dir)
+tiv = pd.read_csv("/home/srs-9/Projects/ms_mri/data/tiv_data.csv", index_col="subid")
 
-data = df.join(df_thomas)
+df = pd.read_csv(
+    "/home/srs-9/Projects/ms_mri/data/clinical_data_processed.csv",
+    index_col="subid",
+)
+sdmt = pd.read_csv(
+    "/home/srs-9/Projects/ms_mri/analysis/thalamus/SDMT_sheet.csv",
+    index_col="subid",
+)
+df = df.join(
+    [
+        choroid_volumes,
+        ventricle_volumes,
+        csf_volumes,
+        third_ventricle_width,
+        tiv,
+        sdmt["SDMT"],
+    ]
+)
+# some values in SDMT are strings like "need to break glass, skip"
+df["SDMT"] = pd.to_numeric(df["SDMT"], errors="coerce")
 
 # these corrections should ultimately be made to the csv file
-for struct in ["brain", "white", "grey", "thalamus", "t2lv"]:
-    data[struct] = data[struct] * 1000
+for struct in [
+    "brain",
+    "cat12_brain",
+    "white",
+    "cat12_wm",
+    "grey",
+    "cat12_gm",
+    "cat12_tiv",
+    "thalamus",
+    "t2lv",
+]:
+    df[struct] = df[struct] * 1000
 
-# these three columns were normalized; dividing by vscaling un-normalizes   
+# these three columns were normalized; dividing by vscaling un-normalizes
 for struct in ["brain", "white", "grey"]:
-    data[struct] = data[struct] / data['vscaling']
+    df[struct] = df[struct] / df['vscaling']
 
-#%% Create composite measures of CSF distribution
+
+# %% Load HIPS-THOMAS volumes
+
+df_thomas = utils.load_hipsthomas(data_dir)
+data = df.join(df_thomas)
+
+rename_columns = {
+    "ventricle_volume": "LV",
+    "choroid_volume": "CP",
+    "peripheral": "periCSF",
+    "all": "allCSF",
+    "third_ventricle": "thirdV",
+    "fourth_ventricle": "fourthV",
+    "aseg_csf": "interCSF",
+    "third_ventricle_width": "thirdV_width",
+}
+data.rename(columns=rename_columns, inplace=True)
+
+# %% Create composite measures of CSF distribution
 # /home/srs-9/Projects/ms_mri/analysis/thalamus/helpers/helpers.py:225: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
 #   df["CCF0"] = df["LV"] / df["allCSF"]
 # /home/srs-9/Projects/ms_mri/analysis/thalamus/helpers/helpers.py:226: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor pe
 
-# maybe print a log of what what composited 
+
+# maybe print a log of what what composited
 def composite_vars(df):
     df["CCF0"] = df["LV"] / df["allCSF"]
     df["CCF"] = df["LV"] / (df["LV"] + df["periCSF"])
@@ -110,27 +111,28 @@ def composite_vars(df):
     df["periCSF_ratio2"] = df["periCSF"] / (df["LV"] + df["thirdV"])
     df["periCSF_frac"] = df["periCSF"] / df["allCSF"]
     df["thirdV_expansion"] = df['thirdV_width'] / df['thirdV']
-    
+
     # Produce central measures from normalized versions
     LV_norm = df["LV"] / df["LV"].mean()
     thirdV_norm = df["thirdV"] / df["thirdV"].mean()
     centralV_norm = (df["LV"] + df["thirdV"]) / (df["LV"] + df["thirdV"]).mean()
     periCSF_norm = df["periCSF"] / df["periCSF"].mean()
-    
+
     df["CCF_norm"] = LV_norm / (LV_norm + periCSF_norm)
     df["CCF2_norm"] = (LV_norm + thirdV_norm) / (LV_norm + thirdV_norm + periCSF_norm)
     df["CCR_norm"] = LV_norm / periCSF_norm
     df["CCR2_norm"] = centralV_norm / periCSF_norm
     df["CCR2_norm2"] = (LV_norm + thirdV_norm) / periCSF_norm
     df["periCSF_ratio_norm"] = periCSF_norm / LV_norm
-    df["periCSF_ratio2_norm"] = periCSF_norm / centralV_norm    
-    df["periCSF_ratio2_norm2"] = periCSF_norm / (LV_norm + thirdV_norm)    
+    df["periCSF_ratio2_norm"] = periCSF_norm / centralV_norm
+    df["periCSF_ratio2_norm2"] = periCSF_norm / (LV_norm + thirdV_norm)
     return df
+
 
 data = composite_vars(data)
 
-#%% Transform non-normal data
-#? See suggestions from assumption_checks.ipynb
+# %% Transform non-normal data
+# ? See suggestions from assumption_checks.ipynb
 transformations = {
     "LV": "log",
     "thirdV": "log",
@@ -161,31 +163,6 @@ transformations = {
 }
 data = utils.transform_variables(data, transformations)
 # dataT = utils.transform_variables(data, transformations, rename=False)
-
-#%%
-
-viridis = colormaps["viridis"].resampled(20)
-colors = utils.get_colors()
-
-MS_patients = data["dz_type2"] == "MS"
-NONMS_patients = data["dz_type2"] == "!MS"
-NIND_patients = data["dz_type5"] == "NIND"
-OIND_patients = data["dz_type5"] == "OIND"
-RMS_patients = data["dz_type5"] == "RMS"
-PMS_patients = data["dz_type5"] == "PMS"
-
-
-thalamic_nuclei = [2, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-deep_grey = [13, 14, 26, 27, 28, 29, 30, 31, 32]
-
-thalamic_nuclei_str = [str(i) for i in thalamic_nuclei]
-
-hips_thomas_ref = pd.read_csv(
-    "/home/srs-9/Projects/ms_mri/data/hipsthomas_struct_index.csv", index_col="index"
-)["struct"]
-hips_thomas_invref = pd.read_csv(
-    "/home/srs-9/Projects/ms_mri/data/hipsthomas_struct_index.csv", index_col="struct"
-)["index"]
 
 data.to_csv(Path(__file__).parent / "data.csv")
 # dataT.to_csv(Path(__file__).parent / "data_transformed.csv")

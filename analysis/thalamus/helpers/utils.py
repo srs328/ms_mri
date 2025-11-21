@@ -101,10 +101,27 @@ vars_to_center = [
     "choroid_volume",
 ]
 
-def load_data(path: str) -> pd.DataFrame:
+def load_data(path: str, rename_columns: dict = None, copy_columns: dict = None) -> pd.DataFrame:
+    if rename_columns is None:
+        rename_columns = {}
+
+    if copy_columns is None:
+        copy_columns = {
+            "cat12_brain": "WBV",
+            "cat12_wm": "WMV",
+            "cat12_gm": "GMV",
+            "THALAMUS_1": "WTV",
+            "cat12_tiv": "TIV"
+        }
+
     data = pd.read_csv(path, index_col="subid")
     data['Female'] = pd.Categorical(data['Female'], categories=[0, 1])
     data['Male'] = pd.Categorical(data['Male'], categories=[0, 1])
+
+    data.rename(columns=rename_columns, inplace=True)
+    for col, new_col in copy_columns.items():
+        data[new_col] = data[col].copy()
+
     return data
 
 def tmp_test():

@@ -121,3 +121,116 @@ OK: produced /mnt/h/3Tpioneer_bids/sub-ms2149/ses-20210205/lst-ai/space-flair_se
 
 2025-11-21 00:31:27.998 | INFO     | __main__:<module>:41 - Starting subject 2152
 2025-11-21 00:31:27.999 | INFO     | __main__:<module>:49 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms2152/ses-20161202
+2025-11-21 00:37:41.430 | DEBUG    | __main__:<module>:57 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms2152/ses-20161202/lst-ai/space-flair_seg-lst.nii.gz
+OK: produced /mnt/h/3Tpioneer_bids/sub-ms2152/ses-20161202/lst-ai/space-flair_seg-lst.nii.gz
+
+2025-11-21 00:37:41.430 | INFO     | __main__:<module>:41 - Starting subject 2153
+2025-11-21 00:37:41.431 | INFO     | __main__:<module>:49 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms2153/ses-20200316
+2025-11-21 10:45:42.169 | INFO     | __main__:<module>:41 - Starting subject 2140
+2025-11-21 10:45:42.170 | INFO     | __main__:<module>:49 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms2140/ses-20191211
+2025-11-21 10:45:42.211 | DEBUG    | __main__:<module>:57 - SKIP: /mnt/h/3Tpioneer_bids/sub-ms2140/ses-20191211/lst-ai/space-flair_seg-lst.nii.gz exists
+
+2025-11-21 10:45:42.211 | INFO     | __main__:<module>:41 - Starting subject 2145
+2025-11-21 10:45:42.211 | INFO     | __main__:<module>:49 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms2145/ses-20190531
+2025-11-21 10:45:42.228 | DEBUG    | __main__:<module>:57 - SKIP: /mnt/h/3Tpioneer_bids/sub-ms2145/ses-20190531/lst-ai/space-flair_seg-lst.nii.gz exists
+
+2025-11-21 10:45:42.228 | INFO     | __main__:<module>:41 - Starting subject 2147
+2025-11-21 10:45:42.228 | INFO     | __main__:<module>:49 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms2147/ses-20190809
+2025-11-21 10:45:42.238 | DEBUG    | __main__:<module>:57 - SKIP: /mnt/h/3Tpioneer_bids/sub-ms2147/ses-20190809/lst-ai/space-flair_seg-lst.nii.gz exists
+
+2025-11-21 10:45:42.238 | INFO     | __main__:<module>:41 - Starting subject 2149
+2025-11-21 10:45:42.238 | INFO     | __main__:<module>:49 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms2149/ses-20210205
+2025-11-21 10:45:42.263 | DEBUG    | __main__:<module>:57 - SKIP: /mnt/h/3Tpioneer_bids/sub-ms2149/ses-20210205/lst-ai/space-flair_seg-lst.nii.gz exists
+
+2025-11-21 10:45:42.263 | INFO     | __main__:<module>:41 - Starting subject 2152
+2025-11-21 10:45:42.264 | INFO     | __main__:<module>:49 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms2152/ses-20161202
+2025-11-21 10:45:42.274 | DEBUG    | __main__:<module>:57 - SKIP: /mnt/h/3Tpioneer_bids/sub-ms2152/ses-20161202/lst-ai/space-flair_seg-lst.nii.gz exists
+
+2025-11-21 10:45:42.275 | INFO     | __main__:<module>:41 - Starting subject 2153
+2025-11-21 10:45:42.275 | INFO     | __main__:<module>:49 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms2153/ses-20200316
+2025-11-21 13:13:43.768 | INFO     | __main__:<module>:43 - Starting subject 1229
+2025-11-21 13:13:43.781 | INFO     | __main__:<module>:56 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1229/ses-20180304
+2025-11-21 13:20:52.613 | DEBUG    | __main__:<module>:64 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1229/ses-20180304/lst-ai/space-flair_seg-lst.nii.gz
+OK: produced /mnt/h/3Tpioneer_bids/sub-ms1229/ses-20180304/lst-ai/space-flair_seg-lst.nii.gz
+
+2025-11-21 13:20:52.614 | INFO     | __main__:<module>:43 - Starting subject 1245
+2025-11-21 13:30:59.830 | INFO     | __main__:<module>:44 - Starting subject 1245
+2025-11-21 13:30:59.832 | WARNING  | __main__:<module>:55 - sub1245 does not have a FLAIR in any session, so must skip
+2025-11-21 13:30:59.832 | INFO     | __main__:<module>:44 - Starting subject 1364
+2025-11-21 13:31:00.204 | INFO     | __main__:<module>:68 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1364/ses-20180618
+2025-11-21 13:36:57.144 | DEBUG    | __main__:<module>:76 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1364/ses-20180618/lst-ai/space-flair_seg-lst.nii.gz
+OK: produced /mnt/h/3Tpioneer_bids/sub-ms1364/ses-20180618/lst-ai/space-flair_seg-lst.nii.gz
+
+2025-11-21 13:36:57.146 | INFO     | __main__:<module>:44 - Starting subject 1379
+2025-11-21 13:36:57.161 | WARNING  | __main__:<module>:55 - sub1379 does not have a FLAIR in any session, so must skip
+2025-11-21 13:36:57.162 | INFO     | __main__:<module>:44 - Starting subject 1394
+2025-11-21 13:36:57.174 | INFO     | __main__:<module>:68 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1394/ses-20200708
+2025-11-21 13:43:05.651 | DEBUG    | __main__:<module>:76 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1394/ses-20200708/lst-ai/space-flair_seg-lst.nii.gz
+OK: produced /mnt/h/3Tpioneer_bids/sub-ms1394/ses-20200708/lst-ai/space-flair_seg-lst.nii.gz
+
+2025-11-21 13:43:05.652 | INFO     | __main__:<module>:44 - Starting subject 2001
+2025-11-21 13:43:05.657 | INFO     | __main__:<module>:68 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms2001/ses-20200512
+2025-11-21 13:49:00.407 | DEBUG    | __main__:<module>:76 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms2001/ses-20200512/lst-ai/space-flair_seg-lst.nii.gz
+OK: produced /mnt/h/3Tpioneer_bids/sub-ms2001/ses-20200512/lst-ai/space-flair_seg-lst.nii.gz
+
+2025-11-21 13:49:00.408 | INFO     | __main__:<module>:44 - Starting subject 2106
+2025-11-21 13:49:00.411 | INFO     | __main__:<module>:68 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms2106/ses-20170813
+2025-11-21 13:55:03.613 | DEBUG    | __main__:<module>:76 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms2106/ses-20170813/lst-ai/space-flair_seg-lst.nii.gz
+OK: produced /mnt/h/3Tpioneer_bids/sub-ms2106/ses-20170813/lst-ai/space-flair_seg-lst.nii.gz
+
+2025-11-21 14:09:38.072 | WARNING  | __main__:<module>:46 - sub1245 does not have a FLAIR in any session, so must skip
+2025-11-21 14:09:38.349 | WARNING  | __main__:<module>:46 - sub1379 does not have a FLAIR in any session, so must skip
+2025-11-21 14:12:23.969 | WARNING  | __main__:<module>:46 - sub1245 does not have a FLAIR in any session, so must skip
+2025-11-21 14:12:24.211 | WARNING  | __main__:<module>:46 - sub1379 does not have a FLAIR in any session, so must skip
+2025-11-21 14:16:17.513 | INFO     | __main__:<module>:45 - Starting subject 1196
+2025-11-21 14:16:17.518 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1196/ses-20170725
+2025-11-21 14:24:04.848 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1196/ses-20170725/lst-ai/space-flair_seg-lst.nii.gz
+OK: produced /mnt/h/3Tpioneer_bids/sub-ms1196/ses-20170725/lst-ai/space-flair_seg-lst.nii.gz
+
+2025-11-21 14:24:04.849 | INFO     | __main__:<module>:45 - Starting subject 2120
+2025-11-21 14:24:04.851 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms2120/ses-20170920
+2025-11-21 14:24:50.646 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms2120/ses-20170920/lst-ai/space-flair_seg-lst.nii.gz
+ERROR: command block failed
+
+2025-11-21 14:49:53.641 | WARNING  | __main__:<module>:52 - sub1027 does not have an lst-ai folder
+2025-11-21 14:49:53.646 | WARNING  | __main__:<module>:52 - sub1028 does not have an lst-ai folder
+2025-11-21 14:49:53.711 | WARNING  | __main__:<module>:52 - sub1029 does not have an lst-ai folder
+2025-11-21 14:49:53.771 | WARNING  | __main__:<module>:52 - sub1064 does not have an lst-ai folder
+2025-11-21 14:49:53.873 | WARNING  | __main__:<module>:52 - sub1105 does not have an lst-ai folder
+2025-11-21 14:49:53.910 | WARNING  | __main__:<module>:52 - sub1145 does not have an lst-ai folder
+2025-11-21 14:49:53.929 | WARNING  | __main__:<module>:52 - sub1163 does not have an lst-ai folder
+2025-11-21 14:49:54.009 | WARNING  | __main__:<module>:52 - sub1191 does not have an lst-ai folder
+2025-11-21 14:49:54.098 | WARNING  | __main__:<module>:52 - sub1200 does not have an lst-ai folder
+2025-11-21 14:49:54.137 | WARNING  | __main__:<module>:52 - sub1203 does not have an lst-ai folder
+2025-11-21 14:49:54.270 | WARNING  | __main__:<module>:52 - sub1224 does not have an lst-ai folder
+2025-11-21 14:49:54.331 | WARNING  | __main__:<module>:52 - sub1245 does not have an lst-ai folder
+2025-11-21 14:49:54.457 | WARNING  | __main__:<module>:52 - sub1264 does not have an lst-ai folder
+2025-11-21 14:49:54.483 | WARNING  | __main__:<module>:52 - sub1270 does not have an lst-ai folder
+2025-11-21 14:49:54.509 | WARNING  | __main__:<module>:52 - sub1280 does not have an lst-ai folder
+2025-11-21 14:49:54.523 | WARNING  | __main__:<module>:52 - sub1283 does not have an lst-ai folder
+2025-11-21 14:49:54.649 | WARNING  | __main__:<module>:52 - sub1285 does not have an lst-ai folder
+2025-11-21 14:49:54.800 | WARNING  | __main__:<module>:52 - sub1287 does not have an lst-ai folder
+2025-11-21 14:49:54.853 | WARNING  | __main__:<module>:52 - sub1302 does not have an lst-ai folder
+2025-11-21 14:49:54.883 | WARNING  | __main__:<module>:52 - sub1317 does not have an lst-ai folder
+2025-11-21 14:49:54.887 | WARNING  | __main__:<module>:52 - sub1321 does not have an lst-ai folder
+2025-11-21 14:49:54.909 | WARNING  | __main__:<module>:52 - sub1323 does not have an lst-ai folder
+2025-11-21 14:49:55.170 | WARNING  | __main__:<module>:52 - sub1344 does not have an lst-ai folder
+2025-11-21 14:49:55.210 | WARNING  | __main__:<module>:52 - sub1355 does not have an lst-ai folder
+2025-11-21 14:49:55.235 | WARNING  | __main__:<module>:52 - sub1379 does not have an lst-ai folder
+2025-11-21 14:49:55.383 | WARNING  | __main__:<module>:52 - sub1383 does not have an lst-ai folder
+2025-11-21 14:49:55.497 | WARNING  | __main__:<module>:52 - sub1384 does not have an lst-ai folder
+2025-11-21 14:49:55.627 | WARNING  | __main__:<module>:52 - sub1391 does not have an lst-ai folder
+2025-11-21 14:49:55.664 | WARNING  | __main__:<module>:52 - sub1406 does not have an lst-ai folder
+2025-11-21 14:49:55.695 | WARNING  | __main__:<module>:52 - sub1421 does not have an lst-ai folder
+2025-11-21 14:49:55.946 | WARNING  | __main__:<module>:52 - sub1423 does not have an lst-ai folder
+2025-11-21 14:49:55.983 | WARNING  | __main__:<module>:52 - sub1425 does not have an lst-ai folder
+2025-11-21 14:49:56.022 | WARNING  | __main__:<module>:52 - sub1433 does not have an lst-ai folder
+2025-11-21 14:49:56.029 | WARNING  | __main__:<module>:52 - sub1437 does not have an lst-ai folder
+2025-11-21 14:49:56.130 | WARNING  | __main__:<module>:52 - sub1463 does not have an lst-ai folder
+2025-11-21 14:50:24.678 | WARNING  | __main__:<module>:52 - sub1245 does not have an lst-ai folder
+2025-11-21 14:50:24.819 | WARNING  | __main__:<module>:52 - sub1379 does not have an lst-ai folder
+2025-11-21 15:41:13.844 | WARNING  | __main__:<module>:48 - sub1245 does not have an lst-ai folder
+2025-11-21 15:41:14.036 | WARNING  | __main__:<module>:48 - sub1379 does not have an lst-ai folder
+2025-11-21 15:41:15.719 | WARNING  | __main__:<module>:48 - sub2120 does not have an lst-ai folder
+2025-11-21 15:57:27.848 | WARNING  | __main__:<module>:48 - sub1245 does not have an lst-ai folder
+2025-11-21 15:57:28.007 | WARNING  | __main__:<module>:48 - sub1379 does not have an lst-ai folder
