@@ -11,10 +11,67 @@ from pathlib import Path
 from matplotlib import colormaps
 
 sys.path.insert(0, "/home/srs-9/Projects/ms_mri/analysis/thalamus/helpers")
-from utils import load_df
 import utils
 
 from mri_data import file_manager as fm
+
+#%% 
+def load_df():
+    choroid_volumes = pd.read_csv(
+        "/home/srs-9/Projects/ms_mri/data/choroid_aschoplex_volumes.csv",
+        index_col="subid",
+    )
+    ventricle_volumes = pd.read_csv(
+        "/home/srs-9/Projects/ms_mri/data/ventricle_volumes.csv",
+        index_col="subid",
+    )
+    csf_volumes = pd.read_csv(
+        "/home/srs-9/Projects/ms_mri/analysis/thalamus/data0/csf_volumes3.csv",
+        index_col="subid",
+    )
+    third_ventricle_width = pd.read_csv(
+        "/home/srs-9/Projects/ms_mri/analysis/thalamus/data0/third_ventricle_width.csv",
+        index_col="subid",
+    )
+
+    tiv = pd.read_csv(
+        "/home/srs-9/Projects/ms_mri/data/tiv_data.csv", index_col="subid"
+    )
+
+    df = pd.read_csv(
+        "/home/srs-9/Projects/ms_mri/data/clinical_data_processed.csv",
+        index_col="subid",
+    )
+    sdmt = pd.read_csv(
+        "/home/srs-9/Projects/ms_mri/analysis/thalamus/SDMT_sheet.csv",
+        index_col="subid",
+    )
+    df = df.join(
+        [
+            choroid_volumes,
+            ventricle_volumes,
+            csf_volumes,
+            third_ventricle_width,
+            tiv,
+            sdmt["SDMT"],
+        ]
+    )
+    # some values in SDMT are strings like "need to break glass, skip"
+    df["SDMT"] = pd.to_numeric(df["SDMT"], errors="coerce")
+
+    rename_columns = {
+        "ventricle_volume": "LV",
+        "choroid_volume": "CP",
+        "peripheral": "periCSF",
+        "all": "allCSF",
+        "third_ventricle": "thirdV",
+        "fourth_ventricle": "fourthV",
+        "aseg_csf": "interCSF",
+        "third_ventricle_width": "thirdV_width",
+    }
+    df.rename(columns=rename_columns, inplace=True)
+
+    return df
 
 #%%
 drive_root = fm.get_drive_root()
@@ -33,7 +90,11 @@ data = df.join(df_thomas)
 for struct in ["brain", "white", "grey", "thalamus", "t2lv"]:
     data[struct] = data[struct] * 1000
 
-#%%
+# these three columns were normalized; dividing by vscaling un-normalizes   
+for struct in ["brain", "white", "grey"]:
+    data[struct] = data[struct] / data['vscaling']
+
+#%% Create composite measures of CSF distribution
 # /home/srs-9/Projects/ms_mri/analysis/thalamus/helpers/helpers.py:225: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
 #   df["CCF0"] = df["LV"] / df["allCSF"]
 # /home/srs-9/Projects/ms_mri/analysis/thalamus/helpers/helpers.py:226: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor pe
@@ -68,10 +129,8 @@ def composite_vars(df):
 
 data = composite_vars(data)
 
-#%%
-#! See suggestions from assumption_checks.ipynb
-# TODO It would be helpful if the transformed variable name was general so I
-# TODO     wouldnt have to remember which transform was applied to each
+#%% Transform non-normal data
+#? See suggestions from assumption_checks.ipynb
 transformations = {
     "LV": "log",
     "thirdV": "log",
@@ -103,6 +162,7 @@ transformations = {
 data = utils.transform_variables(data, transformations)
 # dataT = utils.transform_variables(data, transformations, rename=False)
 
+#%%
 
 viridis = colormaps["viridis"].resampled(20)
 colors = utils.get_colors()
