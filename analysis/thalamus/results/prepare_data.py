@@ -38,6 +38,10 @@ lst_ai = pd.read_csv(
     "/home/srs-9/Projects/ms_mri/analysis/thalamus/data0/lst_ai_volumes.csv",
     index_col="subid"
 )
+prl_volumes = pd.read_csv(
+    "/home/srs-9/Projects/ms_mri/analysis/thalamus/data0/prl_volumes.csv",
+    index_col="subid"
+)
 lst_ai.rename(columns={
     "total_count": "T2LC",
     "total_volume": "T2LV",
@@ -69,6 +73,7 @@ df = df.join(
         third_ventricle_width,
         tiv,
         lst_ai,
+        prl_volumes,
         sdmt["SDMT"],
     ]
 )
