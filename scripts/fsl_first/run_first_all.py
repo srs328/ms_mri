@@ -20,6 +20,8 @@ logger.add(TqdmLoguruStream(), level="INFO", format="{level} | {message}")
 dataroot = Path("/mnt/h/srs-9/thalamus_project/data")
 output_root = Path("/mnt/i/Data/srs-9/fsl_first")
 
+script = "run_first.sh"
+
 datafile_dir = Path("/home/srs-9/Projects/ms_mri/analysis/thalamus/data0")
 with open(datafile_dir / "lst_ai-sessions.csv", 'r') as f:
     reader = csv.reader(f)
@@ -34,7 +36,7 @@ for subid, sesid in tqdm(subject_sessions, desc="Running FSL first", unit="subje
     if not subject_root2.exists():
         logger.info(f"Creating folder {str(subject_root2)}")
         os.makedirs(subject_root2)
-        
+
     if not (subject_root2 / "t1.nii.gz").exists():
         logger.info(f"Copying t1.nii.gz into {str(subject_root2)}")
         # shutil.copy(subject_root1/"t1.nii.gz", subject_root2/"t1.nii.gz")
@@ -45,7 +47,7 @@ for subid, sesid in tqdm(subject_sessions, desc="Running FSL first", unit="subje
         continue
     
     # run_first_all -dv -i t1.nii.gz -o t1
-    cmd = ["run_first_all", "-d", "-i", str(subject_root2/"t1.nii.gz"), str(subject_root2/"t1")]
+    cmd = ["bash", "run_first.sh", str(subject_root2)]
     try:
         logger.info(f"{" ".join(cmd)}")
         subprocess.run(cmd, check=True, capture_output=True, text=True)

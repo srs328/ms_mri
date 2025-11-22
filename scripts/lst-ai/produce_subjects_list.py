@@ -20,16 +20,16 @@ dataroot = Path("/mnt/h/3Tpioneer_bids")
 with open(dataroot / "subject-sessions-longit.json", 'r') as f:
     subject_sessions = json.load(f)
 
-with open("/home/srs-9/Projects/ms_mri/scripts/lst-ai/ms_patients.txt", 'r') as f:
-# with open("/home/srs-9/Projects/ms_mri/scripts/lst-ai/subjects_to_process.txt", 'r') as f:
+# with open("/home/srs-9/Projects/ms_mri/scripts/lst-ai/ms_patients.txt", 'r') as f:
+with open("/home/srs-9/Projects/ms_mri/scripts/lst-ai/subjects_to_process.txt", 'r') as f:
     subjects = [line.strip() for line in f.readlines()]
 
 
 subjects_to_process = []
 subjects_processed = []
 failed_subs = []
-# for subid in subject_sessions:
-for subid in subjects:
+for subid in subject_sessions:
+# for subid in subjects:
     sessions = sorted(subject_sessions[subid])
     sesid = sessions[0]
 

@@ -234,3 +234,239 @@ ERROR: command block failed
 2025-11-21 15:41:15.719 | WARNING  | __main__:<module>:48 - sub2120 does not have an lst-ai folder
 2025-11-21 15:57:27.848 | WARNING  | __main__:<module>:48 - sub1245 does not have an lst-ai folder
 2025-11-21 15:57:28.007 | WARNING  | __main__:<module>:48 - sub1379 does not have an lst-ai folder
+2025-11-21 21:49:50.303 | WARNING  | __main__:<module>:43 - sub1245 does not have a FLAIR in any session, so must skip
+2025-11-21 21:50:00.760 | WARNING  | __main__:<module>:43 - sub1379 does not have a FLAIR in any session, so must skip
+2025-11-21 21:50:14.676 | WARNING  | __main__:<module>:43 - sub2085 does not have a FLAIR in any session, so must skip
+2025-11-21 21:51:52.591 | INFO     | __main__:<module>:45 - Starting subject 1196
+2025-11-21 21:51:52.593 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1196/ses-20170725
+2025-11-21 21:51:52.783 | DEBUG    | __main__:<module>:81 - SKIP: /mnt/h/3Tpioneer_bids/sub-ms1196/ses-20170725/lst-ai/space-flair_seg-lst.nii.gz exists
+
+2025-11-21 21:51:52.784 | INFO     | __main__:<module>:45 - Starting subject 2120
+2025-11-21 21:51:52.792 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms2120/ses-20170920
+2025-11-21 21:52:27.510 | INFO     | __main__:<module>:45 - Starting subject 1027
+2025-11-21 21:52:27.512 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1027/ses-20170127
+2025-11-21 21:52:31.407 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1027/ses-20170127/lst-ai/space-flair_seg-lst.nii.gz
+ERROR: command block failed
+
+2025-11-21 21:52:31.407 | INFO     | __main__:<module>:45 - Starting subject 1028
+2025-11-21 21:52:31.413 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1028/ses-20190608
+2025-11-21 21:52:34.160 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1028/ses-20190608/lst-ai/space-flair_seg-lst.nii.gz
+ERROR: command block failed
+
+2025-11-21 21:52:34.161 | INFO     | __main__:<module>:45 - Starting subject 1029
+2025-11-21 21:52:34.163 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1029/ses-20170816
+2025-11-21 21:52:37.061 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1029/ses-20170816/lst-ai/space-flair_seg-lst.nii.gz
+ERROR: command block failed
+
+2025-11-21 21:52:37.061 | INFO     | __main__:<module>:45 - Starting subject 1064
+2025-11-21 21:52:37.066 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1064/ses-20170310
+2025-11-21 21:52:40.277 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1064/ses-20170310/lst-ai/space-flair_seg-lst.nii.gz
+ERROR: command block failed
+
+2025-11-21 21:52:40.277 | INFO     | __main__:<module>:45 - Starting subject 1105
+2025-11-21 21:52:40.281 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1105/ses-20171208
+2025-11-21 21:52:43.115 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1105/ses-20171208/lst-ai/space-flair_seg-lst.nii.gz
+ERROR: command block failed
+
+2025-11-21 21:52:43.115 | INFO     | __main__:<module>:45 - Starting subject 1145
+2025-11-21 21:52:43.117 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1145/ses-20191126
+2025-11-21 21:52:45.826 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1145/ses-20191126/lst-ai/space-flair_seg-lst.nii.gz
+ERROR: command block failed
+
+2025-11-21 21:52:45.826 | INFO     | __main__:<module>:45 - Starting subject 1163
+2025-11-21 21:52:45.829 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1163/ses-20180907
+2025-11-21 21:52:48.899 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1163/ses-20180907/lst-ai/space-flair_seg-lst.nii.gz
+ERROR: command block failed
+
+2025-11-21 21:52:48.900 | INFO     | __main__:<module>:45 - Starting subject 1191
+2025-11-21 21:52:48.901 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1191/ses-20190124
+2025-11-21 21:52:51.656 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1191/ses-20190124/lst-ai/space-flair_seg-lst.nii.gz
+ERROR: command block failed
+
+2025-11-21 21:52:51.657 | INFO     | __main__:<module>:45 - Starting subject 1196
+2025-11-21 21:52:51.659 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1196/ses-20170725
+2025-11-21 21:52:51.670 | DEBUG    | __main__:<module>:81 - SKIP: /mnt/h/3Tpioneer_bids/sub-ms1196/ses-20170725/lst-ai/space-flair_seg-lst.nii.gz exists
+
+2025-11-21 21:52:51.670 | INFO     | __main__:<module>:45 - Starting subject 1200
+2025-11-21 21:52:51.672 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1200/ses-20170128
+2025-11-21 21:52:54.375 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1200/ses-20170128/lst-ai/space-flair_seg-lst.nii.gz
+ERROR: command block failed
+
+2025-11-21 21:52:54.376 | INFO     | __main__:<module>:45 - Starting subject 1203
+2025-11-21 21:52:54.377 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1203/ses-20190814
+2025-11-21 21:52:57.576 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1203/ses-20190814/lst-ai/space-flair_seg-lst.nii.gz
+ERROR: command block failed
+
+2025-11-21 21:52:57.576 | INFO     | __main__:<module>:45 - Starting subject 1224
+2025-11-21 21:52:57.579 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1224/ses-20181007
+2025-11-21 21:53:00.427 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1224/ses-20181007/lst-ai/space-flair_seg-lst.nii.gz
+ERROR: command block failed
+
+2025-11-21 21:53:00.427 | INFO     | __main__:<module>:45 - Starting subject 1245
+2025-11-21 21:53:00.430 | WARNING  | __main__:<module>:56 - sub1245 does not have a FLAIR in any session, so must skip
+2025-11-21 21:53:00.431 | INFO     | __main__:<module>:45 - Starting subject 1264
+2025-11-21 21:53:00.440 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1264/ses-20170806
+2025-11-21 21:53:03.682 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1264/ses-20170806/lst-ai/space-flair_seg-lst.nii.gz
+ERROR: command block failed
+
+2025-11-21 21:53:03.682 | INFO     | __main__:<module>:45 - Starting subject 1270
+2025-11-21 21:53:03.683 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1270/ses-20200909
+2025-11-21 21:53:06.951 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1270/ses-20200909/lst-ai/space-flair_seg-lst.nii.gz
+ERROR: command block failed
+
+2025-11-21 21:53:06.951 | INFO     | __main__:<module>:45 - Starting subject 1280
+2025-11-21 21:53:06.957 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1280/ses-20220317
+2025-11-21 21:53:09.857 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1280/ses-20220317/lst-ai/space-flair_seg-lst.nii.gz
+ERROR: command block failed
+
+2025-11-21 21:53:09.857 | INFO     | __main__:<module>:45 - Starting subject 1283
+2025-11-21 21:53:09.859 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1283/ses-20200810
+2025-11-21 21:53:13.255 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1283/ses-20200810/lst-ai/space-flair_seg-lst.nii.gz
+ERROR: command block failed
+
+2025-11-21 21:53:13.255 | INFO     | __main__:<module>:45 - Starting subject 1285
+2025-11-21 21:53:13.259 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1285/ses-20161105
+2025-11-21 21:53:16.060 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1285/ses-20161105/lst-ai/space-flair_seg-lst.nii.gz
+ERROR: command block failed
+
+2025-11-21 21:53:16.060 | INFO     | __main__:<module>:45 - Starting subject 1287
+2025-11-21 21:53:16.061 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1287/ses-20200515
+2025-11-21 21:53:19.112 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1287/ses-20200515/lst-ai/space-flair_seg-lst.nii.gz
+ERROR: command block failed
+
+2025-11-21 21:53:19.113 | INFO     | __main__:<module>:45 - Starting subject 1302
+2025-11-21 21:53:19.114 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1302/ses-20200911
+2025-11-21 21:53:22.081 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1302/ses-20200911/lst-ai/space-flair_seg-lst.nii.gz
+ERROR: command block failed
+
+2025-11-21 21:53:22.081 | INFO     | __main__:<module>:45 - Starting subject 1317
+2025-11-21 21:53:22.086 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1317/ses-20201013
+2025-11-21 21:53:24.818 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1317/ses-20201013/lst-ai/space-flair_seg-lst.nii.gz
+ERROR: command block failed
+
+2025-11-21 21:53:24.818 | INFO     | __main__:<module>:45 - Starting subject 1321
+2025-11-21 21:53:24.820 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1321/ses-20201020
+2025-11-21 21:53:27.540 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1321/ses-20201020/lst-ai/space-flair_seg-lst.nii.gz
+ERROR: command block failed
+
+2025-11-21 21:53:27.540 | INFO     | __main__:<module>:45 - Starting subject 1323
+2025-11-21 21:53:27.541 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1323/ses-20191011
+2025-11-21 21:53:30.260 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1323/ses-20191011/lst-ai/space-flair_seg-lst.nii.gz
+ERROR: command block failed
+
+2025-11-21 21:53:30.260 | INFO     | __main__:<module>:45 - Starting subject 1344
+2025-11-21 21:53:30.261 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1344/ses-20160925
+2025-11-21 21:53:32.794 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1344/ses-20160925/lst-ai/space-flair_seg-lst.nii.gz
+ERROR: command block failed
+
+2025-11-21 21:53:32.794 | INFO     | __main__:<module>:45 - Starting subject 1355
+2025-11-21 21:53:32.796 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1355/ses-20210104
+2025-11-21 21:53:35.754 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1355/ses-20210104/lst-ai/space-flair_seg-lst.nii.gz
+ERROR: command block failed
+
+2025-11-21 21:53:35.755 | INFO     | __main__:<module>:45 - Starting subject 1379
+2025-11-21 21:53:35.756 | WARNING  | __main__:<module>:56 - sub1379 does not have a FLAIR in any session, so must skip
+2025-11-21 21:53:35.756 | INFO     | __main__:<module>:45 - Starting subject 1383
+2025-11-21 21:53:35.757 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1383/ses-20181105
+2025-11-21 21:53:38.680 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1383/ses-20181105/lst-ai/space-flair_seg-lst.nii.gz
+ERROR: command block failed
+
+2025-11-21 21:53:38.680 | INFO     | __main__:<module>:45 - Starting subject 1384
+2025-11-21 21:53:38.684 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1384/ses-20170203
+2025-11-21 21:53:41.747 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1384/ses-20170203/lst-ai/space-flair_seg-lst.nii.gz
+ERROR: command block failed
+
+2025-11-21 21:53:41.747 | INFO     | __main__:<module>:45 - Starting subject 1391
+2025-11-21 21:53:41.750 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1391/ses-20201207
+2025-11-21 21:53:44.552 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1391/ses-20201207/lst-ai/space-flair_seg-lst.nii.gz
+ERROR: command block failed
+
+2025-11-21 21:53:44.552 | INFO     | __main__:<module>:45 - Starting subject 1406
+2025-11-21 21:53:44.554 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1406/ses-20200929
+2025-11-21 21:53:47.443 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1406/ses-20200929/lst-ai/space-flair_seg-lst.nii.gz
+ERROR: command block failed
+
+2025-11-21 21:53:47.443 | INFO     | __main__:<module>:45 - Starting subject 1421
+2025-11-21 21:53:47.444 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1421/ses-20210122
+2025-11-21 21:53:50.613 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1421/ses-20210122/lst-ai/space-flair_seg-lst.nii.gz
+ERROR: command block failed
+
+2025-11-21 21:53:50.613 | INFO     | __main__:<module>:45 - Starting subject 1423
+2025-11-21 21:53:50.616 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1423/ses-20170302
+2025-11-21 21:53:53.192 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1423/ses-20170302/lst-ai/space-flair_seg-lst.nii.gz
+ERROR: command block failed
+
+2025-11-21 21:53:53.193 | INFO     | __main__:<module>:45 - Starting subject 1425
+2025-11-21 21:53:53.196 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1425/ses-20210420
+2025-11-21 21:53:56.078 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1425/ses-20210420/lst-ai/space-flair_seg-lst.nii.gz
+ERROR: command block failed
+
+2025-11-21 21:53:56.078 | INFO     | __main__:<module>:45 - Starting subject 1433
+2025-11-21 21:53:56.083 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1433/ses-20201230
+2025-11-21 21:53:59.231 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1433/ses-20201230/lst-ai/space-flair_seg-lst.nii.gz
+ERROR: command block failed
+
+2025-11-21 21:53:59.231 | INFO     | __main__:<module>:45 - Starting subject 1437
+2025-11-21 21:53:59.233 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1437/ses-20210503
+2025-11-21 21:54:02.496 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1437/ses-20210503/lst-ai/space-flair_seg-lst.nii.gz
+ERROR: command block failed
+
+2025-11-21 21:54:02.496 | INFO     | __main__:<module>:45 - Starting subject 1463
+2025-11-21 21:54:02.500 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1463/ses-20180210
+2025-11-21 21:54:05.326 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1463/ses-20180210/lst-ai/space-flair_seg-lst.nii.gz
+ERROR: command block failed
+
+2025-11-21 21:54:05.326 | INFO     | __main__:<module>:45 - Starting subject 1476
+2025-11-21 21:54:05.330 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1476/ses-20180414
+2025-11-21 21:54:07.737 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1476/ses-20180414/lst-ai/space-flair_seg-lst.nii.gz
+ERROR: command block failed
+
+2025-11-21 21:54:07.738 | INFO     | __main__:<module>:45 - Starting subject 1484
+2025-11-21 21:54:07.741 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1484/ses-20220212
+2025-11-21 21:54:10.640 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1484/ses-20220212/lst-ai/space-flair_seg-lst.nii.gz
+ERROR: command block failed
+
+2025-11-21 21:54:10.641 | INFO     | __main__:<module>:45 - Starting subject 1486
+2025-11-21 21:54:10.643 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1486/ses-20210224
+2025-11-21 21:54:13.456 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1486/ses-20210224/lst-ai/space-flair_seg-lst.nii.gz
+ERROR: command block failed
+
+2025-11-21 21:54:13.457 | INFO     | __main__:<module>:45 - Starting subject 1488
+2025-11-21 21:54:13.460 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1488/ses-20210905
+2025-11-21 21:54:16.287 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1488/ses-20210905/lst-ai/space-flair_seg-lst.nii.gz
+ERROR: command block failed
+
+2025-11-21 21:54:16.287 | INFO     | __main__:<module>:45 - Starting subject 1489
+2025-11-21 21:54:16.290 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1489/ses-20211109
+2025-11-21 21:54:19.229 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1489/ses-20211109/lst-ai/space-flair_seg-lst.nii.gz
+ERROR: command block failed
+
+2025-11-21 21:54:19.229 | INFO     | __main__:<module>:45 - Starting subject 1492
+2025-11-21 21:54:19.232 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1492/ses-20190620
+2025-11-21 21:54:22.369 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1492/ses-20190620/lst-ai/space-flair_seg-lst.nii.gz
+ERROR: command block failed
+
+2025-11-21 21:54:22.369 | INFO     | __main__:<module>:45 - Starting subject 1494
+2025-11-21 21:54:22.372 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1494/ses-20181116
+2025-11-21 21:57:46.404 | INFO     | __main__:<module>:45 - Starting subject 1027
+2025-11-21 21:57:46.404 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1027/ses-20170127
+2025-11-21 22:03:30.917 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1027/ses-20170127/lst-ai/space-flair_seg-lst.nii.gz
+OK: produced /mnt/h/3Tpioneer_bids/sub-ms1027/ses-20170127/lst-ai/space-flair_seg-lst.nii.gz
+
+2025-11-21 22:03:30.917 | INFO     | __main__:<module>:45 - Starting subject 1028
+2025-11-21 22:03:30.919 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1028/ses-20190608
+2025-11-21 22:09:19.566 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1028/ses-20190608/lst-ai/space-flair_seg-lst.nii.gz
+OK: produced /mnt/h/3Tpioneer_bids/sub-ms1028/ses-20190608/lst-ai/space-flair_seg-lst.nii.gz
+
+2025-11-21 22:09:19.566 | INFO     | __main__:<module>:45 - Starting subject 1029
+2025-11-21 22:09:19.572 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1029/ses-20170816
+2025-11-21 22:15:20.136 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1029/ses-20170816/lst-ai/space-flair_seg-lst.nii.gz
+OK: produced /mnt/h/3Tpioneer_bids/sub-ms1029/ses-20170816/lst-ai/space-flair_seg-lst.nii.gz
+
+2025-11-21 22:15:20.136 | INFO     | __main__:<module>:45 - Starting subject 1064
+2025-11-21 22:15:20.138 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1064/ses-20170310
+2025-11-21 22:21:11.527 | DEBUG    | __main__:<module>:81 - RUN: producing /mnt/h/3Tpioneer_bids/sub-ms1064/ses-20170310/lst-ai/space-flair_seg-lst.nii.gz
+OK: produced /mnt/h/3Tpioneer_bids/sub-ms1064/ses-20170310/lst-ai/space-flair_seg-lst.nii.gz
+
+2025-11-21 22:21:11.527 | INFO     | __main__:<module>:45 - Starting subject 1105
+2025-11-21 22:21:11.528 | INFO     | __main__:<module>:73 - bash /home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh /mnt/h/3Tpioneer_bids/sub-ms1105/ses-20171208

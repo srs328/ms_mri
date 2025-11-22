@@ -31,11 +31,11 @@ dataroot = Path("/mnt/h/3Tpioneer_bids")
 with open(dataroot / "subject-sessions-longit.json", 'r') as f:
     subject_sessions = json.load(f)
 
-with open("/home/srs-9/Projects/ms_mri/scripts/lst-ai/subjects_to_process3.txt", 'r') as f:
+with open("/home/srs-9/Projects/ms_mri/scripts/lst-ai/subjects_to_process4.txt", 'r') as f:
     subjects = [line.strip() for line in f.readlines()]
 
-subjects = ["1245", "1364", "1379", "1394", "2001", "2106"]
-subjects = ["1196", "2120"]
+# subjects = ["1245", "1364", "1379", "1394", "2001", "2106"]
+# subjects = ["1196", "2120"]
 
 lstai_script = "/home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh"
 
