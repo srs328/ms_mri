@@ -52,60 +52,90 @@ def get_prl_label_for_subject(subid):
             print(subid, total_prl)
     return prl_labels
 
-prl_data['prl_labels'] = prl_data.index.map(get_prl_label_for_subject)
+def get_all_prl_labels_for_subject(subid):
+    total_prl = data.loc[subid, "PRL"]
+    i = 1
+    prl_labels = []
+    prl_label = prl_data.loc[subid, f"PRL{i}_label"]
+    num_na = 0
+    for i in range(20):
+        if num_na >= 3:
+            break
+        prl_label = prl_data.loc[subid, f"PRL{i+1}_label"]
+        if pd.isna(prl_label):
+            num_na += 1
+            continue
+        prl_labels.append(int(prl_label))
 
-# # I need to get only the definite ones, which I can do by only iterating n=PRL times
-# prl_data['prl_labels'] = [{"prl_labels": []} for subid in prl_data.index]
-# for subid in prl_data.index:
-#     total_prl = data.loc[subid, "PRL"]
-#     prl_labels = []
-#     for i in range(int(total_prl)):
-#         prl_label = prl_data.loc[subid, f"PRL{i+1}_label"]
-#         prl_labels.append(prl_label)
-#     prl_data.loc[subid, 'prl_labels']['prl_labels'] = prl_labels
+    return prl_labels
+
+prl_data['prl_labels'] = prl_data.index.map(get_prl_label_for_subject)
+prl_data['all_prl_labels'] = prl_data.index.map(get_all_prl_labels_for_subject)
+
 
 #%%
 import subprocess
 from tqdm.notebook import tqdm
 
 dataroot = Path("/mnt/h/3Tpioneer_bids")
-lstat_dir = Path("/home/srs-9/Projects/ms_mri/analysis/thalamus/scripts/PRL/lstats")
-script = "/home/srs-9/Projects/ms_mri/analysis/thalamus/scripts/PRL/save_lstat.sh"
+lstat_dir = Path("/home/srs-9/Projects/ms_mri/analysis/thalamus/scripts/lesions/lstats")
+script = "/home/srs-9/Projects/ms_mri/analysis/thalamus/scripts/lesions/save_lstat.sh"
 
+produce_lstats = False
 
-no_lesion_file = []
-for subid, row in tqdm(prl_data.iterrows(), total=len(prl_data)):
+columns = ['LabelID', 'Mean', 'StdD', 'Max', 'Min', 'Count', 
+                'Vol(mm^3)', 'Extent_X', 'Extent_Y', 'Extent_Z']
 
-    subject_root = dataroot / f"sub-ms{subid}" / f"ses-{row['date_mri']}"
-    t1 = subject_root / "t1.nii.gz"
-    lesion_file = subject_root / "lesion.t3m20" / "lesion_index.t3m20.nii.gz"
-    file = lstat_dir / f"lesion_vols-sub{subid}-{row['date_mri']}.csv"
+if produce_lstats:
+    no_lesion_file = []
+    for subid, row in tqdm(prl_data.iterrows(), total=len(prl_data)):
+        subject_root = dataroot / f"sub-ms{subid}" / f"ses-{row['date_mri']}"
+        t1 = subject_root / "t1.nii.gz"
+        lesion_file = subject_root / "lesion.t3m20" / "lesion_index.t3m20.nii.gz"
+        file = lstat_dir / f"lesion_vols-sub{subid}-{row['date_mri']}.csv"
 
-    cmd = ["bash", script, str(t1), str(lesion_file), str(file)]
+        cmd = ["bash", script, str(t1), str(lesion_file), str(file)]
 
-    try:
-        result = subprocess.run(cmd, check=True, capture_output=True)
-    except subprocess.CalledProcessError as e:
-        print(e.stderr)
+        try:
+            result = subprocess.run(cmd, check=True, capture_output=True)
+        except subprocess.CalledProcessError as e:
+            print(e.stderr)
+
+        try:
+            df = pd.read_csv(file, header=None, skiprows=1)
+        except pd.errors.EmptyDataError:
+            df = pd.DataFrame(columns=columns)
+        else:
+            df.columns = columns
+            df['LabelID'] = df['LabelID'].map(int)
+        df.set_index("LabelID", inplace=True)
+        df.to_csv(file)
 
 
 #%% 
 
-def read_lesion_volumes(file):
-    df = pd.read_csv(file, header=None, skiprows=1)
-    df.columns = ['LabelID', 'Mean', 'StdD', 'Max', 'Min', 'Count', 
-                'Vol(mm^3)', 'Extent_X', 'Extent_Y', 'Extent_Z']
-    df['LabelID'] = df['LabelID'].map(int)
-    df.set_index("LabelID", inplace=True)
-    return df
+prl_data['PRL_volume'] = 0
+prl_data['PRL_all_volume'] = 0
+failed_subs = []
+for subid, _ in prl_data.iterrows():
+    file = lstat_dir / f"lesion_vols-sub{subid}-{prl_data.loc[subid, 'date_mri']}.csv"
+    lesion_volumes = pd.read_csv(file, index_col="LabelID")
 
-subid = 1002
-file = lstat_dir / f"lesion_vols-sub{subid}-{prl_data.loc[subid, 'date_mri']}.csv"
-prl_labels = prl_data.loc[subid, 'prl_labels']
-lesion_volumes = read_lesion_volumes(file)
+    try:
+        prl_labels = prl_data.loc[subid, 'prl_labels']
+        total_vol = 0
+        for label in prl_labels:
+            total_vol += lesion_volumes.loc[label, "Vol(mm^3)"]
+        prl_data.loc[subid, 'PRL_volume'] = total_vol
 
-total_vol = 0
-for label in prl_labels:
-    total_vol += lesion_volumes.loc[label, "Vol(mm^3)"]
+        prl_labels = prl_data.loc[subid, 'all_prl_labels']
+        total_vol = 0
+        for label in prl_labels:
+            total_vol += lesion_volumes.loc[label, "Vol(mm^3)"]
+        prl_data.loc[subid, 'PRL_all_volume'] = total_vol
+    except Exception:
+        failed_subs.append(subid)
 
-print(total_vol)
+print(len(failed_subs))
+print(failed_subs)
+    
