@@ -34,6 +34,22 @@ third_ventricle_width = pd.read_csv(
     "/home/srs-9/Projects/ms_mri/analysis/thalamus/data0/third_ventricle_width.csv",
     index_col="subid",
 )
+lst_ai = pd.read_csv(
+    "/home/srs-9/Projects/ms_mri/analysis/thalamus/data0/lst_ai_volumes.csv",
+    index_col="subid"
+)
+lst_ai.rename(columns={
+    "total_count": "T2LC",
+    "total_volume": "T2LV",
+    "periventricular_count": "periV_T2LC",
+    "periventricular_volume": "periV_T2LV",
+    "juxtacortical_count": "juxcort_T2LC",
+    "juxtacortical_volume": "juxcort_T2LV",
+    "subcortical_count": "subcort_T2LC",
+    "subcortical_volume": "subcort_T2LV",
+    "infratentorial_count": "infraT_T2LC",
+    "infratentorial_volume": "infraT_T2LV"
+}, inplace=True)
 
 tiv = pd.read_csv("/home/srs-9/Projects/ms_mri/data/tiv_data.csv", index_col="subid")
 
@@ -52,6 +68,7 @@ df = df.join(
         csf_volumes,
         third_ventricle_width,
         tiv,
+        lst_ai,
         sdmt["SDMT"],
     ]
 )
@@ -141,6 +158,11 @@ transformations = {
     "periCSF": "log",
     "thirdV_width": "log",
     "interCSF": "log",
+    "T2LV": "log1p",
+    "periV_T2LV": "log1p",
+    "juxcort_T2LV": "log1p",
+    "subcort_T2LV": "log1p",
+    "infraT_T2LV": "log1p",
     "t2lv": "log",
     "PRL": "log1p",
     "CCR": "log",
