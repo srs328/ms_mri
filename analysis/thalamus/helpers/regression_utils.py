@@ -15,6 +15,8 @@ import textwrap
 from collections import defaultdict
 from datetime import datetime
 from pathlib import Path
+from pandas.api.types import is_numeric_dtype
+
 
 import helpers
 import matplotlib.pyplot as plt
@@ -425,7 +427,10 @@ def present_model(
             present_index.remove(ind)
         except ValueError:
             pass
-        
+
+    for col in present_cols:
+        if col not in format_opts and is_numeric_dtype(model[col]):
+            format_opts[col] = "{:.4f}"
     model = format_df(model.loc[present_index, present_cols], format_opts)
     
     return model
