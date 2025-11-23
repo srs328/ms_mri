@@ -110,11 +110,16 @@ colors = {
     
     # Reds
     "darkest red1": "#4a0f0f",
+    "darker red1": "#ad3434",
     "dark red1": "#eb3131",
     "light red1": "#eb7171",
-    "darkest red2": "#3d0f1f",  # More pink/magenta red
-    "dark red2": "#c72e5c",
-    "light red2": "#e66b92",
+    "darkest red2": "#4a0f0f",
+    "darker red2": "#ad3434",
+    "dark red2": "#db4b4b",
+    "light red2": "#eb7171",
+    "darkest red3": "#3d0f1f",  # More pink/magenta red
+    "dark red3": "#c72e5c",
+    "light red3": "#e66b92",
     
     # Blues
     "darkest blue1": "#0a1433",
@@ -155,6 +160,7 @@ colors = {
     
     # Pinks
     "darkest pink1": "#3d142b",
+    "darker pink1": "#9c2e6b",
     "dark pink1": "#c9438c",
     "light pink1": "#e778b8",
     

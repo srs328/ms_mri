@@ -38,10 +38,10 @@ lst_ai = pd.read_csv(
     "/home/srs-9/Projects/ms_mri/analysis/thalamus/data0/lst_ai_volumes.csv",
     index_col="subid"
 )
-prl_volumes = pd.read_csv(
-    "/home/srs-9/Projects/ms_mri/analysis/thalamus/data0/prl_volumes.csv",
-    index_col="subid"
-)
+# prl_volumes = pd.read_csv(
+#     "/home/srs-9/Projects/ms_mri/analysis/thalamus/data0/prl_volumes.csv",
+#     index_col="subid"
+# )
 lst_ai.rename(columns={
     "total_count": "T2LC",
     "total_volume": "T2LV",
@@ -73,7 +73,7 @@ df = df.join(
         third_ventricle_width,
         tiv,
         lst_ai,
-        prl_volumes,
+        # prl_volumes,
         sdmt["SDMT"],
     ]
 )
@@ -134,6 +134,10 @@ def composite_vars(df):
     df["periCSF_frac"] = df["periCSF"] / df["allCSF"]
     df["thirdV_expansion"] = df['thirdV_width'] / df['thirdV']
 
+    # more compositional variables
+    df['LV_div_thirdV'] = df['LV'] / df['thirdV']
+    df['LV_div_thirdV_interCSF'] = df['LV'] / (df['thirdV'] + df['interCSF'])
+
     # Produce central measures from normalized versions
     LV_norm = df["LV"] / df["LV"].mean()
     thirdV_norm = df["thirdV"] / df["thirdV"].mean()
@@ -175,6 +179,8 @@ transformations = {
     "CCF": "log",
     "CCF2": "log",
     "CCF0": "log",
+    "LV_div_thirdV": "log",
+    "LV_div_thirdV_interCSF": "log",
     "periCSF_ratio": "log",
     "periCSF_ratio2": "log",
     "periCSF_frac": "reflect_log",

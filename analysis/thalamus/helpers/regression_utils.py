@@ -25,6 +25,7 @@ import statsmodels.formula.api as smf
 import utils
 from IPython.display import clear_output
 from matplotlib import colormaps
+import pingouin as pg
 from reload_recursive import reload_recursive
 from scipy import stats
 from statsmodels.base.wrapper import ResultsWrapper
@@ -72,8 +73,7 @@ def formula_string(
 
 
 def residualize_vars(
-    model_data: pd.DataFrame, dependent_var: str, independent_vars: list[str]
-) -> pd.Series:
+    model_data: pd.DataFrame, dependent_var: str, independent_vars: list[str], regression_model: str = "OLS") -> pd.Series:
     """
     Residualize a dependent variable by regressing out independent variables.
 
@@ -92,8 +92,15 @@ def residualize_vars(
         Residuals of the dependent variable after regression
     """
     formula = f"{dependent_var} ~ " + " + ".join(independent_vars)
-    model = sm.OLS.from_formula(formula, data=model_data).fit()
-    return model.resid
+    if regression_model == "OLS":
+        model = sm.OLS.from_formula(formula, data=model_data).fit()
+        return model.resid
+    elif regression_model == "GLM":
+        family = sm.families.Poisson()
+        model = sm.GLM.from_formula(formula, data=model_data, family=family).fit()
+        return model.resid_pearson
+    else:
+        raise Exception
 
 
 def run_regressions0(
@@ -357,12 +364,15 @@ format_opts_ref = {
     'R2': "{:.2}"
 }
 
-def format_df(df, format_dict):
+def format_df(df: pd.DataFrame, format_dict):
     """Apply Styler-like formatting but output to markdown"""
     df_copy = df.copy()
     for col, fmt in format_dict.items():
         if col in df_copy.columns:
-            df_copy[col] = df_copy[col].map(lambda x: fmt.format(x))
+            try:
+                df_copy[col] = df_copy[col].map(lambda x: fmt.format(x))
+            except TypeError:
+                df_copy.drop(columns=[col], inplace=True)
     return df_copy
 
 
@@ -416,9 +426,9 @@ def present_model(
         except ValueError:
             pass
         
-    model = format_df(model, format_opts)
+    model = format_df(model.loc[present_index, present_cols], format_opts)
     
-    return model.loc[present_index, present_cols]
+    return model
 
 
 def plot_moderation(model_data, y_name, x_name, w_name, covariates=None,
@@ -974,3 +984,199 @@ def run_regressions_from_formulas(
         formulas[model_name] = formula
 
     return results, models, formulas
+
+
+def run_partial_regressions(
+    model_data: pd.DataFrame,
+    outcomes: str | list[str],
+    predictors: list[str] | set[str],
+    covariates: list[str] = None,
+    corr_type: Optional[str] = None,
+    robust_cov: str = "HC3",
+    regression_models: str | list[str] = "OLS",
+    family: Optional[sm.families.Family] = None,
+    fdr_method: str = "fdr_bh",
+    fdr_alpha: float = 0.05,
+) -> tuple[dict[str, pd.DataFrame], dict[str, pd.DataFrame], dict[tuple[str, str], ResultsWrapper]]:
+    """
+    Run regressions for all combinations of outcomes and predictors.
+    
+    Fits separate regression models for each (outcome, predictor) pair, controlling
+    for specified covariates. Applies FDR correction across multiple comparisons
+    and returns results organized by outcome and by predictor.
+    
+    Parameters
+    ----------
+    model_data : pd.DataFrame
+        DataFrame containing all variables (outcomes, predictors, covariates).
+    outcomes : str or list of str
+        Outcome variable(s) to model. If string, treated as single outcome.
+    predictors : list of str or set of str
+        Predictor variables of interest. Each is tested separately.
+    covariates : list of str, default=[]
+        Control variables included in all models.
+    robust_cov : str, default="HC3"
+        Covariance estimator type. Valid values:
+        - "HC0", "HC1", "HC2", "HC3": Heteroscedasticity-robust standard errors
+        - "nonrobust": Standard OLS covariance (homoscedasticity assumed)
+        Ignored when regression_model is not "OLS".
+    regression_model : str, default="OLS"
+        Type of regression model to fit. Valid values:
+        - "OLS": Ordinary least squares
+        - "GLM": Generalized linear model (requires `family` parameter)
+        - "Logit": Logistic regression
+    family : sm.families.Family, optional
+        GLM family object (e.g., sm.families.Poisson()). Required when
+        regression_model="GLM", ignored otherwise.
+    fdr_method : str, default="fdr_bh"
+        Method for FDR correction (passed to statsmodels.multipletests).
+    fdr_alpha : float, default=0.05
+        Significance threshold for FDR correction.
+    
+    Returns
+    -------
+    results_by_outcome : dict of {str: pd.DataFrame}
+        Results organized by outcome. Keys are outcome names, values are
+        DataFrames indexed by predictor with columns:
+        - coef: regression coefficient
+        - pval: uncorrected p-value
+        - p_fdr: FDR-corrected p-value
+        - se: standard error
+        - llci, ulci: confidence interval bounds
+        - ci: formatted confidence interval string
+        - R2: adjusted R² (OLS) or pseudo-R² (GLM), None for Logit
+        - coef_sig: coefficient if p_fdr < fdr_alpha, else 0
+        - formula: regression formula used
+    results_by_predictor : dict of {str: pd.DataFrame}
+        Results organized by predictor. Keys are predictor names, values are
+        DataFrames indexed by outcome with same columns as above.
+    models : dict of {tuple[str, str]: ResultsWrapper}
+        Fitted model objects indexed by (outcome, predictor) tuple.
+    
+    Raises
+    ------
+    Exception
+        Re-raises any exception from model fitting with context about which
+        outcome and predictor caused the error.
+    
+    Notes
+    -----
+    - FDR correction is applied separately within each outcome (across predictors)
+      and within each predictor (across outcomes).
+    - For GLM models, family defaults to Poisson if not specified.
+    - Robust covariance is automatically disabled for non-OLS models.
+    
+    Examples
+    --------
+    >>> results_out, results_pred, models = run_regressions(
+    ...     model_data=df,
+    ...     outcomes=['disability_score', 'cognitive_score'],
+    ...     predictors=['choroid_plexus_vol', 'ventricle_vol'],
+    ...     covariates=['age', 'sex'],
+    ...     robust_cov='HC3'
+    ... )
+    >>> results_out['disability_score']  # coefficients for all predictors
+    """
+    
+    if covariates is None:
+        covariates = []
+    if isinstance(predictors, set):
+        predictors = list(predictors)
+    
+    single_outcome = False
+    if isinstance(outcomes, str):
+        outcomes = [outcomes]
+        single_outcome = True
+        
+    if isinstance(regression_models, str):
+        regression_models = {k: regression_models for k in outcomes + predictors}
+
+    resid_data = model_data.copy()
+    for outcome in outcomes:
+        resid_data[outcome] = residualize_vars(model_data, outcome, covariates, regression_model=regression_models[outcome])
+    for predictor in predictors:
+        resid_data[predictor] = residualize_vars(model_data, predictor, covariates, regression_model=regression_models[predictor])    
+    # container: per-outcome dataframes
+    results_by_outcome = {}
+    models = defaultdict(dict)
+    for outcome in outcomes:
+        rows = []
+        for predictor in predictors:
+            exog = [predictor] + covariates
+            formula = f"{outcome} ~ {' + '.join(exog)}"
+            try:
+                if corr_type is None:
+                    rres = sm.OLS.from_formula(f"{outcome} ~ {predictor}", data=utils.zscore(resid_data)).fit(cov_type=robust_cov)
+                    r2 = rres.rsquared_adj
+                    coef = rres.params[predictor]
+                    pval = rres.pvalues[predictor]
+                    se = rres.bse[predictor]
+
+                    # confidence interval: conf_int() returns DataFrame when names available
+                    ci_df = rres.conf_int()
+                    llci, ulci = float(ci_df.loc[predictor, 0]), float(ci_df.loc[predictor, 1])
+                    ci_str = f"[{llci:.3}, {ulci:.3}]" if not np.isnan(llci) else ""
+                    
+                else:
+                    rres = pg.corr(model_data[predictor], model_data[outcome], method=corr_type, alternative='two-sided')
+                    coef = rres.loc[corr_type, 'r']
+                    pval = rres.loc[corr_type, 'p-val']
+                    ci = rres.loc[corr_type, 'CI95%']
+                    llci, ulci = float(ci[0]), float(ci[1])
+                    ci_str = f"[{llci:.3}, {ulci:.3}]" if not np.isnan(llci) else ""
+                    se = None
+                    r2 = None
+                #* can switch to frozenset if it becomes really helpful to index without worrying about order
+                models[(outcome, predictor)] = rres
+
+            except Exception as e:
+                print(f"Error occurred while processing {predictor} for {outcome}: {e}")
+                coef = pval = se = llci = ulci = np.nan
+                ci_str = ""
+                r2 = np.nan
+                raise e
+            rows.append(
+                {
+                    "predictor": predictor,
+                    "coef": coef,
+                    "pval": pval,
+                    "se": se,
+                    "llci": llci,
+                    "ulci": ulci,
+                    "ci": ci_str,
+                    "R2": r2,
+                    "formula": formula,
+                }
+            )
+        df_struct = pd.DataFrame(rows).set_index("predictor")
+        # FDR across predictors for this struct
+        pvals = df_struct["pval"].fillna(1.0).values
+        _, p_fdr_vals, _, _ = multipletests(pvals, alpha=fdr_alpha, method=fdr_method)
+        df_struct.insert(2, "p_fdr", p_fdr_vals)
+        df_struct["coef_sig"] = df_struct["coef"].where(
+            df_struct["p_fdr"] < fdr_alpha, 0.0
+        )
+        results_by_outcome[outcome] = df_struct
+
+    # build results_by_predictor for compatibility
+    results_by_predictor = {}
+    cols = next(iter(results_by_outcome.values())).columns
+    for pred in predictors:
+        rows = []
+        for outcome in outcomes:
+            row = results_by_outcome[outcome].loc[pred].to_dict()
+            row["outcome"] = outcome
+            rows.append(row)
+        df_pred = pd.DataFrame(rows).set_index("outcome")[cols]
+        pvals = df_pred["pval"].fillna(1.0).values
+        _, p_fdr_vals, _, _ = multipletests(pvals, alpha=fdr_alpha, method=fdr_method)
+        df_pred["p_fdr"] = p_fdr_vals
+        df_pred["coef_sig"] = df_struct["coef"].where(
+            df_struct["p_fdr"] < fdr_alpha, 0.0
+        )
+        results_by_predictor[pred] = df_pred
+
+    if single_outcome:
+        results_by_outcome = results_by_outcome[outcomes[0]]
+
+    return results_by_outcome, results_by_predictor, models
