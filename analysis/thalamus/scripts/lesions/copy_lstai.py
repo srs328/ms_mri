@@ -35,5 +35,6 @@ for subid, sesid in tqdm(subject_sessions):
     subject_root = dataroot / f"sub{subid}-{sesid}"
     src = pioneer_subject_root / "lst-ai"
     dst = subject_root / "lst-ai"
-    logger.info(f"Copying {src} to {dst}")
-    shutil.copytree(src, dst, dirs_exist_ok=True)
+    if not (dst / "lesion_stats.csv").exists():
+        logger.info(f"Copying {src} to {dst}")
+        shutil.copytree(src, dst, dirs_exist_ok=True)

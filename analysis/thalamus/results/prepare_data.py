@@ -6,6 +6,7 @@ import pandas as pd
 simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
 import sys
 from pathlib import Path
+from loguru import logger
 
 
 sys.path.insert(0, "/home/srs-9/Projects/ms_mri/analysis/thalamus/helpers")
@@ -79,6 +80,15 @@ df = df.join(
 )
 # some values in SDMT are strings like "need to break glass, skip"
 df["SDMT"] = pd.to_numeric(df["SDMT"], errors="coerce")
+
+
+#! Two subjects didn't have a flair so I couldnt run lst-ai
+#!  for now, I will hard code the values from lst that was already run
+no_flair_subjeccts = [1245, 1379]
+for subid in no_flair_subjeccts:
+    if pd.isna(df.loc[subid, "T2LV"]):
+        logger.info(f"Substituting missing value for {subid}'s T2LV with the old T2LV")
+        df.loc[subid, "T2LV"] = df.loc[subid, "lesion_vol"]*1000
 
 # these corrections should ultimately be made to the csv file
 for struct in [
