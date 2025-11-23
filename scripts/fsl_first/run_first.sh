@@ -28,7 +28,7 @@ run_if_missing() {
 }
 
 run_if_missing "$work_dir/t1-L_Thal_first.nii.gz" "
-	run_first_all -v -i t1.nii.gz -o t1
+	run_first_all -dv -i t1.nii.gz -o t1
 "
 
 exec 3>&-  # Close FD 3

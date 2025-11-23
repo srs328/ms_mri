@@ -13,7 +13,7 @@ scratch.py
 *cp_work_dir
 .*
 !.gitignore
-lstat
+lstats
 
 fsf
 src/mri_data/new_files.log
