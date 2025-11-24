@@ -802,8 +802,10 @@ def run_regressions_multimodel(
                 rres = smf.glm(formula, data=model_data, family=family).fit(cov_type=robust_cov)
                 r2 = rres.pseudo_rsquared()
             elif regression_model == "Logit":
-                rres = smf.Logit(formula, data=model_data).fit(cov_type=robust_cov, disp=0)
+                rres = smf.logit(formula, data=model_data).fit(disp=0)
                 r2 = None
+            else:
+                raise Exception("Invalid input for regression_model")
             
             models[model_name] = rres
             coef = rres.params
@@ -1123,7 +1125,7 @@ def run_partial_regressions(
                     ci_str = f"[{llci:.3}, {ulci:.3}]" if not np.isnan(llci) else ""
                     
                 else:
-                    rres = pg.corr(model_data[predictor], model_data[outcome], method=corr_type, alternative='two-sided')
+                    rres = pg.corr(resid_data[predictor], resid_data[outcome], method=corr_type, alternative='two-sided')
                     coef = rres.loc[corr_type, 'r']
                     pval = rres.loc[corr_type, 'p-val']
                     ci = rres.loc[corr_type, 'CI95%']
