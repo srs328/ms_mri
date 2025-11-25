@@ -45,3 +45,4 @@ for sub, ses in tqdm(subject_sessions, total=len(subject_sessions)):
 with open("choroid_sdt_out.txt", 'w') as f:
     for line in didnt_exist:
         f.write(line + "\n")
+

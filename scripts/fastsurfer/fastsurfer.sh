@@ -4,6 +4,10 @@ subid=$1
 subj_folder=$2
 output_folder=$3
 
+log="$dataroot/$subid/fastsurfer.log"
+# tee all output to a per-subject log
+exec > >(tee -a "$log") 2>&1
+
 fs_license=/home/srs-9
 
 # 2. Run command
@@ -12,7 +16,7 @@ docker run --gpus all -v $subj_folder:/data \
                       -v $fs_license:/fs_license \
                       --rm --user $(id -u):$(id -g) deepmi/fastsurfer:latest \
                       --fs_license /fs_license/license.txt \
-                      --t1 /data/t1.nii.gz \
+                      --t1 /data/$subid/t1.nii.gz \
                       --sid $subid --sd /output \
                       --3T \
                       --threads 4 \

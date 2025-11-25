@@ -124,6 +124,7 @@ colors = {
     # Blues
     "darkest blue1": "#0a1433",
     "dark blue1": "#1f4294",
+    "darkish blue1": "#446cc8",
     "light blue1": "#7a9df0",
     "darkest blue2": "#0f2a35",  # Teal-ish blue
     "dark blue2": "#2E86AB",
