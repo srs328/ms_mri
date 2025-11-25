@@ -408,6 +408,11 @@ def read_pyprocess_output(p):
     direct_indirect_pattern = r"\*+ DIRECT AND INDIRECT EFFECTS \*+\n(.*?)$"
     direct_indirect = re.search(direct_indirect_pattern, output, re.DOTALL)
     mediation_model = direct_indirect.group(1)
+    
+    moderated_mediation_pattern = r"\*+ DIRECT AND INDIRECT EFFECTS \*+\n(.*?)$"
+    direct_indirect = re.search(moderated_mediation_pattern, output, re.DOTALL)
+    mediation_model = direct_indirect.group(1)
+    
     return outcome_model, mediation_model
 
 #! keep the following code for my reference

@@ -37,24 +37,27 @@ third_ventricle_width = pd.read_csv(
 )
 lst_ai = pd.read_csv(
     "/home/srs-9/Projects/ms_mri/analysis/thalamus/data0/lst_ai_volumes.csv",
-    index_col="subid"
+    index_col="subid",
 )
 # prl_volumes = pd.read_csv(
 #     "/home/srs-9/Projects/ms_mri/analysis/thalamus/data0/prl_volumes.csv",
 #     index_col="subid"
 # )
-lst_ai.rename(columns={
-    "total_count": "T2LC",
-    "total_volume": "T2LV",
-    "periventricular_count": "periV_T2LC",
-    "periventricular_volume": "periV_T2LV",
-    "juxtacortical_count": "juxcort_T2LC",
-    "juxtacortical_volume": "juxcort_T2LV",
-    "subcortical_count": "subcort_T2LC",
-    "subcortical_volume": "subcort_T2LV",
-    "infratentorial_count": "infraT_T2LC",
-    "infratentorial_volume": "infraT_T2LV"
-}, inplace=True)
+lst_ai.rename(
+    columns={
+        "total_count": "T2LC",
+        "total_volume": "T2LV",
+        "periventricular_count": "periV_T2LC",
+        "periventricular_volume": "periV_T2LV",
+        "juxtacortical_count": "juxcort_T2LC",
+        "juxtacortical_volume": "juxcort_T2LV",
+        "subcortical_count": "subcort_T2LC",
+        "subcortical_volume": "subcort_T2LV",
+        "infratentorial_count": "infraT_T2LC",
+        "infratentorial_volume": "infraT_T2LV",
+    },
+    inplace=True,
+)
 
 tiv = pd.read_csv("/home/srs-9/Projects/ms_mri/data/tiv_data.csv", index_col="subid")
 
@@ -88,7 +91,7 @@ no_flair_subjeccts = [1245, 1379]
 for subid in no_flair_subjeccts:
     if pd.isna(df.loc[subid, "T2LV"]):
         logger.info(f"Substituting missing value for {subid}'s T2LV with the old T2LV")
-        df.loc[subid, "T2LV"] = df.loc[subid, "lesion_vol"]*1000
+        df.loc[subid, "T2LV"] = df.loc[subid, "lesion_vol"] * 1000
 
 # these corrections should ultimately be made to the csv file
 for struct in [
@@ -106,7 +109,7 @@ for struct in [
 
 # these three columns were normalized; dividing by vscaling un-normalizes
 for struct in ["brain", "white", "grey"]:
-    df[struct] = df[struct] / df['vscaling']
+    df[struct] = df[struct] / df["vscaling"]
 
 
 # %% Load HIPS-THOMAS volumes
@@ -126,6 +129,11 @@ rename_columns = {
 }
 data.rename(columns=rename_columns, inplace=True)
 
+# ? I'm unsure whether I like CT as the new name for cortical thickness,
+# ?     so I'll just duplicate it so I can have both
+data["CT"] = data["cortical_thickness"]
+
+
 # %% Create composite measures of CSF distribution
 # /home/srs-9/Projects/ms_mri/analysis/thalamus/helpers/helpers.py:225: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
 #   df["CCF0"] = df["LV"] / df["allCSF"]
@@ -142,11 +150,11 @@ def composite_vars(df):
     df["periCSF_ratio"] = df["periCSF"] / df["LV"]
     df["periCSF_ratio2"] = df["periCSF"] / (df["LV"] + df["thirdV"])
     df["periCSF_frac"] = df["periCSF"] / df["allCSF"]
-    df["thirdV_expansion"] = df['thirdV_width'] / df['thirdV']
+    df["thirdV_expansion"] = df["thirdV_width"] / df["thirdV"]
 
     # more compositional variables
-    df['LV_div_thirdV'] = df['LV'] / df['thirdV']
-    df['LV_div_thirdV_interCSF'] = df['LV'] / (df['thirdV'] + df['interCSF'])
+    df["LV_div_thirdV"] = df["LV"] / df["thirdV"]
+    df["LV_div_thirdV_interCSF"] = df["LV"] / (df["thirdV"] + df["interCSF"])
 
     # Produce central measures from normalized versions
     LV_norm = df["LV"] / df["LV"].mean()

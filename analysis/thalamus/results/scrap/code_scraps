@@ -1,0 +1,180 @@
+from warnings import simplefilter
+
+import pandas as pd
+
+simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
+simplefilter(action="ignore", category=DeprecationWarning)
+simplefilter(action="ignore", category=FutureWarning)
+
+import re
+import textwrap
+from pathlib import Path
+from pyprocessmacro import Process
+import statsmodels
+from statsmodels.stats.multitest import multipletests
+from IPython.display import clear_output
+
+import os
+import numpy as np
+import pyperclip
+import statsmodels.api as sm
+import statsmodels.formula.api as smf
+from matplotlib import colormaps
+from scipy import stats
+from IPython.display import Markdown, display
+from io import StringIO
+import matplotlib.pyplot as plt
+from collections import defaultdict
+import subprocess
+
+import sys
+
+simplefilter(
+    action="ignore", category=statsmodels.tools.sm_exceptions.InvalidTestWarning
+)
+
+sys.path.insert(0, "/home/srs-9/Projects/ms_mri/analysis/thalamus/helpers")
+
+import helpers
+import utils
+import regression_utils as regutils
+import my_namespace
+from my_python_utils import smart_title, reload_recursive
+
+
+
+plot_data = data[MS_patients].copy()
+plot_data['Female'] = pd.to_numeric(plot_data['Female'])
+x_name = "CP"
+w_name = "T2LV_log1p"
+w_lab = "T2LV"
+y_name = "WTV"
+covariates = ["age", "Female", "tiv"]
+
+if covariates is not None:
+    plus_covariates = f"+ {' + '.join(covariates)}"
+else:
+    plus_covariates = ""
+
+xcent_name = f"{x_name}_cent"
+wcent_name = f"{w_name}_cent"
+plot_data[xcent_name] = plot_data[x_name] - plot_data[x_name].mean()
+plot_data[wcent_name] = plot_data[w_name] - plot_data[w_name].mean()
+
+formula = f"{y_name} ~ {wcent_name}*{xcent_name} {plus_covariates}"
+res = sm.OLS.from_formula(formula, data=plot_data).fit()
+
+other_vars = [
+    var
+    for var in res.model.exog_names
+    if var
+    not in [
+        "Intercept",
+        x_name,
+        w_name,
+        xcent_name,
+        wcent_name,
+        f"{wcent_name}:{xcent_name}",
+    ]
+]
+
+d = {var: [plot_data[var].mean()] for var in other_vars}
+d[xcent_name] = np.linspace(plot_data[xcent_name].min(), plot_data[xcent_name].max())
+
+d_low = d.copy()
+d_low[wcent_name] = [plot_data[wcent_name].mean() - plot_data[wcent_name].std()]
+test_data_low = (
+    pd.MultiIndex.from_product(d_low.values(), names=d_low.keys())
+    .to_frame()
+    .reset_index(drop=True)
+)
+pred_low = res.get_prediction(test_data_low).summary_frame(alpha=0.05)
+
+
+d_mid = d.copy()
+d_mid[wcent_name] = [plot_data[wcent_name].mean()]
+test_data_mid = (
+    pd.MultiIndex.from_product(d_mid.values(), names=d_mid.keys())
+    .to_frame()
+    .reset_index(drop=True)
+)
+pred_mid = res.get_prediction(test_data_mid).summary_frame(alpha=0.05)
+y_pred, y_upper, y_lower = (
+    pred_mid["mean"],
+    pred_mid["mean_ci_upper"],
+    pred_mid["mean_ci_lower"],
+)
+
+d_high = d.copy()
+d_high[wcent_name] = [plot_data[wcent_name].mean() + plot_data[wcent_name].std()]
+test_data_high = (
+    pd.MultiIndex.from_product(d_high.values(), names=d_high.keys())
+    .to_frame()
+    .reset_index(drop=True)
+)
+pred_high = res.get_prediction(test_data_high).summary_frame(alpha=0.05)
+
+d[wcent_name] = [
+    plot_data[wcent_name].mean() - plot_data[wcent_name].std(),
+    plot_data[wcent_name].mean(),
+    plot_data[wcent_name].mean() + plot_data[wcent_name].std()]
+test_data = (
+    pd.MultiIndex.from_product(d.values(), names=d.keys())
+    .to_frame()
+    .reset_index(drop=True)
+)
+pred = res.get_prediction(test_data).summary_frame(alpha=0.05)
+
+
+x_plot = d[xcent_name] + plot_data[x_name].mean()
+
+# Your existing code, with additions:
+
+# Get interaction coefficient to verify direction
+interaction_coef = res.params[f"{wcent_name}:{xcent_name}"]
+interaction_p = res.pvalues[f"{wcent_name}:{xcent_name}"]
+print(f"Interaction coefficient: {interaction_coef:.4f}, p={interaction_p:.4f}")
+
+# Plot
+fig, ax = plt.subplots(figsize=(8, 6))
+
+ax.plot(x_plot, pred_high['mean'], label=f"High {w_lab} (+1 SD)", 
+        linestyle="--", color=colors["dark red2"], linewidth=2)
+ax.plot(x_plot, pred_mid['mean'], label=f"Mean {w_lab}", 
+        color="black", linewidth=2)
+ax.plot(x_plot, pred_low['mean'], label=f"Low {w_lab} (-1 SD)", 
+        linestyle="--", color=colors["dark blue1"], linewidth=2)
+
+ax.fill_between(x_plot, pred_mid["mean_ci_upper"], pred_mid["mean_ci_lower"], 
+                color="grey", alpha=0.2)
+ax.fill_between(x_plot, pred_low["mean_ci_upper"], pred_low["mean_ci_lower"], 
+                color=colors["light blue1"], alpha=0.2)
+ax.fill_between(x_plot, pred_high["mean_ci_upper"], pred_high["mean_ci_lower"], 
+                color=colors["light red2"], alpha=0.2)
+
+ax.legend(loc='upper right', frameon=True, fontsize=10)
+ax.set_xlabel("Choroid Plexus Volume", fontsize=12, fontweight='bold')
+ax.set_ylabel("Whole Thalamic Volume", fontsize=12, fontweight='bold')
+ax.set_title(
+    f"Moderating Effect of T2 Lesion Volume on CP-Thalamus Relationship\n"
+    f"Interaction: β={interaction_coef:.3f}, p={interaction_p:.4f}",
+    fontsize=13, fontweight='bold', pad=15
+)
+
+# Add annotation explaining the interaction
+if interaction_coef < 0:
+    ax.text(
+        0.05, 0.95, 
+        "Higher lesion burden amplifies\nCP's deleterious effect on thalamus",
+        transform=ax.transAxes, 
+        fontsize=10, 
+        verticalalignment='top',
+        bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.5)
+    )
+
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+ax.grid(True, alpha=0.3, linestyle='--', linewidth=0.5)
+
+plt.tight_layout()
+plt.show()

@@ -605,6 +605,61 @@ def plot_reg_var2(data, res, x, outcome):
     return fig
 
 
+def moderation_y0(data, res, x_name, m_name):
+    coef = res.params
+    conf_int = res.conf_int()
+
+    reg = re.compile(r"(\w+)\:(\w+)")
+    regression_data = {}
+    for name in coef.index:
+        if name == "Intercept":
+            continue
+        mat = reg.match(name)
+        if mat is None:
+            regression_data[name] = data[name]
+        else:
+            regression_data[name] = data[mat[1]] * data[mat[2]]
+            inter_name = name
+    regression_data = pd.DataFrame(regression_data)
+
+    other_vars = coef.index[~coef.index.isin([x_name, m_name, inter_name, "Intercept"])]
+    other_terms = np.sum(coef[other_vars] * regression_data.loc[:, other_vars].mean())
+
+    m_vals = [
+        data[m_name].mean() - data[m_name].std(),
+        data[m_name].mean(),
+        data[m_name].mean() + data[m_name].std(),
+    ]
+
+    x_rng = np.linspace(data[x_name].min(), data[x_name].max(), 100)
+    y_lvls = []
+    for m_val in m_vals:
+        y = (
+            x_rng * coef[x_name]
+            + m_val * coef[m_name]
+            + coef[inter_name] * m_val * x_rng
+            + other_terms
+            + coef["Intercept"]
+        )
+        y_lower = (
+            x_rng * conf_int.loc[x_name, 0]
+            + m_val * coef[m_name]
+            + coef[inter_name] * m_val * x_rng
+            + other_terms
+            + coef["Intercept"]
+        )
+        y_upper = (
+            x_rng * conf_int.loc[x_name, 1]
+            + m_val * coef[m_name]
+            + coef[inter_name] * m_val * x_rng
+            + other_terms
+            + coef["Intercept"]
+        )
+        y_lvls.append((y, y_lower, y_upper))
+
+    return x_rng, y_lvls
+
+
 def moderation_y(data, res, x_name, m_name):
     coef = res.params
     conf_int = res.conf_int()
