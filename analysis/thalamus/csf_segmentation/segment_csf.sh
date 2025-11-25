@@ -54,35 +54,33 @@ run_if_missing "$root/all_CSF.nii.gz" \
     c3d "$root"/*_pveseg.nii.gz -retain-labels 1 -o "$root/all_CSF.nii.gz"
 
 
-
-
 # Dilate ventricle mask for subtraction from peripheral CSF
 kernal_shape="sphere"
 kernal_size=2
 out_suffix="_dilM_${kernal_shape}${kernal_size}"
 
-prefix="aseg-lv-fix"
+prefix="aseg-left_ventricle"
 initial="${prefix}.nii.gz"
 dilname="${prefix}${out_suffix}.nii.gz"
 run_if_missing "$root/$dilname" \
     fslmaths "$root/$initial" -kernel $kernal_shape $kernal_size -dilM "$root/$dilname" 
 lv_dilname=$dilname
 
-prefix="aseg-rv-fix"
+prefix="aseg-right_ventricle"
 initial="${prefix}.nii.gz"
 dilname="${prefix}${out_suffix}.nii.gz"
 run_if_missing "$root/$dilname" \
-    fslmaths "$root/aseg-rv-fix.nii.gz" -kernel $kernal_shape $kernal_size -dilM "$root/$dilname"
+    fslmaths "$root/${initial}" -kernel $kernal_shape $kernal_size -dilM "$root/$dilname"
 rv_dilname=$dilname
 
-run_if_missing $root/aseg-lateral_ventricles.nii.gz \
-	fslmaths $root/aseg-lv-fix.nii.gz -add $root/aseg-rv-fix.nii.gz $root/aseg-lateral_ventricles.nii.gz
+# run_if_missing $root/aseg-lateral_ventricles.nii.gz \
+# 	fslmaths $root/aseg-lv-fix.nii.gz -add $root/aseg-rv-fix.nii.gz $root/aseg-lateral_ventricles.nii.gz
 
-run_if_missing $root/aseg-choroid.nii.gz \
-	fslmaths $root/aseg-left_choroid.nii.gz -add $root/aseg-right_choroid.nii.gz $root/aseg-choroid.nii.gz
+# run_if_missing $root/aseg-choroid.nii.gz \
+# 	fslmaths $root/aseg-left_choroid.nii.gz -add $root/aseg-right_choroid.nii.gz $root/aseg-choroid.nii.gz
 
-run_if_missing $root/aseg-lateral_ventricles_choroid.nii.gz \
-	fslmaths $root/aseg-lateral_ventricles.nii.gz -add $root/aseg-choroid.nii.gz $root/aseg-lateral_ventricles_choroid.nii.gz
+# run_if_missing $root/aseg-lateral_ventricles_choroid.nii.gz \
+# 	fslmaths $root/aseg-lateral_ventricles.nii.gz -add $root/aseg-choroid.nii.gz $root/aseg-lateral_ventricles_choroid.nii.gz
 
 # Third Ventricle
 kernal_shape="sphere"
@@ -92,10 +90,10 @@ out_suffix="_dilM_${kernal_shape}${kernal_size}"
 prefix="aseg-third_ventricle"
 initial="${prefix}.nii.gz"
 dilname="${prefix}${out_suffix}.nii.gz"
-# run_if_missing "$root/$dilname" \
-#     fslmaths "$root/$initial" -kernel $kernal_shape $kernal_size -dilM "$root/$dilname" 
-# thirdV_dilname=$dilname
-thirdV_dilname=$initial
+run_if_missing "$root/$dilname" \
+    fslmaths "$root/$initial" -kernel $kernal_shape $kernal_size -dilM "$root/$dilname" 
+thirdV_dilname=$dilname
+# thirdV_dilname=$initial
 
 # CSF from aseg
 kernal_shape="sphere"
@@ -105,10 +103,10 @@ out_suffix="_dilM_${kernal_shape}${kernal_size}"
 prefix="aseg-CSF"
 initial="${prefix}.nii.gz"
 dilname="${prefix}${out_suffix}.nii.gz"
-# run_if_missing "$root/$dilname" \
-#     fslmaths "$root/$initial" -kernel $kernal_shape $kernal_size -dilM "$root/$dilname" 
-# fsCSF_dilname=$dilname
-fsCSF_dilname=$initial
+run_if_missing "$root/$dilname" \
+    fslmaths "$root/$initial" -kernel $kernal_shape $kernal_size -dilM "$root/$dilname" 
+fsCSF_dilname=$dilname
+# fsCSF_dilname=$initial
 
 # fourth ventricle
 kernal_shape="sphere"
@@ -118,10 +116,10 @@ out_suffix="_dilM_${kernal_shape}${kernal_size}"
 prefix="aseg-fourth_ventricle"
 initial="${prefix}.nii.gz"
 dilname="${prefix}${out_suffix}.nii.gz"
-# run_if_missing "$root/$dilname" \
-#     fslmaths "$root/$initial" -kernel $kernal_shape $kernal_size -dilM "$root/$dilname" 
-# fourthV_dilname=$dilname
-fourthV_dilname=$initial
+run_if_missing "$root/$dilname" \
+    fslmaths "$root/$initial" -kernel $kernal_shape $kernal_size -dilM "$root/$dilname" 
+fourthV_dilname=$dilname
+# fourthV_dilname=$initial
 
 
 run_if_missing "$root/peripheral_CSF_CHECK.nii.gz" \
