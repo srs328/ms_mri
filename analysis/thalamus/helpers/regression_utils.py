@@ -58,6 +58,7 @@ def formula_string(
         covariates = []
 
     independent_vars = predictors + covariates
+    independent_vars = list(dict.fromkeys(independent_vars))
     return f"{outcome} ~ {' + '.join(independent_vars)}"
 
 
