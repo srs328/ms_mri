@@ -469,6 +469,7 @@ def run_regressions(
     return results_by_outcome, results_by_predictor, models
 
 
+#TODO can easily edit so output table only includes exog_list, not covariates
 def run_regressions_multimodel(
     model_data: pd.DataFrame,
     outcome: str,
