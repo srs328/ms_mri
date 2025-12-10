@@ -14,7 +14,7 @@ import pyperclip
 import textwrap
 import sys
 from io import StringIO
-
+import helpers
 
 
 pd.options.mode.copy_on_write = True
@@ -117,6 +117,9 @@ def load_data(path: str, rename_columns: dict = None, copy_columns: dict = None)
     data = pd.read_csv(path, index_col="subid")
     data['Female'] = pd.Categorical(data['Female'], categories=[0, 1])
     data['Male'] = pd.Categorical(data['Male'], categories=[0, 1])
+    data = helpers.set_prl_levels(data)
+    data = helpers.set_has_prl(data)
+    data['HAS_PRL'] = pd.Categorical(data['HAS_PRL'], categories=[0, 1])
 
     data.rename(columns=rename_columns, inplace=True)
     for col, new_col in copy_columns.items():

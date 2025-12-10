@@ -295,11 +295,12 @@ def subject_to_subid(subject):
 
 
 def set_prl_levels(df):
-    prl_levels = [range(0, 1), range(1, 3), range(3, 5), range(5, df["PRL"].max() + 1)]
+    prl_levels = [range(0, 1), range(1, 3), range(3, int(df["PRL"].max()) + 1)]
     df.loc[:, ["PRL_LEVEL"]] = None
+    df.loc[:, ["PRL_LEVEL_CAT"]] = None
     for i, level in enumerate(prl_levels):
         df.loc[df["PRL"].isin(level), ["PRL_LEVEL"]] = i
-    df.loc[:, ["PRL_LEVEL"]] = pd.Categorical(df["PRL_LEVEL"], ordered=True)
+    # df.loc[:, ["PRL_LEVEL_CAT"]] = pd.Categorical(df["PRL_LEVEL"], ordered=True)
 
     return df
 
