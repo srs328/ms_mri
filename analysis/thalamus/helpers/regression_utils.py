@@ -395,6 +395,13 @@ def run_regressions(
                     r2 = None
 
                 # * can switch to frozenset if it becomes really helpful to index without worrying about order
+
+                #! crude workaround
+                if pred == "HAS_PRL":
+                    pred = "HAS_PRL[T.1]"
+                if pred == "PRL_LEVEL":
+                    pred = "PRL_LEVEL[T.2]"
+
                 models[(outcome, pred)] = rres
                 coef = rres.params[pred]
                 pval = rres.pvalues[pred]
@@ -449,6 +456,12 @@ def run_regressions(
     results_by_predictor = {}
     cols = next(iter(results_by_outcome.values())).columns
     for pred in predictors:
+        #! crude workaround
+        if pred == "HAS_PRL":
+            pred = "HAS_PRL[T.1]"
+        if pred == "PRL_LEVEL":
+            pred = "PRL_LEVEL[T.2]"
+
         rows = []
         for outcome in outcomes:
             row = results_by_outcome[outcome].loc[pred].to_dict()
