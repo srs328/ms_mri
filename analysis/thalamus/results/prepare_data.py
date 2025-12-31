@@ -20,7 +20,7 @@ data_dir = Path("/home/srs-9/Projects/ms_mri/data")
 # %% Load and preprocess the main clinical and MRI data
 
 choroid_volumes = pd.read_csv(
-    "/home/srs-9/Projects/ms_mri/data/choroid_aschoplex_volumes.csv",
+    "/home/srs-9/Projects/ms_mri/data/choroid_aschoplex_volumes_bilateral.csv",
     index_col="subid",
 )
 ventricle_volumes = pd.read_csv(
@@ -120,6 +120,8 @@ data = df.join(df_thomas)
 rename_columns = {
     "ventricle_volume": "LV",
     "choroid_volume": "CP",
+    "choroid_volume_left": "CP_left",
+    "choroid_volume_right": "CP_right",
     "peripheral": "periCSF",
     "all": "allCSF",
     "third_ventricle": "thirdV",
