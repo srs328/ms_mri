@@ -15,7 +15,7 @@ def get_color(ref, bin):
 template_image = Image.open("template_diagram.png")
 template = np.asarray(template_image)
 # color_ref = pd.read_csv("color_reference.csv", index_col="bin")
-color_ref = pd.read_csv("color_reference_coolwarm_CP_THAL1.csv", index_col="bin")
+color_ref = pd.read_csv("color_reference_hot_CP.csv", index_col="bin")
 
 diagram_ref_table = pd.read_csv("structure_reference.csv")
 diagram_ref = diagram_ref_table['diagram_index']

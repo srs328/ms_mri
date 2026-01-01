@@ -110,7 +110,8 @@ format_opts_ref = {
     "se": "{:.3f}",
     "pval": "{:.3f}",
     "p_fdr": "{:.3f}",
-    "R2": "{:.3f}",
+    "R2": "{:.2f}",
+    "ΔR2": "{:.2f}"
 }
 
 def format_df(df: pd.DataFrame, format_dict):
@@ -449,7 +450,7 @@ def run_regressions(
                         except Exception:
                             llci = ulci = np.nan
 
-                    ci_str = f"[{llci:.3}, {ulci:.3}]" if not np.isnan(llci) else ""
+                    ci_str = f"[{llci:.3f}, {ulci:.3f}]" if not np.isnan(llci) else ""
 
                     rows.append(
                         {
