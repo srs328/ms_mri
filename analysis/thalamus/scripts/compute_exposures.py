@@ -5,13 +5,14 @@ import os
 import nibabel as nib
 import numpy as np
 from tqdm import tqdm
+import subprocess
 
 from scipy import ndimage
 from scipy.spatial import distance
 
 # %%
 hipsthomas_root = Path("/mnt/h/srs-9/hipsthomas")
-dataproc_root = Path("/mnt/h/srs-9/thalamus_project/data0")
+dataproc_root = Path("/mnt/h/srs-9/thalamus_project/data")
 data_file_dir = Path("/home/srs-9/Projects/ms_mri/data")
 
 subject_sessions = pd.read_csv(data_file_dir / "subject-sessions.csv")
@@ -26,7 +27,11 @@ def load_choroid_sdt(root, sub, ses):
 
 
 def load_ventricle_sdt(root, sub, ses):
-    file = os.path.join(root, f"sub{sub}-{ses}", "aseg-rv-fix-sdt.nii.gz")
+    file = os.path.join(root, f"sub{sub}-{ses}", "aseg-lv-fix-sdt.nii.gz")
+    if not os.path.exists(file):
+        in_file = os.path.join(root, f"sub{sub}-{ses}", "aseg-lv-fix.nii.gz")
+        cmd = ["c3d", in_file, "-sdt", "-o", file]
+        subprocess.run(cmd)
     return nib.load(file).get_fdata()
 
 
@@ -41,7 +46,7 @@ def load_thomas0(root, sub, ses):
 
 def load_thomas(root, sub, ses):
     thomas_dir = root / f"sub{sub}-{ses}"
-    thomL_file = thomas_dir / "thomasfull_R.nii.gz"
+    thomL_file = thomas_dir / "thomasfull_L.nii.gz"
     thomL_img = nib.load(thomL_file)
     thomR_file = thomas_dir / "thomasfull_R.nii.gz"
     # thomR_img = nib.load(thomR_file)
@@ -49,16 +54,16 @@ def load_thomas(root, sub, ses):
     return thomL_img, thomR_img
 
 
-def load_file(root, sub, ses, file):
+def load_file(root, sub, ses, file, side):
     thomas_dir = root / f"sub{sub}-{ses}"
-    thom_img = nib.load(thomas_dir / "left" / file)
+    thom_img = nib.load(thomas_dir / side / file)
     return thom_img
 
 
 distance_metrics = {"choroid": load_choroid_sdt, "ventricle": load_ventricle_sdt}
 save_names = {
-    "choroid": "centroid-choroid_SDTX.csv",
-    "ventricle": "centroid-ventricle_SDT_fixed-right.csv",
+    "choroid": "centroid-choroid_SDT.csv",
+    "ventricle": "centroid-ventricle_SDT_fixed-left-THALAMUS.csv",
 }
 load_function = distance_metrics[which_distance]
 save_name = save_names[which_distance]
@@ -72,6 +77,7 @@ all_subjects = []
 for i, row in tqdm(subject_sessions.iterrows(), total=len(subject_sessions)):
     sub = row["sub"]
     ses = row["ses"]
+
     try:
         sdt = load_function(dataproc_root, sub, ses)
         thomL_img, _ = load_thomas(dataproc_root, sub, ses)
@@ -79,29 +85,30 @@ for i, row in tqdm(subject_sessions.iterrows(), total=len(subject_sessions)):
         thom_inds = np.unique(thom)
         thom_inds = thom_inds[thom_inds > 0]
         dists = {}
-        for ind in thom_inds:
-            struct_pts = thom.copy()
-            struct_pts[thom != ind] = 0
-            struct_pts[thom == ind] = 1
-            centroid = ndimage.center_of_mass(struct_pts)
-            centroid_round = [int(cent) for cent in centroid]
-            dists[int(ind)] = sdt[*centroid_round]
-
-        # for ind, file in [
-        #     (1, "1-THALAMUS.nii.gz"),
-        #     (33, "33-GP.nii.gz"),
-        #     (34, "34-Amy.nii.gz"),
-        # ]:
-        #     thom_img = load_file(dataproc_root, sub, ses, file)
-        #     struct_pts = thom_img.get_fdata()
+        # for ind in thom_inds:
+        #     struct_pts = thom.copy()
+        #     struct_pts[thom != ind] = 0
+        #     struct_pts[thom == ind] = 1
         #     centroid = ndimage.center_of_mass(struct_pts)
         #     centroid_round = [int(cent) for cent in centroid]
         #     dists[int(ind)] = sdt[*centroid_round]
+
+        for ind, file in [
+            (1, "1-THALAMUS.nii.gz"),
+            # (33, "33-GP.nii.gz"),
+            # (34, "34-Amy.nii.gz"),
+        ]:
+            thom_img = load_file(hipsthomas_root, sub, ses, file, "left")
+            struct_pts = thom_img.get_fdata()
+            centroid = ndimage.center_of_mass(struct_pts)
+            centroid_round = [int(cent) for cent in centroid]
+            dists[int(ind)] = sdt[*centroid_round]
 
         all_dists.append(dists)
         all_subjects.append(sub)
 
     except Exception as e:
+        print(f"Failed {sub}")
         print(e)
         continue
 

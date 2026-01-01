@@ -52,7 +52,7 @@ def load_file(root, sub, ses , file):
     return thom_img
 
 distance_metrics = {'choroid': load_choroid, 'ventricle': load_ventricle_sdt}
-save_names = {'choroid': "centroid-choroid_centroid.csv", 'ventricle': "centroid-ventricle_centroid.csv"}
+save_names = {'choroid': "centroid-choroid_centroid.csv", 'ventricle': "centroid-ventricle_SDT.csv"}
 load_function = distance_metrics[which_distance]
 save_name = save_names[which_distance]
 
@@ -102,50 +102,50 @@ df.to_csv(data_file_dir / save_name)
 
 # %%
 
-# for i, row in subject_sessions.iterrows():
-#     sub = row['sub']
-#     ses = row['ses']
-#     file = os.path.join(dataproc_root, f"sub{sub}-{ses}", "aseg-ventricles-sdt.nii.gz")
-#     if not os.path.exists(file):
-#         print(sub)
-    # try:
-    #     sdt = load_function(dataproc_root, sub, ses)
-    # except FileNotFoundError:
-    #     print(sub)
-    #     continue
+for i, row in subject_sessions.iterrows():
+    sub = row['sub']
+    ses = row['ses']
+    file = os.path.join(dataproc_root, f"sub{sub}-{ses}", "aseg-ventricles-sdt.nii.gz")
+    if not os.path.exists(file):
+        print(sub)
+    try:
+        sdt = load_function(dataproc_root, sub, ses)
+    except FileNotFoundError:
+        print(sub)
+        continue
 
 # # %% [markdown]
 # ## Ventricle-SDT metric
 # # %%
 
-# # subject_sessions.set_index("sub", inplace=True)
-# # 1326
-# subjects = [1326, 2195, 1076, 1042, 1508, 1071, 1241, 1003, 1301, 1001, 1107, 1125, 1161, 1198, 1218, 1527, 1376, 2075, 1023, 1038, 1098]
-# all_dists = []
-# all_subjects = []
-# for sub in subjects:
-#     ses = subject_sessions.loc[sub, 'ses']
-#     try:
-#         ventricle_sdt = load_ventricle_sdt(hipsthomas_root, sub, ses)
-#         thomL_img, _ = load_thomas(hipsthomas_root, sub, ses)
-#         thom = thomL_img.get_fdata()
-#         thom_inds = np.unique(thom)
-#         thom_inds = thom_inds[thom_inds > 0]
-#         dists = {}
-#         for ind in thom_inds:
-#             struct_pts = thom.copy()
-#             struct_pts[thom!=ind] = 0
-#             struct_pts[thom==ind] = 1
-#             centroid = ndimage.center_of_mass(struct_pts)
-#             centroid_round = [int(cent) for cent in centroid]
-#             dists[int(ind)] = ventricle_sdt[*centroid_round]
+# subject_sessions.set_index("sub", inplace=True)
+# 1326
+subjects = [1326, 2195, 1076, 1042, 1508, 1071, 1241, 1003, 1301, 1001, 1107, 1125, 1161, 1198, 1218, 1527, 1376, 2075, 1023, 1038, 1098]
+all_dists = []
+all_subjects = []
+for sub in subjects:
+    ses = subject_sessions.loc[sub, 'ses']
+    try:
+        ventricle_sdt = load_ventricle_sdt(hipsthomas_root, sub, ses)
+        thomL_img, _ = load_thomas(hipsthomas_root, sub, ses)
+        thom = thomL_img.get_fdata()
+        thom_inds = np.unique(thom)
+        thom_inds = thom_inds[thom_inds > 0]
+        dists = {}
+        for ind in thom_inds:
+            struct_pts = thom.copy()
+            struct_pts[thom!=ind] = 0
+            struct_pts[thom==ind] = 1
+            centroid = ndimage.center_of_mass(struct_pts)
+            centroid_round = [int(cent) for cent in centroid]
+            dists[int(ind)] = ventricle_sdt[*centroid_round]
         
-#         all_dists.append(dists)
-#         all_subjects.append(sub)
+        all_dists.append(dists)
+        all_subjects.append(sub)
     
-#     except Exception as e:
-#         print(e)
-#         continue
+    except Exception as e:
+        print(e)
+        continue
 
 # # %%
 
