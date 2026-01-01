@@ -220,7 +220,7 @@ def load_df():
     return df
 
 
-def load_hipsthomas(data_dir, side=None):
+def load_hipsthomas(data_dir, side=None, filename=None):
     if side is not None:
         filename = f"hipsthomas_{side}_vols.csv"
     else:
