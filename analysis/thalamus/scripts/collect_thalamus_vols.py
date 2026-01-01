@@ -1,3 +1,4 @@
+# %%
 import os
 import re
 from pathlib import Path
@@ -6,7 +7,7 @@ from mri_data import utils
 from tqdm import tqdm
 import csv
 
-hips_thomas_home = Path("/media/smbshare/srs-9/hipsthomas")
+hips_thomas_home = Path("/mnt/h/srs-9/hipsthomas")
 logdir = Path("/home/srs-9/Projects/ms_mri/analysis/paper1/scripts/logs")
 data_dir = Path("/home/srs-9/Projects/ms_mri/data")
 assert data_dir.exists()
@@ -24,6 +25,7 @@ def get_hipsthomas_vols(loc):
     # vols = {key: left_vols[key] + right_vols[key] for key in left_vols}
     return left_vols, right_vols
 
+# %%
 all_vols = []
 all_left_vols = []
 all_right_vols = []
@@ -33,7 +35,10 @@ failed_hips_thomas = []
 for folder in tqdm(hips_thomas_home.iterdir()):
     if not folder.is_dir():
         continue
-    subject = int(re.match(r"sub(\d{4})", folder.name)[1])
+    try:
+        subject = int(re.match(r"sub(\d{4})", folder.name)[1])
+    except TypeError:
+        continue
     try:
         left_vols, right_vols = get_hipsthomas_vols(folder)
     except FileNotFoundError:

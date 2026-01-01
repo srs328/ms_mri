@@ -1,3 +1,4 @@
+import re
 from collections import defaultdict
 from typing import Optional, Union
 from warnings import simplefilter
@@ -104,7 +105,13 @@ format_opts_ref = {
     "p_fdr": "{:.2}",
     "R2": "{:.2}",
 }
-
+format_opts_ref = {
+    "coef": "{:.3f}",
+    "se": "{:.3f}",
+    "pval": "{:.3f}",
+    "p_fdr": "{:.3f}",
+    "R2": "{:.3f}",
+}
 
 def format_df(df: pd.DataFrame, format_dict):
     """Apply Styler-like formatting but output to markdown"""
@@ -265,6 +272,7 @@ def run_regressions(
     fdr_method: str = "fdr_bh",
     fdr_alpha: float = 0.05,
     to_check_vif: bool = True,
+    to_adjust_cat_vars: bool = True,
 ) -> tuple[
     dict[str, pd.DataFrame],
     dict[str, pd.DataFrame],
@@ -304,6 +312,8 @@ def run_regressions(
         Method for FDR correction (passed to statsmodels.multipletests).
     fdr_alpha : float, default=0.05
         Significance threshold for FDR correction.
+    to_adjust_cat_vars : bool, default=True
+        Adjust betas for categorical variables by multiplying it by the stdev
 
     Returns
     -------
@@ -363,6 +373,10 @@ def run_regressions(
     # container: per-outcome dataframes
     results_by_outcome = {}
     models = defaultdict(dict)
+
+    # if there are any categorical variables, I will end up with more predictors than I started with,
+    #   so keep track of them with all_predictors
+    all_predictors = set() 
     for outcome in outcomes:
         rows = []
         for pred in predictors:
@@ -395,33 +409,62 @@ def run_regressions(
                     r2 = None
 
                 # * can switch to frozenset if it becomes really helpful to index without worrying about order
-
+                
                 #! crude workaround
-                if pred == "HAS_PRL":
-                    pred = "HAS_PRL[T.1]"
-                if pred == "PRL_LEVEL":
-                    pred = "PRL_LEVEL[T.2]"
+                # if pred == "HAS_PRL":
+                #     pred = "HAS_PRL[T.1]"
+                # if pred == "PRL_LEVEL":
+                #     pred = f"PRL_LEVEL[T.{factor_level}]"
 
-                models[(outcome, pred)] = rres
-                coef = rres.params[pred]
-                pval = rres.pvalues[pred]
-                se = rres.bse[pred]
-
-                # confidence interval: conf_int() returns DataFrame when names available
-                ci_df = rres.conf_int()
-                if hasattr(ci_df, "loc") and pred in ci_df.index:
-                    llci, ulci = float(ci_df.loc[pred, 0]), float(ci_df.loc[pred, 1])
+                exog_names = list(rres.model.exog_names)
+                factor_levels = []
+                for elem in exog_names:
+                    if re.match(rf"^{pred}\[T.", elem):
+                        factor_levels.append(elem)
+                if len(factor_levels) > 0:
+                    predictors_to_add = factor_levels
                 else:
-                    # fallback via exog_names -> index
-                    try:
-                        exog_names = list(rres.model.exog_names)
-                        idx = exog_names.index(pred)
-                        ci_arr = np.asarray(ci_df)
-                        llci, ulci = float(ci_arr[idx, 0]), float(ci_arr[idx, 1])
-                    except Exception:
-                        llci = ulci = np.nan
+                    predictors_to_add = [pred]
 
-                ci_str = f"[{llci:.3}, {ulci:.3}]" if not np.isnan(llci) else ""
+                for pred_to_add in predictors_to_add:
+                    models[(outcome, pred_to_add)] = rres
+                    coef = rres.params[pred_to_add]
+                    if "[T." in pred_to_add and to_adjust_cat_vars:
+                        coef = coef*model_data[pred].astype("float").std()
+
+                    pval = rres.pvalues[pred_to_add]
+                    se = rres.bse[pred_to_add]
+
+                    # confidence interval: conf_int() returns DataFrame when names available
+                    ci_df = rres.conf_int()
+                    if hasattr(ci_df, "loc") and pred_to_add in ci_df.index:
+                        llci, ulci = float(ci_df.loc[pred_to_add, 0]), float(ci_df.loc[pred_to_add, 1])
+                    else:
+                        # fallback via exog_names -> index
+                        try:
+                            
+                            idx = exog_names.index(pred_to_add)
+                            ci_arr = np.asarray(ci_df)
+                            llci, ulci = float(ci_arr[idx, 0]), float(ci_arr[idx, 1])
+                        except Exception:
+                            llci = ulci = np.nan
+
+                    ci_str = f"[{llci:.3}, {ulci:.3}]" if not np.isnan(llci) else ""
+
+                    rows.append(
+                        {
+                            "predictor": pred_to_add,
+                            "coef": coef,
+                            "pval": pval,
+                            "se": se,
+                            "llci": llci,
+                            "ulci": ulci,
+                            "ci": ci_str,
+                            "R2": r2,
+                            "formula": formula,
+                        }
+                    )
+                    all_predictors.add(pred_to_add)
 
             except Exception as e:
                 print(f"Error occurred while processing {pred} for {outcome}: {e}")
@@ -429,19 +472,7 @@ def run_regressions(
                 ci_str = ""
                 r2 = np.nan
                 raise e
-            rows.append(
-                {
-                    "predictor": pred,
-                    "coef": coef,
-                    "pval": pval,
-                    "se": se,
-                    "llci": llci,
-                    "ulci": ulci,
-                    "ci": ci_str,
-                    "R2": r2,
-                    "formula": formula,
-                }
-            )
+                
         df_struct = pd.DataFrame(rows).set_index("predictor")
         # FDR across predictors for this struct
         pvals = df_struct["pval"].fillna(1.0).values
@@ -455,12 +486,12 @@ def run_regressions(
     # build results_by_predictor for compatibility
     results_by_predictor = {}
     cols = next(iter(results_by_outcome.values())).columns
-    for pred in predictors:
+    for pred in all_predictors:
         #! crude workaround
-        if pred == "HAS_PRL":
-            pred = "HAS_PRL[T.1]"
-        if pred == "PRL_LEVEL":
-            pred = "PRL_LEVEL[T.2]"
+        # if pred == "HAS_PRL":
+        #     pred = "HAS_PRL[T.1]"
+        # if pred == "PRL_LEVEL":
+        #     pred = f"PRL_LEVEL[T.{factor_level}]"
 
         rows = []
         for outcome in outcomes:
@@ -471,9 +502,13 @@ def run_regressions(
         pvals = df_pred["pval"].fillna(1.0).values
         _, p_fdr_vals, _, _ = multipletests(pvals, alpha=fdr_alpha, method=fdr_method)
         df_pred["p_fdr"] = p_fdr_vals
-        df_pred["coef_sig"] = df_struct["coef"].where(
-            df_struct["p_fdr"] < fdr_alpha, 0.0
-        )
+        try:
+            df_pred["coef_sig"] = df_struct["coef"].where(
+                df_struct["p_fdr"] < fdr_alpha, 0.0
+            )
+        except Exception:
+            raise
+
         results_by_predictor[pred] = df_pred
 
     if single_outcome:
