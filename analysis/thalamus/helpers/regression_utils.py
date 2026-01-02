@@ -703,6 +703,7 @@ def run_regressions_from_formulas(
     regression_model: str = "OLS",
     family: Optional[sm.families.Family] = None,
     to_check_vif: bool = True,
+    to_adjust_cat_vars: bool = True,
 ) -> tuple[dict[str, pd.DataFrame], dict[str, ResultsWrapper], dict[str, str]]:
     """
     Run regression models from R-style formula specifications.
@@ -849,6 +850,10 @@ def run_regressions_from_formulas(
             },
             index=exog_names,
         )
+        if to_adjust_cat_vars:
+            for idx in res_df.index:
+                if match := re.match(r"^(.+)\[T\.", idx):
+                    res_df.loc[idx, "coef"] = res_df.loc[idx, "coef"]*model_data[match[1]].astype("float").std()
         results[model_name] = res_df
         formulas[model_name] = formula
 
