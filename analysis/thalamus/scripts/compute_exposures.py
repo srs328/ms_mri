@@ -32,6 +32,14 @@ def load_ventricle_sdt(root, sub, ses):
         in_file = os.path.join(root, f"sub{sub}-{ses}", "aseg-lv-fix.nii.gz")
         cmd = ["c3d", in_file, "-sdt", "-o", file]
         subprocess.run(cmd)
+    try:
+        fdata = nib.load(file).get_fdata()
+    except Exception:
+        in_file = os.path.join(root, f"sub{sub}-{ses}", "aseg-lv-fix.nii.gz")
+        cmd = ["c3d", in_file, "-sdt", "-o", file]
+        subprocess.run(cmd)
+    else:
+        return fdata
     return nib.load(file).get_fdata()
 
 
@@ -78,12 +86,13 @@ for i, row in tqdm(subject_sessions.iterrows(), total=len(subject_sessions)):
     sub = row["sub"]
     ses = row["ses"]
 
+
     try:
         sdt = load_function(dataproc_root, sub, ses)
-        thomL_img, _ = load_thomas(dataproc_root, sub, ses)
-        thom = thomL_img.get_fdata()
-        thom_inds = np.unique(thom)
-        thom_inds = thom_inds[thom_inds > 0]
+        # thomL_img, _ = load_thomas(dataproc_root, sub, ses)
+        # thom = thomL_img.get_fdata()
+        # thom_inds = np.unique(thom)
+        # thom_inds = thom_inds[thom_inds > 0]
         dists = {}
         # for ind in thom_inds:
         #     struct_pts = thom.copy()
