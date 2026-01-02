@@ -125,6 +125,7 @@ for i, row in tqdm(subject_sessions.iterrows(), total=len(subject_sessions)):
 # %%
 
 df = pd.DataFrame(all_dists, index=all_subjects)
+df.index.name="subid"
 df.to_csv(data_file_dir / save_name)
 
 # %%
