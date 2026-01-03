@@ -19,6 +19,7 @@ import numpy as np
 import statsmodels.api as sm
 import statsmodels.formula.api as smf
 from collections.abc import Iterable
+from typing import Callable
 import utils
 import pingouin as pg
 from scipy import stats
@@ -363,6 +364,7 @@ def run_regressions(
 
     if covariates is None:
         covariates = []
+
     if isinstance(predictors, set):
         predictors = list(predictors)
 
@@ -381,7 +383,8 @@ def run_regressions(
     for outcome in outcomes:
         rows = []
         for pred in predictors:
-            exog = [pred] + covariates
+            covars = [covar if not isinstance(covar, Callable) else covar(**locals()) for covar in covariates]
+            exog = [pred] + covars
             
             if to_check_vif:
                 message, vif = check_vif(model_data, exog+[outcome])
