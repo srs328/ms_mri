@@ -24,7 +24,7 @@ pioneer_bids_root = drive_root / "3Tpioneer_bids"
 dataroot = drive_root / "srs-9/thalamus_project/data"
 
 datafile_dir = Path("/home/srs-9/Projects/ms_mri/analysis/thalamus/data0")
-with open(datafile_dir / "lst_ai-sessions.csv", 'r') as f:
+with open(datafile_dir / "subject-sessions.csv", 'r') as f:
     reader = csv.reader(f)
     header = next(reader)  # Skip header
     subject_sessions = list(reader)
@@ -34,7 +34,11 @@ for subid, sesid in tqdm(subject_sessions):
     pioneer_subject_root = pioneer_bids_root / f"sub-ms{subid}" / f"ses-{sesid}"
     subject_root = dataroot / f"sub{subid}-{sesid}"
     src = pioneer_subject_root / "lst-ai"
+    
     dst = subject_root / "lst-ai"
     if not (dst / "lesion_stats.csv").exists():
+        if not src.exists():
+            logger.warning(subid, sesid)
+            continue
         logger.info(f"Copying {src} to {dst}")
         shutil.copytree(src, dst, dirs_exist_ok=True)
