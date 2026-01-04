@@ -34,7 +34,7 @@ subjects_to_process = []
 subjects_processed = []
 # for subid in subject_sessions:
 with open("copy_commands.ps1", 'w') as f:
-    for subid in subjects:
+    for subid in subject_sessions:
         sessions = sorted(subject_sessions[subid])
         sesid = sessions[0]
 
@@ -51,7 +51,8 @@ with open("copy_commands.ps1", 'w') as f:
             subjects_to_process.append(subid)
             src = src_dataroot / f"sub-ms{subid}" / f"ses-{sesid}" / "lst-ai"
             dst = dst_dataroot / f"sub-ms{subid}" / f"ses-{sesid}" / "lst-ai"
-            f.write(f'cp -r {str(src)} {str(dst)}\n')
+            if not dst.exists():
+                f.write(f'cp -r {str(src)} {str(dst)}\n')
 
     print("Number of subjects to process: ", len(subjects_to_process))
     print("Number of subjects processed: ", len(subjects_processed))

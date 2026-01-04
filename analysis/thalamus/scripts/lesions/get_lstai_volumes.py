@@ -27,7 +27,7 @@ pioneer_bids_root = Path("/home/srs-9/Data/ls-ai/3Tpioneer_bids")
 dataroot = drive_root / "srs-9/thalamus_project/data"
 
 datafile_dir = Path("/home/srs-9/Projects/ms_mri/analysis/thalamus/data0")
-with open(datafile_dir / "lst_ai-sessions.csv", 'r') as f:
+with open(datafile_dir / "subject-sessions.csv", 'r') as f:
     reader = csv.reader(f)
     header = next(reader)  # Skip header
     subject_sessions = list(reader)
@@ -35,14 +35,18 @@ with open(datafile_dir / "lst_ai-sessions.csv", 'r') as f:
 # %%
 lesion_data = defaultdict(list)
 for subid, sesid in tqdm(subject_sessions):
-    lesion_data['subid'].append(int(subid))
-    subject_root = pioneer_bids_root / f"sub-ms{subid}" / f"ses-{sesid}"
-    # subject_root = dataroot / f"sub{subid}-{sesid}"
+    # subject_root = dataroot / f"sub-ms{subid}" / f"ses-{sesid}"
+    subject_root = dataroot / f"sub{subid}-{sesid}"
 
     lst_ai_path = subject_root / "lst-ai"
-    lesion_stats = pd.read_csv(lst_ai_path / "lesion_stats.csv")
+    try:
+        lesion_stats = pd.read_csv(lst_ai_path / "lesion_stats.csv")
+    except FileNotFoundError:
+        print(subid)
+        continue
     lesion_data['total_count'].append(int(lesion_stats.Num_Lesions[0]))
     lesion_data['total_volume'].append(lesion_stats.Lesion_Volume[0])
+    lesion_data['subid'].append(int(subid))
     
     annotated_lesion_stats = pd.read_csv(lst_ai_path / "annotated_lesion_stats.csv", index_col="Region")
     for region, row in annotated_lesion_stats.iterrows():
