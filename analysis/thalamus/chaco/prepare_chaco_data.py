@@ -64,7 +64,9 @@ def main():
     df = pd.read_csv(csv_path)
     skipped = []
 
-    for _, row in df.iterrows():
+    for i, row in df.iterrows():
+        if i>1:
+            return
         sub = str(row["sub"]).zfill(4)
         ses = str(row["ses"])
         scan_id  = f"sub{sub}-{ses}"
