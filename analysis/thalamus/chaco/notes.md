@@ -48,3 +48,5 @@ And for the lesion mask:
 ```bash
 fslmaths /path/to/space-flair_desc-annotated_seg-lst_mni.nii.gz -bin /path/to/lesion_mask_mni.nii.gz
 ```
+
+Write this as a python script.
