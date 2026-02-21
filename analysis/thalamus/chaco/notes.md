@@ -1,5 +1,7 @@
 # Notes
 
+## Registering data to source
+
 In each data directory, niftis will be in subject specific folders named with the convention: `subXXXX-YYYYMMDD` where XXXX refers to the 4 digit subjectID (subid or sub), and YYYYMMDD is the session ID (sesid or ses). I'll refer to the whole string `subXXXX-YYYYMMDD` as scan ID or scan henceforth. The subid and sesid for scan ID can be loaded from the csv file at `/home/srs-9/Projects/ms_mri/analysis/thalamus/data0/subject-sessions.csv`, which is organized into two columns, first one is `sub`, second one is `ses`.
 
 The first data folder is located at `/mnt/h/srs-9/thalamus_project/data`. In Python code I always assign this path to the variable `dataroot`, and I like it to be a pathlib Path object. So to be clear, that dataroot folder will have a subfolder for every scan ID with the name `subXXXX-YYYYMMDD`. In general, things inside dataroot should not be modified except certain circumstances I'll mention below; essentially, treat it as read only unless a file we expect to be there isn't, then it will be created (as described further below). The files of interest within each scan's folder in dataroot are:
@@ -50,3 +52,15 @@ fslmaths /path/to/space-flair_desc-annotated_seg-lst_mni.nii.gz -bin /path/to/le
 ```
 
 Write this as a python script.
+
+## Running Chaco
+
+```bash
+python nemo_lesion_to_chaco.py \
+    --lesion $lesion \
+    --outputbase $outputbase \
+    --parcelvol $parcelvol \
+    --resolution $resolution \
+    --pairwise \
+    --s3nemoroot 's3://kuceyeski-wcm-web'
+```
