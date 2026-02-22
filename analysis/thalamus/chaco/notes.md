@@ -1,6 +1,5 @@
 # Notes
 
-
 | Region   | Label      | Region of Interest                  |
 | :------- | :--------- | :---------------------------------- |
 | 1 | 2-AV       | Antero-Ventral Nucleus              |
@@ -13,3 +12,53 @@
 | 8 | 10-MGN     | Medial Geniculate Nucleus           |
 | 9 | 11-CM      | Centromedian Nucleus                |
 | 10 | 12-MD-Pf   | Mediodorsal Nucleus                 |
+
+---
+
+```bash
+scan_dir=/mnt/h/srs-9/chaco/sub1001-20170215
+nemo_base=$scan_dir/lesion_mask_mni_nemo_output
+mni=/mnt/h/srs-9/chaco/MNI152_T1_1mm_brain.nii
+volumefile=$nemo_base/lesion_mask_mni_nemo_output_sdstream_chacovol_res1mm_mean.nii.gz
+parcelfile=$scan_dir/thomas_thalamus.nii.gz
+
+python nemo_save_average_glassbrain.py \
+    --out $nemo_base/test.png \
+    --parcellation $parcelfile \
+    --binarize \
+    $volumefile
+```
+
+```bash
+--out /mnt/h/srs-9/chaco/sub1001-20170215/lesion_mask_mni_nemo_output/test.png --parcellation /mnt/h/srs-9/chaco/sub1001-20170215/thomas_thalamus.nii.gz /mnt/h/srs-9/chaco/sub1001-20170215/lesion_mask_mni_nemo_output/lesion_mask_mni_nemo_output_sdstream_chacovol_res1mm_mean.nii.gz
+
+```
+
+```bash
+scan_dir=/mnt/h/srs-9/chaco/sub1001-20170215
+nemo_base=$scan_dir/lesion_mask_mni_nemo_output_sdstreamANDifod2act_20260221_052753046
+mni=/mnt/h/srs-9/chaco/MNI152_T1_1mm_brain.nii
+volumefile=$nemo_base/lesion_mask_mni_nemo_output_ifod2act_chacovol_thomas_mean.pkl
+parcelfile=$scan_dir/thomas_thalamus.nii.gz
+
+python nemo_save_average_glassbrain.py \
+    --out $nemo_base/test.png \
+    --parcellation $parcelfile \
+    $volumefile
+```
+
+
+```bash
+scan_dir=/mnt/h/srs-9/chaco
+nemo_base=$scan_dir/lesion_mask_mni_nemo_output_allsubs
+mni=/mnt/h/srs-9/chaco/MNI152_T1_1mm_brain.nii.gz
+chacofile=$nemo_base/lesion_mask_mni_nemo_output_ifod2act_chacovol_res1mm_allref.pkl
+parcelfile=$scan_dir/sub1001-20170215/thomas_thalamus.nii.gz
+
+python nemo_parcellate_results.py \
+    --input  $chacofile \
+    --output $nemo_base/test.npz \
+    --parcelvol $parcelfile \
+    --refvol $mni \
+    --asum /mnt/h/chaco_batches/localnemo/nemo_Asum_endpoints.npz 
+```
