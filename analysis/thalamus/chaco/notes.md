@@ -15,6 +15,19 @@
 
 ---
 
+## ChaCo Batches
+
+- `lesion_mask_mni_nemo_output_sdstreamANDifod2act_20260222_184222817`
+  - Both sdstream and ifod2
+  - All ref subs
+  - Did not include tracts that start and end at same ROI
+- `lesion_mask_mni_nemo_output_ifod2act_20260222_203419351`
+  - Justifod2
+  - All ref subs
+  - Included tracts that start and end at same ROI
+
+## Commands
+
 ```bash
 scan_dir=/mnt/h/srs-9/chaco/sub1001-20170215
 nemo_base=$scan_dir/lesion_mask_mni_nemo_output
