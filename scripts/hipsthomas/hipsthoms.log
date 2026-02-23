@@ -1,0 +1,21 @@
+2120
+Created /mnt/h/srs-9/hipsthomas/sub2120-20180917 and copied T1
+bash /home/srs-9/Projects/ms_mri/scripts/hipsthomas/hipsthomas.sh 2120 /mnt/h/srs-9/hipsthomas/sub2120-20180917
+2001
+Created /mnt/h/srs-9/hipsthomas/sub2001-20200512 and copied T1
+bash /home/srs-9/Projects/ms_mri/scripts/hipsthomas/hipsthomas.sh 2001 /mnt/h/srs-9/hipsthomas/sub2001-20200512
+1394
+Created /mnt/h/srs-9/hipsthomas/sub1394-20200708 and copied T1
+bash /home/srs-9/Projects/ms_mri/scripts/hipsthomas/hipsthomas.sh 1394 /mnt/h/srs-9/hipsthomas/sub1394-20200708
+2120
+bash /home/srs-9/Projects/ms_mri/scripts/hipsthomas/hipsthomas.sh /mnt/h/srs-9/hipsthomas/sub2120-20180917
+2001
+bash /home/srs-9/Projects/ms_mri/scripts/hipsthomas/hipsthomas.sh /mnt/h/srs-9/hipsthomas/sub2001-20200512
+1394
+bash /home/srs-9/Projects/ms_mri/scripts/hipsthomas/hipsthomas.sh /mnt/h/srs-9/hipsthomas/sub1394-20200708
+1364
+Created /mnt/h/srs-9/hipsthomas/sub1364-20180618 and copied T1
+bash /home/srs-9/Projects/ms_mri/scripts/hipsthomas/hipsthomas.sh /mnt/h/srs-9/hipsthomas/sub1364-20180618
+2106
+Created /mnt/h/srs-9/hipsthomas/sub2106-20170813 and copied T1
+bash /home/srs-9/Projects/ms_mri/scripts/hipsthomas/hipsthomas.sh /mnt/h/srs-9/hipsthomas/sub2106-20170813

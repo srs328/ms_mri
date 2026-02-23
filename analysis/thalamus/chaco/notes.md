@@ -88,10 +88,37 @@ python nemo_parcellate_results.py \
 
 
 run with regular lst
-- 1245, 1379, 2106, 1364, 1394
+- 1245, 1379
 
 run lst-ai
 - 2120
 
 should be ready to add to batch
-- 1357, 1112, 
+- 1357, 1112, 1529
+
+- 1529 the thomas segmentation was screwed up
+- 1112 nonlinear registration was screwed up
+- 1357 the nonlinear registration was screwed up
+
+
+- sub2001 does not have a 2016 flair. The old t2lv was from the 2020 scan. the edss date is 2020
+- sub1394: does not have 2019 flair. old t2lv from jul 2020 session. EDSS from feb 2020
+- sub1364: no 2017 flair. old t2lv from 20180618. No EDSS. Need to check when I pulled SDMT from
+- sub2106: no flair 20170205, but has flair 20170813. EDSS from 20171214
+- sub2120: flair from 20170920 is screwed up; has flair from 20180917; EDSS from 20180109
+
+
+To do:
+
+- [x] 1112: rerun prepare chaco data
+- [x] 1357: rerun prepare_chaco_data
+- [ ] 1529: fix thomas seg and rerun prepare chaco data
+- [ ] 2120: switch to 20180917 scan
+- [ ] 2001: switch to ses-20200512 scan: run hips-thomas, CP seg, already have lst-ai
+- [ ] 1394: switch to ses-20200708
+- [ ] 1364: switch to ses-20180618
+- [ ] 2106: switch to ses-20170813
+
+Other documentation to do:
+
+- [ ] 1196: add my notes about this to a central location too
