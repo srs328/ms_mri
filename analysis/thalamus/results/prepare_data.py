@@ -39,6 +39,15 @@ lst_ai = pd.read_csv(
     "/home/srs-9/Projects/ms_mri/analysis/thalamus/data0/lst_ai_volumes.csv",
     index_col="subid",
 )
+chaco_ratios = pd.read_csv(
+    "/home/srs-9/Projects/ms_mri/analysis/thalamus/data0/chaco1_roi_means.csv",
+    index_col="subid"
+)
+chaco_ratios.rename(
+    columns={item: f"{item}_chaco" for item in chaco_ratios.columns},
+    inplace=True
+)
+
 # prl_volumes = pd.read_csv(
 #     "/home/srs-9/Projects/ms_mri/analysis/thalamus/data0/prl_volumes.csv",
 #     index_col="subid"

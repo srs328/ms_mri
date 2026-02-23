@@ -33,6 +33,8 @@
   - lesion_batch1
   - All ref subs for 1mm res only (not for thomas)
   - Thomas without pairwise option selected
+- chaco1
+  - Default options no parcellation
 
 ## Commands
 

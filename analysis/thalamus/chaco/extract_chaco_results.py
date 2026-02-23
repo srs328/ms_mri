@@ -13,7 +13,7 @@ from pathlib import Path
 
 # ── Paths ──────────────────────────────────────────────────────────────────────
 chacoroot   = Path("/mnt/h/srs-9/chaco")
-batched_dir = chacoroot / "batched_results"
+batched_dir = chacoroot / "chaco1_batched_results"
 
 # ── Logging ────────────────────────────────────────────────────────────────────
 logging.basicConfig(
