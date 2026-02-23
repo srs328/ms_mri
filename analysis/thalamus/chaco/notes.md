@@ -85,3 +85,13 @@ python nemo_parcellate_results.py \
     --refvol $mni \
     --asum /mnt/h/chaco_batches/localnemo/nemo_Asum_endpoints.npz 
 ```
+
+
+run with regular lst
+- 1245, 1379, 2106, 1364, 1394
+
+run lst-ai
+- 2120
+
+should be ready to add to batch
+- 1357, 1112, 

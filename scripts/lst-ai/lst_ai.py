@@ -40,6 +40,7 @@ with open("/home/srs-9/Projects/ms_mri/scripts/lst-ai/subjects_to_process4.txt",
 lstai_script = "/home/srs-9/Projects/ms_mri/scripts/lst-ai/lst_ai.sh"
 
 failed_subs = []
+subjects = [2120]
 # for subid in subject_sessions:
 for subid in tqdm(subjects, total=len(subjects), desc="Processing subjects", unit="subject"):
     logger.info(f"Starting subject {subid}")

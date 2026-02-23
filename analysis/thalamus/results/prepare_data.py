@@ -96,7 +96,7 @@ df["SDMT"] = pd.to_numeric(df["SDMT"], errors="coerce")
 
 #! Two subjects didn't have a flair so I couldnt run lst-ai
 #!  for now, I will hard code the values from lst that was already run
-no_flair_subjeccts = [1245, 1379]
+no_flair_subjeccts = [1245, 1379, 2106, 1364, 1394]
 for subid in no_flair_subjeccts:
     if pd.isna(df.loc[subid, "T2LV"]):
         logger.info(f"Substituting missing value for {subid}'s T2LV with the old T2LV")
