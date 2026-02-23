@@ -47,6 +47,8 @@ chaco_ratios.rename(
     columns={item: f"{item}_chaco" for item in chaco_ratios.columns},
     inplace=True
 )
+for col in chaco_ratios.columns:
+    chaco_ratios[f"{col}_curoot"] = chaco_ratios[col]**(1/3)
 
 # prl_volumes = pd.read_csv(
 #     "/home/srs-9/Projects/ms_mri/analysis/thalamus/data0/prl_volumes.csv",
@@ -88,6 +90,7 @@ df = df.join(
         lst_ai,
         # prl_volumes,
         sdmt["SDMT"],
+        chaco_ratios,
     ]
 )
 # some values in SDMT are strings like "need to break glass, skip"
@@ -196,11 +199,11 @@ transformations = {
     "periCSF": "log",
     "thirdV_width": "log",
     "interCSF": "log",
-    "T2LV": "log1p",
-    "periV_T2LV": "log1p",
-    "juxcort_T2LV": "log1p",
-    "subcort_T2LV": "log1p",
-    "infraT_T2LV": "log1p",
+    "T2LV": "curoot",
+    "periV_T2LV": "curoot",
+    "juxcort_T2LV": "curoot",
+    "subcort_T2LV": "curoot",
+    "infraT_T2LV": "curoot",
     "t2lv": "log",
     "PRL": "log1p",
     "CCR": "log",
@@ -226,5 +229,5 @@ transformations = {
 data = utils.transform_variables(data, transformations)
 # dataT = utils.transform_variables(data, transformations, rename=False)
 
-data.to_csv(Path(__file__).parent / "data.csv")
+data.to_csv(Path(__file__).parent / "data_wchaco.csv")
 # dataT.to_csv(Path(__file__).parent / "data_transformed.csv")

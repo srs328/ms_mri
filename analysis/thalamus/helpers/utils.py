@@ -304,7 +304,7 @@ transforms = {
     "log10": np.log10,
     "log1p": np.log1p,
     "sqrt": np.sqrt,
-    "3root": lambda x: x**(1/3),
+    "curoot": lambda x: x**(1/3),
     "reflect_log": reflect_log,
     "square": np.square,
     "boxcox": stats.boxcox,
