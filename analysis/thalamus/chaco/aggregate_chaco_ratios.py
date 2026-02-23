@@ -26,6 +26,7 @@ subject_data = pd.read_csv(
 )
 ms_subs = set(subject_data.index[subject_data["dz_type2"] == "MS"])
 
+# %%
 roi_means = []
 for sub in tqdm(ms_subs, total=len(ms_subs)):
     ses = subject_sessions.loc[sub, "ses"]
