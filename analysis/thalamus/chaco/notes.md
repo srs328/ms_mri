@@ -25,6 +25,14 @@
   - Justifod2
   - All ref subs
   - Included tracts that start and end at same ROI
+- `lesion_mask_mni_nemo_output_ifod2act_20260223_013527837`
+  - Just ifod2
+  - All ref subs for just 1mm res (not for thomas)
+  - Thomas without pairwise 
+- `lesion_batch_001_nemo_output_ifod2act_20260222_234401174.zip`
+  - lesion_batch1
+  - All ref subs for 1mm res only (not for thomas)
+  - Thomas without pairwise option selected
 
 ## Commands
 

@@ -171,7 +171,7 @@ def hausdorff_dist(seg1, seg2, seg1_val=1, seg2_val=1):
     return hd95(seg1_fix, seg2_fix)
 
 
-def compute_volume(path, index_mask_file=None, terminal_output="none"):
+def compute_volume(path, index_mask_file=None, terminal_output="none", op_string="-V"):
     # Create an instance of the ImageStats interface
     stats = fsl.ImageStats()
 
@@ -181,7 +181,7 @@ def compute_volume(path, index_mask_file=None, terminal_output="none"):
         stats.inputs.index_mask_file = index_mask_file
 
     # Define the operations you want to perform
-    stats.inputs.op_string = "-V"  # Calculate mean and volume
+    stats.inputs.op_string = op_string  # Calculate mean and volume
 
     # stats.terminal_output = terminal_output
 

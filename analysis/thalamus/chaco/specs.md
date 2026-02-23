@@ -64,3 +64,13 @@ python nemo_lesion_to_chaco.py \
     --pairwise \
     --s3nemoroot 's3://kuceyeski-wcm-web'
 ```
+
+Alright, i already have the basic voxelwise chacovols for almost all the subjects in batched zip files. I'll need your help to write a script to extract the files I want from the zips into the appropriate folders.
+
+One change from the specs I provided you before. I want `/mnt/h/srs-9/chaco` to be called `chacoroot` instead of `work_dir` going forward.
+
+The zipped batches are located in `{chacoroot}/batched_results`​. The zip files have names like `lesion_batch_001_nemo_output_sdstreamANDifod2act_20260221_235006483.zip`​. I dont want to unzip their entire contents, just copy what I need. The files I want are anything that have "ifod2act" in the name. An example of one file is `sub1030-20200304-lesion_mask_mni_nemo_output_ifod2act_chacovol_res1mm_mean.nii.gz`, but I also want the pngs, so just grab anything that has "ifod2act" in the name. Every file in the zip is top level, and all the ifod2act files start with the scanID.
+
+I want those files copied into a subfolder called "chaco1" within the respective scanID's folder (e.g. `{chacoroot}/sub1030-20200304/chaco1`). The chaco1 subfolder does not yet exist. Also, strip the `scanID-` prefix from all those files being copied. Also copy the config and log for the batch into each subject's chaco1 subfolder. The config file is the only json inside the zip. The log file's name is like `*_log.txt`. Don't change the names of those files. 
+
+Since I'm still waiting on a couple of batches to finish, make sure the script wont recopy and overwrite files if they already exist.
