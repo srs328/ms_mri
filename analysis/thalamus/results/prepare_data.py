@@ -199,11 +199,11 @@ transformations = {
     "periCSF": "log",
     "thirdV_width": "log",
     "interCSF": "log",
-    "T2LV": "curoot",
-    "periV_T2LV": "curoot",
-    "juxcort_T2LV": "curoot",
-    "subcort_T2LV": "curoot",
-    "infraT_T2LV": "curoot",
+    "T2LV": "log1p",
+    "periV_T2LV": "log1p",
+    "juxcort_T2LV": "log1p",
+    "subcort_T2LV": "log1p",
+    "infraT_T2LV": "log1p",
     "t2lv": "log",
     "PRL": "log1p",
     "CCR": "log",
@@ -228,6 +228,14 @@ transformations = {
 }
 data = utils.transform_variables(data, transformations)
 # dataT = utils.transform_variables(data, transformations, rename=False)
+transformations = {
+    "T2LV": "curoot",
+    "periV_T2LV": "curoot",
+    "juxcort_T2LV": "curoot",
+    "subcort_T2LV": "curoot",
+    "infraT_T2LV": "curoot",
+}
+data = utils.transform_variables(data, transformations)
 
 data.to_csv(Path(__file__).parent / "data_wchaco.csv")
 # dataT.to_csv(Path(__file__).parent / "data_transformed.csv")
