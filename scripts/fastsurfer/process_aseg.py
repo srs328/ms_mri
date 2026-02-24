@@ -6,6 +6,7 @@ import subprocess
 from tqdm import tqdm
 from loguru import logger
 import sys
+import pandas as pd
 
 curr_file = os.path.abspath(__file__)
 curr_dir = os.path.dirname(curr_file)
@@ -22,16 +23,23 @@ dataroot = Path("/mnt/h/srs-9/thalamus_project/data")
 with open("/home/srs-9/Projects/ms_mri/data/subject-sessions-longit.json", 'r') as f:
     subject_sessions = json.load(f)
 
+subject_sessions = pd.read_csv(
+    "/home/srs-9/Projects/ms_mri/analysis/thalamus/data0/subject-sessions-updated.csv",
+    index_col="sub"
+)
+
 # subjects = [1326, 2195, 1076, 1042, 1508, 1071, 1241, 1003, 1301, 1001, 1107, 1125, 1161, 1198, 1218, 1527, 1376, 2075, 1023, 1038, 1098]
 subjects = [2195, 1076, 1042, 1508, 1071, 1241, 1003, 1301, 1001, 1107, 1125, 1161, 1198, 1218, 1527, 1376, 2075, 1023, 1038, 1098]
 subjects = [str(subid) for subid in subjects]
 
 fastsurfer_script = "/home/srs-9/Projects/ms_mri/scripts/fastsurfer/processAseg.sh"
+subjects = [2120, 2001,1394,1364,2106]
 
-for subid in tqdm(subject_sessions, total=len(subject_sessions)):
-    sessions = sorted(subject_sessions[subid])
-    sesid = sessions[0]
-
+# for subid in tqdm(subject_sessions, total=len(subject_sessions)):
+for subid in subjects:
+    # sessions = sorted(subject_sessions[subid])
+    # sesid = sessions[0]
+    sesid = subject_sessions.loc[subid, 'ses']
     fastsurfer_folder = (work_home / f"sub{subid}-{sesid}" / str(subid))
     save_folder = dataroot / f"sub{subid}-{sesid}"
     cmd = ["bash", fastsurfer_script, str(fastsurfer_folder), str(save_folder)]

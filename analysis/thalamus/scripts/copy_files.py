@@ -6,16 +6,21 @@ import csv
 from tqdm import tqdm
 
 # %%
-hipsthomas_root = Path("/media/smbshare/srs-9/hipsthomas")
-dataroot = Path("/media/smbshare/srs-9/thalamus_project/data")
+hipsthomas_root = Path("/mnt/h/srs-9/hipsthomas")
+dataroot = Path("/mnt/h/srs-9/thalamus_project/data")
 
-with open("/home/srs-9/Projects/ms_mri/analysis/thalamus/data0/subject-sessions.csv", 'r') as f:
+with open("/home/srs-9/Projects/ms_mri/analysis/thalamus/data0/subject-sessions-updated.csv", 'r') as f:
     reader = csv.reader(f)
     subject_sessions = [line for line in reader]
+subject_sessions = subject_sessions[1:]
 
+subjects = [2120, 2001,1394,1364,2106]
 
 # %%
 for sub, ses in tqdm(subject_sessions):
+    print(sub)
+    if int(sub) not in subjects:
+        continue
     thomas_subdir = hipsthomas_root / f"sub{sub}-{ses}"
     data_subdir = dataroot / f"sub{sub}-{ses}"
 

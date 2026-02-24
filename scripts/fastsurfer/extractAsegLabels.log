@@ -10549,3 +10549,193 @@ writing output to aseg-right_choroid_tmp.nii.gz.
   There are 585 connected components.
   Largest component has 710 pixels.
 
+2026-02-23 17:51:19.481 | INFO     | __main__:<module>:41 - bash /home/srs-9/Projects/ms_mri/scripts/fastsurfer/extractAsegLabels.sh /mnt/h/srs-9/thalamus_project/data/sub2120-20180917
+2026-02-23 17:51:24.643 | DEBUG    | __main__:<module>:47 - RUN: producing aseg-right_ventricle.nii.gz
+reading volume from aseg.auto_noCCseg.in_subject.nii.gz...
+extracting label 43 (Right_Lateral_Ventricle)
+writing output to aseg-right_ventricle_tmp.nii.gz.
+  There are 3 connected components.
+  Largest component has 16924 pixels.
+OK: produced aseg-right_ventricle.nii.gz
+RUN: producing aseg-left_ventricle.nii.gz
+reading volume from aseg.auto_noCCseg.in_subject.nii.gz...
+extracting label 4 (Left_Lateral_Ventricle)
+writing output to aseg-left_ventricle_tmp.nii.gz.
+  There are 2 connected components.
+  Largest component has 17620 pixels.
+OK: produced aseg-left_ventricle.nii.gz
+RUN: producing aseg-third_ventricle.nii.gz
+reading volume from aseg.auto_noCCseg.in_subject.nii.gz...
+extracting label 14 (Third_Ventricle)
+writing output to aseg-third_ventricle_tmp.nii.gz.
+  There are 41 connected components.
+  Largest component has 1724 pixels.
+OK: produced aseg-third_ventricle.nii.gz
+SKIP: aseg-third_ventricle.nii.gz exists
+RUN: producing aseg-fourth_ventricle.nii.gz
+reading volume from aseg.auto_noCCseg.in_subject.nii.gz...
+extracting label 15 (Fourth_Ventricle)
+writing output to aseg-fourth_ventricle_tmp.nii.gz.
+  There are 151 connected components.
+  Largest component has 2926 pixels.
+OK: produced aseg-fourth_ventricle.nii.gz
+RUN: producing aseg-CSF.nii.gz
+reading volume from aseg.auto_noCCseg.in_subject.nii.gz...
+extracting label 24 (CSF)
+writing output to aseg-CSF_tmp.nii.gz.
+  There are 1 connected components.
+  Largest component has 1918 pixels.
+OK: produced aseg-CSF.nii.gz
+
+2026-02-23 17:51:24.643 | INFO     | __main__:<module>:41 - bash /home/srs-9/Projects/ms_mri/scripts/fastsurfer/extractAsegLabels.sh /mnt/h/srs-9/thalamus_project/data/sub2001-20200512
+2026-02-23 17:51:29.380 | DEBUG    | __main__:<module>:47 - RUN: producing aseg-right_ventricle.nii.gz
+reading volume from aseg.auto_noCCseg.in_subject.nii.gz...
+extracting label 43 (Right_Lateral_Ventricle)
+writing output to aseg-right_ventricle_tmp.nii.gz.
+  There are 2 connected components.
+  Largest component has 4878 pixels.
+OK: produced aseg-right_ventricle.nii.gz
+RUN: producing aseg-left_ventricle.nii.gz
+reading volume from aseg.auto_noCCseg.in_subject.nii.gz...
+extracting label 4 (Left_Lateral_Ventricle)
+writing output to aseg-left_ventricle_tmp.nii.gz.
+  There are 4 connected components.
+  Largest component has 6618 pixels.
+OK: produced aseg-left_ventricle.nii.gz
+RUN: producing aseg-third_ventricle.nii.gz
+reading volume from aseg.auto_noCCseg.in_subject.nii.gz...
+extracting label 14 (Third_Ventricle)
+writing output to aseg-third_ventricle_tmp.nii.gz.
+  There are 35 connected components.
+  Largest component has 1098 pixels.
+OK: produced aseg-third_ventricle.nii.gz
+SKIP: aseg-third_ventricle.nii.gz exists
+RUN: producing aseg-fourth_ventricle.nii.gz
+reading volume from aseg.auto_noCCseg.in_subject.nii.gz...
+extracting label 15 (Fourth_Ventricle)
+writing output to aseg-fourth_ventricle_tmp.nii.gz.
+  There are 126 connected components.
+  Largest component has 3002 pixels.
+OK: produced aseg-fourth_ventricle.nii.gz
+RUN: producing aseg-CSF.nii.gz
+reading volume from aseg.auto_noCCseg.in_subject.nii.gz...
+extracting label 24 (CSF)
+writing output to aseg-CSF_tmp.nii.gz.
+  There are 2 connected components.
+  Largest component has 1600 pixels.
+OK: produced aseg-CSF.nii.gz
+
+2026-02-23 17:51:29.380 | INFO     | __main__:<module>:41 - bash /home/srs-9/Projects/ms_mri/scripts/fastsurfer/extractAsegLabels.sh /mnt/h/srs-9/thalamus_project/data/sub1394-20200708
+2026-02-23 17:51:34.170 | DEBUG    | __main__:<module>:47 - RUN: producing aseg-right_ventricle.nii.gz
+reading volume from aseg.auto_noCCseg.in_subject.nii.gz...
+extracting label 43 (Right_Lateral_Ventricle)
+writing output to aseg-right_ventricle_tmp.nii.gz.
+  There are 3 connected components.
+  Largest component has 4506 pixels.
+OK: produced aseg-right_ventricle.nii.gz
+RUN: producing aseg-left_ventricle.nii.gz
+reading volume from aseg.auto_noCCseg.in_subject.nii.gz...
+extracting label 4 (Left_Lateral_Ventricle)
+writing output to aseg-left_ventricle_tmp.nii.gz.
+  There are 2 connected components.
+  Largest component has 6185 pixels.
+OK: produced aseg-left_ventricle.nii.gz
+RUN: producing aseg-third_ventricle.nii.gz
+reading volume from aseg.auto_noCCseg.in_subject.nii.gz...
+extracting label 14 (Third_Ventricle)
+writing output to aseg-third_ventricle_tmp.nii.gz.
+  There are 34 connected components.
+  Largest component has 1035 pixels.
+OK: produced aseg-third_ventricle.nii.gz
+SKIP: aseg-third_ventricle.nii.gz exists
+RUN: producing aseg-fourth_ventricle.nii.gz
+reading volume from aseg.auto_noCCseg.in_subject.nii.gz...
+extracting label 15 (Fourth_Ventricle)
+writing output to aseg-fourth_ventricle_tmp.nii.gz.
+  There are 110 connected components.
+  Largest component has 2336 pixels.
+OK: produced aseg-fourth_ventricle.nii.gz
+RUN: producing aseg-CSF.nii.gz
+reading volume from aseg.auto_noCCseg.in_subject.nii.gz...
+extracting label 24 (CSF)
+writing output to aseg-CSF_tmp.nii.gz.
+  There are 3 connected components.
+  Largest component has 1800 pixels.
+OK: produced aseg-CSF.nii.gz
+
+2026-02-23 17:51:34.170 | INFO     | __main__:<module>:41 - bash /home/srs-9/Projects/ms_mri/scripts/fastsurfer/extractAsegLabels.sh /mnt/h/srs-9/thalamus_project/data/sub1364-20180618
+2026-02-23 17:51:38.625 | DEBUG    | __main__:<module>:47 - RUN: producing aseg-right_ventricle.nii.gz
+reading volume from aseg.auto_noCCseg.in_subject.nii.gz...
+extracting label 43 (Right_Lateral_Ventricle)
+writing output to aseg-right_ventricle_tmp.nii.gz.
+  There are 1100 connected components.
+  Largest component has 3101 pixels.
+OK: produced aseg-right_ventricle.nii.gz
+RUN: producing aseg-left_ventricle.nii.gz
+reading volume from aseg.auto_noCCseg.in_subject.nii.gz...
+extracting label 4 (Left_Lateral_Ventricle)
+writing output to aseg-left_ventricle_tmp.nii.gz.
+  There are 3942 connected components.
+  Largest component has 4867 pixels.
+OK: produced aseg-left_ventricle.nii.gz
+RUN: producing aseg-third_ventricle.nii.gz
+reading volume from aseg.auto_noCCseg.in_subject.nii.gz...
+extracting label 14 (Third_Ventricle)
+writing output to aseg-third_ventricle_tmp.nii.gz.
+  There are 2637 connected components.
+  Largest component has 697 pixels.
+OK: produced aseg-third_ventricle.nii.gz
+SKIP: aseg-third_ventricle.nii.gz exists
+RUN: producing aseg-fourth_ventricle.nii.gz
+reading volume from aseg.auto_noCCseg.in_subject.nii.gz...
+extracting label 15 (Fourth_Ventricle)
+writing output to aseg-fourth_ventricle_tmp.nii.gz.
+  There are 2515 connected components.
+  Largest component has 2028 pixels.
+OK: produced aseg-fourth_ventricle.nii.gz
+RUN: producing aseg-CSF.nii.gz
+reading volume from aseg.auto_noCCseg.in_subject.nii.gz...
+extracting label 24 (CSF)
+writing output to aseg-CSF_tmp.nii.gz.
+  There are 2261 connected components.
+  Largest component has 1094 pixels.
+OK: produced aseg-CSF.nii.gz
+
+2026-02-23 17:51:38.625 | INFO     | __main__:<module>:41 - bash /home/srs-9/Projects/ms_mri/scripts/fastsurfer/extractAsegLabels.sh /mnt/h/srs-9/thalamus_project/data/sub2106-20170813
+2026-02-23 17:51:43.047 | DEBUG    | __main__:<module>:47 - RUN: producing aseg-right_ventricle.nii.gz
+reading volume from aseg.auto_noCCseg.in_subject.nii.gz...
+extracting label 43 (Right_Lateral_Ventricle)
+writing output to aseg-right_ventricle_tmp.nii.gz.
+  There are 1767 connected components.
+  Largest component has 15426 pixels.
+OK: produced aseg-right_ventricle.nii.gz
+RUN: producing aseg-left_ventricle.nii.gz
+reading volume from aseg.auto_noCCseg.in_subject.nii.gz...
+extracting label 4 (Left_Lateral_Ventricle)
+writing output to aseg-left_ventricle_tmp.nii.gz.
+  There are 7219 connected components.
+  Largest component has 18472 pixels.
+OK: produced aseg-left_ventricle.nii.gz
+RUN: producing aseg-third_ventricle.nii.gz
+reading volume from aseg.auto_noCCseg.in_subject.nii.gz...
+extracting label 14 (Third_Ventricle)
+writing output to aseg-third_ventricle_tmp.nii.gz.
+  There are 4566 connected components.
+  Largest component has 1756 pixels.
+OK: produced aseg-third_ventricle.nii.gz
+SKIP: aseg-third_ventricle.nii.gz exists
+RUN: producing aseg-fourth_ventricle.nii.gz
+reading volume from aseg.auto_noCCseg.in_subject.nii.gz...
+extracting label 15 (Fourth_Ventricle)
+writing output to aseg-fourth_ventricle_tmp.nii.gz.
+  There are 4360 connected components.
+  Largest component has 4394 pixels.
+OK: produced aseg-fourth_ventricle.nii.gz
+RUN: producing aseg-CSF.nii.gz
+reading volume from aseg.auto_noCCseg.in_subject.nii.gz...
+extracting label 24 (CSF)
+writing output to aseg-CSF_tmp.nii.gz.
+  There are 3855 connected components.
+  Largest component has 1524 pixels.
+OK: produced aseg-CSF.nii.gz
+
