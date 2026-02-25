@@ -122,3 +122,16 @@ To do:
 Other documentation to do:
 
 - [ ] 1196: add my notes about this to a central location too
+
+
+941327[24]  | short | EXIT | hipsthomas[24]   | [96.0%] of 4 | [100.0%] of 16.0G |    51:18
+ * Job hit requested memory limit of 16G.
+ * Consider requesting ~24G instead.
+-------------------------------------------------------------------------------------------
+941327[119] | short | EXIT | hipsthomas[119]  | [93.2%] of 4 | [100.0%] of 16.0G | 01:36:46
+ * Job hit requested memory limit of 16G.
+ * Consider requesting ~24G instead.
+-------------------------------------------------------------------------------------------
+941327[200] | short | EXIT | hipsthomas[200]  | [94.1%] of 4 | [100.0%] of 16.0G | 01:04:13
+ * Job hit requested memory limit of 16G.
+ * Consider requesting ~24G instead.

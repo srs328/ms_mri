@@ -188,7 +188,10 @@ def compute_volume(path, index_mask_file=None, terminal_output="none", op_string
     # Run the interface
     result = stats.run()
 
-    return result.outputs.out_stat
+    out_stat = result.outputs.out_stat
+    if index_mask_file is not None and type(out_stat) is not list:
+        out_stat = [out_stat]
+    return out_stat
 
 
 def create_itksnap_workspace_cmd(label_scan, image_scan, save_dir):
