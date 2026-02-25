@@ -6,6 +6,7 @@
 import pandas as pd
 from pathlib import Path
 from mri_data import utils
+import subprocess
 from tqdm import tqdm
 
 chacoroot = Path("/mnt/h/srs-9/chaco")
@@ -17,7 +18,8 @@ hips_thomas_ref = pd.read_csv(
 )["struct"]
 
 thalamic_nuclei = [2, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-nuclei_labels = hips_thomas_ref[thalamic_nuclei].to_numpy()
+nuclei_labels = hips_thomas_ref[thalamic_nuclei].to_list()
+nuclei_labels.extend(["anterior", "ventral", "posterior", "medial"])
 
 # def main():
 subject_data = pd.read_csv(
@@ -25,17 +27,27 @@ subject_data = pd.read_csv(
     index_col="subid"
 )
 ms_subs = set(subject_data.index[subject_data["dz_type2"] == "MS"])
+script_file = "combineNuclei.sh"
 
 # %%
 roi_means = []
 for sub in tqdm(ms_subs, total=len(ms_subs)):
     ses = subject_sessions.loc[sub, "ses"]
     scan_dir = chacoroot / f"sub{sub}-{ses}"
-    thomas_mask = scan_dir / "thomas_thalamus.nii.gz"
+    subprocess.run(["bash", script_file, str(scan_dir)])
     chacovol = scan_dir / "chaco1/lesion_mask_mni_nemo_output_ifod2act_chacovol_res1mm_mean.nii.gz"
+    thomas_mask = scan_dir / "thomas_thalamus.nii.gz"
+    ventral_mask = scan_dir / "thomas_ventral.nii.gz"
+    anterior_mask = scan_dir / "thomas_anterior.nii.gz"
+    posterior_mask = scan_dir / "thomas_posterior.nii.gz"
+    medial_mask = scan_dir / "thomas_medial.nii.gz"
     try:
-        roi_means.append((sub, 
-                        utils.compute_volume(chacovol, index_mask_file=thomas_mask, op_string="-M")))
+        means = utils.compute_volume(chacovol, index_mask_file=thomas_mask, op_string="-M")
+        means.extend(utils.compute_volume(chacovol, index_mask_file=anterior_mask, op_string="-M"))
+        means.extend(utils.compute_volume(chacovol, index_mask_file=ventral_mask, op_string="-M"))
+        means.extend(utils.compute_volume(chacovol, index_mask_file=posterior_mask, op_string="-M"))
+        means.extend(utils.compute_volume(chacovol, index_mask_file=medial_mask, op_string="-M"))
+        roi_means.append((sub, means))
     except Exception:
         continue
 
