@@ -65,10 +65,9 @@ def main():
     skipped = []
 
     for i, row in df.iterrows():
-        
         sub = str(row["sub"]).zfill(4)
         ses = str(row["ses"])
-        if not sub == "1357":
+        if not sub == "2011":
             continue
         scan_id  = f"sub{sub}-{ses}"
         scan_dir = dataroot / scan_id

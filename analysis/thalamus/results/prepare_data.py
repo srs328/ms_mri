@@ -40,7 +40,7 @@ lst_ai = pd.read_csv(
     index_col="subid",
 )
 chaco_ratios = pd.read_csv(
-    "/home/srs-9/Projects/ms_mri/analysis/thalamus/data0/chaco1_roi_means.csv",
+    "/home/srs-9/Projects/ms_mri/analysis/thalamus/data0/chaco1_roi_means2.csv",
     index_col="subid"
 )
 chaco_ratios.rename(
