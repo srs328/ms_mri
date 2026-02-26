@@ -13,7 +13,7 @@ sys.path.insert(0, "/home/srs-9/Projects/ms_mri/analysis/thalamus/helpers")
 
 import helpers
 import utils
-
+import json
 
 #%%
 
@@ -23,18 +23,54 @@ hips_thomas_ref = pd.read_csv(
     "/home/srs-9/Projects/ms_mri/data/hipsthomas_struct_index.csv", index_col="index"
 )["struct"]
 thalamic_nuclei = [1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+with open("/home/srs-9/Projects/ms_mri/longitudinal_pipeline/all_longitudinal_sessions.json", 'r') as f:
+    subject_sessions = json.load(f)
+df_long_full = pd.read_csv("/home/srs-9/Projects/ms_mri/longitudinal_pipeline/data0/full_volumes_long.csv").set_index(["subid", "sesid"])
 
+select_subject_sessions = []
+time_interval = 2
+min_time_interval = 1
+for sub in subject_sessions:
+    subid = int(sub)
+    try:
+        df_subid = df_long_full.loc[subid]
+    except KeyError:
+        continue
+    ses1 = df_subid.index[0]
+    ses2 = None
+    best_difference = time_interval
+    for sesid, row in df_subid.iterrows():
+        difference = abs(row['t_diff'] - time_interval)
+        if difference < best_difference and row['t_diff'] > min_time_interval:
+            ses2 = sesid
+    if ses2 is None:
+        continue
+    select_subject_sessions.extend([(subid, ses1), (subid, ses2)])
+    
+df_long = df_long_full.loc[select_subject_sessions, :]
+
+df_wide = df_long.reset_index()
+
+# rank sessions within subject (0=first, 1=second)
+df_wide['time'] = df_wide.groupby('subid')['sesid'].rank(method='first').astype(int)
+
+df_wide = df_wide.pivot(index='subid', columns='time')
+
+# flatten the multiindex columns: (Pul_8, 1) -> Pul_8_time1
+df_wide.columns = [f'{col}_{["","time1","time2"][t]}' for col, t in df_wide.columns]
+df_wide.columns.name = None
+df_wide.rename(columns={"sesid_time1": "time1", "sesid_time2": "time2"}, inplace=True)
+
+#%%
 # Load longitudinal volumes
-df_long = pd.read_csv("/home/srs-9/Projects/ms_mri/longitudinal_pipeline/data0/full_volumes.csv")
-df_long['time1'] = pd.to_datetime(df_long['time1'], format='%Y%m%d')
-df_long['time2'] = pd.to_datetime(df_long['time2'], format='%Y%m%d')
-df_long['interval_years'] = (df_long['time2'] - df_long['time1']).dt.days / 365.25
+df_wide['time1'] = pd.to_datetime(df_wide['time1'], format='%Y%m%d')
+df_wide['time2'] = pd.to_datetime(df_wide['time2'], format='%Y%m%d')
+df_wide['interval_years'] = (df_wide['time2'] - df_wide['time1']).dt.days / 365.25
 
-df_long2 = pd.read_csv("/home/srs-9/Projects/ms_mri/longitudinal_pipeline/data0/full_volumes_thalamus.csv")
-df_long2['time1'] = pd.to_datetime(df_long2['time1'], format='%Y%m%d')
-df_long2['time2'] = pd.to_datetime(df_long2['time2'], format='%Y%m%d')
-df_long2['interval_years'] = (df_long2['time2'] - df_long2['time1']).dt.days / 365.25
 
+# %%
+
+df_wide = df_wide.reset_index()
 groups = {
     "medial": ["MD_Pf_12", "CM_11"],
     "ventral": ["VA_4", "VLa_5", "VLP_6", "VPL_7"],
@@ -43,15 +79,15 @@ groups = {
 }
 for group, nucs in groups.items():
     cols = [f"{nuc}_time1" for nuc in nucs]
-    df_long[f"{group}_time1"] = df_long[cols].sum(axis=1)
+    df_wide[f"{group}_time1"] = df_wide[cols].sum(axis=1)
     cols = [f"{nuc}_time2" for nuc in nucs]
-    df_long[f"{group}_time2"] = df_long[cols].sum(axis=1)
+    df_wide[f"{group}_time2"] = df_wide[cols].sum(axis=1)
 
 
 cols_ordered = ["subid", "interval_years", "time1", "time2"]
 for struct in hips_thomas_ref.to_list() + list(groups.keys()):
     cols_ordered.extend([f"{struct}_time1", f"{struct}_time2"])
-df_long = df_long[cols_ordered]
+df_wide = df_wide[cols_ordered]
 
 # Load baseline covariates (adjust path as needed)
 # Expected columns: subid, T2LV, dzdur, age, Female, tiv, CP
@@ -59,9 +95,7 @@ df_base = utils.load_data("/home/srs-9/Projects/ms_mri/analysis/thalamus/results
 df_base = df_base.reset_index()
 
 # Merge on subid
-df = df_long.merge(df_base, on='subid', how='inner')
-df['thalamus_time1'] = df_long2['thalamus_time1']
-df['thalamus_time2'] = df_long2['thalamus_time2']
+df = df_wide.merge(df_base, on='subid', how='inner')
 print(f"N after merge: {len(df)}")
 print(f"Interval range: {df['interval_years'].min():.2f} – {df['interval_years'].max():.2f} years")
 
@@ -71,11 +105,13 @@ print(f"Interval range: {df['interval_years'].min():.2f} – {df['interval_years
 df = df[df['dz_type2'] == "MS"]
 
 
+df = df[~df['subid'].isin([2094, 1201, 1465])]
 
 if max_dzdur is not None:
     df = df[df['dzdur'] < max_dzdur]
     print(f"N after dzdur<{max_dzdur}: {len(df)}")
     print(f"Interval range: {df['interval_years'].min():.2f} – {df['interval_years'].max():.2f} years")
+
 
 # %% [compute annualized change scores]
 # Using annualized % change to account for variable follow-up intervals.
@@ -86,7 +122,7 @@ structures = {
     hips_thomas_ref[i]: hips_thomas_ref[i] for i in thalamic_nuclei
 }
 structures.update({group: group for group in groups})
-structures.update({"thalamus": "thalamus"})
+# structures.update({"thalamus": "thalamus"})
 
 for col_prefix, label in structures.items():
     v1 = df[f'{col_prefix}_time1']
@@ -94,8 +130,8 @@ for col_prefix, label in structures.items():
     pct_change = (v2 - v1) / v1 * 100
     df[f'{col_prefix}_pct_change'] = pct_change
     df[f'{col_prefix}_ann_pct_change'] = pct_change / df['interval_years']
-    df_long[f'{col_prefix}_pct_change'] = pct_change
-    df_long[f'{col_prefix}_ann_pct_change'] = pct_change / df_long['interval_years']
+    df_wide[f'{col_prefix}_pct_change'] = pct_change
+    df_wide[f'{col_prefix}_ann_pct_change'] = pct_change / df_wide['interval_years']
 
 print(df[[f'{col_prefix}_ann_pct_change' for col_prefix in structures]].describe().round(3))
 
@@ -183,7 +219,7 @@ for key, label in structures.items():
 # %%
 
 df_qc_z = utils.zscore(df_qc)
-res = smf.ols("thalamus_ann_pct_change ~ LV + age + Female + tiv + dzdur", data=df_qc_z).fit()
+res = smf.ols("posterior_ann_pct_change ~ posterior + T2LV_log1p + age + Female + tiv", data=df_qc_z).fit()
 print(res.summary())
 
 # %% [validation: T2LV at baseline predicts thalamic atrophy rate]
@@ -207,7 +243,7 @@ df_qc['age_z']             = stats.zscore(df_qc['age'])
 df_qc['tiv_z']             = stats.zscore(df_qc['tiv'])
 df_qc['dzdur_z']           = stats.zscore(df_qc['dzdur'])
 
-formula = 'Pul_8_ann_pct_change ~ log_T2LV_z + age_z + tiv_z + dzdur_z + interval_years + Female'
+formula = 'thal_ann_change_z ~ log_T2LV_z + age_z + tiv_z + dzdur_z + interval_years + Female'
 model = smf.ols(formula, data=df_qc).fit(cov_type='HC3')
 print(model.summary())
 

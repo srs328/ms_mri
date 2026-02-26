@@ -19,6 +19,7 @@ log_filename = now.strftime(
 logger.remove()
 logger.add(log_filename, mode="w")
 
+# %%
 dataroot = Path("/home/shridhar.singh9-umw/data/longitudinal")
 subject_sessions = pd.read_csv("longitudinal_sessions.csv", index_col="subid")
 data_dir = Path("/home/shridhar.singh9-umw/Projects/ms_mri/longitudinal_pipeline") / "data0"
@@ -142,7 +143,7 @@ for subid, row in subject_sessions.iterrows():
             new_key = re.sub("-", "_", new_key) + f"_time{ses_num}"
             left_data[new_key] = left_vols[key]
             right_data[new_key] = right_vols[key]
-            full_data[new_key] = mean([right_vols[key], left_vols[key]])
+            full_data[new_key] = right_vols[key] + left_vols[key]
 
         ses_num += 1
     
@@ -168,3 +169,6 @@ df_left.to_csv(data_dir / "left_volumes.csv")
 df_right.to_csv(data_dir / "right_volumes.csv")
 df_full.to_csv(data_dir / "full_volumes.csv")
 
+for key in key_ref:
+    new_key = re.sub(r"(\d+)-([\w-]+)", r"\2_\1", key)
+    df_full[f"{key}_time1"]
