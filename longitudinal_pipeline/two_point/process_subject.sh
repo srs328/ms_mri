@@ -8,6 +8,7 @@
 #BSUB -e /home/shridhar.singh9-umw/logs/%J_%I.err
 #BSUB -u /dev/null
 
+# running 957377 first 3 lines
 source /home/shridhar.singh9-umw/Projects/ms_mri/.venv/bin/activate
 
 line=$(sed -n 4p param_list.txt)
