@@ -1,5 +1,6 @@
 #!/bin/bash
 
+source 
 subid=$1
 work_dir=$2
 

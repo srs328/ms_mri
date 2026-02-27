@@ -35,6 +35,9 @@ df_long2['time1'] = pd.to_datetime(df_long2['time1'], format='%Y%m%d')
 df_long2['time2'] = pd.to_datetime(df_long2['time2'], format='%Y%m%d')
 df_long2['interval_years'] = (df_long2['time2'] - df_long2['time1']).dt.days / 365.25
 
+df_long3 = pd.read_csv("/home/srs-9/Projects/ms_mri/longitudinal_pipeline/data0/longitudinal_old_doublecheck.csv", index_col="subid")
+df_long3['interval_years'] = df_long3['t_diff']
+
 groups = {
     "medial": ["MD_Pf_12", "CM_11"],
     "ventral": ["VA_4", "VLa_5", "VLP_6", "VPL_7"],
@@ -44,8 +47,10 @@ groups = {
 for group, nucs in groups.items():
     cols = [f"{nuc}_time1" for nuc in nucs]
     df_long[f"{group}_time1"] = df_long[cols].sum(axis=1)
+    df_long3[f"{group}_time1"] = df_long3[cols].sum(axis=1)
     cols = [f"{nuc}_time2" for nuc in nucs]
     df_long[f"{group}_time2"] = df_long[cols].sum(axis=1)
+    df_long3[f"{group}_time2"] = df_long3[cols].sum(axis=1)
 
 
 cols_ordered = ["subid", "interval_years", "time1", "time2"]
@@ -70,6 +75,10 @@ print(f"Interval range: {df['interval_years'].min():.2f} – {df['interval_years
 
 df = df[df['dz_type2'] == "MS"]
 
+df2 = df_long3.merge(df_base, on='subid', how='inner')
+df2 = df2[df2['dz_type2'] == "MS"]
+df2['thalamus_time1'] = df_long2['thalamus_time1']
+df2['thalamus_time2'] = df_long2['thalamus_time2']
 
 
 if max_dzdur is not None:
@@ -97,37 +106,49 @@ for col_prefix, label in structures.items():
     df_long[f'{col_prefix}_pct_change'] = pct_change
     df_long[f'{col_prefix}_ann_pct_change'] = pct_change / df_long['interval_years']
 
-print(df[[f'{col_prefix}_ann_pct_change' for col_prefix in structures]].describe().round(3))
+    v1 = df2[f'{col_prefix}_time1']
+    v2 = df2[f'{col_prefix}_time2']
+    pct_change = (v2 - v1) / v1 * 100
+    df2[f'{col_prefix}_pct_change'] = pct_change
+    df2[f'{col_prefix}_ann_pct_change'] = pct_change / df2['interval_years']
+    df_long3[f'{col_prefix}_pct_change'] = pct_change
+    df_long3[f'{col_prefix}_ann_pct_change'] = pct_change / df_long3['interval_years']
 
+print(df2[[f'{col_prefix}_ann_pct_change' for col_prefix in structures]].describe().round(3))
+
+# %%
+print(df[[f'{col_prefix}_ann_pct_change' for col_prefix in structures]].describe().round(3))
 
 # %% [QC: flag implausible volumes and large change outliers]
 # Whole thalamus bilateral should be roughly 5500-9000 mm³ in adults.
 # Values outside this range suggest segmentation failure.
 # Also flag subjects with >20% change (annualized) as likely failures.
 
+work_df = df2
+
 THAL_MIN, THAL_MAX = 5500, 13000
 THAL_MIN, THAL_MAX = 4000, 13000
 ANN_CHANGE_THRESH = 5  # % per year — biologically implausible
 
-df['qc_thal_t1_range'] = df['THALAMUS_1_time1'].between(THAL_MIN, THAL_MAX)
-df['qc_thal_t2_range'] = df['THALAMUS_1_time2'].between(THAL_MIN, THAL_MAX)
-df['qc_ann_change']    = df['THALAMUS_1_ann_pct_change'].abs() < ANN_CHANGE_THRESH
-df['qc_pass']          = df['qc_thal_t1_range'] & df['qc_thal_t2_range'] & df['qc_ann_change']
+work_df['qc_thal_t1_range'] = work_df['THALAMUS_1_time1'].between(THAL_MIN, THAL_MAX)
+work_df['qc_thal_t2_range'] = work_df['THALAMUS_1_time2'].between(THAL_MIN, THAL_MAX)
+work_df['qc_ann_change']    = work_df['THALAMUS_1_ann_pct_change'].abs() < ANN_CHANGE_THRESH
+work_df['qc_pass']          = work_df['qc_thal_t1_range'] & work_df['qc_thal_t2_range'] & work_df['qc_ann_change']
 
 print(f"\nQC summary:")
-print(f"  Fail thal range at T1:    {(~df['qc_thal_t1_range']).sum()}")
-print(f"  Fail thal range at T2:    {(~df['qc_thal_t2_range']).sum()}")
-print(f"  Fail ann change threshold:{(~df['qc_ann_change']).sum()}")
-print(f"  Total QC pass:            {df['qc_pass'].sum()} / {len(df)}")
+print(f"  Fail thal range at T1:    {(~work_df['qc_thal_t1_range']).sum()}")
+print(f"  Fail thal range at T2:    {(~work_df['qc_thal_t2_range']).sum()}")
+print(f"  Fail ann change threshold:{(~work_df['qc_ann_change']).sum()}")
+print(f"  Total QC pass:            {work_df['qc_pass'].sum()} / {len(work_df)}")
 
 # Inspect failures
-df_fail = df[~df['qc_pass']][['subid', 'interval_years',
+work_df_fail = work_df[~work_df['qc_pass']][['subid', 'interval_years',
                                'THALAMUS_1_time1', 'THALAMUS_1_time2',
                                'THALAMUS_1_pct_change', 'THALAMUS_1_ann_pct_change']]
 print("\nFailed subjects:")
-print(df_fail.to_string())
+print(work_df_fail.to_string())
 
-df_qc = df[df['qc_pass']].copy()
+df_qc = work_df[work_df['qc_pass']].copy()
 print(f"\nProceeding with N={len(df_qc)} after QC")
 
 
@@ -207,7 +228,7 @@ df_qc['age_z']             = stats.zscore(df_qc['age'])
 df_qc['tiv_z']             = stats.zscore(df_qc['tiv'])
 df_qc['dzdur_z']           = stats.zscore(df_qc['dzdur'])
 
-formula = 'Pul_8_ann_pct_change ~ log_T2LV_z + age_z + tiv_z + dzdur_z + interval_years + Female'
+formula = 'Pul_8_ann_pct_change ~ Pul_8_chaco + age_z + tiv_z + dzdur_z + Female'
 model = smf.ols(formula, data=df_qc).fit(cov_type='HC3')
 print(model.summary())
 

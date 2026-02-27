@@ -85,3 +85,9 @@ def remap_image(input_image, output_image, order=3, contrast_stretching=1, scali
     FIN = nib.Nifti1Image(FINAL_rescale, input.affine, input.header)
     FIN.header['cal_max'] = max   # modify the max value of the header using specified max
     nib.save(FIN, output_image)
+
+
+if __name__ == "__main__":
+    input_image = sys.argv[1]
+    output_image = sys.argv[2]
+    remap_image(input_image, output_image, order=3, contrast_stretching=1, scaling='WM')
