@@ -1,0 +1,15 @@
+sub1001: 957442
+sub1017: 957409
+sub1003: 957441
+Rest: 957450
+
+5 point (2113): 957452
+5 point (1495): 957456
+
+bsub -q large -o my_out.%J -e my_err.%J ./script
+
+hipsthomas 1-80 : 959362
+
+compute_jacobinas 3-161: 962206
+
+Fix termlimit jobs: 962306

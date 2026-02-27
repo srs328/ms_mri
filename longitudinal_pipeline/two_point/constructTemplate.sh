@@ -1,6 +1,5 @@
 #!/bin/bash
 
-source 
 subid=$1
 work_dir=$2
 
@@ -23,4 +22,8 @@ antsMultivariateTemplateConstruction2.sh \
 	-m CC[4] \
 	-t SyN \
 	t1_brain_wmn_*.nii.gz
+
+
+	# bsub -q short -o /home/shridhar.singh9-umw/logs/%J_%I.out -e /home/shridhar.singh9-umw/logs/%J_%I.err -u /dev/null -W 8:00 -n 6 -R "rusage[mem=5G
     
+	# bsub -q short -o /home/shridhar.singh9-umw/logs/%J_%I.out -e /home/shridhar.singh9-umw/logs/%J_%I.err -u /dev/null -W 8:00 -n 6 -R "rusage[mem=2]"
