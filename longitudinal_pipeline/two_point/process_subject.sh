@@ -8,6 +8,7 @@
 #BSUB -e /home/shridhar.singh9-umw/logs/%J_%I.err
 #BSUB -u /dev/null
 
+# running 957377 first 3 lines
 source /home/shridhar.singh9-umw/Projects/ms_mri/.venv/bin/activate
 
 export PATH=/home/shridhar.singh9-umw/ants-2.6.5/bin:$PATH
