@@ -1,12 +1,14 @@
 #!/bin/bash
-#BSUB -J hipsthomas[1-3]%128
-#BSUB -n 4
-#BSUB -R "rusage[mem=4G]"
+#BSUB -J jacobian_pipeline[1-3]
+#BSUB -n 6
+#BSUB -R "rusage[mem=5G]"
 #BSUB -q short
-#BSUB -W 8:00
+#BSUB -W 12:00
 #BSUB -o /home/shridhar.singh9-umw/logs/%J_%I.out
 #BSUB -e /home/shridhar.singh9-umw/logs/%J_%I.err
 #BSUB -u /dev/null
+
+source /home/shridhar.singh9-umw/Projects/ms_mri/.venv/bin/activate
 
 line=$(sed -n 4p param_list.txt)
 subject_root=$(echo $line | awk '{print $1}')
