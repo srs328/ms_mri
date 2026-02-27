@@ -1,26 +1,33 @@
 #!/bin/bash
 
 # cd /home/shridhar.singh9-umw/data/longitudinal/sub2113/group2
-# CreateJacobianDeterminantImage 3 sub1001_input0000-t1_brain_wmn_c-1InverseWarp.nii.gz sub1001_input0000-t1_brain_wmn_20170215-1InverseWarp-Jacobian00.nii.gz
-# CreateJacobianDeterminantImage 3 sub1001_input0000-t1_brain_wmn_20170215-1Warp.nii.gz sub1001_input0000-t1_brain_wmn_20170215-1Warp-Jacobian00.nii.gz
 
-# CreateJacobianDeterminantImage 3 sub1001_input0001-t1_brain_wmn_20200523-1InverseWarp.nii.gz sub1001_input0001-t1_brain_wmn_20200523-1InverseWarp-Jacobian00.nii.gz
-# CreateJacobianDeterminantImage 3 sub1001_input0001-t1_brain_wmn_20200523-1Warp.nii.gz sub1001_input0001-t1_brain_wmn_20200523-1Warp-Jacobian00.nii.gz
+CreateJacobianDeterminantImage 3 sub1495_input0000-t1_brain_wmn_20160918-1Warp.nii.gz sub1495_input0000-t1_brain_wmn_20160918-1Warp-Jacobian00.nii.gz
 
-# # CreateJacobianDeterminantImage 3 sub2113_input0002-t1_brain_wmn_20190213-1InverseWarp.nii.gz sub2113_input0002-t1_brain_wmn_20190213-1InverseWarp-Jacobian00.nii.gz
-# # CreateJacobianDeterminantImage 3 sub2113_input0002-t1_brain_wmn_20190213-1Warp.nii.gz sub2113_input0002-t1_brain_wmn_20190213-1Warp-Jacobian00.nii.gz
+CreateJacobianDeterminantImage 3 sub1495_input0001-t1_brain_wmn_20171127-1Warp.nii.gz sub1495_input0001-t1_brain_wmn_20171127-1Warp-Jacobian00.nii.gz
 
-# # CreateJacobianDeterminantImage 3 sub2113_input0003-t1_brain_wmn_20200107-1InverseWarp.nii.gz sub2113_input0003-t1_brain_wmn_20200107-1InverseWarp-Jacobian00.nii.gz
-# # CreateJacobianDeterminantImage 3 sub2113_input0003-t1_brain_wmn_20200107-1Warp.nii.gz sub2113_input0003-t1_brain_wmn_20200107-1Warp-Jacobian00.nii.gz
+CreateJacobianDeterminantImage 3 sub1495_input0002-t1_brain_wmn_20180627-1Warp.nii.gz sub1495_input0002-t1_brain_wmn_20180627-1Warp-Jacobian00.nii.gz
 
-# # CreateJacobianDeterminantImage 3 sub2113_input0004-t1_brain_wmn_20210314-1InverseWarp.nii.gz sub2113_input0004-t1_brain_wmn_20210314-1InverseWarp-Jacobian00.nii.gz
-# # CreateJacobianDeterminantImage 3 sub2113_input0004-t1_brain_wmn_20210314-1Warp.nii.gz sub2113_input0004-t1_brain_wmn_20210314-1Warp-Jacobian00.nii.gz
+CreateJacobianDeterminantImage 3 sub1495_input0003-t1_brain_wmn_20190717-1Warp.nii.gz sub1495_input0003-t1_brain_wmn_20190717-1Warp-Jacobian00.nii.gz
 
-# fslstats sub2113_input0000-t1_brain_wmn_20170126-1Warp-Jacobian00.nii.gz -k tthomas_tmp/left/1-THALAMUS.nii.gz -M
-# fslstats sub2113_input0001-t1_brain_wmn_20180206-1Warp-Jacobian00.nii.gz -k tthomas_tmp/left/1-THALAMUS.nii.gz -M
-# fslstats sub2113_input0002-t1_brain_wmn_20190213-1Warp-Jacobian00.nii.gz -k tthomas_tmp/left/1-THALAMUS.nii.gz -M
-# fslstats sub2113_input0003-t1_brain_wmn_20200107-1Warp-Jacobian00.nii.gz -k tthomas_tmp/left/1-THALAMUS.nii.gz -M
-# fslstats sub2113_input0004-t1_brain_wmn_20210314-1Warp-Jacobian00.nii.gz -k tthomas_tmp/left/1-THALAMUS.nii.gz -M
+CreateJacobianDeterminantImage 3 sub1495_input0004-t1_brain_wmn_20210604-1Warp.nii.gz sub1495_input0004-t1_brain_wmn_20210604-1Warp-Jacobian00.nii.gz
+
+# CreateJacobianDeterminantImage 3 sub1495_input0001-t1_brain_wmn_20171127-1InverseWarp.nii.gz sub1495_input0001-t1_brain_wmn_20171127-1InverseWarp-Jacobian00.nii.gz
+# CreateJacobianDeterminantImage 3 sub1495_input0002-t1_brain_wmn_20180627-1InverseWarp.nii.gz sub1495_input0002-t1_brain_wmn_20180627-1InverseWarp-Jacobian00.nii.gz
+# CreateJacobianDeterminantImage 3 sub1495_input0000-t1_brain_wmn_20160918-1InverseWarp.nii.gz sub1495_input0000-t1_brain_wmn_20160918-1InverseWarp-Jacobian00.nii.gz
+# CreateJacobianDeterminantImage 3 sub1495_input0003-t1_brain_wmn_20190717-1InverseWarp.nii.gz sub1495_input0003-t1_brain_wmn_20190717-1InverseWarp-Jacobian00.nii.gz
+# CreateJacobianDeterminantImage 3 sub1495_input0004-t1_brain_wmn_20210604-1InverseWarp.nii.gz sub1495_input0004-t1_brain_wmn_20210604-1InverseWarp-Jacobian00.nii.gz
+fslstats sub1495_input0000-t1_brain_wmn_20160918-1Warp-Jacobian00.nii.gz -k left/1-THALAMUS.nii.gz -M
+fslstats sub1495_input0001-t1_brain_wmn_20171127-1Warp-Jacobian00.nii.gz -k left/1-THALAMUS.nii.gz -M
+fslstats sub1495_input0002-t1_brain_wmn_20180627-1Warp-Jacobian00.nii.gz -k left/1-THALAMUS.nii.gz -M
+fslstats sub1495_input0003-t1_brain_wmn_20190717-1Warp-Jacobian00.nii.gz -k left/1-THALAMUS.nii.gz -M
+fslstats sub1495_input0004-t1_brain_wmn_20210604-1Warp-Jacobian00.nii.gz -k left/1-THALAMUS.nii.gz -M
+
+fslstats sub1495_input0000-t1_brain_wmn_20160918-1Warp-Jacobian00.nii.gz -k right/1-THALAMUS.nii.gz -M
+fslstats sub1495_input0001-t1_brain_wmn_20171127-1Warp-Jacobian00.nii.gz -k right/1-THALAMUS.nii.gz -M
+fslstats sub1495_input0002-t1_brain_wmn_20180627-1Warp-Jacobian00.nii.gz -k right/1-THALAMUS.nii.gz -M
+fslstats sub1495_input0003-t1_brain_wmn_20190717-1Warp-Jacobian00.nii.gz -k right/1-THALAMUS.nii.gz -M
+fslstats sub1495_input0004-t1_brain_wmn_20210604-1Warp-Jacobian00.nii.gz -k right/1-THALAMUS.nii.gz -M
 
 
 subid=$1

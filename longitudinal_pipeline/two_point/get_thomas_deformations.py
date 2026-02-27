@@ -30,7 +30,7 @@ subject_sessions = pd.read_csv("/home/shridhar.singh9-umw/Projects/ms_mri/longit
 # dataroot = Path("/home/srs-9/hpc/data/longitudinal")
 # data_dir = Path("/home/srs-9/Projects/ms_mri/longitudinal_pipeline/data0")
 
-subid = sys.argv[1]
+subid = int(sys.argv[1])
 dataroot = Path("/home/shridhar.singh9-umw/data/longitudinal")
 # dataroot = Path("/home/srs-9/hpc/data/longitudinal")
 
@@ -107,7 +107,7 @@ ses2 = subject_sessions.loc[subid, 'ses2']
 group_dir = dataroot / f"sub{subid}/group"
 
 if not (group_dir / "bilateral" / "thomas_posterior.nii.gz").exists():
-    subprocess.run(["combineNuclei.sh", group_dir])
+    subprocess.run(["bash", "/home/shridhar.singh9-umw/Projects/ms_mri/longitudinal_pipeline/two_point/combineNuclei.sh", group_dir])
 
 ses1_jac = group_dir / f"sub{subid}_input0000-t1_brain_wmn_{ses1}-1Warp-Jacobian00.nii.gz"
 ses2_jac = group_dir / f"sub{subid}_input0001-t1_brain_wmn_{ses2}-1Warp-Jacobian00.nii.gz"
@@ -140,3 +140,9 @@ for mask_file in KEY_REF:
 
 # %%
 df_full = pd.DataFrame(full_defs, columns=["struct", "ses1", "ses2"])
+df_right = pd.DataFrame(right_defs, columns=["struct", "ses1", "ses2"])
+df_left = pd.DataFrame(left_defs, columns=["struct", "ses1", "ses2"])
+
+df_full.to_csv(group_dir / f"sub{subid}_thomas_bilateral_deformations.csv", index=False)
+df_right.to_csv(group_dir / f"sub{subid}_thomas_right_deformations.csv", index=False)
+df_left.to_csv(group_dir / f"sub{subid}_thomas_left_deformations.csv", index=False)
