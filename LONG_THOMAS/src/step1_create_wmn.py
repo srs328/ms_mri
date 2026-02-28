@@ -3,6 +3,7 @@ import sys
 import numpy as np
 import nibabel
 import tempfile
+from pathlib import Path
 
 from libraries.ants_tools import (
     ants_ApplyInvTransforms, ants_apply_only_warp, ants_new_compose_a_to_b,
@@ -18,7 +19,7 @@ from libraries.imgtools import (
   label_fusion_majority, remap_image
 )
 
-from THOMAS_constants import (
+from longitudinal_pipeline.custom_pipeline.constants import (
   PRIOR_PATH, ORIG_TEMPLATE, ORIG_TEMPLATE_MNI_STRIPPED, TEMPLATE_93, MASK_93,
   TEMPLATE_93B, MASK_93B, SUBJECTS, ROI, OPTIMAL, UNCROP_PADDING, WMN_BIAS_IMAGE
 )
@@ -26,3 +27,4 @@ from THOMAS_constants import (
 # arguments
 
 work_dir = "/mnt/i/Data/srs-9/longitudinal/sub1003/20170329/test_thomas"
+orig_input_image = "t1.nii.gz"

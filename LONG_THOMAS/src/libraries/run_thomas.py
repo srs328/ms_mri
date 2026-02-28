@@ -22,7 +22,7 @@ from libraries.imgtools import (
   label_fusion_majority, remap_image
 )
 
-from THOMAS_constants import (
+from longitudinal_pipeline.custom_pipeline.constants import (
   PRIOR_PATH, ORIG_TEMPLATE, ORIG_TEMPLATE_MNI_STRIPPED, TEMPLATE_93, MASK_93,
   TEMPLATE_93B, MASK_93B, SUBJECTS, ROI, OPTIMAL, UNCROP_PADDING, WMN_BIAS_IMAGE
 )

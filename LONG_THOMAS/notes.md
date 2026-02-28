@@ -1,8 +1,12 @@
 # Notes
 
+`LONG_THOMAS_HOME` must be set as environment variable
+    - Eg `LONG_THOMAS_HOME=/home/srs-9/Projects/ms_mri/longitudinal_pipeline/LONG_THOMAS`
+
+`work_dir` will start with a raw t1.nii.gz, a skull stripped t1_brain.nii.gz, and a skull stripped mask t1_mask.nii.gz
+
 ## Generate Crop
 
-`pipeline_root=/home/srs-9/Projects/ms_mri/longitudinal_pipeline/custom_pipeline`
 
 - `ORIG_TEMPLATE`: Used to ants register template to subject
   - `ORIG_TEMPLATE=$pipeline_root/resources/origtemplate.nii.gz` used to ants register template to subject
@@ -17,7 +21,7 @@
     - `mask` is the template mask, `mask_input` will be the input image's mask
 3. Run `fslcpgeom {orig_input_image} {mask_input}` to match the sform of `mask_input` to `orig_input_image`
 4. Run `bias_correction`
-
+5. Remap
 
 ```bash
 docker run -it --rm \
