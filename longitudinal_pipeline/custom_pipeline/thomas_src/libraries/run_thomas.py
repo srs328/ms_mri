@@ -149,8 +149,6 @@ def split_roi(roi, axis, split_axis):
     return first, second
 
 
-# SRS: each of 20 atlas subjects already has a transform to the template. 
-#   This composes those with the template -> input subject transforms to get atlas subject -> input subject
 def warp_atlas_subject(subject, path, labels, input_image, input_transform_prefix, output_path, exec_options={}):
     """
     Warp a training set subject's labels to input_image.
@@ -184,7 +182,6 @@ def warp_atlas_subject(subject, path, labels, input_image, input_transform_prefi
 
 
 def run_thomas(args, do_command, temp_path, pool, **exec_options):
-    # do_command is make_partial_command() defined in parallel.py
     if (args.verbose):
         print(f"(run_thomas): args={args}, cmd={do_command}, temp_path={temp_path}, e_opts={exec_options}")
 
@@ -358,7 +355,6 @@ def run_thomas(args, do_command, temp_path, pool, **exec_options):
         output_path=temp_path,
         exec_options=exec_options,
     ), SUBJECTS)
-    # SRS: Now we have labels from 20 atlas subjects warped into our input subject's space
     warped_labels = {label: {subj: d[label] for subj, d in zip(SUBJECTS, warped_labels)} for label in warped_labels[0]}
     # # print '--- Forming subject-registered atlases. --- Elapsed: %s' % timedelta(seconds=time.time()-t)
     # atlases = pool.map(partial(create_atlas, path=temp_path, subjects=SUBJECTS, target='', debug=exec_options['debug']),

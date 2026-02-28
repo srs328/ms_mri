@@ -111,6 +111,7 @@ if __name__ == "__main__":
     input_image = sys.argv[1]
     output_image = sys.argv[2]
     crop_mask_image = sys.argv[3]
+    # bias_correct(input_image, output_image)
     remap_image(input_image, output_image, crop_mask_image, order=3, contrast_stretching=1, scaling='WM')
     
     # /mnt/i/Data/srs-9/longitudinal/sub1003/20170329/tmp_sandbox/t1.nii.gz /mnt/i/Data/srs-9/longitudinal/sub1003/20170329/tmp_sandbox/t1_wmnNew.nii.gz /mnt/i/Data/srs-9/longitudinal/sub1003/20170329/tmp_sandbox/mask_inp.nii.gz
