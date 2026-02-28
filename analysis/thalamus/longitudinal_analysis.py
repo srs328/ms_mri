@@ -347,3 +347,11 @@ for sub in df_base.index:
             t_diff = new_diff
         
     second_sessions.append((ses2, t_diff))
+    
+    
+# %%
+
+x = [0, 1, 2, 3, 4]
+y = [0.997691,1.019430,0.982149,0.994821,0.968414 ]
+plt.plot(x, y)
+plt.title("2113 (Jacobian approach)")
