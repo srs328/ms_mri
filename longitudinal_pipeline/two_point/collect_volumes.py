@@ -71,6 +71,10 @@ def get_hipsthomas_vols(loc):
 def rename_struct(struct):
     new_key = re.sub(r"(\d+)-([\w-]+)", r"\2_\1", struct)
     new_key = re.sub("-", "_", new_key)
+    if new_key.startswith("thomas_"):
+        new_key = new_key.removeprefix("thomas_")
+    if new_key.endswith(".nii.gz"):
+        new_key = new_key.removesuffix(".nii.gz")
     return new_key
 
 # %%
