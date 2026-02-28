@@ -40,7 +40,7 @@ def remap_image(input_image, output_image, crop_mask_image, order=3, contrast_st
 
     # use crop here
     # SRS-make the histogram only from values in the input image that are within the crop mask
-    hist, bin_edges = np.histogram(input_data[crop_data != 0], bins="auto")
+    hist, bin_edges = np.histogram(input_data[crop_mask != 0], bins="auto")
     #plt.hist(crop_data[crop_data != 0],bins="auto")
 
     # Find the voxel value shared by at least 1% of voxels mode
@@ -58,7 +58,7 @@ def remap_image(input_image, output_image, crop_mask_image, order=3, contrast_st
     reversalnum = reversalnum.tolist()
 
     # dont use crop here
-    input_data_normwmn = crop_data / reversalnum   # normalize by WM
+    input_data_normwmn = input_data / reversalnum   # normalize by WM
 
     if order > 4 or order < 0:
         print("ERROR: please enter an order between 1 and 4")
@@ -82,8 +82,8 @@ def remap_image(input_image, output_image, crop_mask_image, order=3, contrast_st
     if contrast_stretching == 1:
         print("contrast_stretching")
         # mask input_normwmn_rev for percentiles
-        p2 = np.percentile(input_normwmn_rev[crop_data != 0], 2)
-        p98 = np.percentile(input_normwmn_rev[crop_data != 0], 98)
+        p2 = np.percentile(input_normwmn_rev[crop_mask != 0], 2)
+        p98 = np.percentile(input_normwmn_rev[crop_mask != 0], 98)
         #FINAL = exposure.rescale_intensity(crop_normwmn_rev, in_range=(p2, p98))  # contrast stretching
         FINAL = np.clip(input_normwmn_rev, p2, p98)   # contrast stretching
         fmin = np.min(FINAL)
@@ -93,7 +93,7 @@ def remap_image(input_image, output_image, crop_mask_image, order=3, contrast_st
         FINAL = input_normwmn_rev
 
     if scaling == "T1" :    # rescale to max of T1 input image
-        max = np.max(crop_data) #! use crop here
+        max = np.max(input_data[crop_mask != 0]) #! use crop here
     elif scaling == "WM":   # rescale to 99% end of WM peak (0.01 of WM mode) previously computed
         max = int(reversalnum)
     else:
@@ -110,4 +110,7 @@ def remap_image(input_image, output_image, crop_mask_image, order=3, contrast_st
 if __name__ == "__main__":
     input_image = sys.argv[1]
     output_image = sys.argv[2]
-    remap_image(input_image, output_image, order=3, contrast_stretching=1, scaling='WM')
+    crop_mask_image = sys.argv[3]
+    remap_image(input_image, output_image, crop_mask_image, order=3, contrast_stretching=1, scaling='WM')
+    
+    # /mnt/i/Data/srs-9/longitudinal/sub1003/20170329/tmp_sandbox/t1.nii.gz /mnt/i/Data/srs-9/longitudinal/sub1003/20170329/tmp_sandbox/t1_wmnNew.nii.gz /mnt/i/Data/srs-9/longitudinal/sub1003/20170329/tmp_sandbox/mask_inp.nii.gz
