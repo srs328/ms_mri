@@ -1,4 +1,5 @@
 #!/bin/bash
+
 subid=$1
 work_dir=$2
 
@@ -9,8 +10,8 @@ antsMultivariateTemplateConstruction2.sh \
 	-o "sub${subid}_" \
 	-i 4 \
 	-g 0.25 \
-	-j 4 \
-	-c 0 \
+	-j 8 \
+	-c 2 \
 	-k 1 \
 	-w 1 \
 	-f 8x4x2x1 \

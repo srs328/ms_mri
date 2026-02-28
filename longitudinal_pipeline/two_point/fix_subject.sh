@@ -1,14 +1,13 @@
 #!/bin/bash
-#BSUB -J jacobian_pipeline[28]%80
-#BSUB -n 6
-#BSUB -R "rusage[mem=5G]"
+#BSUB -J jacobian_pipeline[167,170,177,179,180]
+#BSUB -n 16
+#BSUB -R "rusage[mem=2G]"
 #BSUB -q short
 #BSUB -W 8:00
 #BSUB -o /home/shridhar.singh9-umw/logs/%J_%I.out
 #BSUB -e /home/shridhar.singh9-umw/logs/%J_%I.err
 #BSUB -u /dev/null
 
-# running 957377 first 3 lines
 source /home/shridhar.singh9-umw/Projects/ms_mri/.venv/bin/activate
 
 export PATH=/home/shridhar.singh9-umw/ants-2.6.5/bin:$PATH
@@ -32,23 +31,16 @@ if [ ! -d "$group_dir" ]; then
 	mkdir $group_dir
 fi
 
+rm -r $group_dir/left
+rm -r $group_dir/right
+
 # cp "$subject_root/$ses1/t1_brain_wmn.nii.gz" "$group_dir/t1_brain_wmn_$ses1.nii.gz"
 # cp "$subject_root/$ses2/t1_brain_wmn.nii.gz" "$group_dir/t1_brain_wmn_$ses2.nii.gz"
 
 # files=(${group_dir}/*template0.nii.gz)
 # if [ -e "${files[0]}" ]; then
-if ! compgen -G "${group_dir}/*template0.nii.gz"; then
-    bash constructTemplate.sh $subid $group_dir
+bash constructTemplate2.sh $subid $group_dir
 
-fi
-
-# fslstats sub1046_input0000-t1_brain_wmn_20181109-1Warp-Jacobian00.nii.gz -k left/1-THALAMUS.nii.gz -M
-# fslstats sub1046_input0001-t1_brain_wmn_20210802-1Warp-Jacobian00.nii.gz -k left/1-THALAMUS.nii.gz -M
-# fslstats sub1046_input0002-t1_brain_wmn_20220224-1Warp-Jacobian00.nii.gz -k left/1-THALAMUS.nii.gz -M
-
-# fslstats sub1046_input0000-t1_brain_wmn_20181109-1InverseWarp-Jacobian00.nii.gz -k left/1-THALAMUS.nii.gz -M
-# fslstats sub1046_input0001-t1_brain_wmn_20210802-1InverseWarp-Jacobian00.nii.gz -k left/1-THALAMUS.nii.gz -M
-# fslstats sub1046_input0002-t1_brain_wmn_20220224-1InverseWarp-Jacobian00.nii.gz -k left/1-THALAMUS.nii.gz -M
 
 ml apptainer
 cd $group_dir

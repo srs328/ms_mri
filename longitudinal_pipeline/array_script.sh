@@ -1,7 +1,7 @@
 #!/bin/sh
-#BSUB -J hipsthomas[1-3]%128
+#BSUB -J hipsthomas[1-629]%128
 #BSUB -n 4
-#BSUB -R "rusage[mem=4G]"
+#BSUB -R "rusage[mem=5G]"
 #BSUB -q short
 #BSUB -W 8:00
 #BSUB -o /home/shridhar.singh9-umw/logs/%J_%I.out
@@ -9,7 +9,7 @@
 #BSUB -u /dev/null
 
 # Read the path for this task's index
-path=$(sed -n "${LSB_JOBINDEX}p" /home/shridhar.singh9-umw/subjects.txt)
+path=$(sed -n "${LSB_JOBINDEX}p" /home/shridhar.singh9-umw/Projects/ms_mri/longitudinal_pipeline/subjects2.txt)
 
 ml apptainer
 cd $path

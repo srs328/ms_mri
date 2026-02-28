@@ -1,0 +1,382 @@
+2026-02-25 23:43:34.373 | WARNING  | __main__:<module>:49 - Missing something for sub1001 in session 20170215
+2026-02-25 23:43:34.374 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:43:37.391 | WARNING  | __main__:<module>:49 - Missing something for sub1003 in session 20170329
+2026-02-25 23:43:37.391 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:43:40.378 | WARNING  | __main__:<module>:49 - Missing something for sub1010 in session 20180208
+2026-02-25 23:43:40.378 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:43:43.325 | WARNING  | __main__:<module>:49 - Missing something for sub1017 in session 20160921
+2026-02-25 23:43:43.326 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:43:46.547 | WARNING  | __main__:<module>:49 - Missing something for sub1020 in session 20170927
+2026-02-25 23:43:46.547 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:44:25.245 | WARNING  | __main__:<module>:49 - Missing something for sub1001 in session 20170215
+2026-02-25 23:44:25.245 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:44:28.345 | WARNING  | __main__:<module>:49 - Missing something for sub1003 in session 20170329
+2026-02-25 23:44:28.345 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:44:31.337 | WARNING  | __main__:<module>:49 - Missing something for sub1010 in session 20180208
+2026-02-25 23:44:31.337 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:44:34.245 | WARNING  | __main__:<module>:49 - Missing something for sub1017 in session 20160921
+2026-02-25 23:44:34.246 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:44:37.318 | WARNING  | __main__:<module>:49 - Missing something for sub1020 in session 20170927
+2026-02-25 23:44:37.318 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:44:39.941 | WARNING  | __main__:<module>:49 - Missing something for sub1023 in session 20170813
+2026-02-25 23:44:39.941 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:44:42.465 | WARNING  | __main__:<module>:49 - Missing something for sub1024 in session 20170710
+2026-02-25 23:44:42.465 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:44:45.537 | WARNING  | __main__:<module>:49 - Missing something for sub1026 in session 20181011
+2026-02-25 23:44:45.537 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:44:48.576 | WARNING  | __main__:<module>:49 - Missing something for sub1033 in session 20171117
+2026-02-25 23:44:48.576 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:44:51.553 | WARNING  | __main__:<module>:49 - Missing something for sub1038 in session 20161031
+2026-02-25 23:44:51.553 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:44:54.456 | WARNING  | __main__:<module>:49 - Missing something for sub1039 in session 20171206
+2026-02-25 23:44:54.456 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:44:57.468 | WARNING  | __main__:<module>:49 - Missing something for sub1042 in session 20161013
+2026-02-25 23:44:57.468 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:45:00.060 | WARNING  | __main__:<module>:49 - Missing something for sub1044 in session 20170317
+2026-02-25 23:45:00.060 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:45:02.962 | WARNING  | __main__:<module>:49 - Missing something for sub1045 in session 20170418
+2026-02-25 23:45:02.962 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:45:06.306 | WARNING  | __main__:<module>:49 - Missing something for sub1046 in session 20181109
+2026-02-25 23:45:06.306 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:45:09.392 | WARNING  | __main__:<module>:49 - Missing something for sub1049 in session 20170815
+2026-02-25 23:45:09.392 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:45:12.017 | WARNING  | __main__:<module>:49 - Missing something for sub1050 in session 20170624
+2026-02-25 23:45:12.017 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:45:14.685 | WARNING  | __main__:<module>:49 - Missing something for sub1053 in session 20161218
+2026-02-25 23:45:14.685 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:45:17.663 | WARNING  | __main__:<module>:49 - Missing something for sub1054 in session 20161006
+2026-02-25 23:45:17.663 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:45:20.716 | WARNING  | __main__:<module>:49 - Missing something for sub1062 in session 20180522
+2026-02-25 23:45:20.716 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:45:23.693 | WARNING  | __main__:<module>:49 - Missing something for sub1063 in session 20161017
+2026-02-25 23:45:23.693 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:45:26.695 | WARNING  | __main__:<module>:49 - Missing something for sub1065 in session 20170127
+2026-02-25 23:45:26.695 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:45:29.731 | WARNING  | __main__:<module>:49 - Missing something for sub1071 in session 20161201
+2026-02-25 23:45:29.731 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:45:32.703 | WARNING  | __main__:<module>:49 - Missing something for sub1076 in session 20170912
+2026-02-25 23:45:32.704 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:45:35.477 | WARNING  | __main__:<module>:49 - Missing something for sub1082 in session 20161218
+2026-02-25 23:45:35.477 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:45:38.453 | WARNING  | __main__:<module>:49 - Missing something for sub1094 in session 20160902
+2026-02-25 23:45:38.453 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:45:41.255 | WARNING  | __main__:<module>:49 - Missing something for sub1098 in session 20171105
+2026-02-25 23:45:41.255 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:45:44.340 | WARNING  | __main__:<module>:49 - Missing something for sub1100 in session 20180703
+2026-02-25 23:45:44.340 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:45:46.973 | WARNING  | __main__:<module>:49 - Missing something for sub1109 in session 20180303
+2026-02-25 23:45:46.973 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:45:49.459 | WARNING  | __main__:<module>:49 - Missing something for sub1111 in session 20161211
+2026-02-25 23:45:49.459 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:45:52.434 | WARNING  | __main__:<module>:49 - Missing something for sub1113 in session 20170526
+2026-02-25 23:45:52.434 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:45:55.306 | WARNING  | __main__:<module>:49 - Missing something for sub1115 in session 20170107
+2026-02-25 23:45:55.306 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:45:58.059 | WARNING  | __main__:<module>:49 - Missing something for sub1119 in session 20161010
+2026-02-25 23:45:58.060 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:46:01.062 | WARNING  | __main__:<module>:49 - Missing something for sub1122 in session 20170427
+2026-02-25 23:46:01.062 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:46:04.124 | WARNING  | __main__:<module>:49 - Missing something for sub1124 in session 20160929
+2026-02-25 23:46:04.125 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:46:06.840 | WARNING  | __main__:<module>:49 - Missing something for sub1125 in session 20160919
+2026-02-25 23:46:06.841 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:46:09.827 | WARNING  | __main__:<module>:49 - Missing something for sub1126 in session 20170609
+2026-02-25 23:46:09.827 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:46:12.535 | WARNING  | __main__:<module>:49 - Missing something for sub1130 in session 20180902
+2026-02-25 23:46:12.535 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:46:15.588 | WARNING  | __main__:<module>:49 - Missing something for sub1131 in session 20161209
+2026-02-25 23:46:15.588 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:46:18.556 | WARNING  | __main__:<module>:49 - Missing something for sub1133 in session 20170308
+2026-02-25 23:46:18.556 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:46:21.594 | WARNING  | __main__:<module>:49 - Missing something for sub1135 in session 20170721
+2026-02-25 23:46:21.594 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:46:24.646 | WARNING  | __main__:<module>:49 - Missing something for sub1136 in session 20171109
+2026-02-25 23:46:24.646 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:46:27.103 | WARNING  | __main__:<module>:49 - Missing something for sub1138 in session 20170620
+2026-02-25 23:46:27.103 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:46:29.914 | WARNING  | __main__:<module>:49 - Missing something for sub1142 in session 20170715
+2026-02-25 23:46:29.915 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:46:32.666 | WARNING  | __main__:<module>:49 - Missing something for sub1148 in session 20170618
+2026-02-25 23:46:32.666 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:46:35.319 | WARNING  | __main__:<module>:49 - Missing something for sub1150 in session 20170724
+2026-02-25 23:46:35.319 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:46:38.004 | WARNING  | __main__:<module>:49 - Missing something for sub1152 in session 20170529
+2026-02-25 23:46:38.004 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:46:41.146 | WARNING  | __main__:<module>:49 - Missing something for sub1154 in session 20170412
+2026-02-25 23:46:41.146 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:46:44.206 | WARNING  | __main__:<module>:49 - Missing something for sub1155 in session 20180708
+2026-02-25 23:46:44.206 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:46:47.400 | WARNING  | __main__:<module>:49 - Missing something for sub1157 in session 20170102
+2026-02-25 23:46:47.401 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:46:50.380 | WARNING  | __main__:<module>:49 - Missing something for sub1158 in session 20170725
+2026-02-25 23:46:50.380 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:46:53.276 | WARNING  | __main__:<module>:49 - Missing something for sub1165 in session 20160910
+2026-02-25 23:46:53.276 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:46:56.116 | WARNING  | __main__:<module>:49 - Missing something for sub1167 in session 20170503
+2026-02-25 23:46:56.116 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:46:59.151 | WARNING  | __main__:<module>:49 - Missing something for sub1171 in session 20161116
+2026-02-25 23:46:59.151 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:47:01.719 | WARNING  | __main__:<module>:49 - Missing something for sub1177 in session 20180813
+2026-02-25 23:47:01.719 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:47:04.361 | WARNING  | __main__:<module>:49 - Missing something for sub1182 in session 20170131
+2026-02-25 23:47:04.361 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:47:07.401 | WARNING  | __main__:<module>:49 - Missing something for sub1183 in session 20170328
+2026-02-25 23:47:07.401 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:47:10.368 | WARNING  | __main__:<module>:49 - Missing something for sub1186 in session 20170517
+2026-02-25 23:47:10.368 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:47:13.339 | WARNING  | __main__:<module>:49 - Missing something for sub1198 in session 20170612
+2026-02-25 23:47:13.339 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:47:16.467 | WARNING  | __main__:<module>:49 - Missing something for sub1201 in session 20161021
+2026-02-25 23:47:16.467 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:47:19.445 | WARNING  | __main__:<module>:49 - Missing something for sub1208 in session 20171221
+2026-02-25 23:47:19.445 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:47:22.530 | WARNING  | __main__:<module>:49 - Missing something for sub1209 in session 20170711
+2026-02-25 23:47:22.530 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:47:25.007 | WARNING  | __main__:<module>:49 - Missing something for sub1211 in session 20170117
+2026-02-25 23:47:25.008 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:47:27.894 | WARNING  | __main__:<module>:49 - Missing something for sub1216 in session 20170113
+2026-02-25 23:47:27.894 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:47:30.827 | WARNING  | __main__:<module>:49 - Missing something for sub1218 in session 20170821
+2026-02-25 23:47:30.827 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:47:34.003 | WARNING  | __main__:<module>:49 - Missing something for sub1223 in session 20180405
+2026-02-25 23:47:34.003 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:47:36.580 | WARNING  | __main__:<module>:49 - Missing something for sub1225 in session 20161203
+2026-02-25 23:47:36.580 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:47:39.292 | WARNING  | __main__:<module>:49 - Missing something for sub1228 in session 20170616
+2026-02-25 23:47:39.292 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:47:42.359 | WARNING  | __main__:<module>:49 - Missing something for sub1229 in session 20170715
+2026-02-25 23:47:42.359 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:47:45.484 | WARNING  | __main__:<module>:49 - Missing something for sub1232 in session 20170811
+2026-02-25 23:47:45.484 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:47:48.433 | WARNING  | __main__:<module>:49 - Missing something for sub1234 in session 20180214
+2026-02-25 23:47:48.433 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:47:51.488 | WARNING  | __main__:<module>:49 - Missing something for sub1235 in session 20161121
+2026-02-25 23:47:51.488 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:47:54.356 | WARNING  | __main__:<module>:49 - Missing something for sub1239 in session 20170113
+2026-02-25 23:47:54.356 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:47:57.413 | WARNING  | __main__:<module>:49 - Missing something for sub1240 in session 20170615
+2026-02-25 23:47:57.413 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:48:00.505 | WARNING  | __main__:<module>:49 - Missing something for sub1241 in session 20161122
+2026-02-25 23:48:00.505 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:48:03.454 | WARNING  | __main__:<module>:49 - Missing something for sub1246 in session 20160915
+2026-02-25 23:48:03.454 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:48:06.540 | WARNING  | __main__:<module>:49 - Missing something for sub1248 in session 20160922
+2026-02-25 23:48:06.540 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:48:09.143 | WARNING  | __main__:<module>:49 - Missing something for sub1254 in session 20171226
+2026-02-25 23:48:09.143 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:48:12.098 | WARNING  | __main__:<module>:49 - Missing something for sub1256 in session 20170601
+2026-02-25 23:48:12.098 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:48:15.161 | WARNING  | __main__:<module>:49 - Missing something for sub1257 in session 20161208
+2026-02-25 23:48:15.162 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:48:17.742 | WARNING  | __main__:<module>:49 - Missing something for sub1262 in session 20170402
+2026-02-25 23:48:17.742 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:48:20.718 | WARNING  | __main__:<module>:49 - Missing something for sub1265 in session 20180127
+2026-02-25 23:48:20.718 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:48:23.673 | WARNING  | __main__:<module>:49 - Missing something for sub1274 in session 20180504
+2026-02-25 23:48:23.673 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:48:26.302 | WARNING  | __main__:<module>:49 - Missing something for sub1282 in session 20161113
+2026-02-25 23:48:26.302 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:48:29.135 | WARNING  | __main__:<module>:49 - Missing something for sub1290 in session 20170702
+2026-02-25 23:48:29.135 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:48:31.758 | WARNING  | __main__:<module>:49 - Missing something for sub1293 in session 20161129
+2026-02-25 23:48:31.758 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:48:34.798 | WARNING  | __main__:<module>:49 - Missing something for sub1297 in session 20170725
+2026-02-25 23:48:34.798 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:48:37.871 | WARNING  | __main__:<module>:49 - Missing something for sub1301 in session 20181003
+2026-02-25 23:48:37.871 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:48:40.503 | WARNING  | __main__:<module>:49 - Missing something for sub1304 in session 20170608
+2026-02-25 23:48:40.504 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:48:43.594 | WARNING  | __main__:<module>:49 - Missing something for sub1311 in session 20161005
+2026-02-25 23:48:43.594 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:48:46.149 | WARNING  | __main__:<module>:49 - Missing something for sub1312 in session 20180114
+2026-02-25 23:48:46.149 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:48:49.146 | WARNING  | __main__:<module>:49 - Missing something for sub1318 in session 20161013
+2026-02-25 23:48:49.146 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:48:52.148 | WARNING  | __main__:<module>:49 - Missing something for sub1326 in session 20180720
+2026-02-25 23:48:52.148 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:48:55.347 | WARNING  | __main__:<module>:49 - Missing something for sub1327 in session 20170426
+2026-02-25 23:48:55.347 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:48:58.092 | WARNING  | __main__:<module>:49 - Missing something for sub1333 in session 20171030
+2026-02-25 23:48:58.093 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:49:00.626 | WARNING  | __main__:<module>:49 - Missing something for sub1334 in session 20171212
+2026-02-25 23:49:00.626 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:49:03.738 | WARNING  | __main__:<module>:49 - Missing something for sub1335 in session 20170906
+2026-02-25 23:49:03.738 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:49:06.427 | WARNING  | __main__:<module>:49 - Missing something for sub1336 in session 20170921
+2026-02-25 23:49:06.427 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:49:09.422 | WARNING  | __main__:<module>:49 - Missing something for sub1339 in session 20170426
+2026-02-25 23:49:09.422 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:49:12.434 | WARNING  | __main__:<module>:49 - Missing something for sub1340 in session 20170906
+2026-02-25 23:49:12.434 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:49:15.430 | WARNING  | __main__:<module>:49 - Missing something for sub1341 in session 20170207
+2026-02-25 23:49:15.430 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:49:18.527 | WARNING  | __main__:<module>:49 - Missing something for sub1343 in session 20170309
+2026-02-25 23:49:18.527 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:49:21.597 | WARNING  | __main__:<module>:49 - Missing something for sub1348 in session 20181009
+2026-02-25 23:49:21.597 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:49:24.548 | WARNING  | __main__:<module>:49 - Missing something for sub1353 in session 20170518
+2026-02-25 23:49:24.548 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:49:27.250 | WARNING  | __main__:<module>:49 - Missing something for sub1358 in session 20170311
+2026-02-25 23:49:27.250 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:49:29.858 | WARNING  | __main__:<module>:49 - Missing something for sub1360 in session 20170108
+2026-02-25 23:49:29.858 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:49:32.550 | WARNING  | __main__:<module>:49 - Missing something for sub1364 in session 20180618
+2026-02-25 23:49:32.550 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:49:35.505 | WARNING  | __main__:<module>:49 - Missing something for sub1366 in session 20170306
+2026-02-25 23:49:35.505 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:49:37.778 | WARNING  | __main__:<module>:49 - Missing something for sub1371 in session 20170208
+2026-02-25 23:49:37.778 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:49:40.984 | WARNING  | __main__:<module>:49 - Missing something for sub1374 in session 20170106
+2026-02-25 23:49:40.985 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:49:43.807 | WARNING  | __main__:<module>:49 - Missing something for sub1376 in session 20161214
+2026-02-25 23:49:43.807 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:49:46.767 | WARNING  | __main__:<module>:49 - Missing something for sub1377 in session 20160929
+2026-02-25 23:49:46.767 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:49:49.773 | WARNING  | __main__:<module>:49 - Missing something for sub1382 in session 20170511
+2026-02-25 23:49:49.773 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:49:52.665 | WARNING  | __main__:<module>:49 - Missing something for sub1388 in session 20170915
+2026-02-25 23:49:52.665 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:49:55.625 | WARNING  | __main__:<module>:49 - Missing something for sub1396 in session 20170126
+2026-02-25 23:49:55.625 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:49:58.632 | WARNING  | __main__:<module>:49 - Missing something for sub1400 in session 20171003
+2026-02-25 23:49:58.632 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:50:01.428 | WARNING  | __main__:<module>:49 - Missing something for sub1401 in session 20170801
+2026-02-25 23:50:01.428 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:50:04.408 | WARNING  | __main__:<module>:49 - Missing something for sub1417 in session 20170701
+2026-02-25 23:50:04.408 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:50:06.940 | WARNING  | __main__:<module>:49 - Missing something for sub1429 in session 20180414
+2026-02-25 23:50:06.940 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:50:09.701 | WARNING  | __main__:<module>:49 - Missing something for sub1432 in session 20170622
+2026-02-25 23:50:09.701 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:50:12.820 | WARNING  | __main__:<module>:49 - Missing something for sub1436 in session 20180518
+2026-02-25 23:50:12.820 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:50:15.472 | WARNING  | __main__:<module>:49 - Missing something for sub1441 in session 20170519
+2026-02-25 23:50:15.472 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:50:18.478 | WARNING  | __main__:<module>:49 - Missing something for sub1442 in session 20170720
+2026-02-25 23:50:18.478 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:50:21.024 | WARNING  | __main__:<module>:49 - Missing something for sub1455 in session 20171031
+2026-02-25 23:50:21.024 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:50:23.926 | WARNING  | __main__:<module>:49 - Missing something for sub1479 in session 20161018
+2026-02-25 23:50:23.926 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:50:26.608 | WARNING  | __main__:<module>:49 - Missing something for sub1495 in session 20160918
+2026-02-25 23:50:26.608 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:50:29.589 | WARNING  | __main__:<module>:49 - Missing something for sub1497 in session 20170831
+2026-02-25 23:50:29.589 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:50:32.646 | WARNING  | __main__:<module>:49 - Missing something for sub1499 in session 20170817
+2026-02-25 23:50:32.647 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:50:35.621 | WARNING  | __main__:<module>:49 - Missing something for sub1503 in session 20190112
+2026-02-25 23:50:35.621 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:50:38.502 | WARNING  | __main__:<module>:49 - Missing something for sub1508 in session 20170719
+2026-02-25 23:50:38.502 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:50:41.693 | WARNING  | __main__:<module>:49 - Missing something for sub1512 in session 20161025
+2026-02-25 23:50:41.693 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:50:44.669 | WARNING  | __main__:<module>:49 - Missing something for sub1522 in session 20181031
+2026-02-25 23:50:44.669 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:50:47.292 | WARNING  | __main__:<module>:49 - Missing something for sub1523 in session 20170422
+2026-02-25 23:50:47.292 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:50:50.341 | WARNING  | __main__:<module>:49 - Missing something for sub1527 in session 20170915
+2026-02-25 23:50:50.341 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:50:53.333 | WARNING  | __main__:<module>:49 - Missing something for sub1529 in session 20170119
+2026-02-25 23:50:53.333 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:50:56.320 | WARNING  | __main__:<module>:49 - Missing something for sub1531 in session 20170127
+2026-02-25 23:50:56.321 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:50:59.442 | WARNING  | __main__:<module>:49 - Missing something for sub1536 in session 20170323
+2026-02-25 23:50:59.442 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:51:02.321 | WARNING  | __main__:<module>:49 - Missing something for sub1537 in session 20161203
+2026-02-25 23:51:02.321 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:51:05.163 | WARNING  | __main__:<module>:49 - Missing something for sub1544 in session 20160927
+2026-02-25 23:51:05.163 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:51:07.783 | WARNING  | __main__:<module>:49 - Missing something for sub1546 in session 20180205
+2026-02-25 23:51:07.783 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:51:10.617 | WARNING  | __main__:<module>:49 - Missing something for sub2003 in session 20170221
+2026-02-25 23:51:10.617 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:51:13.639 | WARNING  | __main__:<module>:49 - Missing something for sub2006 in session 20170320
+2026-02-25 23:51:13.639 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:51:16.611 | WARNING  | __main__:<module>:49 - Missing something for sub2017 in session 20170118
+2026-02-25 23:51:16.611 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:51:19.635 | WARNING  | __main__:<module>:49 - Missing something for sub2024 in session 20180219
+2026-02-25 23:51:19.635 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:51:22.585 | WARNING  | __main__:<module>:49 - Missing something for sub2025 in session 20171221
+2026-02-25 23:51:22.586 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:51:25.255 | WARNING  | __main__:<module>:49 - Missing something for sub2026 in session 20160917
+2026-02-25 23:51:25.255 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:51:27.893 | WARNING  | __main__:<module>:49 - Missing something for sub2033 in session 20170221
+2026-02-25 23:51:27.893 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:51:30.951 | WARNING  | __main__:<module>:49 - Missing something for sub2039 in session 20170118
+2026-02-25 23:51:30.951 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:51:33.896 | WARNING  | __main__:<module>:49 - Missing something for sub2041 in session 20170515
+2026-02-25 23:51:33.896 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:51:36.893 | WARNING  | __main__:<module>:49 - Missing something for sub2043 in session 20170707
+2026-02-25 23:51:36.893 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:51:39.320 | WARNING  | __main__:<module>:49 - Missing something for sub2048 in session 20160923
+2026-02-25 23:51:39.320 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:51:42.372 | WARNING  | __main__:<module>:49 - Missing something for sub2053 in session 20170118
+2026-02-25 23:51:42.372 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:51:45.354 | WARNING  | __main__:<module>:49 - Missing something for sub2054 in session 20160917
+2026-02-25 23:51:45.355 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:51:48.301 | WARNING  | __main__:<module>:49 - Missing something for sub2060 in session 20170608
+2026-02-25 23:51:48.301 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:51:51.054 | WARNING  | __main__:<module>:49 - Missing something for sub2075 in session 20170116
+2026-02-25 23:51:51.054 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:51:53.851 | WARNING  | __main__:<module>:49 - Missing something for sub2087 in session 20171027
+2026-02-25 23:51:53.851 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:51:56.820 | WARNING  | __main__:<module>:49 - Missing something for sub2088 in session 20170407
+2026-02-25 23:51:56.820 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:51:59.826 | WARNING  | __main__:<module>:49 - Missing something for sub2091 in session 20171128
+2026-02-25 23:51:59.826 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:52:02.872 | WARNING  | __main__:<module>:49 - Missing something for sub2095 in session 20171207
+2026-02-25 23:52:02.872 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:52:05.894 | WARNING  | __main__:<module>:49 - Missing something for sub2098 in session 20180515
+2026-02-25 23:52:05.894 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:52:08.358 | WARNING  | __main__:<module>:49 - Missing something for sub2105 in session 20161008
+2026-02-25 23:52:08.358 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:52:10.916 | WARNING  | __main__:<module>:49 - Missing something for sub2106 in session 20170813
+2026-02-25 23:52:10.916 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:52:14.132 | WARNING  | __main__:<module>:49 - Missing something for sub2112 in session 20170601
+2026-02-25 23:52:14.133 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:52:17.301 | WARNING  | __main__:<module>:49 - Missing something for sub2113 in session 20170126
+2026-02-25 23:52:17.301 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:52:20.243 | WARNING  | __main__:<module>:49 - Missing something for sub2118 in session 20170423
+2026-02-25 23:52:20.243 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:52:23.304 | WARNING  | __main__:<module>:49 - Missing something for sub2119 in session 20180903
+2026-02-25 23:52:23.304 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:52:26.249 | WARNING  | __main__:<module>:49 - Missing something for sub2120 in session 20180917
+2026-02-25 23:52:26.249 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:52:28.872 | WARNING  | __main__:<module>:49 - Missing something for sub2135 in session 20180113
+2026-02-25 23:52:28.872 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:52:31.862 | WARNING  | __main__:<module>:49 - Missing something for sub2152 in session 20161202
+2026-02-25 23:52:31.862 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:52:34.911 | WARNING  | __main__:<module>:49 - Missing something for sub2155 in session 20161010
+2026-02-25 23:52:34.911 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:52:37.974 | WARNING  | __main__:<module>:49 - Missing something for sub2168 in session 20180530
+2026-02-25 23:52:37.975 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:52:40.941 | WARNING  | __main__:<module>:49 - Missing something for sub2171 in session 20161230
+2026-02-25 23:52:40.941 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:52:43.692 | WARNING  | __main__:<module>:49 - Missing something for sub2173 in session 20170128
+2026-02-25 23:52:43.692 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:52:46.369 | WARNING  | __main__:<module>:49 - Missing something for sub2178 in session 20170406
+2026-02-25 23:52:46.369 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:52:49.337 | WARNING  | __main__:<module>:49 - Missing something for sub2195 in session 20170427
+2026-02-25 23:52:49.337 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:52:52.326 | WARNING  | __main__:<module>:49 - Missing something for sub2207 in session 20180717
+2026-02-25 23:52:52.327 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:52:55.074 | WARNING  | __main__:<module>:49 - Missing something for sub2213 in session 20170421
+2026-02-25 23:52:55.074 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:52:58.025 | WARNING  | __main__:<module>:49 - Missing something for sub2217 in session 20161003
+2026-02-25 23:52:58.025 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:53:01.004 | WARNING  | __main__:<module>:49 - Missing something for sub2263 in session 20170530
+2026-02-25 23:53:01.004 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:53:03.550 | WARNING  | __main__:<module>:49 - Missing something for sub2264 in session 20161231
+2026-02-25 23:53:03.550 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:53:06.452 | WARNING  | __main__:<module>:49 - Missing something for sub2268 in session 20161128
+2026-02-25 23:53:06.452 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:53:09.055 | WARNING  | __main__:<module>:49 - Missing something for sub3007 in session 20161217
+2026-02-25 23:53:09.055 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:53:12.012 | WARNING  | __main__:<module>:49 - Missing something for sub3015 in session 20170720
+2026-02-25 23:53:12.012 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:53:14.502 | WARNING  | __main__:<module>:49 - Missing something for sub3016 in session 20170815
+2026-02-25 23:53:14.502 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:53:17.476 | WARNING  | __main__:<module>:49 - Missing something for sub3021 in session 20161117
+2026-02-25 23:53:17.476 | ERROR    | __main__:<module>:50 - list index out of range
+2026-02-25 23:53:20.523 | WARNING  | __main__:<module>:49 - Missing something for sub3023 in session 20170727
+2026-02-25 23:53:20.523 | ERROR    | __main__:<module>:50 - list index out of range

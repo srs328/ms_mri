@@ -1,0 +1,33 @@
+sub1001: 957442
+sub1017: 957409
+sub1003: 957441
+Rest: 957450
+
+5 point (2113): 957452
+5 point (1495): 957456
+
+bsub -q large -o my_out.%J -e my_err.%J ./script
+
+hipsthomas 1-80 : 959362
+
+compute_jacobinas 3-161: 962206
+
+- [x] Fix termlimit jobs: 962306 (12 cores -c 0 -j 4)
+- [x] fix term limits: 965878 (16 cores, -c 2 -j 8)  fix_subjects param_list [167,170,177,179,180]
+
+- [x] hipsthomas params_list2: 965881 process_subject2 [1-83]
+    - Job 1 exited at very end; EXTRAS/MV already existed somehow 
+
+- [x] thomas (process_subject2) <965885> [28,31,35,49,53,71,75,79,80]
+
+- [ ] Compute jacobians 965888
+
+
+deformations: 965903,965904
+
+
+965906: hipsthomas for
+1109
+1053
+
+965907: deformations for the above

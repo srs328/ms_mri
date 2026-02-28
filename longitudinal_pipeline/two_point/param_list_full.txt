@@ -1,6 +1,7 @@
 /home/shridhar.singh9-umw/data/longitudinal/sub1001 1001 20170215 20200523
 /home/shridhar.singh9-umw/data/longitudinal/sub1003 1003 20170329 20210918
 /home/shridhar.singh9-umw/data/longitudinal/sub1010 1010 20180208 20210320
+/home/shridhar.singh9-umw/data/longitudinal/sub1017 1017 20160921 20220118
 /home/shridhar.singh9-umw/data/longitudinal/sub1020 1020 20170927 20210213
 /home/shridhar.singh9-umw/data/longitudinal/sub1023 1023 20170813 20211014
 /home/shridhar.singh9-umw/data/longitudinal/sub1024 1024 20170710 20210223
