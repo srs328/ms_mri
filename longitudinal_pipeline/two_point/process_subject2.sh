@@ -1,7 +1,7 @@
 #!/bin/bash
-#BSUB -J jacobian_thomas[1-80]
-#BSUB -n 6
-#BSUB -R "rusage[mem=4G]"
+#BSUB -J jacobian_thomas[18,29]
+#BSUB -n 12
+#BSUB -R "rusage[mem=2G]"
 #BSUB -q short
 #BSUB -W 8:00
 #BSUB -o /home/shridhar.singh9-umw/logs/%J_%I.out
@@ -16,7 +16,7 @@ export FREESURFER_HOME=$HOME/freesurfer
 source $FREESURFER_HOME/SetUpFreeSurfer.sh
 
 # /home/shridhar.singh9-umw/data/longitudinal/sub1017 1017 20160921 20220118
-line=$(sed -n "${LSB_JOBINDEX}p" param_list.txt)
+line=$(sed -n "${LSB_JOBINDEX}p" param_list_full.txt)
 subject_root=$(echo $line | awk '{print $1}')
 subid=$(echo $line | awk '{print $2}')
 ses1=$(echo $line | awk '{print $3}')
@@ -51,10 +51,14 @@ fi
 
 ml apptainer
 cd $group_dir
-if [ -f sthomas_LR_labels.nii.gz ]; then
-    echo "Thomas already exists, skipping"
-    exit 0
-fi
+# rm -r left
+# rm -r right
+# rm sthomas_LR_labels.nii.gz
+# rm sthomas_LR_labels.png
+# if [ -f sthomas_LR_labels.nii.gz ]; then
+#     echo "Thomas already exists, skipping"
+#     exit 0
+# fi
 apptainer exec --cleanenv --bind ${PWD}:/data \
     /home/shridhar.singh9-umw/hips-thomas.sif \
     /thomas/src/hipsthomas.sh -i "sub${subid}_template0.nii.gz"

@@ -8,14 +8,14 @@ run_if_missing() {
     out="$1"; shift
     # treat empty or zero-size as missing
     if [[ -e "$out" && -s "$out" ]]; then
-        info "SKIP: $out exists"
+        echo "SKIP: $out exists"
         return 0
     fi
-    info "RUN: $* -> $out"
+    echo "RUN: $* -> $out"
     if "$@"; then
-        info "OK: produced $out"
+        echo "OK: produced $out"
     else
-        info "ERROR: command failed: $*"
+        echo "ERROR: command failed: $*"
         return 1
     fi
 }
@@ -30,6 +30,7 @@ run_if_missing "thomas_medial.nii.gz" \
 
 cp "4567-VL.nii.gz" "thomas_ventral.nii.gz"
 cp "2-AV.nii.gz" "thomas_anterior.nii.gz"
+cp "CL_L.nii.gz" "15-CL.nii.gz"
 
 
 cd ../right || exit
@@ -42,6 +43,7 @@ run_if_missing "thomas_medial.nii.gz" \
 
 cp "4567-VL.nii.gz" "thomas_ventral.nii.gz"
 cp "2-AV.nii.gz" "thomas_anterior.nii.gz"
+cp "CL_R.nii.gz" "15-CL.nii.gz"
 
 
 cd $sub_root || exit
@@ -74,11 +76,11 @@ KEY_REF=(
     "7-VPL.nii.gz"
     "8-Pul.nii.gz"
     "9-LGN.nii.gz"
-    "CL_L.nii.gz"
 	"thomas_anterior.nii.gz"
 	"thomas_ventral.nii.gz"
 	"thomas_medial.nii.gz"
 	"thomas_posterior.nii.gz"
+    "15-CL.nii.gz"
 )
 
 for item in "${KEY_REF[@]}"; do

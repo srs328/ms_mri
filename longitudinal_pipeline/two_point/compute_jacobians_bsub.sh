@@ -1,15 +1,15 @@
 #/bin/bash
 
-#BSUB -J get_jacobians[3-161]%80
+#BSUB -J get_jacobians[1-186]
 #BSUB -n 1
 #BSUB -R "rusage[mem=4G]"
 #BSUB -q short
-#BSUB -W 8:00
+#BSUB -W 2:00
 #BSUB -o /home/shridhar.singh9-umw/logs/%J_%I.out
 #BSUB -e /home/shridhar.singh9-umw/logs/%J_%I.err
 #BSUB -u /dev/null
 
-line=$(sed -n "${LSB_JOBINDEX}p" param_list.txt)
+line=$(sed -n "${LSB_JOBINDEX}p" param_list_full.txt)
 subject_root=$(echo $line | awk '{print $1}')
 subid=$(echo $line | awk '{print $2}')
 ses1=$(echo $line | awk '{print $3}')
