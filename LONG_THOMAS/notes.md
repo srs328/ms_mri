@@ -3,10 +3,15 @@
 `LONG_THOMAS_HOME` must be set as environment variable
     - Eg `LONG_THOMAS_HOME=/home/srs-9/Projects/ms_mri/longitudinal_pipeline/LONG_THOMAS`
 
-`work_dir` will start with a raw t1.nii.gz, a skull stripped t1_brain.nii.gz, and a skull stripped mask t1_mask.nii.gz
+`work_dir` will start with a raw t1.nii.gz
+
+Main Steps
+
+- Step1: create_wmns
+- Step2: create group template
+- Step3: hips-thomas on group template
 
 ## Generate Crop
-
 
 - `ORIG_TEMPLATE`: Used to ants register template to subject
   - `ORIG_TEMPLATE=$pipeline_root/resources/origtemplate.nii.gz` used to ants register template to subject
@@ -23,6 +28,8 @@
 4. Run `bias_correction`
 5. Remap
 
+This is how to produce the crop with thomas, but I adapted their code myself
+
 ```bash
 docker run -it --rm \
     --name sthomas \
@@ -33,10 +40,6 @@ docker run -it --rm \
     hipsthomas.sh -v -t1 -co -d -i t1.nii.gz
 ```
 
-### Helpers
-
-- `make_partial_command()`
-- `command()`
 
 ### HIPS-THOMAS Behavior
 

@@ -27,20 +27,21 @@ def closest_voxel_value(num, hist, ndx_maxy):
 
 
 
-def remap_image(input_image, output_image, crop_mask_image, order=3, contrast_stretching=1, scaling='WM'):
+def remap_image(input_image, output_image, crop_mask_image=None, order=3, contrast_stretching=1, scaling='WM'):
     # Default order is set to use a cubic function
     # Default scaling == "WM" (rescale using WM), specify a fix value, "T1" .
     input = nib.load(input_image)
     input_data = input.get_fdata()
 
-    crop = nib.load(crop_mask_image)
-    crop_mask = crop.get_fdata()
-
-    crop_data = input_data[crop_mask != 0]
+    if crop_mask_image is not None:
+        crop = nib.load(crop_mask_image)
+        mask = crop.get_fdata()
+    else:
+        mask = input_data
 
     # use crop here
     # SRS-make the histogram only from values in the input image that are within the crop mask
-    hist, bin_edges = np.histogram(input_data[crop_mask != 0], bins="auto")
+    hist, bin_edges = np.histogram(input_data[mask != 0], bins="auto")
     #plt.hist(crop_data[crop_data != 0],bins="auto")
 
     # Find the voxel value shared by at least 1% of voxels mode
@@ -82,8 +83,8 @@ def remap_image(input_image, output_image, crop_mask_image, order=3, contrast_st
     if contrast_stretching == 1:
         print("contrast_stretching")
         # mask input_normwmn_rev for percentiles
-        p2 = np.percentile(input_normwmn_rev[crop_mask != 0], 2)
-        p98 = np.percentile(input_normwmn_rev[crop_mask != 0], 98)
+        p2 = np.percentile(input_normwmn_rev[mask != 0], 2)
+        p98 = np.percentile(input_normwmn_rev[mask != 0], 98)
         #FINAL = exposure.rescale_intensity(crop_normwmn_rev, in_range=(p2, p98))  # contrast stretching
         FINAL = np.clip(input_normwmn_rev, p2, p98)   # contrast stretching
         fmin = np.min(FINAL)
@@ -93,7 +94,7 @@ def remap_image(input_image, output_image, crop_mask_image, order=3, contrast_st
         FINAL = input_normwmn_rev
 
     if scaling == "T1" :    # rescale to max of T1 input image
-        max = np.max(input_data[crop_mask != 0]) #! use crop here
+        max = np.max(input_data[mask != 0]) #! use crop here
     elif scaling == "WM":   # rescale to 99% end of WM peak (0.01 of WM mode) previously computed
         max = int(reversalnum)
     else:
@@ -105,6 +106,7 @@ def remap_image(input_image, output_image, crop_mask_image, order=3, contrast_st
     FIN = nib.Nifti1Image(FINAL_rescale, input.affine, input.header)
     FIN.header['cal_max'] = max   # modify the max value of the header using specified max
     nib.save(FIN, output_image)
+    return output_image
 
 
 if __name__ == "__main__":

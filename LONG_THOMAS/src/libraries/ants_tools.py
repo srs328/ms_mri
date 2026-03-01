@@ -76,7 +76,9 @@ def ants_rigid_registration(fixed, moving, cost='MI', **exec_options):
     return output_warp, output_rigid, cmd
 
 
-def ants_new_rigid_registration(fixed, moving, cost='MI', **exec_options):
+def ants_new_rigid_registration(fixed, moving, work_dir=None, cost='MI', **exec_options):
+    if work_dir is not None:
+        os.chdir(work_dir)
     cmd = 'antsRegistration -d 3 --float 0 --output rigid --interpolation Linear --use-histogram-matching 0 --winsorize-image-intensities [ 0.005,0.995 ] -r [%s,%s,1] -t Rigid[0.1] --metric MI[%s,%s,1,32,Regular,0.25] --convergence [1000x500x250x100, 7e-7,10] -v -f 12x8x4x2 -s 4x3x2x1vox -t Affine[0.1] --metric MI[%s,%s,1,32,Regular,0.25] --convergence [1000x500x250x100, 4e-7,10] -v -f 12x8x4x2 -s 4x3x2x1vox  ' % (fixed, moving, fixed, moving, fixed, moving)
     #cmd = 'antsRegistration -d 3 --float 0 --output rigid --interpolation Linear --use-histogram-matching 0 --winsorize-image-intensities [ 0.005,0.995 ] -r [%s,%s,1] -t Rigid[0.1] --metric MI[%s,%s,1,32,Regular,0.25] --convergence [1000x500x250x100, 5e-7,10] -v -f 8x4x2x1 -s 3x2x1x0vox -t Affine[0.1] --metric MI[%s,%s,1,32,Regular,0.25] --convergence [1000x500x250x100, 5e-7,10] -v -f 8x4x2x1 -s 3x2x1x0vox  ' % (fixed, moving, fixed, moving, fixed, moving)
     #cmd = 'antsRegistration -d 3 --float 0 --output rigid -t Rigid[0.1] -r [%s,%s,1]  --metric %s[%s,%s,1,32,None] --convergence [1000x500x250x100, 1e-6,10] -v -f 8x4x2x1 -s 3x2x1x0vox' % (fixed, moving, cost, fixed, moving)
